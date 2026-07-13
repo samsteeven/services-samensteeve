@@ -131,7 +131,6 @@ export function HeroSection({ lang }: { lang: Language }) {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 font-mono text-[10px] uppercase font-bold tracking-widest text-white transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-lg hover:shadow-accent/30 active:scale-[0.96]"
           >
-            <Phone className="h-3.5 w-3.5" />
             {lang === "fr" ? "Réserver un appel de 30 min" : "Book a 30-min call"}
           </a>
         </ScrollReveal>

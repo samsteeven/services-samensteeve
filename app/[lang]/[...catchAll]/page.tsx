@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import type { Language } from "@/lib/translations";
-import { getT } from "@/lib/translations";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
@@ -14,8 +12,6 @@ export const metadata: Metadata = {
 
 export default async function NotFoundPage({ params }: PageProps) {
   const { lang } = await params;
-  const langKey = lang as Language;
-  const t = getT(langKey);
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center py-32 px-4 text-center">

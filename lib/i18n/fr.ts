@@ -1,10 +1,20 @@
 export const fr = {
   nav: {
     services: "Services",
+    servicesLabel: "MES SERVICES.",
     process: "Comment ça marche",
     realisations: "Réalisations",
+    explore: "Explorer",
+    moi: "Moi",
+    contactShort: "Me contacter",
     cta: "Démarrer un projet",
     opposite: "EN",
+    serviceItems: [
+      { label: "Développement Web", slug: "developpement-web" },
+      { label: "Architecture Cloud", slug: "architecture-cloud" },
+      { label: "Audit & Sécurité", slug: "audit-securite" },
+      { label: "Agents IA", slug: "agents-ia" },
+    ],
   },
   hero: {
     status: "Disponible pour de nouveaux projets",
@@ -15,7 +25,8 @@ export const fr = {
     connect: "Me contacter",
   },
   services: {
-    title: "Mes Services",
+    title: "Ce que je fais",
+    tagline: "Construire, défendre, accélérer — pas de blabla, que du concret.",
     subtitle: "Des prestations ciblées pour construire des applications résilientes, automatiser vos processus et sécuriser vos infrastructures.",
     cta: "En savoir plus",
     back: "Retour aux services",
@@ -27,6 +38,7 @@ export const fr = {
     items: {
       "developpement-web": {
         title: "Développement Web Full-Stack",
+        punchline: "Des applications qui ne tombent pas en panne. Backend solide, frontend rapide, zéro compromis sur la fiabilité.",
         shortDesc: "Applications web robustes et évolutives, de la conception de la base de données au déploiement de production.",
         longDesc: "Je prends en charge la conception et le développement de vos plateformes web critiques. Pas de compromis sur la qualité : typage strict, architecture découplée, gestion des transactions SQL et verrous d'accès concurrents pour garantir l'intégrité de vos données.",
         stack: ["Laravel", "Next.js", "Angular", "React", "Inertia.js", "PostgreSQL", "Redis", "Docker", "Laravel Reverb (WebSockets)", "Typesense"],
@@ -46,6 +58,7 @@ export const fr = {
       },
       "architecture-cloud": {
         title: "Architecture Cloud & Hybride",
+        punchline: "Votre infrastructure qui fonctionne même quand tout le reste casse. Conçue pour les réalités du terrain.",
         shortDesc: "Infrastructures cloud et hybrides sécurisées et résilientes, adaptées aux réalités de connectivité du terrain africain.",
         longDesc: "Je conçois et déploie des architectures cloud (AWS/Azure) et hybrides. Ayant une forte expérience du terrain en Afrique centrale, j'intègre les contraintes réelles (liens MPLS onéreux, coupures électriques, connectivité variable, souveraineté locale des données) pour proposer des architectures hybrides pragmatiques et hautement disponibles.",
         stack: ["Azure", "AWS", "Terraform (IaC)", "Docker", "Kubernetes", "MPLS", "IPSec VPN", "Active Directory", "Microsoft 365", "Veeam Backup", "Zabbix & Grafana"],
@@ -64,7 +77,8 @@ export const fr = {
         ]
       },
       "audit-securite": {
-        title: "Audit & Sécurité applicative",
+        title: "Audit & Sécurité",
+        punchline: "Je trouve les failles avant que les autres ne les trouvent. Audit offensif, pas de checklist passive.",
         shortDesc: "Analyse en profondeur de votre code et de vos serveurs pour identifier et corriger les vulnérabilités avant qu'elles ne soient exploitées.",
         longDesc: "La sécurité n'est pas une option ou un module qu'on ajoute à la fin. J'analyse vos applications et infrastructures sous l'angle offensif pour détecter les failles logiques, les faiblesses d'authentification et les erreurs de configuration réseau, puis je vous accompagne dans leur résolution.",
         stack: ["OWASP Top 10", "RBAC granulaire", "Chiffrement AES-256", "Protection SSRF / CSRF", "Sessions Redis TTL", "Audit de dépendances", "Sécurisation headers HTTP (CSP, HSTS)"],
@@ -83,7 +97,8 @@ export const fr = {
         ]
       },
       "automatisation-ia": {
-        title: "Automatisation IA & Agents",
+        title: "Automatisation IA",
+        punchline: "L'IA qui travaille pour vous, pas l'inverse. Agents autonomes connectés à vos vrais outils.",
         shortDesc: "Intégration d'agents IA autonomes dans vos logiciels pour automatiser vos tâches répétitives complexes.",
         longDesc: "Je ne vends pas de gadgets IA. J'intègre des systèmes d'agents autonomes directement connectés à vos bases de données et API de production. Grâce à des protocoles comme MCP et des frameworks d'orchestration de graphes (LangGraph), l'IA exécute des workflows complexes et fiables à l'intérieur de vos outils existants.",
         stack: ["MCP (Model Context Protocol)", "LangGraph", "CrewAI", "APIs Claude / OpenAI", "Intégration Node.js / Laravel / Python"],
@@ -105,55 +120,55 @@ export const fr = {
   },
   process: {
     title: "Comment ça marche ?",
-    subtitle: "Une méthodologie transparente, sans effet boîte noire, axée sur des livrables concrets à chaque étape.",
+    subtitle: "Une méthode d'ingénierie rigoureuse, sans boîte noire — chaque phase produit des livrables concrets que vous pouvez auditer.",
     cta: "Démarrer une collaboration",
     phases: [
       {
         num: "01",
-        title: "Cadrage & Alignement",
+        title: "Discovery & Audit",
         duration: "1 à 3 jours",
-        desc: "Nous analysons votre besoin réel. L'objectif est de comprendre le problème métier sous-jacent pour vous proposer l'approche la plus pragmatique, pas la plus complexe.",
+        desc: "Avant d'écrire une ligne de code, j'audite l'existant et cadre le problème réel. Si vous avez déjà un projet, j'analyse la base de code, l'infrastructure et les risques de sécurité. Si c'est un greenfield, je cartographie les contraintes métier et techniques pour éviter les pivots coûteux.",
         deliverables: [
-          "Compréhension approfondie et formalisée du besoin métier",
-          "Proposition d'architecture macro avec choix technologiques justifiés",
-          "Définition claire du périmètre de livraison (ce qui est inclus et exclu)",
-          "Estimation précise du budget et du calendrier"
+          "Rapport d'audit technique : dette, risques, points bloquants identifiés",
+          "Cartographie des flux métier et des contraintes de performance",
+          "Périmètre de livraison formalisé (scope, hors-scope, hypothèses)",
+          "Estimation chiffrée avec découpage en phases autonomes"
         ]
       },
       {
         num: "02",
-        title: "Architecture & Conception",
-        duration: "Variable selon la taille",
-        desc: "Avant d'écrire du code, nous posons des bases solides. Tout est modélisé et documenté pour éviter les mauvaises surprises et les pivots coûteux en cours de route.",
+        title: "Architecture & Proof of Concept",
+        duration: "3 à 7 jours",
+        desc: "Je conçois l'architecture cible avant de construire. Les choix technologiques sont justifiés par des ADR (Architecture Decision Records). Un POC validé sur les points de risque techniques est livré avant le démarrage du build — pour éliminer les inconnues, pas pour les reporter.",
         deliverables: [
-          "Diagrammes d'architecture (flux de données, composants, déploiement)",
-          "Architecture Decision Records (ADR) documentant les choix structurants",
-          "Configuration de l'environnement de développement et de staging",
-          "Première version squelette déployée sur l'environnement de staging"
+          "Diagrammes d'architecture (C4 : contexte, conteneurs, composants, déploiement)",
+          "ADR documentant chaque choix structurant (stack, patterns, sécurité)",
+          "Schéma de base de données avec contraintes, index et stratégie de migration",
+          "POC fonctionnel validant les hypothèses techniques à risque"
         ]
       },
       {
         num: "03",
-        title: "Build & Itérations",
-        duration: "Développement actif",
-        desc: "Le développement se fait de manière itérative. Vous avez accès au dépôt Git et à l'environnement de staging dès le premier jour pour suivre l'avancement en continu.",
+        title: "Build Itératif & CI/CD",
+        duration: "Sprints de 2 semaines",
+        desc: "Le développement se fait en sprints courts. Dès le premier sprint, un pipeline CI/CD est en place : chaque commit est testé, linté et déployé automatiquement sur staging. Vous avez accès au dépôt Git et à l'environnement de staging en temps réel — zéro effet tunnel.",
         deliverables: [
-          "Livraisons fonctionnelles régulières testées en staging",
-          "Code source typé, propre et couvert par des tests automatisés",
-          "Points d'avancement réguliers pour valider les étapes intermédiaires",
-          "Aucun effet tunnel : vous voyez l'application grandir semaine après semaine"
+          "Pipeline CI/CD opérationnel dès le sprint 1 (tests, lint, déploiement auto)",
+          "Code source typé strict, reviewé et couvert par des tests unitaires et d'intégration",
+          "Démo de fin de sprint avec validation fonctionnelle en environnement staging",
+          "Changelog structuré et documentation technique mise à jour à chaque livraison"
         ]
       },
       {
         num: "04",
-        title: "Livraison & Autonomie",
-        duration: "Déploiement & Suivi",
-        desc: "Je déploie l'application en production et m'assure que vos équipes soient totalement autonomes pour la maintenir. Vous êtes propriétaire à 100% de tout ce qui a été produit.",
+        title: "Hardening, Déploiement & Autonomie",
+        duration: "1 à 2 semaines",
+        desc: "Avant la mise en production, j'effectue un hardening complet : audit OWASP, tests de charge, revue des permissions et des secrets. La mise en prod est outillée (monitoring, alerting, rollback). Vos équipes reçoivent la formation et la documentation pour opérer le système en toute autonomie.",
         deliverables: [
-          "Application déployée en production avec monitoring configuré",
-          "Documentation technique complète et runbook d'exploitation",
-          "Sessions de formation pour vos équipes techniques et fonctionnelles",
-          "Période de garantie et de support post-déploiement"
+          "Rapport d'audit de sécurité pré-prod : OWASP Top 10, headers, dépendances",
+          "Tests de charge et validation des SLO (temps de réponse, disponibilité cible)",
+          "Monitoring & alerting configurés (Grafana, Sentry ou équivalent) avec runbook",
+          "Documentation opérationnelle complète + session de transfert de compétences"
         ]
       }
     ]
@@ -231,7 +246,7 @@ export const fr = {
     },
     error: {
       title: "Erreur lors de l'envoi",
-      message: "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer ou m'envoyer directement un email à samendjiaha@gmail.com."
+      message: "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer ou m'envoyer directement un email à contact@samensteeve.com."
     }
   },
   footer: {

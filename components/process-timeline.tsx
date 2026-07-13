@@ -3,28 +3,30 @@ import { getT, type Language } from "@/lib/translations";
 import { ScrollReveal } from "./scroll-reveal";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 
-export function ProcessTimeline({ lang }: { lang: Language }) {
+export function ProcessTimeline({ lang, hideHeader = false }: { lang: Language; hideHeader?: boolean }) {
   const t = getT(lang);
 
   return (
-    <section id="process" className="py-20 md:py-32 transition-all duration-300 border-t border-line/40">
+    <section id="process" className={`py-16 md:py-24 transition-all duration-300 ${hideHeader ? "" : "border-t border-line/40"}`}>
       <div className="mx-auto max-w-5xl px-4 sm:px-8">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto">
-          <ScrollReveal delay={0}>
-            <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink sm:text-4xl">
-              {t.process.title}
-            </h2>
-          </ScrollReveal>
-          <ScrollReveal delay={80} className="mt-4">
-            <p className="text-sm md:text-base leading-relaxed text-ink-soft">
-              {t.process.subtitle}
-            </p>
-          </ScrollReveal>
-        </div>
+        {!hideHeader && (
+          <div className="text-center max-w-2xl mx-auto mb-20">
+            <ScrollReveal delay={0}>
+              <h2 className="font-display text-2xl font-extrabold tracking-tight text-ink sm:text-5xl leading-[1.1]">
+                {t.process.title}
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal delay={80} className="mt-4">
+              <p className="text-sm md:text-base leading-relaxed text-ink-soft">
+                {t.process.subtitle}
+              </p>
+            </ScrollReveal>
+          </div>
+        )}
 
         {/* Timeline container */}
-        <div className="relative mt-20">
+        <div className={`relative ${hideHeader ? "mt-8" : "mt-0"}`}>
           {/* Vertical Center Line for Desktop */}
           <div className="absolute left-[39px] md:left-1/2 top-0 h-full w-px -translate-x-1/2 bg-line/60 pointer-events-none" />
 

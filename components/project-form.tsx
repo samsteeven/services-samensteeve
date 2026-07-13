@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { getT, type Language } from "@/lib/translations";
-import { CheckCircle2, ArrowRight, ArrowLeft, Send, AlertTriangle } from "lucide-react";
+import { Check, CheckCircle2, ArrowRight, ArrowLeft, Send, AlertTriangle } from "lucide-react";
 
 interface Props {
   lang: Language;
@@ -95,14 +95,14 @@ export function ProjectForm({ lang }: Props) {
   const progressPct = ((step - 1) / TOTAL_STEPS) * 100;
 
   return (
-    <div className="mx-auto max-w-xl w-full">
+    <div className="mx-auto max-w-2xl w-full">
       {/* Progress bar */}
-      <div className="mb-10">
-        <div className="flex justify-between font-mono text-[9px] uppercase tracking-wider text-ink-soft/60 mb-3">
+      <div className="mb-12">
+        <div className="flex justify-between font-mono text-[10px] uppercase tracking-[0.15em] text-ink-soft/60 mb-4">
           <span>{step === 1 ? steps.projectType : step === 2 ? steps.description : step === 3 ? steps.context : steps.contact}</span>
           <span>{step} / {TOTAL_STEPS}</span>
         </div>
-        <div className="h-1 w-full rounded-full bg-line overflow-hidden">
+        <div className="h-1.5 w-full rounded-full bg-line overflow-hidden">
           <div
             className="h-full rounded-full bg-accent transition-all duration-500 ease-out"
             style={{ width: `${progressPct + 25}%` }}
@@ -118,17 +118,17 @@ export function ProjectForm({ lang }: Props) {
               key={key}
               type="button"
               onClick={() => toggleType(key)}
-              className={`flex items-center gap-3 rounded-xl border px-5 py-4 text-left text-sm font-medium transition-all duration-200 ${
+              className={`flex items-center gap-4 rounded-xl border px-6 py-4.5 text-left text-base font-semibold transition-all duration-200 ${
                 data.types.includes(key)
                   ? "border-accent bg-accent/5 text-ink"
                   : "border-line bg-paper-raised/40 text-ink-soft hover:border-accent/40 hover:text-ink"
               }`}
             >
-              <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors ${
+              <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded border-2 transition-colors ${
                 data.types.includes(key) ? "border-accent bg-accent" : "border-line"
               }`}>
                 {data.types.includes(key) && (
-                  <CheckCircle2 className="h-3 w-3 text-white" />
+                  <Check className="h-4 w-4 text-white" />
                 )}
               </div>
               {label}
@@ -140,7 +140,7 @@ export function ProjectForm({ lang }: Props) {
       {/* ── Step 2 : Description ── */}
       {step === 2 && (
         <div className="flex flex-col gap-4">
-          <label className="font-mono text-xs font-bold uppercase tracking-wider text-ink-soft">
+          <label className="font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-ink-soft">
             {fields.descLabel}
           </label>
           <textarea
@@ -148,7 +148,7 @@ export function ProjectForm({ lang }: Props) {
             onChange={(e) => setData((p) => ({ ...p, description: e.target.value }))}
             placeholder={fields.descPlaceholder}
             rows={7}
-            className="w-full resize-none rounded-xl border border-line bg-paper-raised/40 px-4 py-3 text-sm text-ink placeholder:text-ink-soft/40 outline-none focus:border-accent/60 focus:ring-1 focus:ring-accent/20 transition duration-200"
+            className="w-full resize-none rounded-xl border border-line bg-paper-raised/40 px-5 py-4 text-base text-ink placeholder:text-ink-soft/40 outline-none focus:border-accent/60 focus:ring-1 focus:ring-accent/20 transition duration-200"
           />
           <p className="font-mono text-[10px] text-ink-soft/50">
             {data.description.trim().length < 20
@@ -163,7 +163,7 @@ export function ProjectForm({ lang }: Props) {
         <div className="flex flex-col gap-8">
           {/* Has codebase */}
           <div>
-            <label className="font-mono text-xs font-bold uppercase tracking-wider text-ink-soft block mb-3">
+            <label className="font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-ink-soft block mb-3">
               {fields.codebaseLabel}
             </label>
             <div className="flex flex-col gap-2">
@@ -172,16 +172,16 @@ export function ProjectForm({ lang }: Props) {
                   key={val}
                   type="button"
                   onClick={() => setData((p) => ({ ...p, hasCodebase: val }))}
-                  className={`flex items-center gap-3 rounded-xl border px-5 py-3.5 text-left text-sm font-medium transition-all duration-200 ${
+                  className={`flex items-center gap-4 rounded-xl border px-6 py-4.5 text-left text-base font-semibold transition-all duration-200 ${
                     data.hasCodebase === val
                       ? "border-accent bg-accent/5 text-ink"
                       : "border-line bg-paper-raised/40 text-ink-soft hover:border-accent/40 hover:text-ink"
                   }`}
                 >
-                  <div className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
+                  <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
                     data.hasCodebase === val ? "border-accent" : "border-line"
                   }`}>
-                    {data.hasCodebase === val && <div className="h-2 w-2 rounded-full bg-accent" />}
+                    {data.hasCodebase === val && <div className="h-2.5 w-2.5 rounded-full bg-accent" />}
                   </div>
                   {label}
                 </button>
@@ -191,16 +191,16 @@ export function ProjectForm({ lang }: Props) {
 
           {/* Timeline */}
           <div>
-            <label className="font-mono text-xs font-bold uppercase tracking-wider text-ink-soft block mb-3">
+            <label className="font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-ink-soft block mb-3">
               {fields.timelineLabel}
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {Object.entries(fields.timelineOptions).map(([val, label]) => (
                 <button
                   key={val}
                   type="button"
                   onClick={() => setData((p) => ({ ...p, timeline: val }))}
-                  className={`rounded-xl border px-4 py-3 text-left text-xs font-medium transition-all duration-200 ${
+                  className={`rounded-xl border px-5 py-4 text-left text-sm font-semibold transition-all duration-200 ${
                     data.timeline === val
                       ? "border-accent bg-accent/5 text-ink"
                       : "border-line bg-paper-raised/40 text-ink-soft hover:border-accent/40 hover:text-ink"
@@ -214,16 +214,16 @@ export function ProjectForm({ lang }: Props) {
 
           {/* Team size */}
           <div>
-            <label className="font-mono text-xs font-bold uppercase tracking-wider text-ink-soft block mb-3">
+            <label className="font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-ink-soft block mb-3">
               {fields.teamLabel}
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {Object.entries(fields.teamOptions).map(([val, label]) => (
                 <button
                   key={val}
                   type="button"
                   onClick={() => setData((p) => ({ ...p, teamSize: val }))}
-                  className={`rounded-xl border px-4 py-3 text-left text-xs font-medium transition-all duration-200 ${
+                  className={`rounded-xl border px-5 py-4 text-left text-sm font-semibold transition-all duration-200 ${
                     data.teamSize === val
                       ? "border-accent bg-accent/5 text-ink"
                       : "border-line bg-paper-raised/40 text-ink-soft hover:border-accent/40 hover:text-ink"
@@ -239,7 +239,7 @@ export function ProjectForm({ lang }: Props) {
 
       {/* ── Step 4 : Contact ── */}
       {step === 4 && (
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-6">
           {[
             { key: "name" as const, label: fields.nameLabel, placeholder: fields.namePlaceholder, type: "text", required: true },
             { key: "email" as const, label: fields.emailLabel, placeholder: fields.emailPlaceholder, type: "email", required: true },
@@ -247,7 +247,7 @@ export function ProjectForm({ lang }: Props) {
             { key: "source" as const, label: fields.sourceLabel, placeholder: fields.sourcePlaceholder, type: "text", required: false },
           ].map((field) => (
             <div key={field.key}>
-              <label className="font-mono text-xs font-bold uppercase tracking-wider text-ink-soft block mb-2">
+              <label className="font-mono text-[11px] font-bold uppercase tracking-[0.15em] text-ink-soft block mb-2">
                 {field.label}
                 {!field.required && (
                   <span className="ml-2 font-normal normal-case text-ink-soft/40">(optionnel)</span>
@@ -258,7 +258,7 @@ export function ProjectForm({ lang }: Props) {
                 value={data[field.key]}
                 onChange={(e) => setData((p) => ({ ...p, [field.key]: e.target.value }))}
                 placeholder={field.placeholder}
-                className="w-full rounded-xl border border-line bg-paper-raised/40 px-4 py-3 text-sm text-ink placeholder:text-ink-soft/40 outline-none focus:border-accent/60 focus:ring-1 focus:ring-accent/20 transition duration-200"
+                className="w-full rounded-xl border border-line bg-paper-raised/40 px-5 py-4 text-base text-ink placeholder:text-ink-soft/40 outline-none focus:border-accent/60 focus:ring-1 focus:ring-accent/20 transition duration-200"
               />
             </div>
           ))}
@@ -277,14 +277,14 @@ export function ProjectForm({ lang }: Props) {
       )}
 
       {/* Navigation */}
-      <div className="mt-10 flex items-center justify-between gap-4">
+      <div className="mt-12 flex items-center justify-between gap-4">
         {step > 1 ? (
           <button
             type="button"
             onClick={() => setStep((s) => s - 1)}
-            className="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 font-mono text-[10px] uppercase font-bold tracking-widest text-ink-soft hover:text-ink hover:border-ink-soft transition duration-200"
+            className="inline-flex items-center gap-2.5 rounded-full border border-line px-6 py-3.5 font-mono text-[11px] uppercase font-bold tracking-widest text-ink-soft hover:text-ink hover:border-ink-soft transition duration-200"
           >
-            <ArrowLeft className="h-3.5 w-3.5" />
+            <ArrowLeft className="h-4 w-4" />
             {buttons.prev}
           </button>
         ) : (
@@ -296,20 +296,20 @@ export function ProjectForm({ lang }: Props) {
             type="button"
             disabled={!canNext()}
             onClick={() => setStep((s) => s + 1)}
-            className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-2.5 font-mono text-[10px] uppercase font-bold tracking-widest text-paper hover:bg-accent hover:text-white transition duration-200 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-105 active:scale-[0.96] disabled:hover:scale-100"
+            className="inline-flex items-center gap-2.5 rounded-full bg-ink px-7 py-3.5 font-mono text-[11px] uppercase font-bold tracking-widest text-paper hover:bg-accent hover:text-white transition duration-200 disabled:opacity-30 disabled:cursor-not-allowed hover:scale-105 active:scale-[0.96] disabled:hover:scale-100"
           >
             {buttons.next}
-            <ArrowRight className="h-3.5 w-3.5" />
+            <ArrowRight className="h-4 w-4" />
           </button>
         ) : (
           <button
             type="button"
             disabled={!canNext() || submitting}
             onClick={handleSubmit}
-            className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-2.5 font-mono text-[10px] uppercase font-bold tracking-widest text-white hover:bg-ink transition duration-200 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 active:scale-[0.96] disabled:hover:scale-100"
+            className="inline-flex items-center gap-2.5 rounded-full bg-accent px-7 py-3.5 font-mono text-[11px] uppercase font-bold tracking-widest text-white hover:bg-ink transition duration-200 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 active:scale-[0.96] disabled:hover:scale-100"
           >
             {submitting ? buttons.submitting : buttons.submit}
-            <Send className="h-3.5 w-3.5" />
+            <Send className="h-4 w-4" />
           </button>
         )}
       </div>

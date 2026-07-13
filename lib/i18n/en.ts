@@ -1,10 +1,20 @@
 export const en = {
   nav: {
     services: "Services",
+    servicesLabel: "MY SERVICES.",
     process: "How it works",
     realisations: "Case Studies",
+    explore: "Explore",
+    moi: "Me",
+    contactShort: "Contact me",
     cta: "Start a project",
     opposite: "FR",
+    serviceItems: [
+      { label: "Web Development", slug: "developpement-web" },
+      { label: "Cloud Architecture", slug: "architecture-cloud" },
+      { label: "Audit & Security", slug: "audit-securite" },
+      { label: "AI Agents", slug: "agents-ia" },
+    ],
   },
   hero: {
     status: "Available for new projects",
@@ -15,7 +25,8 @@ export const en = {
     connect: "Get in touch",
   },
   services: {
-    title: "My Services",
+    title: "What I do",
+    tagline: "Build, defend, accelerate — no fluff, just results.",
     subtitle: "Targeted services to build resilient web applications, automate your workflows, and secure your infrastructure.",
     cta: "Learn more",
     back: "Back to services",
@@ -27,6 +38,7 @@ export const en = {
     items: {
       "developpement-web": {
         title: "Full-Stack Web Development",
+        punchline: "Applications that don't go down. Solid backend, fast frontend, zero compromise on reliability.",
         shortDesc: "Robust and scalable web applications, from database design to production deployment.",
         longDesc: "I take full ownership of designing and developing your critical web platforms. No shortcuts on quality: strict typing, decoupled architecture, robust SQL transaction management, and pessimistic locking to guarantee data integrity.",
         stack: ["Laravel", "Next.js", "Angular", "React", "Inertia.js", "PostgreSQL", "Redis", "Docker", "Laravel Reverb (WebSockets)", "Typesense"],
@@ -46,6 +58,7 @@ export const en = {
       },
       "architecture-cloud": {
         title: "Cloud & Hybrid Architecture",
+        punchline: "Infrastructure that works even when everything else fails. Built for real-world conditions.",
         shortDesc: "Secure and resilient cloud and hybrid infrastructures, tailored for the connectivity realities of the African market.",
         longDesc: "I design and deploy cloud (AWS/Azure) and hybrid architectures. Having solid ground experience in Central Africa, I integrate real-world constraints (expensive MPLS links, power outages, variable connectivity, local data sovereignty regulations) to deliver highly available, pragmatic hybrid architectures.",
         stack: ["Azure", "AWS", "Terraform (IaC)", "Docker", "Kubernetes", "MPLS", "IPSec VPN", "Active Directory", "Microsoft 365", "Veeam Backup", "Zabbix & Grafana"],
@@ -64,7 +77,8 @@ export const en = {
         ]
       },
       "audit-securite": {
-        title: "Application Security & Audit",
+        title: "Security Audit",
+        punchline: "I find the flaws before others do. Offensive audit, not passive checklists.",
         shortDesc: "In-depth review of your code and server configurations to detect and fix vulnerabilities before they can be exploited.",
         longDesc: "Security is not an add-on or a checkbox to tick at the end. I audit your applications and infrastructure from an offensive security perspective to locate logic flaws, authentication bypasses, and network misconfigurations, and guide you through remediation.",
         stack: ["OWASP Top 10", "Granular RBAC", "AES-256 Encryption", "SSRF / CSRF Protection", "Redis TTL Sessions", "Dependency Audits", "Secure HTTP Headers (CSP, HSTS)"],
@@ -83,7 +97,8 @@ export const en = {
         ]
       },
       "automatisation-ia": {
-        title: "AI Automation & Agents",
+        title: "AI Automation",
+        punchline: "AI that works for you, not the other way around. Autonomous agents connected to your real tools.",
         shortDesc: "Integrating autonomous AI agent workflows into your software to automate complex, repetitive tasks.",
         longDesc: "I do not sell AI hype. I build autonomous agent workflows that connect directly to your production databases and APIs. Using Model Context Protocol (MCP) and graph orchestration (LangGraph), the AI reliably executes multi-step, complex workflows directly inside your existing business tools.",
         stack: ["MCP (Model Context Protocol)", "LangGraph", "CrewAI", "Claude / OpenAI APIs", "Node.js / Laravel / Python Integration"],
@@ -105,55 +120,55 @@ export const en = {
   },
   process: {
     title: "How It Works",
-    subtitle: "A transparent methodology, with zero black-box effect, focused on concrete deliverables at each stage.",
+    subtitle: "A rigorous engineering methodology, zero black-box — each phase delivers concrete outputs you can audit.",
     cta: "Start a collaboration",
     phases: [
       {
         num: "01",
-        title: "Scoping & Alignment",
+        title: "Discovery & Audit",
         duration: "1 to 3 days",
-        desc: "We analyze your actual business needs. The goal is to understand the underlying problem to propose the most pragmatic approach, not the most complex one.",
+        desc: "Before writing a single line of code, I audit the existing system and frame the real problem. If you have an existing project, I review the codebase, infrastructure, and security risks. If it's a greenfield build, I map out the business and technical constraints upfront to eliminate costly pivots later.",
         deliverables: [
-          "Deep, formalized understanding of the business requirement",
-          "Macro-architecture proposal with reasoned technology choices",
-          "Clear definition of project scope (what is included and excluded)",
-          "Precise timeline and budget estimates"
+          "Technical audit report: tech debt, risks, and blockers identified",
+          "Business flow mapping with performance and scalability constraints",
+          "Formalized delivery scope (in-scope, out-of-scope, assumptions)",
+          "Phased cost and timeline estimate with autonomous milestones"
         ]
       },
       {
         num: "02",
-        title: "Architecture & Design",
-        duration: "Variable depending on size",
-        desc: "Before writing any code, we lay solid foundations. Everything is modeled and documented to prevent bad surprises and costly late-stage pivots.",
+        title: "Architecture & Proof of Concept",
+        duration: "3 to 7 days",
+        desc: "I design the target architecture before building anything. Technology choices are justified through ADRs (Architecture Decision Records). A validated POC covering the highest-risk technical unknowns is delivered before the build starts — to eliminate uncertainty, not defer it.",
         deliverables: [
-          "Architecture diagrams (data flow, components, deployment mapping)",
-          "Architecture Decision Records (ADRs) documenting key design choices",
-          "Development and staging environments fully configured",
-          "First skeleton version deployed on the staging environment"
+          "Architecture diagrams (C4 model: context, containers, components, deployment)",
+          "ADRs documenting every structural decision (stack, patterns, security model)",
+          "Database schema with constraints, indexes, and migration strategy",
+          "Functional POC validating the riskiest technical hypotheses"
         ]
       },
       {
         num: "03",
-        title: "Build & Iterations",
-        duration: "Active development",
-        desc: "Development is done iteratively. You get access to the Git repository and the staging environment on day one to track progress in real-time.",
+        title: "Iterative Build & CI/CD",
+        duration: "2-week sprints",
+        desc: "Development runs in short sprints. From sprint 1, a CI/CD pipeline is live: every commit is automatically tested, linted, and deployed to staging. You have real-time access to the Git repository and staging environment — zero tunnel effect, zero surprises.",
         deliverables: [
-          "Regular functional updates deployed and tested on staging",
-          "Clean, strongly typed codebase covered by automated tests",
-          "Frequent alignment check-ins to validate intermediate milestones",
-          "Zero tunnel effect: you watch the application grow week after week"
+          "CI/CD pipeline live from sprint 1 (automated tests, lint, auto-deployment)",
+          "Strictly typed, reviewed codebase with unit and integration test coverage",
+          "End-of-sprint demo with functional sign-off in the staging environment",
+          "Structured changelog and updated technical documentation at each release"
         ]
       },
       {
         num: "04",
-        title: "Handover & Autonomy",
-        duration: "Deployment & Support",
-        desc: "I deploy the system to production and ensure your team is fully equipped to maintain it. You retain 100% ownership of everything that has been produced.",
+        title: "Hardening, Deployment & Handover",
+        duration: "1 to 2 weeks",
+        desc: "Before going live, I run a full hardening pass: OWASP audit, load testing, permissions and secrets review. The production deployment is fully instrumented (monitoring, alerting, rollback). Your team receives the training and documentation to operate the system independently.",
         deliverables: [
-          "Production deployment with monitoring and alerts fully set up",
-          "Comprehensive technical documentation and operational runbook",
-          "Training sessions for your technical and functional teams",
-          "Dedicated warranty and post-deployment support period"
+          "Pre-prod security audit report: OWASP Top 10, HTTP headers, dependencies",
+          "Load test results and SLO validation (response time, availability targets)",
+          "Monitoring & alerting configured (Grafana, Sentry or equivalent) with runbook",
+          "Full operational documentation + knowledge-transfer session"
         ]
       }
     ]
@@ -231,7 +246,7 @@ export const en = {
     },
     error: {
       title: "Submission error",
-      message: "Something went wrong while sending your request. Please try again or email me directly at samendjiaha@gmail.com."
+      message: "Something went wrong while sending your request. Please try again or email me directly at contact@samensteeve.com."
     }
   },
   footer: {

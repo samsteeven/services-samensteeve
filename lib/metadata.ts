@@ -4,7 +4,7 @@ import type { Language } from "@/lib/translations";
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://services.samensteeve.com";
 
-const PROFILE_IMAGE = "https://samensteeve.com/profile/profil.png";
+const PROFILE_IMAGE = "/profil.png";
 
 export interface PageMetadataOptions {
   lang: Language;

@@ -137,7 +137,7 @@ export default async function HomePage({ params }: PageProps) {
         <div className="mx-auto max-w-3xl px-4 sm:px-8 text-center">
           <ScrollReveal>
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] font-bold text-accent mb-6 block">
-              {"// "}{lang === "fr" ? "Prêt à lancer ?" : "Ready to Start?"}
+              {lang === "fr" ? "Prêt à lancer ?" : "Ready to Start?"}
             </span>
             <h2 className="font-display text-3xl font-extrabold tracking-tight text-ink sm:text-5xl leading-[1.1]">
               {lang === "fr" ? "Besoin de construire, sécuriser ou automatiser ?" : "Need to build, secure, or automate?"}

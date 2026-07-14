@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getT, type Language } from "@/lib/translations";
-import { ArrowRight, ChevronDown, Phone } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { ScrollReveal } from "./scroll-reveal";
 
 // 👉 Remplacer par l'URL Cal.com réelle

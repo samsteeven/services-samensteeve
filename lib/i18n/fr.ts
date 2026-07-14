@@ -6,6 +6,7 @@ export const fr = {
     realisations: "Réalisations",
     explore: "Explorer",
     moi: "Moi",
+    blog: "Blog",
     contactShort: "Me contacter",
     cta: "Démarrer un projet",
     opposite: "EN",

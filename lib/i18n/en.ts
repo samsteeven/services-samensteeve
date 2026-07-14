@@ -6,6 +6,7 @@ export const en = {
     realisations: "Case Studies",
     explore: "Explore",
     moi: "Me",
+    blog: "Blog",
     contactShort: "Contact me",
     cta: "Start a project",
     opposite: "FR",

@@ -172,6 +172,16 @@ export function SiteHeader({ lang }: { lang: Language }) {
             {t.nav.moi}
           </a>
 
+          {/* ── Blog ── */}
+          <Link
+            href={`/${lang}/blog`}
+            className={`py-1 transition-all duration-200 hover:text-accent ${
+              isActive(`/${lang}/blog`) ? "text-accent" : ""
+            }`}
+          >
+            {t.nav.blog}
+          </Link>
+
           <span className="h-3 w-px bg-line/60" />
 
           {/* Lang switch */}
@@ -258,6 +268,17 @@ export function SiteHeader({ lang }: { lang: Language }) {
             >
               {t.nav.moi}
             </a>
+
+            {/* Blog */}
+            <Link
+              href={`/${lang}/blog`}
+              onClick={() => setIsOpen(false)}
+              className={`py-2 pl-2 border-b border-line/20 transition duration-200 ${
+                isActive(`/${lang}/blog`) ? "text-accent font-semibold" : ""
+              }`}
+            >
+              {t.nav.blog}
+            </Link>
 
             <div className="flex items-center justify-between pt-4">
               <Link

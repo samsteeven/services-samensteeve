@@ -62,6 +62,17 @@ export default async function CaseStudyPage({ params }: PageProps) {
             </Link>
           </ScrollReveal>
 
+          {meta.coverImage && (
+            <ScrollReveal delay={40} className="mt-8 overflow-hidden rounded-2xl border border-line bg-paper-raised/30 max-w-3xl flex justify-center p-6 sm:p-12 relative">
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-line)_1px,transparent_1px)] bg-[size:20px_20px] opacity-10 pointer-events-none" />
+              <img
+                src={meta.coverImage}
+                alt={locale.title}
+                className="w-full max-w-lg h-auto object-contain max-h-[300px] filter dark:brightness-110 z-10"
+              />
+            </ScrollReveal>
+          )}
+
           <ScrollReveal delay={60} className="mt-8">
             {/* Service tags */}
             <div className="flex flex-wrap gap-2 mb-5">

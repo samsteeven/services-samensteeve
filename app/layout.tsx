@@ -60,6 +60,7 @@ const personJsonLd = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://services.samensteeve.com"),
   robots: {
     index: true,
     follow: true,

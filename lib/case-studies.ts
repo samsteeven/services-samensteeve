@@ -6,7 +6,8 @@ export type CaseStudySlug = "tribunejustice" | "digitrans-cm" | "shopnow";
 export interface CaseStudyMeta {
   slug: CaseStudySlug;
   service: "developpement-web" | "architecture-cloud" | "audit-securite" | "automatisation-ia" | "developpement-web,audit-securite";
-  coverPlaceholder: string; // couleur CSS pour placeholder avant ajout des images réelles
+  coverPlaceholder: string;
+  coverImage: string;
 }
 
 export const caseStudiesList: CaseStudyMeta[] = [
@@ -14,16 +15,19 @@ export const caseStudiesList: CaseStudyMeta[] = [
     slug: "tribunejustice",
     service: "developpement-web,audit-securite",
     coverPlaceholder: "#1e293b",
+    coverImage: "/projects/logoTBJ.png",
   },
   {
     slug: "digitrans-cm",
     service: "architecture-cloud",
     coverPlaceholder: "#0f172a",
+    coverImage: "/projects/archi_cloud.png",
   },
   {
     slug: "shopnow",
     service: "architecture-cloud",
     coverPlaceholder: "#172554",
+    coverImage: "/projects/archi_onpromise.png",
   },
 ];
 

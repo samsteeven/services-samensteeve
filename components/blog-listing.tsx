@@ -31,31 +31,36 @@ export function BlogListing({ posts, lang }: BlogListingProps) {
     <div className="mx-auto max-w-5xl px-4 sm:px-8">
       {/* Tags Filtering */}
       <ScrollReveal>
-        <div className="flex flex-wrap items-center gap-2 mb-12 border-b border-line/30 pb-6">
-          <button
-            onClick={() => setActiveTag("all")}
-            className={`font-mono text-[10px] uppercase tracking-wider font-bold px-3.5 py-1.5 rounded-full transition-all duration-200 border ${
-              activeTag === "all"
-                ? "bg-ink text-paper border-ink animate-none"
-                : "bg-paper-raised/40 text-ink-soft border-line hover:border-ink-soft hover:text-ink"
-            }`}
-          >
-            {allTagLabel}
-          </button>
-
-          {allTags.map((tag) => (
+        <div className="relative mb-12 border-b border-line/30 pb-6">
+          <div className="flex overflow-x-auto gap-2 pr-16 scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden flex-nowrap py-1">
             <button
-              key={tag}
-              onClick={() => setActiveTag(tag)}
-              className={`font-mono text-[10px] uppercase tracking-wider font-bold px-3.5 py-1.5 rounded-full transition-all duration-200 border ${
-                activeTag === tag
-                  ? "bg-accent text-white border-accent"
-                  : "bg-paper-raised/40 text-ink-soft border-line hover:border-accent/40 hover:text-accent"
+              onClick={() => setActiveTag("all")}
+              className={`font-mono text-[10px] uppercase tracking-wider font-bold px-3.5 py-1.5 rounded-full transition-all duration-200 border shrink-0 ${
+                activeTag === "all"
+                  ? "bg-ink text-paper border-ink animate-none"
+                  : "bg-paper-raised/40 text-ink-soft border-line hover:border-ink-soft hover:text-ink"
               }`}
             >
-              {tag}
+              {allTagLabel}
             </button>
-          ))}
+
+            {allTags.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => setActiveTag(tag)}
+                className={`font-mono text-[10px] uppercase tracking-wider font-bold px-3.5 py-1.5 rounded-full transition-all duration-200 border shrink-0 ${
+                  activeTag === tag
+                    ? "bg-accent text-white border-accent"
+                    : "bg-paper-raised/40 text-ink-soft border-line hover:border-accent/40 hover:text-accent"
+                }`}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
+          
+          {/* Subtle fade overlay to indicate horizontal scrolling on the right */}
+          <div className="absolute right-0 top-0 bottom-6 w-20 bg-gradient-to-l from-paper via-paper/80 to-transparent pointer-events-none" />
         </div>
       </ScrollReveal>
 

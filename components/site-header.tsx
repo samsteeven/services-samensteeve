@@ -44,6 +44,29 @@ export function SiteHeader({ lang }: { lang: Language }) {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!pathname.includes("/blog")) {
+        setScrollProgress(0);
+        return;
+      }
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const progress = (window.scrollY / totalHeight) * 100;
+        setScrollProgress(progress);
+      } else {
+        setScrollProgress(0);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Safe asynchronous call within useEffect
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [pathname]);
+
   // Hover helpers with delayed close to avoid flickering
   const openServices = () => {
     if (servicesCloseTimer.current) clearTimeout(servicesCloseTimer.current);
@@ -158,6 +181,15 @@ export function SiteHeader({ lang }: { lang: Language }) {
                 >
                   {t.nav.realisations}
                 </Link>
+                <Link
+                  href={`/${lang}/blog`}
+                  onClick={() => setExploreOpen(false)}
+                  className={`block px-4 py-2.5 text-[11px] font-mono uppercase tracking-wider transition duration-150 hover:text-accent hover:bg-accent/5 ${
+                    isActive(`/${lang}/blog`) ? "text-accent" : "text-ink-soft"
+                  }`}
+                >
+                  {t.nav.blog}
+                </Link>
               </div>
             )}
           </div>
@@ -171,16 +203,6 @@ export function SiteHeader({ lang }: { lang: Language }) {
           >
             {t.nav.moi}
           </a>
-
-          {/* ── Blog ── */}
-          <Link
-            href={`/${lang}/blog`}
-            className={`py-1 transition-all duration-200 hover:text-accent ${
-              isActive(`/${lang}/blog`) ? "text-accent" : ""
-            }`}
-          >
-            {t.nav.blog}
-          </Link>
 
           <span className="h-3 w-px bg-line/60" />
 
@@ -257,6 +279,15 @@ export function SiteHeader({ lang }: { lang: Language }) {
             >
               {t.nav.realisations}
             </Link>
+            <Link
+              href={`/${lang}/blog`}
+              onClick={() => setIsOpen(false)}
+              className={`py-2 pl-2 border-b border-line/20 transition duration-200 ${
+                isActive(`/${lang}/blog`) ? "text-accent font-semibold" : ""
+              }`}
+            >
+              {t.nav.blog}
+            </Link>
 
             {/* Moi */}
             <a
@@ -268,17 +299,6 @@ export function SiteHeader({ lang }: { lang: Language }) {
             >
               {t.nav.moi}
             </a>
-
-            {/* Blog */}
-            <Link
-              href={`/${lang}/blog`}
-              onClick={() => setIsOpen(false)}
-              className={`py-2 pl-2 border-b border-line/20 transition duration-200 ${
-                isActive(`/${lang}/blog`) ? "text-accent font-semibold" : ""
-              }`}
-            >
-              {t.nav.blog}
-            </Link>
 
             <div className="flex items-center justify-between pt-4">
               <Link
@@ -300,6 +320,13 @@ export function SiteHeader({ lang }: { lang: Language }) {
             </Link>
           </nav>
         </div>
+      )}
+      {/* Scroll Progress Bar for Blog & Details */}
+      {pathname.includes("/blog") && (
+        <div
+          className="absolute bottom-0 left-0 h-[2px] bg-accent transition-all duration-75 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        />
       )}
     </header>
   );

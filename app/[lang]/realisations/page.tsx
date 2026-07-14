@@ -69,15 +69,24 @@ export default async function RealisationsPage({ params }: PageProps) {
                     href={`/${lang}/realisations/${cs.slug}`}
                     className="group flex flex-col md:flex-row overflow-hidden rounded-2xl border border-line bg-paper-raised/40 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-md"
                   >
-                    {/* Cover Placeholder */}
-                    <div
-                      className="h-48 md:h-auto md:w-64 shrink-0 flex items-center justify-center"
-                      style={{ background: `linear-gradient(135deg, ${cs.coverPlaceholder}, ${cs.coverPlaceholder}cc)` }}
-                    >
-                      <span className="font-display text-4xl font-extrabold text-white/20 select-none">
-                        {locale.title.slice(0, 2).toUpperCase()}
-                      </span>
-                    </div>
+                    {/* Numeration or Logo Block */}
+                    {cs.slug === "tribunejustice" ? (
+                      <div className="md:w-64 shrink-0 bg-paper-raised/80 border-b md:border-b-0 md:border-r border-line/40 p-8 flex items-center justify-center h-48 md:h-auto min-h-[190px] relative overflow-hidden">
+                        {/* Grid background effect */}
+                        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-line)_1px,transparent_1px)] bg-[size:16px_16px] opacity-15 pointer-events-none" />
+                        <img
+                          src={cs.coverImage}
+                          alt={locale.title}
+                          className="max-h-20 max-w-full object-contain filter dark:brightness-110 group-hover:scale-105 transition-all duration-350 ease-out z-10"
+                        />
+                      </div>
+                    ) : (
+                      <div className="md:w-64 shrink-0 bg-paper-raised/35 border-b md:border-b-0 md:border-r border-line/40 p-8 flex items-center justify-center font-display text-6xl font-extrabold text-ink/15 group-hover:text-accent/25 transition-all duration-350 ease-out h-48 md:h-auto min-h-[190px] relative select-none">
+                        {/* Grid background effect */}
+                        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-line)_1px,transparent_1px)] bg-[size:16px_16px] opacity-15 pointer-events-none" />
+                        <span className="z-10 font-mono tracking-tighter">0{i + 1}</span>
+                      </div>
+                    )}
 
                     {/* Content */}
                     <div className="flex flex-col justify-between p-6 sm:p-8">

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { Language } from "@/lib/translations";
 import { createPageMetadata } from "@/lib/metadata";
 import { getT } from "@/lib/translations";
-import { caseStudiesList, caseStudiesContent } from "@/lib/case-studies";
+import { caseStudies } from "@/lib/case-studies";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
@@ -58,10 +58,8 @@ export default async function RealisationsPage({ params }: PageProps) {
       <section className="py-16 md:py-24">
         <div className="mx-auto max-w-5xl px-4 sm:px-8">
           <div className="grid grid-cols-1 gap-8">
-            {caseStudiesList.map((cs, i) => {
-              const content = caseStudiesContent.find((c) => c.slug === cs.slug);
-              if (!content) return null;
-              const locale = lang === "fr" ? content.fr : content.en;
+            {caseStudies.map((cs, i) => {
+              const locale = lang === "fr" ? cs.fr : cs.en;
 
               return (
                 <ScrollReveal key={cs.slug} delay={i * 80}>

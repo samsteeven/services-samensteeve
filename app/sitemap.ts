@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { caseStudiesList } from "@/lib/case-studies";
-import { servicesList } from "@/lib/services";
+import { caseStudies } from "@/lib/case-studies";
+import { services } from "@/lib/services";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://services.samensteeve.com";
@@ -26,7 +26,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Service pages
   const serviceEntries = langs.flatMap((lang) =>
-    servicesList.map((s) => ({
+    services.map((s) => ({
       url: `${baseUrl}/${lang}/services/${s.slug}`,
       lastModified: new Date(),
       priority: 0.8 as const,
@@ -36,7 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Case study pages
   const caseStudyEntries = langs.flatMap((lang) =>
-    caseStudiesList.map((cs) => ({
+    caseStudies.map((cs) => ({
       url: `${baseUrl}/${lang}/realisations/${cs.slug}`,
       lastModified: new Date(),
       priority: 0.8 as const,

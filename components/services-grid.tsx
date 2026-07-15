@@ -1,15 +1,8 @@
 import Link from "next/link";
 import { getT, type Language } from "@/lib/translations";
-import { servicesList } from "@/lib/services";
-import { Code2, Cloud, ShieldCheck, Cpu, ArrowRight } from "lucide-react";
+import { services } from "@/lib/services";
+import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "./scroll-reveal";
-
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Code2,
-  Cloud,
-  ShieldCheck,
-  Cpu,
-};
 
 export function ServicesGrid({ lang }: { lang: Language }) {
   const t = getT(lang);
@@ -43,9 +36,9 @@ export function ServicesGrid({ lang }: { lang: Language }) {
 
         {/* Services Matrix (2x2 grid with high visual detail) */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-          {servicesList.map((service, i) => {
+          {services.map((service, i) => {
             const itemTrans = t.services.items[service.slug];
-            const IconComponent = iconMap[service.iconName] || Code2;
+            const IconComponent = service.icon;
 
             return (
               <ScrollReveal key={service.slug} delay={i * 80}>

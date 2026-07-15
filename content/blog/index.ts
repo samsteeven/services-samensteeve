@@ -1,5 +1,4 @@
 import { BlogPost, PostMeta } from "./types";
-import React from "react";
 
 // Import all posts dynamically or directly.
 // To keep things simple and typed, we define the metadata here and dynamic/static imports for content.
@@ -159,67 +158,8 @@ export async function getPostBySlug(slug: string, lang: "fr" | "en"): Promise<Bl
   if (!meta) return null;
 
   try {
-    let Content: () => React.JSX.Element;
-    if (lang === "fr") {
-      switch (slug) {
-        case "securiser-agent-mcp-bdd":
-          Content = (await import("./posts/fr/securiser-agent-mcp-bdd")).default;
-          break;
-        case "langgraph-destruction-staging":
-          Content = (await import("./posts/fr/langgraph-destruction-staging")).default;
-          break;
-        case "double-facturation-concurrence":
-          Content = (await import("./posts/fr/double-facturation-concurrence")).default;
-          break;
-        case "refus-microservices-laravel":
-          Content = (await import("./posts/fr/refus-microservices-laravel")).default;
-          break;
-        case "migration-mpls-cloud-douala":
-          Content = (await import("./posts/fr/migration-mpls-cloud-douala")).default;
-          break;
-        case "offline-first-connectivite-60":
-          Content = (await import("./posts/fr/offline-first-connectivite-60")).default;
-          break;
-        case "ssrf-webhook-gateway-interne":
-          Content = (await import("./posts/fr/ssrf-webhook-gateway-interne")).default;
-          break;
-        case "audit-owasp-fintech-cameroun":
-          Content = (await import("./posts/fr/audit-owasp-fintech-cameroun")).default;
-          break;
-        default:
-          return null;
-      }
-    } else {
-      switch (slug) {
-        case "securing-mcp-agent-database":
-          Content = (await import("./posts/en/securing-mcp-agent-database")).default;
-          break;
-        case "langgraph-staging-data-destruction":
-          Content = (await import("./posts/en/langgraph-staging-data-destruction")).default;
-          break;
-        case "concurrent-double-billing-bug":
-          Content = (await import("./posts/en/concurrent-double-billing-bug")).default;
-          break;
-        case "refusing-laravel-microservices":
-          Content = (await import("./posts/en/refusing-laravel-microservices")).default;
-          break;
-        case "mpls-hybrid-cloud-migration-douala":
-          Content = (await import("./posts/en/mpls-hybrid-cloud-migration-douala")).default;
-          break;
-        case "offline-first-60-percent-connectivity":
-          Content = (await import("./posts/en/offline-first-60-percent-connectivity")).default;
-          break;
-        case "ssrf-webhook-internal-gateway":
-          Content = (await import("./posts/en/ssrf-webhook-internal-gateway")).default;
-          break;
-        case "owasp-audit-cameroon-fintech":
-          Content = (await import("./posts/en/owasp-audit-cameroon-fintech")).default;
-          break;
-        default:
-          return null;
-      }
-    }
-    return { meta, Content };
+    const mod = await import(`./posts/${lang}/${slug}`);
+    return { meta, Content: mod.default };
   } catch (err) {
     console.error(`Error importing blog post: ${slug} (${lang})`, err);
     return null;

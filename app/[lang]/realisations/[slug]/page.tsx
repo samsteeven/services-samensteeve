@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import type { Language } from "@/lib/translations";
 import { createPageMetadata } from "@/lib/metadata";
 import { getT } from "@/lib/translations";
-import { caseStudiesList, caseStudiesContent } from "@/lib/case-studies";
+import { caseStudies, getCaseStudyBySlug } from "@/lib/case-studies";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, CheckCircle2, ExternalLink, Github } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
@@ -13,7 +13,7 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return caseStudiesList.flatMap((cs) =>
+  return caseStudies.flatMap((cs) =>
     ["fr", "en"].map((lang) => ({ lang, slug: cs.slug }))
   );
 }
@@ -21,9 +21,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang, slug } = await params;
   const langKey = lang as Language;
-  const content = caseStudiesContent.find((c) => c.slug === slug);
-  if (!content) return {};
-  const locale = lang === "fr" ? content.fr : content.en;
+  const cs = getCaseStudyBySlug(slug);
+  if (!cs) return {};
+  const locale = lang === "fr" ? cs.fr : cs.en;
   return createPageMetadata({
     lang: langKey,
     title: locale.title,
@@ -38,18 +38,17 @@ export default async function CaseStudyPage({ params }: PageProps) {
   const langKey = lang as Language;
   const t = getT(langKey);
 
-  const meta = caseStudiesList.find((cs) => cs.slug === slug);
-  const content = caseStudiesContent.find((c) => c.slug === slug);
-  if (!meta || !content) notFound();
+  const cs = getCaseStudyBySlug(slug);
+  if (!cs) notFound();
 
-  const locale = lang === "fr" ? content.fr : content.en;
+  const locale = lang === "fr" ? cs.fr : cs.en;
 
   return (
     <div className="flex flex-col">
       {/* Hero */}
       <header
         className="relative py-16 md:py-24 border-b border-line/40 overflow-hidden transition-all duration-300"
-        style={{ background: `linear-gradient(135deg, ${meta.coverPlaceholder}22, var(--paper))` }}
+        style={{ background: `linear-gradient(135deg, ${cs.coverPlaceholder}22, var(--paper))` }}
       >
         <div className="mx-auto max-w-5xl px-4 sm:px-8">
           <ScrollReveal>
@@ -62,11 +61,11 @@ export default async function CaseStudyPage({ params }: PageProps) {
             </Link>
           </ScrollReveal>
 
-          {meta.coverImage && (
+          {cs.coverImage && (
             <ScrollReveal delay={40} className="mt-8 overflow-hidden rounded-2xl border border-line bg-paper-raised/30 max-w-3xl flex justify-center p-6 sm:p-12 relative">
               <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-line)_1px,transparent_1px)] bg-[size:20px_20px] opacity-10 pointer-events-none" />
               <img
-                src={meta.coverImage}
+                src={cs.coverImage}
                 alt={locale.title}
                 className="w-full max-w-lg h-auto object-contain max-h-[300px] filter dark:brightness-110 z-10"
               />

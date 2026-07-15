@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./theme-toggle";
-import { getT, getOppositeUrl, type Language } from "@/lib/translations";
+import { getT, getOppositeUrl, type Language } from "@/lib/i18n";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 
 export function SiteHeader({ lang }: { lang: Language }) {

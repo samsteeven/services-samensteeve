@@ -1,41 +1,4 @@
-// Données statiques des réalisations
-// Chaque case study peut être étendu avec du contenu MDX plus tard
-
 export type CaseStudySlug = "tribunejustice" | "digitrans-cm" | "shopnow";
-
-export interface CaseStudyMeta {
-  slug: CaseStudySlug;
-  service: "developpement-web" | "architecture-cloud" | "audit-securite" | "automatisation-ia" | "developpement-web,audit-securite";
-  coverPlaceholder: string;
-  coverImage: string;
-}
-
-export const caseStudiesList: CaseStudyMeta[] = [
-  {
-    slug: "tribunejustice",
-    service: "developpement-web,audit-securite",
-    coverPlaceholder: "#1e293b",
-    coverImage: "/projects/logoTBJ.png",
-  },
-  {
-    slug: "digitrans-cm",
-    service: "architecture-cloud",
-    coverPlaceholder: "#0f172a",
-    coverImage: "/projects/archi_cloud.png",
-  },
-  {
-    slug: "shopnow",
-    service: "architecture-cloud",
-    coverPlaceholder: "#172554",
-    coverImage: "/projects/archi_onpromise.png",
-  },
-];
-
-export interface CaseStudyContent {
-  slug: CaseStudySlug;
-  fr: CaseStudyLocale;
-  en: CaseStudyLocale;
-}
 
 export interface CaseStudyLocale {
   title: string;
@@ -52,9 +15,21 @@ export interface CaseStudyLocale {
   siteUrl?: string;
 }
 
-export const caseStudiesContent: CaseStudyContent[] = [
+export interface CaseStudy {
+  slug: CaseStudySlug;
+  service: string[];
+  coverPlaceholder: string;
+  coverImage: string;
+  fr: CaseStudyLocale;
+  en: CaseStudyLocale;
+}
+
+export const caseStudies: CaseStudy[] = [
   {
     slug: "tribunejustice",
+    service: ["developpement-web", "audit-securite"],
+    coverPlaceholder: "#1e293b",
+    coverImage: "/projects/logoTBJ.png",
     fr: {
       title: "TribuneJustice",
       tagline: "Plateforme legaltech : matching avocat-client, paiements en escrow et automatisation IA.",
@@ -110,6 +85,9 @@ export const caseStudiesContent: CaseStudyContent[] = [
   },
   {
     slug: "digitrans-cm",
+    service: ["architecture-cloud", "developpement-web"],
+    coverPlaceholder: "#0f172a",
+    coverImage: "/projects/archi_cloud.png",
     fr: {
       title: "DIGITRANS-CM (AGROCAM S.A.)",
       tagline: "Architecture microservices cloud-native pour une agro-industrie avec synchronisation offline-first en zone rurale.",
@@ -167,6 +145,9 @@ export const caseStudiesContent: CaseStudyContent[] = [
   },
   {
     slug: "shopnow",
+    service: ["architecture-cloud"],
+    coverPlaceholder: "#172554",
+    coverImage: "/projects/archi_onpromise.png",
     fr: {
       title: "ShopNow — Infrastructure Cloud Hybride",
       tagline: "Infrastructure multi-sites sécurisée pour un e-commerce camerounais avec migration M365 et plan de reprise d'activité.",
@@ -223,3 +204,7 @@ export const caseStudiesContent: CaseStudyContent[] = [
     },
   },
 ];
+
+export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
+  return caseStudies.find((cs) => cs.slug === slug);
+}

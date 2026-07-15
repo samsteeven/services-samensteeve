@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { Language } from "@/lib/translations";
 import { createPageMetadata } from "@/lib/metadata";
 import { getT } from "@/lib/translations";
-import { servicesList } from "@/lib/services";
+import { services } from "@/lib/services";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
@@ -54,7 +54,7 @@ export default async function ServicesPage({ params }: PageProps) {
       <section className="py-16 md:py-24 transition-all duration-300">
         <div className="mx-auto max-w-5xl px-4 sm:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[1fr]">
-            {servicesList.map((service, i) => {
+            {services.map((service, i) => {
               const itemTrans = t.services.items[service.slug];
               const isFirst = i === 0;
 

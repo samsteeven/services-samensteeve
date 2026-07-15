@@ -1,36 +1,145 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Services — Samen Steeve
 
-## Getting Started
+Site vitrine bilingue (fr/en) pour les services freelance de **Samen Steeve** : développement web, architecture cloud, audit sécurité, automatisation IA. Blog technique avec 16 articles (8 paires bilingues). Contact via formulaire 4 étapes + envoi email Resend.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router, Turbopack)
+- **React 19**
+- **Tailwind CSS v4** (CSS-first, pas de `tailwind.config.js`)
+- **lucide-react** — icônes
+- **Resend** — envoi d'emails transactionnels (formulaire de contact)
+- **TypeScript strict**
+- **@fontsource/** — polices auto-hébergées (Inter, Outfit, Instrument Sans, JetBrains Mono, Syne)
+
+## Démarrer
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvre [http://localhost:3001](http://localhost:3001).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Internationalisation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Le site est bilingue `/en` et `/fr`. La racine `/` redirige vers `/fr` via `proxy.ts` (Next.js 16+). Les traductions sont dans `lib/i18n/` avec un helper `getT(lang)`. Le changement de langue utilise `getOppositeUrl()` pour basculer n'importe quelle URL.
 
-## Learn More
+## Thème
 
-To learn more about Next.js, take a look at the following resources:
+Mode clair/sombre géré par l'attribut `data-theme` sur `<html>`, persisté dans `localStorage` (clé `theme`). Le script anti-flash dans `app/layout.tsx` applique le thème avant le premier rendu React. Pas de librairie externe.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Structure du contenu
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+content/
+└── blog/
+    ├── types.ts            # interfaces PostMeta, BlogPost
+    ├── index.ts            # métadonnées + getPostBySlug(slug, lang)
+    └── posts/
+        ├── fr/             # 8 articles français (.tsx)
+        │   └── *.tsx
+        └── en/             # 8 articles anglais (.tsx)
+            └── *.tsx
+```
 
-## Deploy on Vercel
+Les articles sont des fichiers `.tsx` exportant un composant React (contenu JSX inline). Le chargement est dynamique via `import(\`./posts/${lang}/${slug}\`)`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Workflow** : créer le fichier `.mdx` → ajouter les métadonnées dans `content/blog/index.ts` → `git push`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Routes
+
+```
+app/
+├── layout.tsx              # Root layout (html, head, fonts, JSON-LD, theme script)
+├── globals.css             # Tokens Tailwind, animations, mode sombre
+├── proxy.ts                # Redirection / → /fr, markdown content negotiation
+├── sitemap.ts              # Sitemap auto-généré (24 URLs)
+├── icon.png                # Favicon
+├── api/
+│   └── contact/
+│       └── route.ts        # POST — envoi email via Resend
+└── [lang]/
+    ├── layout.tsx          # SiteHeader + SiteFooter + validation langue
+    ├── page.tsx            # Accueil (hero, grille services, témoignage, CTA)
+    ├── services/
+    │   ├── page.tsx        # Liste des services (bento grid)
+    │   └── [slug]/
+    │       └── page.tsx    # Détail service (livrables, cas d'usage, étude liée)
+    ├── comment-ca-marche/
+    │   └── page.tsx        # Processus (timeline 4 phases)
+    ├── realisations/
+    │   ├── page.tsx        # Liste des études de cas
+    │   └── [slug]/
+    │       └── page.tsx    # Détail étude (défis, solutions, résultats)
+    ├── blog/
+    │   ├── page.tsx        # Listing blog (filtre par tag)
+    │   └── [slug]/
+    │       └── page.tsx    # Article blog
+    ├── demarrer-un-projet/
+    │   └── page.tsx        # Formulaire 4 étapes (type, description, contexte, contact)
+    └── [...catchAll]/
+        └── page.tsx        # 404 personnalisé
+```
+
+## Design
+
+- **Palette** : Tokens CSS `bg-paper`, `text-ink`, `border-line`, `text-accent` — pas de couleurs Tailwind par défaut.
+- **Polices** : `font-display` (Outfit), `font-sans` (Inter), `font-mono` (JetBrains Mono) — auto-hébergées via `@fontsource`.
+- **Animations** : `fade-in`, `grid-pan`, `hero-glow-pulse` dans `globals.css` ; composant `ScrollReveal` pour apparitions au défilement.
+
+## Composants principaux
+
+- `site-header.tsx` — Navigation sticky avec dropdowns (Services, Explorer), drawer mobile, barre de progression scroll
+- `site-footer.tsx` — Footer 3 colonnes (marque, contact, navigation)
+- `hero-section.tsx` — Hero avec grille SVG animée, badge disponibilité, dual CTA
+- `services-grid.tsx` — Grille 2×2 avec mini-visuals interactifs par service
+- `process-timeline.tsx` — Timeline verticale 4 phases (alterné gauche/droite)
+- `project-form.tsx` — Formulaire multi-étapes (client)
+- `use-project-form.ts` — Hook de logique formulaire (validation, soumission POST)
+- `blog-listing.tsx` — Listing articles avec filtrage par tag (client)
+- `blog-card.tsx` — Carte d'article
+- `scroll-reveal.tsx` — Animation d'entrée au scroll (IntersectionObserver)
+- `theme-toggle.tsx` — Bascule clair/sombre
+
+## Services
+
+4 services définis dans `lib/services.ts` :
+
+| Slug | Type contact | Étude liée |
+|---|---|---|
+| `developpement-web` | `web` | tribunejustice |
+| `architecture-cloud` | `cloud` | shopnow |
+| `audit-securite` | `security` | tribunejustice |
+| `automatisation-ia` | `ai` | digitrans-cm |
+
+Chaque service a une icône, un type de contact associé (pour le formulaire), et une étude de cas liée.
+
+## Études de cas
+
+3 études bilingues dans `lib/case-studies.ts` :
+
+- **tribunejustice** — Plateforme legaltech (Laravel, Angular, Next.js, Redis, Docker)
+- **digitrans-cm** — Microservices cloud-native pour agtech (Kubernetes, Terraform, AWS/Azure)
+- **shopnow** — Infrastructure hybride e-commerce (Azure, AD, M365, FortiGate)
+
+## SEO
+
+- JSON-LD `schema.org/Person` dans le root layout (Knowledge Panel Google)
+- `createPageMetadata()` dans `lib/metadata.ts` — canonical, hreflang, OpenGraph, Twitter cards
+- `metadataBase` : `https://services.samensteeve.com`
+- Sitemap auto-généré (24 URLs)
+- Security headers : `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, etc.
+
+## Commandes
+
+```bash
+npm run dev           # Serveur de développement (port 3001)
+npm run build         # Build de production
+npm run start         # Serveur production (port 3001)
+npm run lint          # ESLint
+```
+
+## Déploiement
+
+Optimisé pour **Vercel** avec domaine **services.samensteeve.com**. Email transactionnel via **Resend** (clé API dans `RESEND_API_KEY`).

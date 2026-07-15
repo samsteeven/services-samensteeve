@@ -3,31 +3,17 @@ import type { Metadata } from "next";
 import type { Language } from "@/lib/translations";
 import { createPageMetadata } from "@/lib/metadata";
 import { getT } from "@/lib/translations";
-import { servicesList } from "@/lib/services";
-import { CheckCircle2, Code2, Cloud, ShieldCheck, Cpu, ArrowRight, ArrowLeft } from "lucide-react";
+import { services, getServiceBySlug } from "@/lib/services";
+import { CheckCircle2, ArrowRight, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { ScrollReveal } from "@/components/scroll-reveal";
-
-type ServiceSlug = "developpement-web" | "architecture-cloud" | "audit-securite" | "automatisation-ia";
 
 interface PageProps {
   params: Promise<{ lang: string; slug: string }>;
 }
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Code2, Cloud, ShieldCheck, Cpu,
-};
-
-// Related case studies per service slug
-const relatedCaseStudy: Record<ServiceSlug, string | null> = {
-  "developpement-web": "tribunejustice",
-  "architecture-cloud": "shopnow",
-  "audit-securite": "tribunejustice",
-  "automatisation-ia": "digitrans-cm",
-};
-
 export async function generateStaticParams() {
-  return servicesList.flatMap((s) =>
+  return services.flatMap((s) =>
     ["fr", "en"].map((lang) => ({ lang, slug: s.slug }))
   );
 }
@@ -35,31 +21,29 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang, slug } = await params;
   const langKey = lang as Language;
-  const slugKey = slug as ServiceSlug;
   const t = getT(langKey);
-  const service = servicesList.find((s) => s.slug === slugKey);
+  const service = getServiceBySlug(slug);
   if (!service) return {};
   const item = t.services.items[service.slug];
   return createPageMetadata({
     lang: langKey,
     title: item.title,
     description: item.shortDesc,
-    path: `/services/${slugKey}`,
+    path: `/services/${service.slug}`,
   });
 }
 
 export default async function ServiceDetailPage({ params }: PageProps) {
   const { lang, slug } = await params;
   const langKey = lang as Language;
-  const slugKey = slug as ServiceSlug;
   const t = getT(langKey);
 
-  const service = servicesList.find((s) => s.slug === slugKey);
+  const service = getServiceBySlug(slug);
   if (!service) notFound();
 
   const item = t.services.items[service.slug];
-  const IconComponent = iconMap[service.iconName] || Code2;
-  const relatedSlug = relatedCaseStudy[slugKey];
+  const IconComponent = service.icon;
+  const relatedSlug = service.relatedCaseStudy;
 
   return (
     <div className="flex flex-col">
@@ -112,7 +96,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
           <ScrollReveal delay={200} className="mt-10">
             <Link
-              href={`/${lang}/demarrer-un-projet?service=${slugKey}`}
+              href={`/${lang}/demarrer-un-projet?service=${service.slug}`}
               className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-mono text-xs uppercase font-bold tracking-widest text-paper hover:bg-accent hover:text-white transition duration-200 hover:scale-105 active:scale-[0.96]"
             >
               {t.services.contactCTA}
@@ -195,7 +179,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               : "Describe your project in 2 minutes. I'll get back with a concrete analysis within 24h."}
           </p>
           <Link
-            href={`/${lang}/demarrer-un-projet?service=${slugKey}`}
+            href={`/${lang}/demarrer-un-projet?service=${service.slug}`}
             className="mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-mono text-xs uppercase font-bold tracking-widest text-paper hover:bg-accent hover:text-white transition duration-200 hover:scale-105 active:scale-[0.96]"
           >
             {t.services.contactCTA}

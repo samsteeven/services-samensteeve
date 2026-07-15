@@ -42,11 +42,6 @@ export default async function StartProjectPage({ params }: PageProps) {
               {t.contact.title}
             </h1>
           </ScrollReveal>
-          <ScrollReveal delay={80}>
-            <p className="mt-4 text-sm text-ink-soft max-w-lg mx-auto leading-relaxed">
-              {t.contact.subtitle}
-            </p>
-          </ScrollReveal>
         </div>
 
         <div className="flex justify-center mt-8">

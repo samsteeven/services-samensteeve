@@ -112,7 +112,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
           <ScrollReveal delay={200} className="mt-10">
             <Link
-              href={`/${lang}/demarrer-un-projet`}
+              href={`/${lang}/demarrer-un-projet?service=${slugKey}`}
               className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-mono text-xs uppercase font-bold tracking-widest text-paper hover:bg-accent hover:text-white transition duration-200 hover:scale-105 active:scale-[0.96]"
             >
               {t.services.contactCTA}
@@ -195,7 +195,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               : "Describe your project in 2 minutes. I'll get back with a concrete analysis within 24h."}
           </p>
           <Link
-            href={`/${lang}/demarrer-un-projet`}
+            href={`/${lang}/demarrer-un-projet?service=${slugKey}`}
             className="mt-6 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-mono text-xs uppercase font-bold tracking-widest text-paper hover:bg-accent hover:text-white transition duration-200 hover:scale-105 active:scale-[0.96]"
           >
             {t.services.contactCTA}

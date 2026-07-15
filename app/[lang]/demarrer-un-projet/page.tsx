@@ -4,6 +4,7 @@ import { createPageMetadata } from "@/lib/metadata";
 import { getT } from "@/lib/translations";
 import { ProjectForm } from "@/components/project-form";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { Suspense } from "react";
 
 interface PageProps {
   params: Promise<{ lang: string }>;
@@ -41,12 +42,26 @@ export default async function StartProjectPage({ params }: PageProps) {
               {t.contact.title}
             </h1>
           </ScrollReveal>
+          <ScrollReveal delay={80}>
+            <p className="mt-4 text-sm text-ink-soft max-w-lg mx-auto leading-relaxed">
+              {t.contact.subtitle}
+            </p>
+          </ScrollReveal>
         </div>
 
         <div className="flex justify-center mt-8">
-          <ProjectForm lang={langKey} />
+          <Suspense fallback={
+            <div className="w-full max-w-2xl flex items-center justify-center py-20">
+              <span className="font-mono text-xs text-ink-soft/40 animate-pulse">
+                {lang === "fr" ? "Chargement du formulaire..." : "Loading form..."}
+              </span>
+            </div>
+          }>
+            <ProjectForm lang={langKey} />
+          </Suspense>
         </div>
       </div>
     </div>
   );
 }
+

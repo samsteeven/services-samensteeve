@@ -138,48 +138,47 @@ export function ProjectForm({ lang }: Props) {
   return (
     <div className="mx-auto max-w-2xl w-full">
 
-      {/* ── Premium Step Indicator ──────────────────────────────────────────── */}
+      {/* ── Step Indicator ─────────────────────────────────────────────────── */}
       <div className="mb-10">
-        {/* Mobile: compact bar */}
-        <div className="md:hidden mb-4 flex justify-between font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
-          <span>{stepLabels[step - 1]}</span>
-          <span className="text-accent font-semibold">{step} / {TOTAL_STEPS}</span>
-        </div>
-
-        {/* Desktop: full step labels */}
-        <div className="hidden md:flex items-center gap-0 mb-6">
-          {stepLabels.map((label, i) => {
+        {/* Circles + connectors row */}
+        <div className="flex items-center">
+          {Array.from({ length: TOTAL_STEPS }, (_, i) => {
             const num = i + 1;
             const isDone = num < step;
             const isActive = num === step;
             return (
-              <div key={label} className="flex items-center flex-1 last:flex-none">
-                <div className="flex items-center gap-2 shrink-0">
-                  <div className={`flex h-7 w-7 items-center justify-center rounded-full border-2 font-mono text-[11px] font-bold transition-all duration-300 ${
-                    isDone
-                      ? "border-accent bg-accent text-white"
-                      : isActive
-                        ? "border-accent text-accent bg-accent/10"
-                        : "border-line text-ink-soft/40 bg-transparent"
-                  }`}>
-                    {isDone ? <Check className="h-3.5 w-3.5" /> : num}
-                  </div>
-                  <span className={`font-mono text-[10px] uppercase tracking-wider transition-colors duration-200 ${
-                    isActive ? "text-ink font-semibold" : isDone ? "text-accent/70" : "text-ink-soft/40"
-                  }`}>
-                    {label}
-                  </span>
+              <div key={num} className="flex items-center flex-1 last:flex-none">
+                {/* Circle */}
+                <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 font-mono text-[12px] font-bold transition-all duration-300 ${
+                  isDone
+                    ? "border-accent bg-accent text-white"
+                    : isActive
+                      ? "border-accent text-accent bg-accent/8"
+                      : "border-line/50 text-ink-soft/30 bg-transparent"
+                }`}>
+                  {isDone ? <Check className="h-3.5 w-3.5" /> : num}
                 </div>
+                {/* Connector line */}
                 {i < TOTAL_STEPS - 1 && (
-                  <div className="flex-1 mx-3 h-px bg-line/40 relative overflow-hidden">
+                  <div className="flex-1 mx-2 h-px bg-line/40 relative overflow-hidden">
                     {isDone && (
-                      <div className="absolute inset-0 bg-accent/50 transition-all duration-500" />
+                      <div className="absolute inset-0 bg-accent/60 transition-all duration-500" />
                     )}
                   </div>
                 )}
               </div>
             );
           })}
+        </div>
+
+        {/* Active step label below */}
+        <div className="mt-4 flex items-center justify-between">
+          <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-ink">
+            {stepLabels[step - 1]}
+          </span>
+          <span className="font-mono text-[10px] text-ink-soft/40 tabular-nums">
+            {step} / {TOTAL_STEPS}
+          </span>
         </div>
 
         {/* Progress bar */}

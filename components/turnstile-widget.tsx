@@ -57,7 +57,7 @@ export function TurnstileWidget({ onTokenChange, resetSignal }: TurnstileWidgetP
     widgetIdRef.current = window.turnstile?.render(containerRef.current, {
       sitekey: siteKey,
       theme: "auto",
-      appearance: "interaction-only",
+      appearance: "always",
       execution: "render",
       retry: "auto",
       "retry-interval": 8000,
@@ -115,7 +115,7 @@ export function TurnstileWidget({ onTokenChange, resetSignal }: TurnstileWidgetP
           }, RETRY_DELAY_MS);
         }}
       />
-      <div ref={containerRef} />
+      <div ref={containerRef} className="min-h-[65px]" />
       {loadFailed && (
         <div className="mt-2 max-w-sm rounded-xl border border-red-400/30 bg-red-500/5 p-3 text-xs text-red-400">
           <p className="font-semibold">La vérification anti-bot n'a pas pu se charger.</p>

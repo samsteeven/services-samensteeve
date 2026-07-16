@@ -699,8 +699,11 @@ export function ProjectForm({ lang }: Props) {
         </div>
       )}
 
-      {form.step >= 5 && (
-        <div className="mt-6 flex justify-end">
+      {form.step === 6 && (
+        <div className="mt-6 rounded-2xl border border-line bg-paper-raised/15 p-4">
+          <p className="mb-3 font-mono text-[9px] uppercase tracking-widest text-ink-soft/45">
+            {buttons.verification}
+          </p>
           <TurnstileWidget
             onTokenChange={form.updateTurnstileToken}
             resetSignal={form.turnstileResetSignal}

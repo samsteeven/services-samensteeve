@@ -329,6 +329,7 @@ export const en = {
       clearStep: "Clear this step",
       resetAll: "Reset",
       resetConfirm: "Do you really want to clear the entire form?",
+      verification: "Anti-bot verification",
     },
     success: {
       title: "Request received!",

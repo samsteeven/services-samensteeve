@@ -329,6 +329,7 @@ export const fr = {
       clearStep: "Vider cette étape",
       resetAll: "Réinitialiser",
       resetConfirm: "Voulez-vous vraiment vider tout le formulaire ?",
+      verification: "Vérification anti-bot",
     },
     success: {
       title: "Demande reçue !",

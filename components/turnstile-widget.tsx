@@ -11,6 +11,8 @@ declare global {
         options: {
           sitekey: string;
           theme?: "auto" | "light" | "dark";
+          appearance?: "always" | "execute" | "interaction-only";
+          execution?: "render" | "execute";
           callback?: (token: string) => void;
           "expired-callback"?: () => void;
           "error-callback"?: () => void;
@@ -28,11 +30,22 @@ interface TurnstileWidgetProps {
 }
 
 const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+const MAX_SCRIPT_RETRIES = 3;
+const RETRY_DELAY_MS = 1500;
 
 export function TurnstileWidget({ onTokenChange, resetSignal }: TurnstileWidgetProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
+  const retryTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [scriptReady, setScriptReady] = useState(false);
+  const [scriptAttempt, setScriptAttempt] = useState(0);
+  const [loadFailed, setLoadFailed] = useState(false);
+
+  useEffect(() => {
+    return () => {
+      if (retryTimerRef.current) clearTimeout(retryTimerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     if (!siteKey || !scriptReady || !containerRef.current || widgetIdRef.current) return;
@@ -40,9 +53,20 @@ export function TurnstileWidget({ onTokenChange, resetSignal }: TurnstileWidgetP
     widgetIdRef.current = window.turnstile?.render(containerRef.current, {
       sitekey: siteKey,
       theme: "auto",
-      callback: onTokenChange,
-      "expired-callback": () => onTokenChange(""),
-      "error-callback": () => onTokenChange(""),
+      appearance: "interaction-only",
+      execution: "render",
+      callback: (token) => {
+        setLoadFailed(false);
+        onTokenChange(token);
+      },
+      "expired-callback": () => {
+        onTokenChange("");
+        if (widgetIdRef.current) window.turnstile?.reset(widgetIdRef.current);
+      },
+      "error-callback": () => {
+        onTokenChange("");
+        setLoadFailed(true);
+      },
     }) ?? null;
 
     return () => {
@@ -55,6 +79,7 @@ export function TurnstileWidget({ onTokenChange, resetSignal }: TurnstileWidgetP
 
   useEffect(() => {
     if (!widgetIdRef.current) return;
+    setLoadFailed(false);
     onTokenChange("");
     window.turnstile?.reset(widgetIdRef.current);
   }, [onTokenChange, resetSignal]);
@@ -64,11 +89,47 @@ export function TurnstileWidget({ onTokenChange, resetSignal }: TurnstileWidgetP
   return (
     <>
       <Script
+        key={scriptAttempt}
         src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
         strategy="afterInteractive"
-        onLoad={() => setScriptReady(true)}
+        onLoad={() => {
+          setLoadFailed(false);
+          setScriptReady(true);
+        }}
+        onError={() => {
+          setScriptReady(false);
+          onTokenChange("");
+          if (scriptAttempt >= MAX_SCRIPT_RETRIES) {
+            setLoadFailed(true);
+            return;
+          }
+          retryTimerRef.current = setTimeout(() => {
+            setScriptAttempt((attempt) => attempt + 1);
+          }, RETRY_DELAY_MS);
+        }}
       />
       <div ref={containerRef} className="min-h-[65px]" />
+      {loadFailed && (
+        <div className="mt-2 max-w-sm rounded-xl border border-red-400/30 bg-red-500/5 p-3 text-xs text-red-400">
+          <p className="font-semibold">La vérification anti-bot n'a pas pu se charger.</p>
+          <button
+            type="button"
+            onClick={() => {
+              setLoadFailed(false);
+              onTokenChange("");
+              if (widgetIdRef.current) {
+                window.turnstile?.reset(widgetIdRef.current);
+                return;
+              }
+              setScriptReady(false);
+              setScriptAttempt((attempt) => attempt + 1);
+            }}
+            className="mt-2 font-mono text-[10px] font-bold uppercase tracking-widest text-red-400 underline underline-offset-4"
+          >
+            Réessayer la vérification
+          </button>
+        </div>
+      )}
     </>
   );
 }

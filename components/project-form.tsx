@@ -113,7 +113,6 @@ export function ProjectForm({ lang }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl w-full">
-
       {/* ── SDEN-Style Step Indicator ───────────────────────────────────────── */}
       <div className="mb-10">
         {/* Row of circles and connector lines */}
@@ -171,6 +170,13 @@ export function ProjectForm({ lang }: Props) {
         <h2 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
           {questionLabels[form.step - 1]}
         </h2>
+      </div>
+
+      <div className="mb-6 flex justify-end">
+        <TurnstileWidget
+          onTokenChange={form.updateTurnstileToken}
+          resetSignal={form.turnstileResetSignal}
+        />
       </div>
 
       {/* ── Step 1: Offer / Services ────────────────────────────────────────── */}
@@ -673,13 +679,6 @@ export function ProjectForm({ lang }: Props) {
               </div>
             </div>
           )}
-
-          <div className="flex justify-end">
-            <TurnstileWidget
-              onTokenChange={form.updateTurnstileToken}
-              resetSignal={form.turnstileResetSignal}
-            />
-          </div>
         </div>
       )}
 

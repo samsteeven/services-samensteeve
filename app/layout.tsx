@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { WebMcpProvider } from "@/components/webmcp-provider";
 
 // Polices auto-hébergées via fontsource — aucun appel réseau à Google au runtime
 import "@fontsource/inter/400.css";
@@ -84,6 +85,7 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-full flex-col bg-paper text-ink font-sans antialiased" suppressHydrationWarning>
+        <WebMcpProvider />
         {children}
       </body>
     </html>

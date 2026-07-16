@@ -12,6 +12,9 @@ const LINK_HEADERS = [
   "</.well-known/mcp/server-card.json>; rel=\"mcp-server\"",
   "</.well-known/api-catalog>; rel=\"api-catalog\"",
   "</.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\"",
+  "</.well-known/dns-aid>; rel=\"dns-aid\"",
+  "</.well-known/oauth-protected-resource>; rel=\"oauth-protected-resource\"",
+  "</.well-known/oauth-authorization-server>; rel=\"oauth-authorization-server\"",
 ].join(", ");
 
 function setPageHeaders(response: NextResponse) {

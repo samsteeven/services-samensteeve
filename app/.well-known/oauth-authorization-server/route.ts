@@ -18,14 +18,21 @@ export function GET() {
       skill: `${BASE_URL}/auth.md`,
       register_uri: `${BASE_URL}/auth.md`,
       identity_endpoint: "",
-      claim_endpoint: "",
+      claim_endpoint: `${BASE_URL}/auth.md`,
       events_endpoint: "",
       identity_types_supported: ["anonymous"],
       anonymous: {
         credential_types_supported: ["none"],
         claim_uri: `${BASE_URL}/auth.md`,
       },
-      events_supported: [],
+      events_supported: ["agent.registered", "agent.accessed"],
+      supported_methods: [
+        {
+          type: "anonymous",
+          description: "No registration required. Access public content directly.",
+          credential_type: "none",
+        },
+      ],
     },
   };
 

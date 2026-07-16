@@ -22,9 +22,9 @@ interface ContactPayload {
 }
 
 const typeLabels: Record<string, string> = {
-  web: "Développement Web",
+  web: "Ingénierie logicielle",
   cloud: "Architecture Cloud",
-  security: "Audit Sécurité",
+  security: "Pentest & Sécurité",
   ai: "Automatisation IA",
   other: "Autre / Pas encore défini",
 };
@@ -57,6 +57,15 @@ const teamLabels: Record<string, string> = {
   medium: "Équipe moyenne (5-15 pers.)",
   large: "Grande équipe (15+)",
 };
+
+function escapeHtml(value: unknown): string {
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
 
 export async function POST(request: Request) {
   let payload: ContactPayload;
@@ -94,9 +103,26 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid email" }, { status: 422 });
   }
 
-  const typeList = (types ?? []).map((t) => typeLabels[t] ?? t).join(", ") || "Non précisé";
-  const goalList = (goals ?? []).map((g) => goalLabels[g] ?? g).join(", ") || "Non précisé";
-  const linksList = (links ?? []).filter((l) => l.trim() !== "").join("<br>") || "Aucun lien fourni";
+  const typeList = (types ?? []).map((t) => typeLabels[t] ?? escapeHtml(t)).join(", ") || "Non précisé";
+  const goalList = (goals ?? []).map((g) => goalLabels[g] ?? escapeHtml(g)).join(", ") || "Non précisé";
+  const linksList = (links ?? [])
+    .map((l) => l.trim())
+    .filter(Boolean)
+    .map(escapeHtml)
+    .join("<br>") || "Aucun lien fourni";
+
+  const safeName = escapeHtml(name.trim());
+  const safeEmail = escapeHtml(email.trim());
+  const safeDescription = escapeHtml(description.trim());
+  const safeCompany = company ? escapeHtml(company.trim()) : "";
+  const safeRole = role ? escapeHtml(role.trim()) : "";
+  const safeWhatsapp = whatsapp ? escapeHtml(whatsapp.trim()) : "";
+  const safeSource = source ? escapeHtml(source.trim()) : "";
+  const timelineLabel = timelineLabels[timeline] ?? escapeHtml(timeline);
+  const budgetLabel = budgetLabels[budget] ?? `Non précisé (${escapeHtml(budget)})`;
+  const teamLabel = teamLabels[teamSize] ?? escapeHtml(teamSize);
+  const subjectName = name.trim().replace(/[\r\n]+/g, " ");
+  const subjectTypes = typeList.replace(/[\r\n]+/g, " ");
 
   const htmlContent = `
 <!DOCTYPE html>
@@ -122,10 +148,10 @@ export async function POST(request: Request) {
   <div class="section highlight">
     <div class="label">Contact</div>
     <div class="value">
-      <strong>${name}</strong> &lt;${email}&gt;
-      ${company ? `<br>Entreprise : ${company}` : ""}
-      ${role ? `<br>Rôle : ${role}` : ""}
-      ${whatsapp ? `<br>WhatsApp : ${whatsapp}` : ""}
+      <strong>${safeName}</strong> &lt;${safeEmail}&gt;
+      ${safeCompany ? `<br>Entreprise : ${safeCompany}` : ""}
+      ${safeRole ? `<br>Rôle : ${safeRole}` : ""}
+      ${safeWhatsapp ? `<br>WhatsApp : ${safeWhatsapp}` : ""}
     </div>
   </div>
 
@@ -136,7 +162,7 @@ export async function POST(request: Request) {
 
   <div class="section">
     <div class="label">Description du projet</div>
-    <div class="value" style="white-space: pre-wrap">${description}</div>
+    <div class="value" style="white-space: pre-wrap">${safeDescription}</div>
   </div>
 
   <div class="section">
@@ -146,7 +172,7 @@ export async function POST(request: Request) {
 
   <div class="section">
     <div class="label">Budget estimé</div>
-    <div class="value">${budgetLabels[budget] ?? "Non précisé (" + budget + ")"}</div>
+    <div class="value">${budgetLabel}</div>
   </div>
 
   <div class="section">
@@ -163,17 +189,17 @@ export async function POST(request: Request) {
 
   <div class="section">
     <div class="label">Quand commencer</div>
-    <div class="value">${timelineLabels[timeline] ?? timeline}</div>
+    <div class="value">${timelineLabel}</div>
   </div>
 
   <div class="section">
     <div class="label">Taille de l'équipe technique</div>
-    <div class="value">${teamLabels[teamSize] ?? teamSize}</div>
+    <div class="value">${teamLabel}</div>
   </div>
 
-  ${source ? `<div class="section">
+  ${safeSource ? `<div class="section">
     <div class="label">Comment ils m'ont trouvé</div>
-    <div class="value">${source}</div>
+    <div class="value">${safeSource}</div>
   </div>` : ""}
 </div>
 </body>
@@ -184,8 +210,8 @@ export async function POST(request: Request) {
     await resend.emails.send({
       from: "Samen Steeve Services <noreply@samensteeve.com>",
       to: ["samendjiaha@gmail.com"],
-      replyTo: email,
-      subject: `[Services] Nouveau projet — ${name} (${typeList})`,
+      replyTo: email.trim(),
+      subject: `[Services] Nouveau projet — ${subjectName} (${subjectTypes})`,
       html: htmlContent,
     });
 

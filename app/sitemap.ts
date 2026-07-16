@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { blogMetadata } from "@/content/blog/index";
 import { caseStudies } from "@/lib/case-studies";
 import { services } from "@/lib/services";
 
@@ -12,6 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/services", priority: 0.9 as const, freq: "monthly" as const },
     { path: "/comment-ca-marche", priority: 0.8 as const, freq: "monthly" as const },
     { path: "/realisations", priority: 0.9 as const, freq: "monthly" as const },
+    { path: "/blog", priority: 0.8 as const, freq: "weekly" as const },
     { path: "/demarrer-un-projet", priority: 0.9 as const, freq: "monthly" as const },
   ];
 
@@ -44,5 +46,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
-  return [...staticEntries, ...serviceEntries, ...caseStudyEntries];
+  const blogEntries = blogMetadata.map((post) => ({
+    url: `${baseUrl}/${post.lang}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    priority: 0.7 as const,
+    changeFrequency: "monthly" as const,
+  }));
+
+  return [...staticEntries, ...serviceEntries, ...caseStudyEntries, ...blogEntries];
 }

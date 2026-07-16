@@ -11,10 +11,10 @@ export const en = {
     cta: "Start a project",
     opposite: "FR",
     serviceItems: [
-      { label: "Web Development", slug: "developpement-web" },
+      { label: "Software Engineering", slug: "developpement-web" },
       { label: "Cloud Architecture", slug: "architecture-cloud" },
-      { label: "Audit & Security", slug: "audit-securite" },
-      { label: "AI Agents", slug: "agents-ia" },
+      { label: "Pentest & Security", slug: "audit-securite" },
+      { label: "AI Automation", slug: "automatisation-ia" },
     ],
   },
   hero: {
@@ -27,8 +27,8 @@ export const en = {
   },
   services: {
     title: "What I do",
-    tagline: "Build, defend, accelerate — no fluff, just results.",
-    subtitle: "Targeted services to build resilient web applications, automate your workflows, and secure your infrastructure.",
+    tagline: "Serious software systems, from architecture to operational security.",
+    subtitle: "I work where a simple website is not enough: software products, business platforms, hybrid infrastructure, application penetration testing, and AI automation connected to real workflows.",
     cta: "Learn more",
     back: "Back to services",
     whyMe: "Why work with me?",
@@ -38,31 +38,55 @@ export const en = {
     contactCTA: "Discuss this service",
     items: {
       "developpement-web": {
-        title: "Full-Stack Web Development",
-        punchline: "Applications that don't go down. Solid backend, fast frontend, zero compromise on reliability.",
-        shortDesc: "Robust and scalable web applications, from database design to production deployment.",
-        longDesc: "I take full ownership of designing and developing your critical web platforms. No shortcuts on quality: strict typing, decoupled architecture, robust SQL transaction management, and pessimistic locking to guarantee data integrity.",
-        stack: ["Laravel", "Next.js", "Angular", "React", "Inertia.js", "PostgreSQL", "Redis", "Docker", "Laravel Reverb (WebSockets)", "Typesense"],
+        title: "Software Engineering",
+        punchline: "I design and build complete software products: business platforms, APIs, critical backends, interfaces, and integrations.",
+        shortDesc: "Design, development, and industrialization of robust software systems, not just web interfaces.",
+        longDesc: "I take ownership of production software: product scoping, application architecture, backend, frontend, APIs, integrations, data, tests, and deployment. The goal is not to ship screens, but a reliable, maintainable system your team can operate.",
+        stack: ["Application architecture", "Backend & APIs", "Product frontend", "Databases", "Business integrations", "Tests & CI/CD", "Observability", "Documentation"],
+        outcomes: [
+          "A reliable, maintainable software product aligned with your business processes.",
+          "An architecture that can evolve without turning each new feature into technical debt.",
+          "Critical workflows secured: payments, roles, approvals, sync, search, or reporting.",
+          "A documented, tested codebase that can be handed over to an internal team."
+        ],
+        scope: [
+          "Needs framing, domain modeling, and business workflow definition before implementation.",
+          "Backend, API, database, access rules, jobs, events, and external integration design.",
+          "Web interfaces or dashboards when they serve the product, without reducing the offer to web.",
+          "Testing, CI/CD, application monitoring, and usable technical documentation."
+        ],
         deliverables: [
-          "Complete turn-key web application (clean, structured, and documented codebase)",
-          "High-performance, well-documented REST or Real-time APIs (OpenAPI/Swagger)",
-          "Secure authentication systems (SSO, JWT, TTL-managed Redis sessions)",
-          "Blazing-fast faceted search and integrated payment/escrow gateways",
-          "Comprehensive unit and integration tests for critical business logic"
+          "Documented application architecture with data models and technical decisions",
+          "Backend, APIs, and product interfaces delivered with structured source code",
+          "Authentication, roles, permissions, and critical business workflows",
+          "Unit tests, continuous integration, and staging environment",
+          "Technical documentation and handover for your team"
         ],
         cases: [
-          "Complex SaaS platforms requiring advanced business rules and workflows",
-          "Marketplaces with multi-party financial flows and escrow systems",
-          "Custom internal business software to automate workflows and save time",
-          "Complete technical refactoring of legacy backends to scale up efficiently"
+          "Business platform or SaaS with complex logic and multiple user profiles",
+          "Internal product replacing spreadsheets, manual processing, or scattered tools",
+          "Critical API or backend to stabilize before scaling",
+          "Technical rebuild of an existing product that became hard to maintain"
         ]
       },
       "architecture-cloud": {
         title: "Cloud & Hybrid Architecture",
-        punchline: "Infrastructure that works even when everything else fails. Built for real-world conditions.",
+        punchline: "Cloud and hybrid architectures designed for real constraints: unstable networks, remote sites, security, and continuity.",
         shortDesc: "Secure and resilient cloud and hybrid infrastructures, tailored for the connectivity realities of the African market.",
         longDesc: "I design and deploy cloud (AWS/Azure) and hybrid architectures. Having solid ground experience in Central Africa, I integrate real-world constraints (expensive MPLS links, power outages, variable connectivity, local data sovereignty regulations) to deliver highly available, pragmatic hybrid architectures.",
-        stack: ["Azure", "AWS", "Terraform (IaC)", "Docker", "Kubernetes", "MPLS", "IPSec VPN", "Active Directory", "Microsoft 365", "Veeam Backup", "Zabbix & Grafana"],
+        stack: ["AWS/Azure cloud", "Hybrid infrastructure", "Network & VPN", "Terraform IaC", "Backup & DRP", "Monitoring", "Microsoft 365 identity", "Runbooks"],
+        outcomes: [
+          "A documented, reproducible infrastructure aligned with field constraints.",
+          "A clear continuity plan: backup, recovery, monitoring, alerts, and ownership.",
+          "Sites, users, and workloads interconnected without a single point of failure.",
+          "An IT team able to operate the environment after handover."
+        ],
+        scope: [
+          "Audit of the existing environment: network, servers, cloud, identity, backup, security, and costs.",
+          "Target architecture design with realistic phased migration scenarios.",
+          "Infrastructure as code, monitoring, backup, and recovery procedure implementation.",
+          "Operational documentation and support for local IT teams."
+        ],
         deliverables: [
           "Detailed Architecture Design Document (Component diagrams and Architecture Decision Records)",
           "Production infrastructure deployed and managed as code (Terraform)",
@@ -78,31 +102,55 @@ export const en = {
         ]
       },
       "audit-securite": {
-        title: "Security Audit",
-        punchline: "I find the flaws before others do. Offensive audit, not passive checklists.",
-        shortDesc: "In-depth review of your code and server configurations to detect and fix vulnerabilities before they can be exploited.",
-        longDesc: "Security is not an add-on or a checkbox to tick at the end. I audit your applications and infrastructure from an offensive security perspective to locate logic flaws, authentication bypasses, and network misconfigurations, and guide you through remediation.",
-        stack: ["OWASP Top 10", "Granular RBAC", "AES-256 Encryption", "SSRF / CSRF Protection", "Redis TTL Sessions", "Dependency Audits", "Secure HTTP Headers (CSP, HSTS)"],
+        title: "Application Pentest & Security",
+        punchline: "Not just a code review: an offensive approach to verify what an attacker can actually do.",
+        shortDesc: "Application penetration testing, exposure review, access-control analysis, and remediation support.",
+        longDesc: "I assess your applications as real targets: reconnaissance, attack-surface mapping, OWASP testing, business logic, authentication, authorization, sessions, APIs, configuration, and exploit paths. Code review can be part of the mission, but it is only one tool among others.",
+        stack: ["Web/API pentest", "OWASP Top 10", "Auth & sessions", "Access control", "Business logic", "Attack surface", "Hardening", "Retest"],
+        outcomes: [
+          "A clear view of truly exploitable weaknesses, not a raw scanner dump.",
+          "Impact evidence that leadership can understand and developers can act on.",
+          "A remediation plan prioritized by business risk and fix effort.",
+          "Post-fix validation to reduce residual risk."
+        ],
+        scope: [
+          "Reconnaissance, attack-surface mapping, and exposed entry-point analysis.",
+          "Manual testing of authentication, authorization, sessions, APIs, files, uploads, and business logic.",
+          "OWASP risk verification: injection, XSS, SSRF, IDOR, CSRF, misconfiguration, secrets.",
+          "Remediation support and retest of critical vulnerabilities."
+        ],
         deliverables: [
-          "Comprehensive security audit report, with clear executive summaries",
-          "Vulnerability registry prioritized by severity level (Critical to Low)",
-          "Remediation roadmap with estimated technical effort for each fix",
-          "Hands-on implementation of priority security patches in your codebase",
-          "Follow-up verification report confirming that all vulnerabilities were resolved"
+          "Pentest report with context, methodology, proof, impact, and recommendations",
+          "Vulnerability register ranked by severity and business risk",
+          "Executive summary readable by leadership, IT, or product teams",
+          "Technical restitution workshop with your developers or vendors",
+          "Retest report after priority vulnerabilities are fixed"
         ],
         cases: [
-          "Compliance and security audit before deploying a sensitive application to production",
-          "Post-incident analysis to understand how an application was breached and patch it",
-          "Code reviews (backend and frontend) focused on business logic and authorization",
-          "Hardening the configuration of web servers, databases, and firewalls"
+          "Pentest before releasing an exposed application or sensitive-data platform",
+          "API, back-office, customer portal, marketplace, or SaaS platform audit",
+          "Verification of roles, permissions, indirect access, and business-logic flaws",
+          "Post-incident analysis to understand the attack path and close the gaps"
         ]
       },
       "automatisation-ia": {
         title: "AI Automation",
-        punchline: "AI that works for you, not the other way around. Autonomous agents connected to your real tools.",
+        punchline: "Automating real processes with supervisable AI agents integrated into your tools and data.",
         shortDesc: "Integrating autonomous AI agent workflows into your software to automate complex, repetitive tasks.",
         longDesc: "I do not sell AI hype. I build autonomous agent workflows that connect directly to your production databases and APIs. Using Model Context Protocol (MCP) and graph orchestration (LangGraph), the AI reliably executes multi-step, complex workflows directly inside your existing business tools.",
-        stack: ["MCP (Model Context Protocol)", "LangGraph", "CrewAI", "Claude / OpenAI APIs", "Node.js / Laravel / Python Integration"],
+        stack: ["AI agents", "MCP", "LangGraph", "Business tools", "Human approval", "RAG", "LLM APIs", "Logging"],
+        outcomes: [
+          "Repetitive tasks handled faster without losing human control.",
+          "Agents connected to existing tools instead of an isolated chatbot.",
+          "Guardrails: permissions, logs, approval steps, and recovery paths.",
+          "Measurable return on automated processes."
+        ],
+        scope: [
+          "Identification of high-ROI workflows and automation risks.",
+          "Agent, tool, permission, memory, approval-step, and logging design.",
+          "Integration with APIs, databases, documents, CRM, ERP, or internal apps.",
+          "Supervision dashboard to track, correct, and improve automations."
+        ],
         deliverables: [
           "Scoping document identifying high-ROI workflows suitable for AI automation",
           "Custom-designed AI agent graph modeled, built, and tested with memory tools",
@@ -209,16 +257,16 @@ export const en = {
     fields: {
       typePlaceholder: "Select one or more domains...",
       types: {
-        web: "Web Development",
+        web: "Software Engineering",
         cloud: "Cloud Architecture",
-        security: "Audit & Security",
+        security: "Pentest & Security",
         ai: "AI Automation",
         other: "Not sure yet"
       },
       typesDesc: {
-        web: "Create or evolve a robust, strictly typed web application (SaaS, API, Marketplace).",
+        web: "Design or evolve business software, a platform, an API, or a complete product.",
         cloud: "Design, secure, and migrate infrastructures with auto-failover and high resilience.",
-        security: "Full offensive security audit, vulnerability registry, and code remediation.",
+        security: "Offensively test an application, API, or exposed surface, then prioritize remediation.",
         ai: "Integrate autonomous AI agents (LangGraph, MCP) connected to your business APIs.",
         other: "Help me scope the needs and define the technical priorities."
       },

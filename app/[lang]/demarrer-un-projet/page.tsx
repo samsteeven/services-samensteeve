@@ -17,8 +17,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     lang: langKey,
     title: lang === "fr" ? "Démarrer un projet" : "Start a project",
     description: lang === "fr"
-      ? "Décrivez votre projet en 4 étapes simples. Réponse sous 24h avec une analyse technique et une proposition concrète."
-      : "Describe your project in 4 simple steps. Response within 24h with a technical analysis and a concrete proposal.",
+      ? "Décrivez votre projet en 6 étapes simples. Réponse sous 24h avec une analyse technique et une proposition concrète."
+      : "Describe your project in 6 simple steps. Response within 24h with a technical analysis and a concrete proposal.",
     path: "/demarrer-un-projet",
   });
 }
@@ -59,4 +59,3 @@ export default async function StartProjectPage({ params }: PageProps) {
     </div>
   );
 }
-

@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, ArrowRight, ShieldCheck, Cpu, Code2, Cloud } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { BASE_URL } from "@/lib/metadata";
 
 interface PageProps {
   params: Promise<{ lang: string; slug: string }>;
@@ -91,9 +92,40 @@ export default async function BlogPostPage({ params }: PageProps) {
   }
 
   const CtaIconComponent = ctaIcon;
+  const canonicalUrl = `${BASE_URL}/${langKey}/blog/${meta.slug}`;
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: meta.title,
+    description: meta.excerpt,
+    datePublished: meta.date,
+    dateModified: meta.date,
+    inLanguage: langKey,
+    author: {
+      "@type": "Person",
+      name: "Samen Steeve",
+      url: "https://samensteeve.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Samen Steeve · Services",
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/profil.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
+    },
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       {/* Top Banner details */}
       <div className="border-b border-line bg-paper-raised/10 py-6 transition-all duration-300">
         <div className="mx-auto max-w-3xl px-4 sm:px-8 flex items-center justify-between">

@@ -36,7 +36,7 @@ export const caseStudies: CaseStudy[] = [
       role: "Tech Lead & Project Manager",
       period: "Novembre 2025 — en cours",
       stack: ["Laravel", "Angular", "Next.js", "Redis", "Docker", "Laravel Reverb", "Typesense"],
-      services: ["Développement Web Full-Stack", "Audit & Sécurité applicative"],
+      services: ["Ingénierie logicielle", "Pentest & Sécurité applicative"],
       summary:
         "TribuneJustice est une plateforme legaltech permettant à des clients de trouver et engager des avocats certifiés. J'ai pris en charge la direction technique complète du projet : définition de l'architecture, implémentation des workflows critiques (paiements en escrow, état des dossiers par machine à états, recherche facettée), et audit de sécurité des 41 vulnérabilités détectées en production.",
       challenges: [
@@ -62,7 +62,7 @@ export const caseStudies: CaseStudy[] = [
       role: "Tech Lead & Project Manager",
       period: "November 2025 — ongoing",
       stack: ["Laravel", "Angular", "Next.js", "Redis", "Docker", "Laravel Reverb", "Typesense"],
-      services: ["Full-Stack Web Development", "Application Security & Audit"],
+      services: ["Software Engineering", "Application Pentest & Security"],
       summary:
         "TribuneJustice is a legaltech platform enabling clients to find and engage certified lawyers. I took full technical ownership: architecture design, implementation of critical workflows (escrow payments, case state machines, faceted search), and a security audit of 41 vulnerabilities found in production.",
       challenges: [
@@ -91,10 +91,10 @@ export const caseStudies: CaseStudy[] = [
     fr: {
       title: "DIGITRANS-CM (AGROCAM S.A.)",
       tagline: "Architecture microservices cloud-native pour une agro-industrie avec synchronisation offline-first en zone rurale.",
-      role: "Architecte Solutions & Développeur Full-Stack",
+      role: "Architecte Solutions & Ingénieur logiciel",
       period: "Mai 2026 — Juin 2026",
       stack: ["Node.js", "FastAPI", "PostgreSQL", "Redis", "Docker", "Kubernetes", "Terraform", "AWS", "Azure", "Hyperledger Fabric", "GitHub Actions"],
-      services: ["Architecture Cloud & Hybride", "Développement Web Full-Stack"],
+      services: ["Architecture Cloud & Hybride", "Ingénierie logicielle"],
       summary:
         "Conception d'une architecture microservices à 5 services (API Gateway, ERP, CRM, Supply Chain, BI) pour AGROCAM S.A., acteur majeur de l'agro-industrie camerounaise. Le défi principal : des agents terrain opérant en zone rurale à faible connectivité. Le module Supply Chain offline-first avec synchronisation par batch a résolu des années d'échecs de sync de données.",
       challenges: [
@@ -118,10 +118,10 @@ export const caseStudies: CaseStudy[] = [
     en: {
       title: "DIGITRANS-CM (AGROCAM S.A.)",
       tagline: "Cloud-native microservices architecture for an agro-industrial company with offline-first sync in rural areas.",
-      role: "Solution Architect & Full-Stack Developer",
+      role: "Solution Architect & Software Engineer",
       period: "May 2026 — June 2026",
       stack: ["Node.js", "FastAPI", "PostgreSQL", "Redis", "Docker", "Kubernetes", "Terraform", "AWS", "Azure", "Hyperledger Fabric", "GitHub Actions"],
-      services: ["Cloud & Hybrid Architecture", "Full-Stack Web Development"],
+      services: ["Cloud & Hybrid Architecture", "Software Engineering"],
       summary:
         "Designed a 5-service microservices architecture (API Gateway, ERP, CRM, Supply Chain, BI) for AGROCAM S.A., a major Cameroonian agro-industrial group. The primary challenge: field agents operating in rural areas with poor connectivity. The offline-first Supply Chain module with batch synchronization solved years of persistent data sync failures.",
       challenges: [

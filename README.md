@@ -1,6 +1,6 @@
 # Services — Samen Steeve
 
-Site vitrine bilingue (fr/en) pour les services freelance de **Samen Steeve** : développement web, architecture cloud, audit sécurité, automatisation IA. Blog technique avec 16 articles (8 paires bilingues). Contact via formulaire 4 étapes + envoi email Resend.
+Site vitrine bilingue (fr/en) pour les services freelance de **Samen Steeve** : ingénierie logicielle, architecture cloud, pentest applicatif, automatisation IA. Blog technique avec 16 articles (8 paires bilingues). Contact via formulaire 6 étapes + envoi email Resend.
 
 ## Stack
 
@@ -77,7 +77,7 @@ app/
     │   └── [slug]/
     │       └── page.tsx    # Article blog
     ├── demarrer-un-projet/
-    │   └── page.tsx        # Formulaire 4 étapes (type, description, contexte, contact)
+    │   └── page.tsx        # Formulaire 6 étapes (offre, portée, objectifs, contexte, contact, récapitulatif)
     └── [...catchAll]/
         └── page.tsx        # 404 personnalisé
 ```
@@ -128,8 +128,28 @@ Chaque service a une icône, un type de contact associé (pour le formulaire), e
 - JSON-LD `schema.org/Person` dans le root layout (Knowledge Panel Google)
 - `createPageMetadata()` dans `lib/metadata.ts` — canonical, hreflang, OpenGraph, Twitter cards
 - `metadataBase` : `https://services.samensteeve.com`
-- Sitemap auto-généré (24 URLs)
+- Sitemap auto-généré avec pages statiques, services, réalisations et articles de blog
 - Security headers : `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, etc.
+
+## Découverte par agents IA
+
+Le site expose des surfaces lisibles par moteurs de recherche et agents IA :
+
+| Endpoint | Standard | Description |
+|---|---|---|
+| `/llms.txt` | LLM discovery | Résumé Markdown des services, réalisations, articles et endpoints agents |
+| `/auth.md` | Auth.md | Instructions d'accès public pour agents |
+| `/api/md/[...slug]` | Markdown negotiation | Représentation Markdown des pages publiques |
+| `/.well-known/agent-skills/index.json` | Agent Skills | Index des capacités de lecture/action |
+| `/.well-known/api-catalog` | RFC 9727 | Catalogue d'API en `linkset+json` |
+| `/.well-known/mcp/server-card.json` | MCP server card | Carte serveur Model Context Protocol |
+| `/.well-known/oauth-authorization-server` | RFC 8414 + agent_auth | Métadonnées d'autorisation anonymes |
+| `/.well-known/oauth-protected-resource` | RFC 9728 | Métadonnées de ressource publique |
+| `/.well-known/http-message-signatures-directory` | Web Bot Auth | Répertoire de clés pour signatures HTTP |
+| `/robots.txt` | Robots | Autorise l'indexation et pointe vers le sitemap |
+| `Link` headers | RFC 8288 | Découverte automatique sur les pages HTML |
+
+Les agents peuvent lire et résumer le contenu public. Ils ne doivent soumettre le formulaire projet que sur demande explicite d'un humain.
 
 ## Commandes
 

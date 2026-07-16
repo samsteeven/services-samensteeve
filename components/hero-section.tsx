@@ -15,8 +15,8 @@ export function HeroSection({ lang }: { lang: Language }) {
 
   const heroSub =
     lang === "fr"
-      ? "Ingénieur logiciel indépendant et Tech Lead basé à Douala. Je conçois des backends robustes, déploie des infrastructures cloud hybrides et intègre des agents IA autonomes dans vos workflows d'entreprise."
-      : "Freelance Software Engineer and Tech Lead based in Douala. I design robust backends, deploy hybrid cloud infrastructures, and integrate autonomous AI agents into your business workflows.";
+      ? "Ingénieur logiciel indépendant et Tech Lead basé à Douala. Je conçois des systèmes logiciels robustes, déploie des infrastructures cloud hybrides et automatise vos workflows métier avec des agents IA supervisables."
+      : "Freelance Software Engineer and Tech Lead based in Douala. I design robust software systems, deploy hybrid cloud infrastructures, and automate business workflows with supervisable AI agents.";
 
   return (
     <section className="relative overflow-hidden pt-12 pb-16 md:pt-16 md:pb-24 border-b border-line/40 bg-paper">

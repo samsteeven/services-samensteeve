@@ -5,7 +5,17 @@ const PUBLIC_FILE = /\.(.*)$/;
 
 const CACHE_HEADERS = "public, s-maxage=3600, stale-while-revalidate=3600";
 
+const LINK_HEADERS = [
+  "</llms.txt>; rel=\"alternate\"; type=\"text/markdown\"",
+  "</auth.md>; rel=\"authorization_endpoint\"; type=\"text/markdown\"",
+  "</.well-known/agent-skills/index.json>; rel=\"agent-skills\"",
+  "</.well-known/mcp/server-card.json>; rel=\"mcp-server\"",
+  "</.well-known/api-catalog>; rel=\"api-catalog\"",
+  "</.well-known/http-message-signatures-directory>; rel=\"http-message-signatures-directory\"",
+].join(", ");
+
 function setPageHeaders(response: NextResponse) {
+  response.headers.set("Link", LINK_HEADERS);
   response.headers.set("Cache-Control", CACHE_HEADERS);
 }
 

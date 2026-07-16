@@ -4,7 +4,7 @@ import { createPageMetadata } from "@/lib/metadata";
 import { getT } from "@/lib/translations";
 import { services } from "@/lib/services";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
 interface PageProps {
@@ -16,10 +16,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const langKey = lang as Language;
   return createPageMetadata({
     lang: langKey,
-    title: lang === "fr" ? "Mes Services" : "My Services",
+    title: lang === "fr" ? "Services d'ingénierie logicielle" : "Software engineering services",
     description: lang === "fr"
-      ? "Vue d'ensemble des 4 prestations : développement web full-stack, architecture cloud, audit sécurité et automatisation IA."
-      : "Overview of the 4 services: full-stack web development, cloud architecture, security audit, and AI automation.",
+      ? "Ingénierie logicielle, architecture cloud, pentest applicatif et automatisation IA pour systèmes de production."
+      : "Software engineering, cloud architecture, application pentesting, and AI automation for production systems.",
     path: "/services",
   });
 }
@@ -31,101 +31,80 @@ export default async function ServicesPage({ params }: PageProps) {
 
   return (
     <div className="flex flex-col">
-      {/* Page Header — editorial */}
-      <header className="py-16 md:py-24 border-b border-line/40 bg-paper-raised/20 transition-all duration-300">
-        <div className="mx-auto max-w-5xl px-4 sm:px-8">
+      <header className="border-b border-line/40 bg-paper py-16 transition-colors duration-300 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-8">
           <ScrollReveal>
-            <p className="font-mono text-[10px] uppercase tracking-widest font-bold text-accent">
+            <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-accent">
               {t.nav.services}
             </p>
-            <h1 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-ink sm:text-5xl leading-[1.1] max-w-3xl">
+            <h1 className="mt-4 max-w-4xl text-balance font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-ink sm:text-5xl">
               {t.services.tagline}
             </h1>
           </ScrollReveal>
-          <ScrollReveal delay={80} className="mt-6 max-w-2xl">
-            <p className="text-sm md:text-base leading-relaxed text-ink-soft">
+          <ScrollReveal delay={80} className="mt-6 max-w-3xl">
+            <p className="text-pretty text-sm leading-relaxed text-ink-soft md:text-base">
               {t.services.subtitle}
             </p>
           </ScrollReveal>
         </div>
       </header>
 
-      {/* Services — bento layout */}
-      <section className="py-16 md:py-24 transition-all duration-300">
-        <div className="mx-auto max-w-5xl px-4 sm:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[1fr]">
+      <section className="py-16 transition-colors duration-300 md:py-24">
+        <div className="mx-auto max-w-6xl px-4 sm:px-8">
+          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-line bg-line">
             {services.map((service, i) => {
-              const itemTrans = t.services.items[service.slug];
-              const isFirst = i === 0;
+              const item = t.services.items[service.slug];
+              const Icon = service.icon;
 
               return (
                 <ScrollReveal key={service.slug} delay={i * 80}>
                   <Link
                     href={`/${lang}/services/${service.slug}`}
-                    className={`group relative flex flex-col justify-between h-full rounded-2xl border border-line p-6 sm:p-8 transition-all duration-300 hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5 ${
-                      isFirst
-                        ? "md:col-span-2 bg-ink text-paper hover:bg-accent"
-                        : "bg-paper-raised/40 hover:-translate-y-1"
-                    }`}
+                    className="group grid gap-8 bg-paper-raised p-6 transition-[background-color] duration-300 hover:bg-paper md:grid-cols-[0.8fr_1.2fr_0.65fr] md:items-start md:p-8"
                   >
-                    {/* Number watermark */}
-                    <span className={`absolute top-4 right-5 font-mono text-[10px] font-bold tracking-wider ${
-                      isFirst ? "text-paper/30" : "text-ink/10"
-                    }`}>
-                      0{i + 1}
-                    </span>
-
-                    <div className="relative">
-                      {/* Title */}
-                      <h2 className={`font-display text-xl font-bold sm:text-2xl ${
-                        isFirst ? "text-paper" : "text-ink group-hover:text-accent"
-                      } transition-colors duration-200`}>
-                        {itemTrans.title}
-                      </h2>
-
-                      {/* Punchline */}
-                      <p className={`mt-3 text-sm leading-relaxed ${
-                        isFirst ? "text-paper/70" : "text-ink-soft"
-                      }`}>
-                        {itemTrans.punchline}
-                      </p>
-
-                      {/* Stack badges */}
-                      <div className="mt-5 flex flex-wrap gap-1.5">
-                        {itemTrans.stack.slice(0, isFirst ? 5 : 3).map((tech) => (
-                          <span
-                            key={tech}
-                            className={`font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded border ${
-                              isFirst
-                                ? "text-paper/60 border-paper/15 bg-paper/5"
-                                : "text-ink-soft/75 border-line/45 bg-paper"
-                            }`}
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                        {(isFirst ? itemTrans.stack.length > 5 : itemTrans.stack.length > 3) && (
-                          <span className={`font-mono text-[9px] px-1 py-0.5 ${
-                            isFirst ? "text-paper/40" : "text-ink-soft/50"
-                          }`}>
-                            +{isFirst ? itemTrans.stack.length - 5 : itemTrans.stack.length - 3}
-                          </span>
-                        )}
+                    <div className="flex items-start gap-4">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent transition-[background-color,color] duration-300 group-hover:bg-accent group-hover:text-white">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/50">
+                          {String(i + 1).padStart(2, "0")}
+                        </p>
+                        <h2 className="mt-2 text-balance font-display text-2xl font-extrabold leading-tight text-ink transition-colors duration-300 group-hover:text-accent">
+                          {item.title}
+                        </h2>
                       </div>
                     </div>
 
-                    {/* CTA */}
-                    <div className={`mt-8 pt-4 border-t flex items-center justify-between ${
-                      isFirst ? "border-paper/15" : "border-line/30"
-                    }`}>
-                      <span className={`font-mono text-[10px] uppercase font-bold tracking-widest ${
-                        isFirst ? "text-paper/60" : "text-ink-soft"
-                      }`}>
+                    <div>
+                      <p className="text-pretty text-sm leading-relaxed text-ink-soft">
+                        {item.shortDesc}
+                      </p>
+                      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                        {item.outcomes.slice(0, 2).map((outcome) => (
+                          <div key={outcome} className="flex items-start gap-3">
+                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                            <span className="text-sm leading-relaxed text-ink">{outcome}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col gap-5 md:items-end">
+                      <div className="flex flex-wrap gap-2 md:justify-end">
+                        {item.stack.slice(0, 4).map((capability) => (
+                          <span
+                            key={capability}
+                            className="rounded-full bg-paper px-3 py-1 font-mono text-[10px] font-medium uppercase tracking-wider text-ink-soft shadow-[inset_0_0_0_1px_var(--color-line)]"
+                          >
+                            {capability}
+                          </span>
+                        ))}
+                      </div>
+                      <span className="inline-flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-ink transition-colors duration-300 group-hover:text-accent">
                         {t.services.cta}
+                        <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                       </span>
-                      <ArrowUpRight className={`h-4 w-4 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${
-                        isFirst ? "text-paper/60 group-hover:text-paper" : "text-ink-soft group-hover:text-accent"
-                      }`} />
                     </div>
                   </Link>
                 </ScrollReveal>
@@ -135,18 +114,17 @@ export default async function ServicesPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="py-16 border-t border-line/40">
-        <div className="mx-auto max-w-3xl px-4 sm:px-8 text-center">
+      <section className="border-t border-line/40 py-16">
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-8">
           <ScrollReveal>
             <p className="text-sm text-ink-soft">
               {lang === "fr"
-                ? "Vous ne savez pas encore par où commencer ?"
-                : "Not sure where to start?"}
+                ? "Vous ne savez pas encore quelle prestation correspond à votre situation ?"
+                : "Not sure which service fits your situation yet?"}
             </p>
             <Link
               href={`/${lang}/demarrer-un-projet`}
-              className="mt-4 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-mono text-xs uppercase font-bold tracking-widest text-paper hover:bg-accent hover:text-white transition duration-200 hover:scale-105 active:scale-[0.96]"
+              className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-6 py-3 font-mono text-xs font-bold uppercase tracking-widest text-paper transition-[transform,background-color,color] duration-200 hover:scale-105 hover:bg-accent hover:text-white active:scale-[0.96]"
             >
               {t.nav.cta}
               <ArrowUpRight className="h-4 w-4" />

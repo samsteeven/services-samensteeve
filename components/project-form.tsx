@@ -39,8 +39,8 @@ export function ProjectForm({ lang }: Props) {
       const type = types[0];
       if (type === "web") {
         return lang === "fr"
-          ? "Décrivez l'application SaaS, la marketplace ou la plateforme web à concevoir, les rôles utilisateurs et les fonctionnalités clés..."
-          : "Describe the SaaS application, marketplace, or web platform to build, user roles, and key features...";
+          ? "Décrivez le logiciel, la plateforme métier, l'API ou le produit à concevoir, les rôles utilisateurs, les workflows et les contraintes de production..."
+          : "Describe the software product, business platform, API, or system to build, user roles, workflows, and production constraints...";
       }
       if (type === "cloud") {
         return lang === "fr"
@@ -49,8 +49,8 @@ export function ProjectForm({ lang }: Props) {
       }
       if (type === "security") {
         return lang === "fr"
-          ? "Décrivez les applications, serveurs ou API à auditer, les technologies sous-jacentes (Laravel, Node, etc.) et si vous suspectez des vulnérabilités ou avez subi un incident..."
-          : "Describe the apps, servers, or APIs to audit, the underlying technologies (Laravel, Node, etc.), and if you suspect vulnerabilities or suffered an incident...";
+          ? "Décrivez la cible à tester (application, API, backoffice, portail client), les rôles disponibles, l'environnement autorisé et les risques déjà identifiés..."
+          : "Describe the target to test (application, API, back office, customer portal), available roles, authorized environment, and risks already identified...";
       }
       if (type === "ai") {
         return lang === "fr"
@@ -63,16 +63,16 @@ export function ProjectForm({ lang }: Props) {
     const contains = (t: string) => types.includes(t);
     if (lang === "fr") {
       const parts = [];
-      if (contains("web")) parts.push("la plateforme/application web");
+      if (contains("web")) parts.push("le logiciel ou produit à construire");
       if (contains("ai")) parts.push("les processus IA à automatiser");
-      if (contains("security")) parts.push("le code/système à auditer et sécuriser");
+      if (contains("security")) parts.push("la cible à tester et sécuriser");
       if (contains("cloud")) parts.push("l'infrastructure cloud à migrer/concevoir");
       return `Décrivez votre projet global en couvrant à la fois : ${parts.join(", ")}. Spécifiez vos objectifs métier et les technos...`;
     } else {
       const parts = [];
-      if (contains("web")) parts.push("the web application/platform");
+      if (contains("web")) parts.push("the software product or system to build");
       if (contains("ai")) parts.push("the AI automation processes");
-      if (contains("security")) parts.push("the codebase/systems to audit and secure");
+      if (contains("security")) parts.push("the target to test and secure");
       if (contains("cloud")) parts.push("the cloud infrastructure to design/migrate");
       return `Describe your overall project, covering: ${parts.join(", ")}. Specify your business goals and current stack...`;
     }

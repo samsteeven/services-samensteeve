@@ -11,10 +11,10 @@ export const fr = {
     cta: "Démarrer un projet",
     opposite: "EN",
     serviceItems: [
-      { label: "Développement Web", slug: "developpement-web" },
+      { label: "Ingénierie logicielle", slug: "developpement-web" },
       { label: "Architecture Cloud", slug: "architecture-cloud" },
-      { label: "Audit & Sécurité", slug: "audit-securite" },
-      { label: "Agents IA", slug: "agents-ia" },
+      { label: "Pentest & Sécurité", slug: "audit-securite" },
+      { label: "Automatisation IA", slug: "automatisation-ia" },
     ],
   },
   hero: {
@@ -27,8 +27,8 @@ export const fr = {
   },
   services: {
     title: "Ce que je fais",
-    tagline: "Construire, défendre, accélérer — pas de blabla, que du concret.",
-    subtitle: "Des prestations ciblées pour construire des applications résilientes, automatiser vos processus et sécuriser vos infrastructures.",
+    tagline: "Des systèmes logiciels sérieux, de l'architecture jusqu'à la sécurité opérationnelle.",
+    subtitle: "J'interviens là où un simple site web ne suffit pas : produits logiciels, plateformes métier, infrastructures hybrides, tests d'intrusion applicatifs et automatisations IA branchées sur vos vrais processus.",
     cta: "En savoir plus",
     back: "Retour aux services",
     whyMe: "Pourquoi travailler avec moi ?",
@@ -38,31 +38,55 @@ export const fr = {
     contactCTA: "Discuter de ce besoin",
     items: {
       "developpement-web": {
-        title: "Développement Web Full-Stack",
-        punchline: "Des applications qui ne tombent pas en panne. Backend solide, frontend rapide, zéro compromis sur la fiabilité.",
-        shortDesc: "Applications web robustes et évolutives, de la conception de la base de données au déploiement de production.",
-        longDesc: "Je prends en charge la conception et le développement de vos plateformes web critiques. Pas de compromis sur la qualité : typage strict, architecture découplée, gestion des transactions SQL et verrous d'accès concurrents pour garantir l'intégrité de vos données.",
-        stack: ["Laravel", "Next.js", "Angular", "React", "Inertia.js", "PostgreSQL", "Redis", "Docker", "Laravel Reverb (WebSockets)", "Typesense"],
+        title: "Ingénierie Logicielle",
+        punchline: "Je conçois et construis des produits logiciels complets : plateformes métier, APIs, backends critiques, interfaces et intégrations.",
+        shortDesc: "Conception, développement et industrialisation de systèmes logiciels robustes, pas seulement des interfaces web.",
+        longDesc: "Je prends en charge la construction de logiciels de production : cadrage fonctionnel, architecture applicative, backend, frontend, APIs, intégrations, données, tests et déploiement. L'objectif n'est pas de livrer des écrans, mais un système fiable, maintenable et exploitable par votre équipe.",
+        stack: ["Architecture applicative", "Backend & APIs", "Frontend produit", "Bases de données", "Intégrations métier", "Tests & CI/CD", "Observabilité", "Documentation"],
+        outcomes: [
+          "Un produit logiciel fiable, maintenable et aligné sur vos processus métier.",
+          "Une architecture capable d'évoluer sans transformer chaque nouvelle fonctionnalité en dette technique.",
+          "Des workflows critiques sécurisés : paiements, rôles, validations, synchronisation, recherche ou reporting.",
+          "Une base de code documentée, testée et transmissible à une équipe interne."
+        ],
+        scope: [
+          "Cadrage du besoin, modélisation du domaine et définition des flux métier avant développement.",
+          "Conception backend, API, base de données, règles d'accès, jobs, événements et intégrations externes.",
+          "Développement d'interfaces web ou dashboards quand elles servent le produit, sans limiter l'offre au web.",
+          "Mise en place de tests, CI/CD, monitoring applicatif et documentation technique exploitable."
+        ],
         deliverables: [
-          "Application web complète clé en main (code source structuré et documenté)",
-          "APIs REST ou temps réel performantes et documentées (OpenAPI/Swagger)",
-          "Système d'authentification sécurisé (SSO, JWT, sessions Redis avec TTL)",
-          "Recherche facettée ultra-rapide et passerelles de paiement/séquestre intégrées",
-          "Tests unitaires et d'intégration couvrant les fonctionnalités critiques"
+          "Architecture applicative documentée avec modèles de données et décisions techniques",
+          "Backend, APIs et interfaces nécessaires au produit, livrés avec code source structuré",
+          "Système d'authentification, rôles, permissions et workflows métier critiques",
+          "Tests unitaires, intégration continue et environnement de staging",
+          "Documentation technique et transfert pour reprise par votre équipe"
         ],
         cases: [
-          "Plateformes SaaS complexes nécessitant une logique métier poussée",
-          "Marketplaces avec flux financiers complexes (système de séquestre/escrow)",
-          "Applications métiers internes pour automatiser la gestion d'activité",
-          "Refonte technique complète de backends obsolètes pour monter en charge"
+          "Plateforme métier ou SaaS avec logique complexe et plusieurs profils utilisateurs",
+          "Produit interne pour remplacer des fichiers Excel, traitements manuels ou outils dispersés",
+          "API ou backend critique à fiabiliser avant montée en charge",
+          "Refonte technique d'un logiciel existant devenu difficile à maintenir"
         ]
       },
       "architecture-cloud": {
         title: "Architecture Cloud & Hybride",
-        punchline: "Votre infrastructure qui fonctionne même quand tout le reste casse. Conçue pour les réalités du terrain.",
+        punchline: "Des architectures cloud et hybrides pensées pour les contraintes réelles : réseau instable, sites distants, sécurité et continuité.",
         shortDesc: "Infrastructures cloud et hybrides sécurisées et résilientes, adaptées aux réalités de connectivité du terrain africain.",
         longDesc: "Je conçois et déploie des architectures cloud (AWS/Azure) et hybrides. Ayant une forte expérience du terrain en Afrique centrale, j'intègre les contraintes réelles (liens MPLS onéreux, coupures électriques, connectivité variable, souveraineté locale des données) pour proposer des architectures hybrides pragmatiques et hautement disponibles.",
-        stack: ["Azure", "AWS", "Terraform (IaC)", "Docker", "Kubernetes", "MPLS", "IPSec VPN", "Active Directory", "Microsoft 365", "Veeam Backup", "Zabbix & Grafana"],
+        stack: ["Cloud AWS/Azure", "Infrastructure hybride", "Réseau & VPN", "IaC Terraform", "Sauvegarde & PRA", "Monitoring", "Identité Microsoft 365", "Runbooks"],
+        outcomes: [
+          "Une infrastructure documentée, reproductible et alignée sur vos contraintes de terrain.",
+          "Un plan de continuité clair : sauvegarde, reprise, supervision, alertes et responsabilités.",
+          "Des sites, utilisateurs et workloads interconnectés sans dépendre d'un seul point de panne.",
+          "Une équipe IT capable d'opérer l'environnement après transfert."
+        ],
+        scope: [
+          "Audit de l'existant : réseau, serveurs, cloud, identité, sauvegarde, sécurité et coûts.",
+          "Conception d'architecture cible avec scénarios de migration réalistes et phasés.",
+          "Mise en place d'infrastructure as code, supervision, sauvegarde et procédures de reprise.",
+          "Documentation opérationnelle et accompagnement des équipes IT locales."
+        ],
         deliverables: [
           "Dossier d'Architecture Documenté (Diagrammes détaillés et ADR - Architecture Decision Records)",
           "Infrastructure en production déployée par code (Terraform)",
@@ -78,31 +102,55 @@ export const fr = {
         ]
       },
       "audit-securite": {
-        title: "Audit & Sécurité",
-        punchline: "Je trouve les failles avant que les autres ne les trouvent. Audit offensif, pas de checklist passive.",
-        shortDesc: "Analyse en profondeur de votre code et de vos serveurs pour identifier et corriger les vulnérabilités avant qu'elles ne soient exploitées.",
-        longDesc: "La sécurité n'est pas une option ou un module qu'on ajoute à la fin. J'analyse vos applications et infrastructures sous l'angle offensif pour détecter les failles logiques, les faiblesses d'authentification et les erreurs de configuration réseau, puis je vous accompagne dans leur résolution.",
-        stack: ["OWASP Top 10", "RBAC granulaire", "Chiffrement AES-256", "Protection SSRF / CSRF", "Sessions Redis TTL", "Audit de dépendances", "Sécurisation headers HTTP (CSP, HSTS)"],
+        title: "Pentest & Sécurité Applicative",
+        punchline: "Pas une simple revue de code : une approche offensive pour vérifier ce qu'un attaquant peut réellement faire.",
+        shortDesc: "Tests d'intrusion applicatifs, audit d'exposition, analyse des contrôles d'accès et accompagnement à la remédiation.",
+        longDesc: "J'évalue vos applications comme une cible réelle : reconnaissance, cartographie de surface d'attaque, tests OWASP, logique métier, authentification, autorisations, sessions, API, configuration et chemins d'exploitation. La revue de code peut faire partie de la mission, mais elle n'est qu'un outil parmi d'autres.",
+        stack: ["Pentest web/API", "OWASP Top 10", "Auth & sessions", "Contrôles d'accès", "Logique métier", "Surface d'attaque", "Hardening", "Retest"],
+        outcomes: [
+          "Une vision claire des failles réellement exploitables, pas une liste brute de scanners.",
+          "Des preuves d'impact compréhensibles par la direction et exploitables par les développeurs.",
+          "Un plan de remédiation priorisé selon le risque métier et la facilité de correction.",
+          "Une validation après correction pour réduire le risque résiduel."
+        ],
+        scope: [
+          "Reconnaissance, cartographie de surface d'attaque et analyse des points d'entrée exposés.",
+          "Tests manuels sur authentification, autorisation, sessions, API, fichiers, uploads et logique métier.",
+          "Vérification des risques OWASP : injection, XSS, SSRF, IDOR, CSRF, mauvaise configuration, secrets.",
+          "Accompagnement des correctifs et contre-test des vulnérabilités critiques."
+        ],
         deliverables: [
-          "Rapport d'audit de sécurité complet et vulgarisé pour la direction",
-          "Registre des vulnérabilités classées par criticité (de Critique à Faible)",
-          "Roadmap de remédiation technique avec estimation de l'effort de correction",
-          "Mise en œuvre des correctifs prioritaires sur votre code source",
-          "Rapport de contre-audit validant la correction des failles détectées"
+          "Rapport de pentest avec contexte, méthodologie, preuves, impact et recommandations",
+          "Registre des vulnérabilités classées par criticité et risque métier",
+          "Synthèse exécutive lisible pour direction, DSI ou équipe produit",
+          "Atelier de restitution technique avec vos développeurs ou prestataires",
+          "Rapport de retest après correction des failles prioritaires"
         ],
         cases: [
-          "Audit de conformité avant la mise en production d'une application sensible",
-          "Analyse post-incident de sécurité pour comprendre et boucher une faille exploitée",
-          "Revue de code (backend et frontend) axée sur la logique métier et les droits d'accès",
-          "Durcissement de la configuration des serveurs web, bases de données et pare-feu"
+          "Pentest avant mise en production d'une application exposée ou manipulant des données sensibles",
+          "Audit d'API, backoffice, portail client, marketplace ou plateforme SaaS",
+          "Vérification des rôles, permissions, accès indirects et failles de logique métier",
+          "Analyse post-incident pour comprendre le chemin d'attaque et fermer les portes"
         ]
       },
       "automatisation-ia": {
         title: "Automatisation IA",
-        punchline: "L'IA qui travaille pour vous, pas l'inverse. Agents autonomes connectés à vos vrais outils.",
+        punchline: "Automatiser des processus réels avec des agents IA supervisables, intégrés à vos outils et à vos données.",
         shortDesc: "Intégration d'agents IA autonomes dans vos logiciels pour automatiser vos tâches répétitives complexes.",
         longDesc: "Je ne vends pas de gadgets IA. J'intègre des systèmes d'agents autonomes directement connectés à vos bases de données et API de production. Grâce à des protocoles comme MCP et des frameworks d'orchestration de graphes (LangGraph), l'IA exécute des workflows complexes et fiables à l'intérieur de vos outils existants.",
-        stack: ["MCP (Model Context Protocol)", "LangGraph", "CrewAI", "APIs Claude / OpenAI", "Intégration Node.js / Laravel / Python"],
+        stack: ["Agents IA", "MCP", "LangGraph", "Outils métier", "Validation humaine", "RAG", "APIs LLM", "Journalisation"],
+        outcomes: [
+          "Des tâches répétitives traitées plus vite sans perdre le contrôle humain.",
+          "Des agents connectés à vos outils existants plutôt qu'un chatbot isolé.",
+          "Des garde-fous : permissions, logs, validation, reprise en cas d'erreur.",
+          "Un retour mesurable sur les processus automatisés."
+        ],
+        scope: [
+          "Identification des workflows à fort ROI et des risques d'automatisation.",
+          "Conception d'agents, outils, permissions, mémoire, étapes de validation et logs.",
+          "Intégration aux APIs, bases de données, documents, CRM, ERP ou applications internes.",
+          "Tableau de supervision pour suivre, corriger et améliorer les automatisations."
+        ],
         deliverables: [
           "Document de cadrage identifiant les processus à fort ROI automatisables par l'IA",
           "Workflow d'agents IA conçu, modélisé et testé (gestion de mémoire et d'outils)",
@@ -209,16 +257,16 @@ export const fr = {
     fields: {
       typePlaceholder: "Sélectionnez un ou plusieurs domaines...",
       types: {
-        web: "Développement Web",
+        web: "Ingénierie logicielle",
         cloud: "Architecture Cloud",
-        security: "Audit & Sécurité",
+        security: "Pentest & Sécurité",
         ai: "Automatisation IA",
         other: "Pas encore sûr"
       },
       typesDesc: {
-        web: "Créer ou faire évoluer une application web (SaaS, API, Marketplace) robuste et typée strict.",
+        web: "Concevoir ou faire évoluer un logiciel métier, une plateforme, une API ou un produit complet.",
         cloud: "Concevoir, sécuriser et migrer des infrastructures avec failover et résilience.",
-        security: "Audit offensif complet, registre des vulnérabilités et remédiation du code.",
+        security: "Tester offensivement une application, une API ou une surface exposée, puis prioriser la remédiation.",
         ai: "Intégrer des agents IA autonomes (LangGraph, MCP) connectés à vos API métiers.",
         other: "Aidez-moi à cadrer le besoin et à définir les priorités techniques."
       },

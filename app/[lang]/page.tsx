@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       ? "Ingénieur Logiciel Freelance & Architecte Solutions — Douala"
       : "Freelance Software Engineer & Solution Architect — Douala",
     description: lang === "fr"
-      ? "Je conçois, sécurise et automatise des systèmes logiciels pour des entreprises qui ont besoin que ça fonctionne en production. Développement web, architecture cloud, audit sécurité, agents IA."
-      : "I design, secure, and automate software systems for companies that need things to work in production. Full-stack development, cloud architecture, security audit, AI agents.",
+      ? "Je conçois, sécurise et automatise des systèmes logiciels pour des entreprises qui ont besoin que ça fonctionne en production. Ingénierie logicielle, architecture cloud, pentest applicatif, automatisation IA."
+      : "I design, secure, and automate software systems for companies that need things to work in production. Software engineering, cloud architecture, application pentesting, AI automation.",
     path: "",
   });
 }

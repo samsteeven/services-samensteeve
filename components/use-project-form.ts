@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { getContactTypeFromSlug } from "@/lib/services";
 
@@ -21,6 +21,8 @@ export interface FormData {
   source: string;
 }
 
+const STORAGE_KEY = "project-form-draft";
+
 const EMPTY_FORM: FormData = {
   types: [],
   description: "",
@@ -38,6 +40,31 @@ const EMPTY_FORM: FormData = {
   source: "",
 };
 
+function loadDraft(): { step: number; data: FormData } | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed.step === "number" && parsed.data) {
+      return { step: parsed.step, data: { ...EMPTY_FORM, ...parsed.data } };
+    }
+  } catch {}
+  return null;
+}
+
+function saveDraft(step: number, data: FormData) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ step, data }));
+  } catch {}
+}
+
+function clearDraft() {
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch {}
+}
+
 export function useProjectForm(lang: string) {
   const searchParams = useSearchParams();
 
@@ -46,14 +73,26 @@ export function useProjectForm(lang: string) {
     return slug ? (getContactTypeFromSlug(slug) ?? null) : null;
   })();
 
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(() => {
+    const draft = loadDraft();
+    return draft?.step ?? 1;
+  });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState(false);
-  const [data, setData] = useState<FormData>(() => ({
-    ...EMPTY_FORM,
-    types: resolvedInitialType ? [resolvedInitialType] : [],
-  }));
+  const [data, setData] = useState<FormData>(() => {
+    const draft = loadDraft();
+    if (draft) return draft.data;
+    return { ...EMPTY_FORM, types: resolvedInitialType ? [resolvedInitialType] : [] };
+  });
+
+  useEffect(() => {
+    if (submitted) {
+      clearDraft();
+      return;
+    }
+    saveDraft(step, data);
+  }, [step, data, submitted]);
 
   const toggleType = (type: string) => {
     setData((prev) => {

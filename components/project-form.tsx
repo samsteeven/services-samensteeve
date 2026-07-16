@@ -13,6 +13,7 @@ import {
   Search,
   ChevronRight,
   Plus,
+  X,
   Briefcase,
   Building,
 } from "lucide-react";
@@ -373,7 +374,7 @@ export function ProjectForm({ lang }: Props) {
             </label>
             <div className="flex flex-col gap-2">
               {form.data.links.map((link, idx) => (
-                <div key={idx} className="relative flex items-center">
+                <div key={idx} className="relative flex items-center gap-2">
                   <input
                     type="url"
                     value={link}
@@ -385,6 +386,18 @@ export function ProjectForm({ lang }: Props) {
                     placeholder="https://..."
                     className="w-full rounded-xl border border-line bg-paper-raised/20 px-4 py-2.5 text-xs text-ink placeholder:text-ink-soft/30 outline-none focus:border-accent/40 focus:bg-paper-raised/30 focus:ring-2 focus:ring-accent/5 transition duration-200"
                   />
+                  {form.data.links.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const newLinks = form.data.links.filter((_, i) => i !== idx);
+                        form.updateField("links", newLinks);
+                      }}
+                      className="shrink-0 flex h-7 w-7 items-center justify-center rounded-lg border border-line bg-paper-raised/20 text-ink-soft/40 hover:border-red-400/40 hover:text-red-400 hover:bg-red-400/5 transition duration-200"
+                    >
+                      <X className="h-3.5 w-3.5" />
+                    </button>
+                  )}
                 </div>
               ))}
               <button

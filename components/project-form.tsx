@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { getContactTypeIcon, type ContactTypeKey } from "@/lib/services";
 import { useProjectForm } from "./use-project-form";
+import { TurnstileWidget } from "./turnstile-widget";
 
 interface Props {
   lang: Language;
@@ -672,6 +673,13 @@ export function ProjectForm({ lang }: Props) {
               </div>
             </div>
           )}
+
+          <div className="flex justify-end">
+            <TurnstileWidget
+              onTokenChange={form.updateTurnstileToken}
+              resetSignal={form.turnstileResetSignal}
+            />
+          </div>
         </div>
       )}
 

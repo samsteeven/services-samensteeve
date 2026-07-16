@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
+const turnstileSecretKey = process.env.TURNSTILE_SECRET_KEY;
+const isTurnstileRequired = process.env.NODE_ENV === "production";
 
 const MAX_DESCRIPTION_LENGTH = 4_000;
 const MAX_TEXT_LENGTH = 200;
@@ -30,6 +32,15 @@ interface ContactPayload {
   source: string;
   lang: string;
   website?: string;
+  turnstileToken?: string;
+}
+
+interface TurnstileVerifyResponse {
+  success: boolean;
+  challenge_ts?: string;
+  hostname?: string;
+  action?: string;
+  "error-codes"?: string[];
 }
 
 const typeLabels: Record<string, string> = {
@@ -142,6 +153,11 @@ function validatePayload(payload: ContactPayload): string | null {
   if (!isShortText(payload.whatsapp)) return "Invalid WhatsApp";
   if (!isShortText(payload.source)) return "Invalid source";
   if (!isValidLinks(payload.links)) return "Invalid links";
+  if (!isTurnstileRequired && !payload.turnstileToken) return null;
+  if (typeof payload.turnstileToken !== "string" || payload.turnstileToken.length > 2048) {
+    return "Invalid verification token";
+  }
+  if (!payload.turnstileToken.trim()) return "Missing verification token";
   if (typeof payload.description !== "string") return "Invalid description";
   const description = payload.description.trim();
   if (description.length < 20 || description.length > MAX_DESCRIPTION_LENGTH) {
@@ -151,6 +167,40 @@ function validatePayload(payload: ContactPayload): string | null {
     return "Invalid email";
   }
   return null;
+}
+
+async function verifyTurnstile(token: string, remoteip: string): Promise<boolean> {
+  if (!isTurnstileRequired && !turnstileSecretKey && !token) return true;
+
+  if (!turnstileSecretKey) {
+    console.error("[api/contact] TURNSTILE_SECRET_KEY is not configured");
+    return false;
+  }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 5000);
+
+  try {
+    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        secret: turnstileSecretKey,
+        response: token,
+        remoteip,
+      }),
+      signal: controller.signal,
+    });
+
+    if (!response.ok) return false;
+    const result = await response.json() as TurnstileVerifyResponse;
+    return result.success;
+  } catch (err) {
+    console.error("[api/contact] Turnstile verification error:", err);
+    return false;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 export async function POST(request: Request) {
@@ -188,11 +238,17 @@ export async function POST(request: Request) {
     whatsapp,
     source,
     lang,
+    turnstileToken,
   } = payload;
 
   const validationError = validatePayload(payload);
   if (validationError) {
     return NextResponse.json({ error: validationError }, { status: 422 });
+  }
+
+  const turnstileOk = await verifyTurnstile(turnstileToken ?? "", ip);
+  if (!turnstileOk) {
+    return NextResponse.json({ error: "Verification failed" }, { status: 403 });
   }
 
   const typeList = (types ?? []).map((t) => typeLabels[t] ?? escapeHtml(t)).join(", ") || "Non précisé";

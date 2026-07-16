@@ -162,4 +162,14 @@ npm run lint          # ESLint
 
 ## Déploiement
 
-Optimisé pour **Vercel** avec domaine **services.samensteeve.com**. Email transactionnel via **Resend** (clé API dans `RESEND_API_KEY`).
+Optimisé pour **Vercel** avec domaine **services.samensteeve.com**. Email transactionnel via **Resend** et protection anti-bot via **Cloudflare Turnstile**.
+
+Variables d'environnement requises :
+
+```bash
+RESEND_API_KEY=
+NEXT_PUBLIC_TURNSTILE_SITE_KEY=
+TURNSTILE_SECRET_KEY=
+```
+
+`NEXT_PUBLIC_TURNSTILE_SITE_KEY` et `TURNSTILE_SECRET_KEY` sont obligatoires en production. En développement local, elles peuvent être omises : le formulaire fonctionne sans Turnstile.

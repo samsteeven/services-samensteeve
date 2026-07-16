@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { getContactTypeFromSlug } from "@/lib/services";
 
@@ -19,9 +19,11 @@ export interface FormData {
   role: string;
   whatsapp: string;
   source: string;
+  turnstileToken: string;
 }
 
 const STORAGE_KEY = "project-form-draft";
+const turnstileEnabled = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
 const EMPTY_FORM: FormData = {
   types: [],
@@ -38,6 +40,7 @@ const EMPTY_FORM: FormData = {
   role: "",
   whatsapp: "",
   source: "",
+  turnstileToken: "",
 };
 
 function loadDraft(): { step: number; data: FormData } | null {
@@ -55,7 +58,10 @@ function loadDraft(): { step: number; data: FormData } | null {
 
 function saveDraft(step: number, data: FormData) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ step, data }));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      step,
+      data: { ...data, turnstileToken: "" },
+    }));
   } catch {}
 }
 
@@ -80,6 +86,7 @@ export function useProjectForm(lang: string) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState(false);
+  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
   const [data, setData] = useState<FormData>(() => {
     const draft = loadDraft();
     if (draft) return draft.data;
@@ -141,13 +148,17 @@ export function useProjectForm(lang: string) {
     setData((prev) => ({ ...prev, [key]: value }));
   };
 
+  const updateTurnstileToken = useCallback((token: string) => {
+    setData((prev) => ({ ...prev, turnstileToken: token }));
+  }, []);
+
   const canNext = (): boolean => {
     if (step === 1) return data.types.length > 0;
     if (step === 2) return data.description.trim().length > 20;
     if (step === 3) return data.timeline !== "" && data.budget !== "" && data.goals.length > 0;
     if (step === 4) return data.hasCodebase !== "" && data.teamSize !== "";
     if (step === 5) return data.name.trim() !== "" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
-    if (step === 6) return true;
+    if (step === 6) return !turnstileEnabled || data.turnstileToken.trim() !== "";
     return false;
   };
 
@@ -165,6 +176,7 @@ export function useProjectForm(lang: string) {
       setSubmitted(true);
     } catch {
       setSubmitError(true);
+      setTurnstileResetSignal((value) => value + 1);
     } finally {
       setSubmitting(false);
     }
@@ -177,9 +189,11 @@ export function useProjectForm(lang: string) {
     submitted,
     submitError,
     data,
+    turnstileResetSignal,
     toggleType,
     toggleGoal,
     updateField,
+    updateTurnstileToken,
     canNext,
     handleSubmit,
   };

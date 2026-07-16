@@ -30,6 +30,34 @@ export function ProjectForm({ lang }: Props) {
   const { fields, buttons, steps, success, error, questions } = t.contact;
   const form = useProjectForm(lang);
 
+  const getDynamicPlaceholder = () => {
+    const types = form.data.types;
+    if (types.length === 1) {
+      const type = types[0];
+      if (type === "web") {
+        return lang === "fr"
+          ? "Décrivez l'application SaaS, la marketplace ou la plateforme web à concevoir, les rôles utilisateurs et les fonctionnalités clés..."
+          : "Describe the SaaS application, marketplace, or web platform to build, user roles, and key features...";
+      }
+      if (type === "cloud") {
+        return lang === "fr"
+          ? "Décrivez votre infrastructure actuelle (on-premise ou cloud), les hébergeurs utilisés, et vos contraintes de résilience ou de migration..."
+          : "Describe your current infrastructure (on-premise or cloud), hosting providers used, and resilience or migration constraints...";
+      }
+      if (type === "security") {
+        return lang === "fr"
+          ? "Décrivez les applications, serveurs ou API à auditer, les technologies sous-jacentes (Laravel, Node, etc.) et si vous suspectez des vulnérabilités ou avez subi un incident..."
+          : "Describe the apps, servers, or APIs to audit, the underlying technologies (Laravel, Node, etc.), and if you suspect vulnerabilities or suffered an incident...";
+      }
+      if (type === "ai") {
+        return lang === "fr"
+          ? "Décrivez les processus manuels ou répétitifs à automatiser (ex: traitement de factures, qualification de leads), les outils utilisés et les API disponibles..."
+          : "Describe the manual or repetitive processes to automate (e.g. invoice processing, lead scoring), tools used, and available APIs...";
+      }
+    }
+    return fields.descPlaceholder;
+  };
+
   // success view
   if (form.submitted) {
     return (
@@ -173,7 +201,7 @@ export function ProjectForm({ lang }: Props) {
             <textarea
               value={form.data.description}
               onChange={(e) => form.updateField("description", e.target.value)}
-              placeholder={fields.descPlaceholder}
+              placeholder={getDynamicPlaceholder()}
               rows={8}
               className="w-full resize-none rounded-2xl border border-line bg-paper-raised/20 px-5 py-4 text-sm leading-relaxed text-ink placeholder:text-ink-soft/30 outline-none focus:border-accent/40 focus:bg-paper-raised/30 focus:ring-2 focus:ring-accent/5 transition duration-200"
             />

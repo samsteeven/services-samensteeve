@@ -56,12 +56,37 @@ export function useProjectForm(lang: string) {
   }));
 
   const toggleType = (type: string) => {
-    setData((prev) => ({
-      ...prev,
-      types: prev.types.includes(type)
+    setData((prev) => {
+      const nextTypes = prev.types.includes(type)
         ? prev.types.filter((t) => t !== type)
-        : [...prev.types, type],
-    }));
+        : [...prev.types, type];
+
+      // Auto-select logical goals if the user hasn't manually selected any goals yet
+      let nextGoals = [...prev.goals];
+      if (prev.goals.length === 0 || prev.goals.every(g => ["launch", "automate", "secure", "scale"].includes(g))) {
+        const tempGoals = new Set<string>();
+        if (nextTypes.includes("web")) tempGoals.add("launch");
+        if (nextTypes.includes("cloud")) tempGoals.add("scale");
+        if (nextTypes.includes("security")) tempGoals.add("secure");
+        if (nextTypes.includes("ai")) tempGoals.add("automate");
+        nextGoals = Array.from(tempGoals);
+      }
+
+      // Auto-suggest codebase context based on service types
+      let nextHasCodebase = prev.hasCodebase;
+      if (nextTypes.includes("security") || nextTypes.includes("cloud")) {
+        nextHasCodebase = "yes";
+      } else if (nextTypes.includes("web") && nextTypes.length === 1) {
+        nextHasCodebase = "no";
+      }
+
+      return {
+        ...prev,
+        types: nextTypes,
+        goals: nextGoals,
+        hasCodebase: nextHasCodebase,
+      };
+    });
   };
 
   const toggleGoal = (goal: string) => {

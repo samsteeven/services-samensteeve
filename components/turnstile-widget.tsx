@@ -13,6 +13,10 @@ declare global {
           theme?: "auto" | "light" | "dark";
           appearance?: "always" | "execute" | "interaction-only";
           execution?: "render" | "execute";
+          retry?: "auto" | "never";
+          "retry-interval"?: number;
+          "refresh-expired"?: "auto" | "manual" | "never";
+          "refresh-timeout"?: "auto" | "manual" | "never";
           callback?: (token: string) => void;
           "expired-callback"?: () => void;
           "error-callback"?: () => void;
@@ -55,13 +59,16 @@ export function TurnstileWidget({ onTokenChange, resetSignal }: TurnstileWidgetP
       theme: "auto",
       appearance: "interaction-only",
       execution: "render",
+      retry: "auto",
+      "retry-interval": 8000,
+      "refresh-expired": "auto",
+      "refresh-timeout": "auto",
       callback: (token) => {
         setLoadFailed(false);
         onTokenChange(token);
       },
       "expired-callback": () => {
         onTokenChange("");
-        if (widgetIdRef.current) window.turnstile?.reset(widgetIdRef.current);
       },
       "error-callback": () => {
         onTokenChange("");
@@ -108,7 +115,7 @@ export function TurnstileWidget({ onTokenChange, resetSignal }: TurnstileWidgetP
           }, RETRY_DELAY_MS);
         }}
       />
-      <div ref={containerRef} className="min-h-[65px]" />
+      <div ref={containerRef} />
       {loadFailed && (
         <div className="mt-2 max-w-sm rounded-xl border border-red-400/30 bg-red-500/5 p-3 text-xs text-red-400">
           <p className="font-semibold">La vérification anti-bot n'a pas pu se charger.</p>

@@ -71,6 +71,23 @@ function clearDraft() {
   } catch {}
 }
 
+function hasMeaningfulData(data: FormData): boolean {
+  return data.types.length > 0
+    || data.description.trim() !== ""
+    || data.hasCodebase !== ""
+    || data.timeline !== ""
+    || data.teamSize !== ""
+    || data.budget !== ""
+    || data.goals.length > 0
+    || data.links.some((link) => link.trim() !== "")
+    || data.name.trim() !== ""
+    || data.email.trim() !== ""
+    || data.company.trim() !== ""
+    || data.role.trim() !== ""
+    || data.whatsapp.trim() !== ""
+    || data.source.trim() !== "";
+}
+
 export function useProjectForm(lang: string) {
   const searchParams = useSearchParams();
 
@@ -162,6 +179,37 @@ export function useProjectForm(lang: string) {
     return false;
   };
 
+  const clearCurrentStep = () => {
+    setSubmitError(false);
+    setData((prev) => {
+      if (step === 1) return { ...prev, types: [], goals: [], hasCodebase: "" };
+      if (step === 2) return { ...prev, description: "" };
+      if (step === 3) return { ...prev, timeline: "", budget: "", goals: [] };
+      if (step === 4) return { ...prev, hasCodebase: "", teamSize: "", links: [""] };
+      if (step === 5) {
+        return {
+          ...prev,
+          name: "",
+          email: "",
+          company: "",
+          role: "",
+          whatsapp: "",
+          source: "",
+        };
+      }
+      return prev;
+    });
+  };
+
+  const resetForm = () => {
+    clearDraft();
+    setStep(1);
+    setSubmitError(false);
+    setSubmitted(false);
+    setData({ ...EMPTY_FORM, types: resolvedInitialType ? [resolvedInitialType] : [] });
+    setTurnstileResetSignal((value) => value + 1);
+  };
+
   const handleSubmit = async () => {
     if (!canNext()) return;
     setSubmitting(true);
@@ -189,11 +237,14 @@ export function useProjectForm(lang: string) {
     submitted,
     submitError,
     data,
+    hasDraftData: hasMeaningfulData(data),
     turnstileResetSignal,
     toggleType,
     toggleGoal,
     updateField,
     updateTurnstileToken,
+    clearCurrentStep,
+    resetForm,
     canNext,
     handleSubmit,
   };

@@ -326,6 +326,9 @@ export const en = {
       prev: "Back",
       submit: "Confirm & send",
       submitting: "Sending...",
+      clearStep: "Clear this step",
+      resetAll: "Reset",
+      resetConfirm: "Do you really want to clear the entire form?",
     },
     success: {
       title: "Request received!",

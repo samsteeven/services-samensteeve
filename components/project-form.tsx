@@ -151,9 +151,22 @@ export function ProjectForm({ lang }: Props) {
           <span className="font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
             {stepLabels[form.step - 1]}
           </span>
-          <span className="font-mono text-[10px] text-ink-soft/40 tabular-nums">
-            {form.step} / {TOTAL_STEPS}
-          </span>
+          <div className="flex items-center gap-3">
+            {form.hasDraftData && (
+              <button
+                type="button"
+                onClick={() => {
+                  if (window.confirm(buttons.resetConfirm)) form.resetForm();
+                }}
+                className="font-mono text-[10px] uppercase tracking-widest text-ink-soft/45 transition hover:text-red-400"
+              >
+                {buttons.resetAll}
+              </button>
+            )}
+            <span className="font-mono text-[10px] text-ink-soft/40 tabular-nums">
+              {form.step} / {TOTAL_STEPS}
+            </span>
+          </div>
         </div>
 
         {/* Progress line */}
@@ -167,16 +180,20 @@ export function ProjectForm({ lang }: Props) {
 
       {/* ── Active Step Header ────────────────────────────────────────────── */}
       <div className="mb-8">
-        <h2 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-          {questionLabels[form.step - 1]}
-        </h2>
-      </div>
-
-      <div className="mb-6 flex justify-end">
-        <TurnstileWidget
-          onTokenChange={form.updateTurnstileToken}
-          resetSignal={form.turnstileResetSignal}
-        />
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <h2 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+            {questionLabels[form.step - 1]}
+          </h2>
+          {form.step < TOTAL_STEPS && (
+            <button
+              type="button"
+              onClick={form.clearCurrentStep}
+              className="self-start font-mono text-[10px] uppercase tracking-widest text-ink-soft/50 transition hover:text-accent"
+            >
+              {buttons.clearStep}
+            </button>
+          )}
+        </div>
       </div>
 
       {/* ── Step 1: Offer / Services ────────────────────────────────────────── */}
@@ -679,6 +696,15 @@ export function ProjectForm({ lang }: Props) {
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {form.step >= 5 && (
+        <div className="mt-6 flex justify-end">
+          <TurnstileWidget
+            onTokenChange={form.updateTurnstileToken}
+            resetSignal={form.turnstileResetSignal}
+          />
         </div>
       )}
 

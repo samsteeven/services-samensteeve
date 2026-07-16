@@ -326,6 +326,9 @@ export const fr = {
       prev: "Retour",
       submit: "Confirmer & envoyer",
       submitting: "Envoi en cours...",
+      clearStep: "Vider cette étape",
+      resetAll: "Réinitialiser",
+      resetConfirm: "Voulez-vous vraiment vider tout le formulaire ?",
     },
     success: {
       title: "Demande reçue !",

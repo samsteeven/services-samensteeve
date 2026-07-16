@@ -10,8 +10,13 @@ export interface FormData {
   hasCodebase: string;
   timeline: string;
   teamSize: string;
+  budget: string;
+  goals: string[];
+  links: string[];
   name: string;
   email: string;
+  company: string;
+  role: string;
   whatsapp: string;
   source: string;
 }
@@ -22,8 +27,13 @@ const EMPTY_FORM: FormData = {
   hasCodebase: "",
   timeline: "",
   teamSize: "",
+  budget: "",
+  goals: [],
+  links: [""],
   name: "",
   email: "",
+  company: "",
+  role: "",
   whatsapp: "",
   source: "",
 };
@@ -54,6 +64,15 @@ export function useProjectForm(lang: string) {
     }));
   };
 
+  const toggleGoal = (goal: string) => {
+    setData((prev) => ({
+      ...prev,
+      goals: prev.goals.includes(goal)
+        ? prev.goals.filter((g) => g !== goal)
+        : [...prev.goals, goal],
+    }));
+  };
+
   const updateField = <K extends keyof FormData>(key: K, value: FormData[K]) => {
     setData((prev) => ({ ...prev, [key]: value }));
   };
@@ -61,8 +80,10 @@ export function useProjectForm(lang: string) {
   const canNext = (): boolean => {
     if (step === 1) return data.types.length > 0;
     if (step === 2) return data.description.trim().length > 20;
-    if (step === 3) return data.hasCodebase !== "" && data.timeline !== "" && data.teamSize !== "";
-    if (step === 4) return data.name.trim() !== "" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
+    if (step === 3) return data.timeline !== "" && data.budget !== "" && data.goals.length > 0;
+    if (step === 4) return data.hasCodebase !== "" && data.teamSize !== "";
+    if (step === 5) return data.name.trim() !== "" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
+    if (step === 6) return true;
     return false;
   };
 
@@ -93,6 +114,7 @@ export function useProjectForm(lang: string) {
     submitError,
     data,
     toggleType,
+    toggleGoal,
     updateField,
     canNext,
     handleSubmit,

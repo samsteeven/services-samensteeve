@@ -12,21 +12,25 @@ import {
   Phone,
   Search,
   ChevronRight,
+  Plus,
+  Briefcase,
+  Building,
 } from "lucide-react";
-import { getContactTypeIcon } from "@/lib/services";
+import { getContactTypeIcon, type ContactTypeKey } from "@/lib/services";
 import { useProjectForm } from "./use-project-form";
 
 interface Props {
   lang: Language;
 }
 
-const TOTAL_STEPS = 4;
+const TOTAL_STEPS = 6;
 
 export function ProjectForm({ lang }: Props) {
   const t = getT(lang);
-  const { fields, buttons, steps, success, error } = t.contact;
+  const { fields, buttons, steps, success, error, questions } = t.contact;
   const form = useProjectForm(lang);
 
+  // success view
   if (form.submitted) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center">
@@ -40,13 +44,30 @@ export function ProjectForm({ lang }: Props) {
     );
   }
 
-  const stepLabels = [steps.projectType, steps.description, steps.context, steps.contact];
+  const stepLabels = [
+    steps.step1,
+    steps.step2,
+    steps.step3,
+    steps.step4,
+    steps.step5,
+    steps.step6,
+  ];
+
+  const questionLabels = [
+    questions.step1,
+    questions.step2,
+    questions.step3,
+    questions.step4,
+    questions.step5,
+    questions.step6,
+  ];
 
   return (
-    <div className="mx-auto max-w-2xl w-full">
+    <div className="mx-auto max-w-3xl w-full">
 
-      {/* Step Indicator */}
+      {/* ── SDEN-Style Step Indicator ───────────────────────────────────────── */}
       <div className="mb-10">
+        {/* Row of circles and connector lines */}
         <div className="flex items-center">
           {Array.from({ length: TOTAL_STEPS }, (_, i) => {
             const num = i + 1;
@@ -54,19 +75,21 @@ export function ProjectForm({ lang }: Props) {
             const isActive = num === form.step;
             return (
               <div key={num} className="flex items-center flex-1 last:flex-none">
-                <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 font-mono text-[12px] font-bold transition-all duration-300 ${
+                {/* Circle */}
+                <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border font-mono text-[10px] font-bold transition-all duration-300 ${
                   isDone
                     ? "border-accent bg-accent text-white"
                     : isActive
-                      ? "border-accent text-accent bg-accent/8"
-                      : "border-line/50 text-ink-soft/30 bg-transparent"
+                      ? "border-accent text-accent bg-accent/10"
+                      : "border-line text-ink-soft/30 bg-transparent"
                 }`}>
-                  {isDone ? <Check className="h-3.5 w-3.5" /> : num}
+                  {isDone ? <Check className="h-3 w-3" /> : num}
                 </div>
+                {/* Connector line */}
                 {i < TOTAL_STEPS - 1 && (
                   <div className="flex-1 mx-2 h-px bg-line/40 relative overflow-hidden">
                     {isDone && (
-                      <div className="absolute inset-0 bg-accent/60 transition-all duration-500" />
+                      <div className="absolute inset-0 bg-accent/50 transition-all duration-500" />
                     )}
                   </div>
                 )}
@@ -75,8 +98,9 @@ export function ProjectForm({ lang }: Props) {
           })}
         </div>
 
+        {/* Labels below */}
         <div className="mt-4 flex items-center justify-between">
-          <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-ink">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
             {stepLabels[form.step - 1]}
           </span>
           <span className="font-mono text-[10px] text-ink-soft/40 tabular-nums">
@@ -84,48 +108,57 @@ export function ProjectForm({ lang }: Props) {
           </span>
         </div>
 
-        <div className="h-1 w-full rounded-full bg-line/40 overflow-hidden">
+        {/* Progress line */}
+        <div className="mt-2 h-0.5 w-full rounded-full bg-line/20 overflow-hidden">
           <div
             className="h-full rounded-full bg-accent transition-all duration-500 ease-out"
-            style={{ width: `${(form.step / TOTAL_STEPS) * 100}%` }}
+            style={{ width: `${((form.step - 1) / (TOTAL_STEPS - 1)) * 100}%` }}
           />
         </div>
       </div>
 
-      {/* Step 1: Service Type */}
+      {/* ── Active Step Header ────────────────────────────────────────────── */}
+      <div className="mb-8">
+        <h2 className="font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+          {questionLabels[form.step - 1]}
+        </h2>
+      </div>
+
+      {/* ── Step 1: Offer / Services ────────────────────────────────────────── */}
       {form.step === 1 && (
-        <div className="flex flex-col gap-3">
-          <p className="mb-2 font-mono text-[11px] text-ink-soft/60 uppercase tracking-widest">
-            {lang === "fr" ? "Sélection multiple possible" : "Multiple selection allowed"}
-          </p>
+        <div className="grid gap-3 sm:grid-cols-2">
           {Object.entries(fields.types).map(([key, label]) => {
-            const Icon = getContactTypeIcon(key as "web" | "cloud" | "security" | "ai" | "other");
+            const Icon = getContactTypeIcon(key as ContactTypeKey);
             const isSelected = form.data.types.includes(key);
+            const description = fields.typesDesc[key as keyof typeof fields.typesDesc];
             return (
               <button
                 key={key}
                 type="button"
                 onClick={() => form.toggleType(key)}
-                className={`group flex items-center gap-4 rounded-2xl border px-5 py-4 text-left transition-all duration-200 ${
+                className={`group flex items-start gap-4 rounded-2xl border px-5 py-4.5 text-left transition-all duration-200 ${
                   isSelected
-                    ? "border-accent bg-accent/5 shadow-sm shadow-accent/10"
-                    : "border-line bg-paper-raised/30 hover:border-accent/40 hover:bg-paper-raised/60"
+                    ? "border-accent bg-accent/5 shadow-sm shadow-accent/5"
+                    : "border-line bg-paper-raised/15 hover:border-accent/40 hover:bg-paper-raised/30"
                 }`}
               >
-                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-200 ${
+                <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-all duration-200 ${
                   isSelected ? "bg-accent text-white" : "bg-paper-raised text-ink-soft group-hover:bg-accent/10 group-hover:text-accent"
                 }`}>
-                  <Icon className="h-5 w-5" />
+                  <Icon className="h-4.5 w-4.5" />
                 </div>
-                <span className={`flex-1 text-sm font-semibold transition-colors ${
-                  isSelected ? "text-ink" : "text-ink-soft group-hover:text-ink"
+                <div className="flex-1 min-w-0">
+                  <div className={`text-sm font-bold transition-colors ${isSelected ? "text-ink" : "text-ink-soft group-hover:text-ink"}`}>
+                    {label}
+                  </div>
+                  <div className="mt-1 text-xs text-ink-soft/60 leading-relaxed font-normal">
+                    {description}
+                  </div>
+                </div>
+                <div className={`flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded border transition-all duration-200 ${
+                  isSelected ? "border-accent bg-accent text-white scale-105" : "border-line bg-transparent"
                 }`}>
-                  {label}
-                </span>
-                <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-all duration-200 ${
-                  isSelected ? "border-accent bg-accent scale-110" : "border-line bg-transparent"
-                }`}>
-                  {isSelected && <Check className="h-3 w-3 text-white" />}
+                  {isSelected && <Check className="h-3 w-3" />}
                 </div>
               </button>
             );
@@ -133,21 +166,18 @@ export function ProjectForm({ lang }: Props) {
         </div>
       )}
 
-      {/* Step 2: Description */}
+      {/* ── Step 2: Scope / Description ──────────────────────────────────────── */}
       {form.step === 2 && (
         <div className="flex flex-col gap-4">
-          <label className="font-mono text-[11px] font-bold uppercase tracking-widest text-ink-soft">
-            {fields.descLabel}
-          </label>
           <div className="relative">
             <textarea
               value={form.data.description}
               onChange={(e) => form.updateField("description", e.target.value)}
               placeholder={fields.descPlaceholder}
               rows={8}
-              className="w-full resize-none rounded-2xl border border-line bg-paper-raised/30 px-5 py-4 text-sm leading-relaxed text-ink placeholder:text-ink-soft/35 outline-none focus:border-accent/50 focus:bg-paper-raised/60 focus:ring-2 focus:ring-accent/10 transition duration-200"
+              className="w-full resize-none rounded-2xl border border-line bg-paper-raised/20 px-5 py-4 text-sm leading-relaxed text-ink placeholder:text-ink-soft/30 outline-none focus:border-accent/40 focus:bg-paper-raised/30 focus:ring-2 focus:ring-accent/5 transition duration-200"
             />
-            <div className="absolute bottom-3 right-4 flex items-center gap-2">
+            <div className="absolute bottom-3 right-4">
               <span className={`font-mono text-[10px] transition-colors ${
                 form.data.description.trim().length < 20 ? "text-ink-soft/30" : "text-accent font-semibold"
               }`}>
@@ -157,123 +187,422 @@ export function ProjectForm({ lang }: Props) {
               </span>
             </div>
           </div>
-          <p className="font-mono text-[10px] text-ink-soft/40 leading-relaxed">
-            {lang === "fr"
-              ? "Décrivez les objectifs, les fonctionnalités clés attendues et le problème métier à résoudre."
-              : "Describe your goals, key expected features, and the business problem to solve."}
-          </p>
         </div>
       )}
 
-      {/* Step 3: Context */}
+      {/* ── Step 3: Goals & Success criteria ──────────────────────────────────── */}
       {form.step === 3 && (
-        <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-8">
+          {/* Target Outcomes (Value metrics) */}
           <div>
-            <label className="font-mono text-[11px] font-bold uppercase tracking-widest text-ink-soft block mb-4">
-              {fields.codebaseLabel}
+            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-3.5">
+              {fields.goalsLabel}
             </label>
-            <div className="flex flex-col gap-2.5">
-              {Object.entries(fields.codebaseOptions).map(([val, label]) => (
-                <button
-                  key={val}
-                  type="button"
-                  onClick={() => form.updateField("hasCodebase", val)}
-                  className={`flex items-center gap-4 rounded-2xl border px-5 py-4 text-left text-sm font-semibold transition-all duration-200 ${
-                    form.data.hasCodebase === val
-                      ? "border-accent bg-accent/5 text-ink shadow-sm shadow-accent/10"
-                      : "border-line bg-paper-raised/30 text-ink-soft hover:border-accent/40 hover:text-ink hover:bg-paper-raised/60"
-                  }`}
-                >
-                  <div className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-200 ${
-                    form.data.hasCodebase === val ? "border-accent scale-110" : "border-line"
-                  }`}>
-                    {form.data.hasCodebase === val && <div className="h-2.5 w-2.5 rounded-full bg-accent" />}
-                  </div>
-                  {label}
-                </button>
-              ))}
+            <div className="grid gap-2.5 sm:grid-cols-2">
+              {Object.entries(fields.goalsOptions).map(([key, label]) => {
+                const isSelected = form.data.goals.includes(key);
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => form.toggleGoal(key)}
+                    className={`group flex items-start gap-3 rounded-xl border p-3.5 text-left text-xs font-semibold leading-relaxed transition-all duration-200 ${
+                      isSelected
+                        ? "border-accent bg-accent/5 text-ink"
+                        : "border-line bg-paper-raised/15 text-ink-soft hover:border-accent/40 hover:text-ink hover:bg-paper-raised/30"
+                    }`}
+                  >
+                    <div className={`mt-0.5 flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded border transition-all ${
+                      isSelected ? "border-accent bg-accent text-white scale-105" : "border-line bg-transparent"
+                    }`}>
+                      {isSelected && <Check className="h-3 w-3" />}
+                    </div>
+                    <span className="flex-1">{label}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
+          {/* Budget Range */}
           <div>
-            <label className="font-mono text-[11px] font-bold uppercase tracking-widest text-ink-soft block mb-4">
+            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-3.5">
+              {fields.budgetLabel}
+            </label>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {Object.entries(fields.budgetOptions).map(([key, label]) => {
+                const isSelected = form.data.budget === key;
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => form.updateField("budget", key)}
+                    className={`rounded-xl border px-3 py-3 text-center text-xs font-bold transition-all duration-200 ${
+                      isSelected
+                        ? "border-accent bg-accent/5 text-accent shadow-sm"
+                        : "border-line bg-paper-raised/15 text-ink-soft hover:border-accent/40 hover:text-ink hover:bg-paper-raised/30"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Desired Timeline */}
+          <div>
+            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-3.5">
               {fields.timelineLabel}
             </label>
-            <div className="grid grid-cols-2 gap-2.5">
-              {Object.entries(fields.timelineOptions).map(([val, label]) => (
-                <button
-                  key={val}
-                  type="button"
-                  onClick={() => form.updateField("timeline", val)}
-                  className={`rounded-2xl border px-4 py-4 text-left text-xs font-semibold leading-snug transition-all duration-200 ${
-                    form.data.timeline === val
-                      ? "border-accent bg-accent/5 text-ink shadow-sm shadow-accent/10"
-                      : "border-line bg-paper-raised/30 text-ink-soft hover:border-accent/40 hover:text-ink hover:bg-paper-raised/60"
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <label className="font-mono text-[11px] font-bold uppercase tracking-widest text-ink-soft block mb-4">
-              {fields.teamLabel}
-            </label>
-            <div className="grid grid-cols-2 gap-2.5">
-              {Object.entries(fields.teamOptions).map(([val, label]) => (
-                <button
-                  key={val}
-                  type="button"
-                  onClick={() => form.updateField("teamSize", val)}
-                  className={`rounded-2xl border px-4 py-4 text-left text-xs font-semibold leading-snug transition-all duration-200 ${
-                    form.data.teamSize === val
-                      ? "border-accent bg-accent/5 text-ink shadow-sm shadow-accent/10"
-                      : "border-line bg-paper-raised/30 text-ink-soft hover:border-accent/40 hover:text-ink hover:bg-paper-raised/60"
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
+            <div className="grid grid-cols-2 gap-2">
+              {Object.entries(fields.timelineOptions).map(([key, label]) => {
+                const isSelected = form.data.timeline === key;
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => form.updateField("timeline", key)}
+                    className={`rounded-xl border px-4 py-3 text-left text-xs font-semibold transition-all duration-200 ${
+                      isSelected
+                        ? "border-accent bg-accent/5 text-ink"
+                        : "border-line bg-paper-raised/15 text-ink-soft hover:border-accent/40 hover:text-ink hover:bg-paper-raised/30"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
       )}
 
-      {/* Step 4: Contact */}
+      {/* ── Step 4: Context / Tech Details ────────────────────────────────────── */}
       {form.step === 4 && (
+        <div className="flex flex-col gap-8">
+          {/* Codebase */}
+          <div>
+            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-3.5">
+              {fields.codebaseLabel}
+            </label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {Object.entries(fields.codebaseOptions).map(([val, label]) => {
+                const isSelected = form.data.hasCodebase === val;
+                return (
+                  <button
+                    key={val}
+                    type="button"
+                    onClick={() => form.updateField("hasCodebase", val)}
+                    className={`flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left text-xs font-bold transition-all duration-200 ${
+                      isSelected
+                        ? "border-accent bg-accent/5 text-ink shadow-sm"
+                        : "border-line bg-paper-raised/15 text-ink-soft hover:border-accent/40 hover:text-ink hover:bg-paper-raised/30"
+                    }`}
+                  >
+                    <div className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-all ${
+                      isSelected ? "border-accent scale-105" : "border-line"
+                    }`}>
+                      {isSelected && <div className="h-2 w-2 rounded-full bg-accent" />}
+                    </div>
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Team Size */}
+          <div>
+            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-3.5">
+              {fields.teamLabel}
+            </label>
+            <div className="grid grid-cols-2 gap-2">
+              {Object.entries(fields.teamOptions).map(([val, label]) => {
+                const isSelected = form.data.teamSize === val;
+                return (
+                  <button
+                    key={val}
+                    type="button"
+                    onClick={() => form.updateField("teamSize", val)}
+                    className={`rounded-xl border px-4 py-3 text-left text-xs font-semibold transition-all duration-200 ${
+                      isSelected
+                        ? "border-accent bg-accent/5 text-ink"
+                        : "border-line bg-paper-raised/15 text-ink-soft hover:border-accent/40 hover:text-ink hover:bg-paper-raised/30"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Links Input Stack */}
+          <div>
+            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-2">
+              {fields.linksLabel}
+            </label>
+            <div className="flex flex-col gap-2">
+              {form.data.links.map((link, idx) => (
+                <div key={idx} className="relative flex items-center">
+                  <input
+                    type="url"
+                    value={link}
+                    onChange={(e) => {
+                      const newLinks = [...form.data.links];
+                      newLinks[idx] = e.target.value;
+                      form.updateField("links", newLinks);
+                    }}
+                    placeholder="https://..."
+                    className="w-full rounded-xl border border-line bg-paper-raised/20 px-4 py-2.5 text-xs text-ink placeholder:text-ink-soft/30 outline-none focus:border-accent/40 focus:bg-paper-raised/30 focus:ring-2 focus:ring-accent/5 transition duration-200"
+                  />
+                </div>
+              ))}
+              <button
+                type="button"
+                onClick={() => {
+                  form.updateField("links", [...form.data.links, ""]);
+                }}
+                className="mt-1 self-start font-mono text-[10px] text-accent hover:underline flex items-center gap-1"
+              >
+                <Plus className="h-3.5 w-3.5" />
+                {fields.addLink}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Step 5: Contact / Identity ───────────────────────────────────────── */}
+      {form.step === 5 && (
         <div className="flex flex-col gap-5">
-          {[
-            { key: "name" as const, label: fields.nameLabel, placeholder: fields.namePlaceholder, type: "text", required: true, Icon: User },
-            { key: "email" as const, label: fields.emailLabel, placeholder: fields.emailPlaceholder, type: "email", required: true, Icon: Mail },
-            { key: "whatsapp" as const, label: fields.whatsappLabel, placeholder: fields.whatsappPlaceholder, type: "tel", required: false, Icon: Phone },
-            { key: "source" as const, label: fields.sourceLabel, placeholder: fields.sourcePlaceholder, type: "text", required: false, Icon: Search },
-          ].map((field) => (
-            <div key={field.key}>
-              <label className="font-mono text-[11px] font-bold uppercase tracking-widest text-ink-soft block mb-2">
-                {field.label}
-                {!field.required && (
-                  <span className="ml-2 font-normal normal-case tracking-normal text-ink-soft/40">
-                    {lang === "fr" ? "(optionnel)" : "(optional)"}
-                  </span>
-                )}
+          {/* Identity Grid */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-2">
+                {fields.nameLabel}
               </label>
               <div className="relative">
                 <div className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-soft/40">
-                  <field.Icon className="h-4 w-4" />
+                  <User className="h-4 w-4" />
                 </div>
                 <input
-                  type={field.type}
-                  value={form.data[field.key]}
-                  onChange={(e) => form.updateField(field.key, e.target.value)}
-                  placeholder={field.placeholder}
-                  className="w-full rounded-2xl border border-line bg-paper-raised/30 pl-11 pr-5 py-4 text-sm text-ink placeholder:text-ink-soft/35 outline-none focus:border-accent/50 focus:bg-paper-raised/60 focus:ring-2 focus:ring-accent/10 transition duration-200"
+                  type="text"
+                  value={form.data.name}
+                  onChange={(e) => form.updateField("name", e.target.value)}
+                  placeholder={fields.namePlaceholder}
+                  className="w-full rounded-xl border border-line bg-paper-raised/20 pl-11 pr-4 py-3 text-sm text-ink placeholder:text-ink-soft/35 outline-none focus:border-accent/40 focus:bg-paper-raised/30 focus:ring-2 focus:ring-accent/5 transition duration-200"
                 />
               </div>
             </div>
-          ))}
 
+            <div>
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-2">
+                {fields.emailLabel}
+              </label>
+              <div className="relative">
+                <div className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-soft/40">
+                  <Mail className="h-4 w-4" />
+                </div>
+                <input
+                  type="email"
+                  value={form.data.email}
+                  onChange={(e) => form.updateField("email", e.target.value)}
+                  placeholder={fields.emailPlaceholder}
+                  className="w-full rounded-xl border border-line bg-paper-raised/20 pl-11 pr-4 py-3 text-sm text-ink placeholder:text-ink-soft/35 outline-none focus:border-accent/40 focus:bg-paper-raised/30 focus:ring-2 focus:ring-accent/5 transition duration-200"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Company & Role */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-2">
+                {fields.companyLabel}
+              </label>
+              <div className="relative">
+                <div className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-soft/40">
+                  <Building className="h-4 w-4" />
+                </div>
+                <input
+                  type="text"
+                  value={form.data.company}
+                  onChange={(e) => form.updateField("company", e.target.value)}
+                  placeholder={fields.companyPlaceholder}
+                  className="w-full rounded-xl border border-line bg-paper-raised/20 pl-11 pr-4 py-3 text-sm text-ink placeholder:text-ink-soft/35 outline-none focus:border-accent/40 focus:bg-paper-raised/30 focus:ring-2 focus:ring-accent/5 transition duration-200"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-2">
+                {fields.roleLabel}
+              </label>
+              <div className="relative">
+                <div className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-soft/40">
+                  <Briefcase className="h-4 w-4" />
+                </div>
+                <input
+                  type="text"
+                  value={form.data.role}
+                  onChange={(e) => form.updateField("role", e.target.value)}
+                  placeholder={fields.rolePlaceholder}
+                  className="w-full rounded-xl border border-line bg-paper-raised/20 pl-11 pr-4 py-3 text-sm text-ink placeholder:text-ink-soft/35 outline-none focus:border-accent/40 focus:bg-paper-raised/30 focus:ring-2 focus:ring-accent/5 transition duration-200"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* WhatsApp & Source */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-2">
+                {fields.whatsappLabel}
+              </label>
+              <div className="relative">
+                <div className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-soft/40">
+                  <Phone className="h-4 w-4" />
+                </div>
+                <input
+                  type="tel"
+                  value={form.data.whatsapp}
+                  onChange={(e) => form.updateField("whatsapp", e.target.value)}
+                  placeholder={fields.whatsappPlaceholder}
+                  className="w-full rounded-xl border border-line bg-paper-raised/20 pl-11 pr-4 py-3 text-sm text-ink placeholder:text-ink-soft/35 outline-none focus:border-accent/40 focus:bg-paper-raised/30 focus:ring-2 focus:ring-accent/5 transition duration-200"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-2">
+                {fields.sourceLabel}
+              </label>
+              <div className="relative">
+                <div className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-soft/40">
+                  <Search className="h-4 w-4" />
+                </div>
+                <input
+                  type="text"
+                  value={form.data.source}
+                  onChange={(e) => form.updateField("source", e.target.value)}
+                  placeholder={fields.sourcePlaceholder}
+                  className="w-full rounded-xl border border-line bg-paper-raised/20 pl-11 pr-4 py-3 text-sm text-ink placeholder:text-ink-soft/35 outline-none focus:border-accent/40 focus:bg-paper-raised/30 focus:ring-2 focus:ring-accent/5 transition duration-200"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Step 6: Summary / Recap ──────────────────────────────────────────── */}
+      {form.step === 6 && (
+        <div className="flex flex-col gap-6">
+          {/* Main Recap Card */}
+          <div className="rounded-2xl border border-line bg-paper-raised/15 p-6 flex flex-col gap-6">
+            {/* Offer row */}
+            <div className="flex flex-col gap-2">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
+                {stepLabels[0]}
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {form.data.types.map((type) => {
+                  const Icon = getContactTypeIcon(type as ContactTypeKey);
+                  const label = fields.types[type as keyof typeof fields.types];
+                  return (
+                    <span key={type} className="inline-flex items-center gap-1.5 rounded-full border border-accent/25 bg-accent/4 px-3 py-1 font-mono text-[10px] text-accent">
+                      <Icon className="h-3 w-3" />
+                      {label}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Scope row */}
+            <div className="flex flex-col gap-2">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
+                {stepLabels[1]}
+              </span>
+              <p className="text-xs text-ink-soft/85 leading-relaxed bg-paper-raised/20 rounded-xl p-4 border border-line/40 whitespace-pre-wrap italic">
+                "{form.data.description}"
+              </p>
+            </div>
+
+            {/* Goals & Budget row */}
+            <div className="grid gap-4 sm:grid-cols-3 border-t border-line/40 pt-4">
+              <div className="flex flex-col gap-1">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
+                  {lang === "fr" ? "Objectifs" : "Goals"}
+                </span>
+                <ul className="text-xs text-ink list-disc pl-4 flex flex-col gap-0.5 font-medium">
+                  {form.data.goals.map((g) => (
+                    <li key={g}>{fields.goalsOptions[g as keyof typeof fields.goalsOptions]}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
+                  {lang === "fr" ? "Budget estimé" : "Budget range"}
+                </span>
+                <span className="text-xs font-bold text-accent">
+                  {fields.budgetOptions[form.data.budget as keyof typeof fields.budgetOptions]}
+                </span>
+              </div>
+              <div className="flex flex-col gap-1">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
+                  {lang === "fr" ? "Démarrage" : "Timeline"}
+                </span>
+                <span className="text-xs font-medium text-ink">
+                  {fields.timelineOptions[form.data.timeline as keyof typeof fields.timelineOptions]}
+                </span>
+              </div>
+            </div>
+
+            {/* Context row */}
+            <div className="grid gap-4 sm:grid-cols-2 border-t border-line/40 pt-4">
+              <div className="flex flex-col gap-1">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
+                  {lang === "fr" ? "Code existant & Équipe" : "Existing Code & Team"}
+                </span>
+                <span className="text-xs text-ink font-medium leading-relaxed">
+                  {fields.codebaseOptions[form.data.hasCodebase as keyof typeof fields.codebaseOptions]}
+                  <br />
+                  <span className="text-ink-soft/60">{fields.teamOptions[form.data.teamSize as keyof typeof fields.teamOptions]}</span>
+                </span>
+              </div>
+              {form.data.links.some(l => l.trim() !== "") && (
+                <div className="flex flex-col gap-1">
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
+                    Links
+                  </span>
+                  <div className="flex flex-col gap-1 font-mono text-[10px] text-accent">
+                    {form.data.links.filter(l => l.trim() !== "").map((l, idx) => (
+                      <a key={idx} href={l} target="_blank" rel="noopener noreferrer" className="hover:underline truncate max-w-xs block">
+                        {l}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Contact details */}
+            <div className="border-t border-line/40 pt-4 flex flex-col gap-1">
+              <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
+                Contact
+              </span>
+              <span className="text-xs text-ink font-semibold">
+                {form.data.name} · <span className="font-normal text-ink-soft/70">{form.data.email}</span>
+                {form.data.company && ` · ${form.data.company}`}
+                {form.data.role && ` (${form.data.role})`}
+                {form.data.whatsapp && <span className="block text-[11px] text-ink-soft/60 font-normal mt-0.5">WhatsApp: {form.data.whatsapp}</span>}
+              </span>
+            </div>
+          </div>
+
+          {/* Submission error message */}
           {form.submitError && (
             <div className="flex items-start gap-3 rounded-2xl border border-red-400/30 bg-red-500/5 p-4 text-sm text-red-400">
               <AlertTriangle className="h-5 w-5 shrink-0 mt-0.5" />
@@ -286,7 +615,7 @@ export function ProjectForm({ lang }: Props) {
         </div>
       )}
 
-      {/* Navigation */}
+      {/* ── Navigation Actions ──────────────────────────────────────────────── */}
       <div className="mt-10 flex items-center justify-between gap-4">
         {form.step > 1 ? (
           <button
@@ -333,26 +662,6 @@ export function ProjectForm({ lang }: Props) {
         )}
       </div>
 
-      {/* Step recap */}
-      {form.step === TOTAL_STEPS && form.data.types.length > 0 && (
-        <div className="mt-8 rounded-2xl border border-line/40 bg-paper-raised/20 p-5">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-ink-soft/50 mb-3">
-            {lang === "fr" ? "Récapitulatif de votre demande" : "Request summary"}
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {form.data.types.map((type) => {
-              const Icon = getContactTypeIcon(type as "web" | "cloud" | "security" | "ai" | "other");
-              const label = fields.types[type as keyof typeof fields.types];
-              return (
-                <span key={type} className="inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/5 px-3 py-1 font-mono text-[10px] text-accent">
-                  <Icon className="h-3 w-3" />
-                  {label}
-                </span>
-              );
-            })}
-          </div>
-        </div>
-      )}
     </div>
   );
 }

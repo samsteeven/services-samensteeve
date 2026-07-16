@@ -9,8 +9,13 @@ interface ContactPayload {
   hasCodebase: string;
   timeline: string;
   teamSize: string;
+  budget: string;
+  goals: string[];
+  links: string[];
   name: string;
   email: string;
+  company?: string;
+  role?: string;
   whatsapp: string;
   source: string;
   lang: string;
@@ -25,10 +30,25 @@ const typeLabels: Record<string, string> = {
 };
 
 const timelineLabels: Record<string, string> = {
-  urgent: "Urgent (< 1 mois)",
-  short: "Court terme (1-3 mois)",
-  medium: "Moyen terme (3-6 mois)",
-  flexible: "Flexible / Sans contrainte",
+  urgent: "Dès que possible / Urgent",
+  short: "Sous 1 à 3 mois",
+  medium: "Sous 3 à 6 mois",
+  flexible: "J'explore simplement",
+};
+
+const budgetLabels: Record<string, string> = {
+  small: "2 000 € à 5 000 €",
+  medium: "5 000 € à 10 000 €",
+  large: "10 000 € à 20 000 €",
+  enterprise: "20 000 €+",
+};
+
+const goalLabels: Record<string, string> = {
+  launch: "Lancer un nouveau produit (SaaS, MVP)",
+  automate: "Remplacer ou automatiser des tâches manuelles",
+  secure: "Sécuriser des systèmes et données critiques",
+  scale: "Passer à l'échelle / améliorer la performance",
+  team: "Renforcer et accompagner l'équipe technique",
 };
 
 const teamLabels: Record<string, string> = {
@@ -47,7 +67,23 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { types, description, hasCodebase, timeline, teamSize, name, email, whatsapp, source, lang } = payload;
+  const {
+    types,
+    description,
+    hasCodebase,
+    timeline,
+    teamSize,
+    budget,
+    goals,
+    links,
+    name,
+    email,
+    company,
+    role,
+    whatsapp,
+    source,
+    lang,
+  } = payload;
 
   // Basic server-side validation
   if (!name?.trim() || !email?.trim() || !description?.trim()) {
@@ -59,6 +95,8 @@ export async function POST(request: Request) {
   }
 
   const typeList = (types ?? []).map((t) => typeLabels[t] ?? t).join(", ") || "Non précisé";
+  const goalList = (goals ?? []).map((g) => goalLabels[g] ?? g).join(", ") || "Non précisé";
+  const linksList = (links ?? []).filter((l) => l.trim() !== "").join("<br>") || "Aucun lien fourni";
 
   const htmlContent = `
 <!DOCTYPE html>
@@ -83,7 +121,12 @@ export async function POST(request: Request) {
 
   <div class="section highlight">
     <div class="label">Contact</div>
-    <div class="value"><strong>${name}</strong> &lt;${email}&gt;${whatsapp ? `<br>WhatsApp : ${whatsapp}` : ""}</div>
+    <div class="value">
+      <strong>${name}</strong> &lt;${email}&gt;
+      ${company ? `<br>Entreprise : ${company}` : ""}
+      ${role ? `<br>Rôle : ${role}` : ""}
+      ${whatsapp ? `<br>WhatsApp : ${whatsapp}` : ""}
+    </div>
   </div>
 
   <div class="section">
@@ -96,6 +139,21 @@ export async function POST(request: Request) {
     <div class="value" style="white-space: pre-wrap">${description}</div>
   </div>
 
+  <div class="section">
+    <div class="label">Objectifs clés visés</div>
+    <div class="value">${goalList}</div>
+  </div>
+
+  <div class="section">
+    <div class="label">Budget estimé</div>
+    <div class="value">${budgetLabels[budget] ?? "Non précisé (" + budget + ")"}</div>
+  </div>
+
+  <div class="section">
+    <div class="label">Liens fournis</div>
+    <div class="value" style="word-break: break-all;">${linksList}</div>
+  </div>
+
   <hr class="divider">
 
   <div class="section">
@@ -104,7 +162,7 @@ export async function POST(request: Request) {
   </div>
 
   <div class="section">
-    <div class="label">Délai souhaité</div>
+    <div class="label">Quand commencer</div>
     <div class="value">${timelineLabels[timeline] ?? timeline}</div>
   </div>
 

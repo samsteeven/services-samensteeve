@@ -189,35 +189,67 @@ export const en = {
   },
   contact: {
     title: "Start a project",
-    subtitle: "Describe your project. I will get back to you within 24 hours with an initial technical and methodological analysis.",
+    subtitle: "Describe your needs. I will get back to you within 24 hours with an initial technical and methodological analysis.",
     steps: {
-      projectType: "Step 1: What type of project?",
-      description: "Step 2: Describe your project",
-      context: "Step 3: Context",
-      contact: "Step 4: Contact info",
+      step1: "Offer",
+      step2: "Scope",
+      step3: "Goals",
+      step4: "Context",
+      step5: "Contact",
+      step6: "Summary",
+    },
+    questions: {
+      step1: "What type of project would you like to start?",
+      step2: "Tell me what you are looking to build",
+      step3: "What does success look like?",
+      step4: "Share anything that helps me understand",
+      step5: "Where can we reach you?",
+      step6: "One last look",
     },
     fields: {
       typePlaceholder: "Select one or more domains...",
       types: {
-        web: "Web application development",
-        cloud: "Cloud architecture / Migration",
-        security: "Security audit & patches",
-        ai: "AI automation & agents",
-        other: "Other needs / Not sure yet"
+        web: "Web Development",
+        cloud: "Cloud Architecture",
+        security: "Audit & Security",
+        ai: "AI Automation",
+        other: "Not sure yet"
       },
-      descLabel: "What are you looking to build, secure, or automate?",
-      descPlaceholder: "Briefly describe the goals of the project, expected key features, and the business problem you are looking to solve...",
+      typesDesc: {
+        web: "Create or evolve a robust, strictly typed web application (SaaS, API, Marketplace).",
+        cloud: "Design, secure, and migrate infrastructures with auto-failover and high resilience.",
+        security: "Full offensive security audit, vulnerability registry, and code remediation.",
+        ai: "Integrate autonomous AI agents (LangGraph, MCP) connected to your business APIs.",
+        other: "Help me scope the needs and define the technical priorities."
+      },
+      descLabel: "Project description",
+      descPlaceholder: "Describe the goals, the expected key features, and the business problem to solve. The more precise you are, the better I can analyze.",
       codebaseLabel: "Do you have an existing codebase?",
       codebaseOptions: {
-        yes: "Yes, we have an existing project to evolve/secure",
-        no: "No, we are starting a new project from scratch"
+        yes: "Yes, an existing project to evolve or secure",
+        no: "No, we are starting a project from scratch"
       },
-      timelineLabel: "Desired timeline",
+      timelineLabel: "When would you like to start?",
       timelineOptions: {
-        urgent: "Urgent (under 1 month)",
-        short: "Short term (1 to 3 months)",
-        medium: "Medium term (3 to 6 months)",
-        flexible: "Flexible / No strict constraints"
+        urgent: "As soon as possible",
+        short: "Within 1 to 3 months",
+        medium: "Within 3 to 6 months",
+        flexible: "Just exploring"
+      },
+      budgetLabel: "Approximate budget range",
+      budgetOptions: {
+        small: "€2,000 to €5,000",
+        medium: "€5,000 to €10,000",
+        large: "€10,000 to €20,000",
+        enterprise: "€20,000+"
+      },
+      goalsLabel: "What result are you aiming for?",
+      goalsOptions: {
+        launch: "Launch a new product (SaaS, MVP)",
+        automate: "Replace or automate manual tasks",
+        secure: "Secure critical systems and data",
+        scale: "Scale up / improve performance",
+        team: "Strengthen and support the technical team"
       },
       teamLabel: "Size of your current technical team",
       teamOptions: {
@@ -226,28 +258,34 @@ export const en = {
         medium: "Medium team (5 to 15 people)",
         large: "Large team (more than 15 people)"
       },
-      nameLabel: "First & Last name",
+      linksLabel: "Useful links (Figma, GitHub, staging)",
+      addLink: "Add another link",
+      nameLabel: "First & Last Name",
       namePlaceholder: "John Doe",
-      emailLabel: "Work email",
+      emailLabel: "Work Email",
       emailPlaceholder: "john.doe@company.com",
-      whatsappLabel: "WhatsApp number (optional, for quick communication)",
+      companyLabel: "Company (optional)",
+      companyPlaceholder: "Acme Corp",
+      roleLabel: "Your role (optional)",
+      rolePlaceholder: "Product Owner, CTO, Founder...",
+      whatsappLabel: "WhatsApp / Phone number",
       whatsappPlaceholder: "+237 6xx xxx xxx",
       sourceLabel: "How did you hear about me?",
       sourcePlaceholder: "LinkedIn, Google search, recommendation..."
     },
     buttons: {
-      next: "Next",
+      next: "Continue",
       prev: "Back",
-      submit: "Submit request",
-      submitting: "Submitting...",
+      submit: "Confirm & send",
+      submitting: "Sending...",
     },
     success: {
       title: "Request received!",
-      message: "Thank you for reaching out. I am analyzing your request and will get back to you within 24 hours with an initial technical assessment and a link to schedule a discovery call."
+      message: "Thank you for your message. I am analyzing your needs and will get back to you within 24 hours with an initial technical and methodological assessment. You will also receive a link to schedule a call if you wish."
     },
     error: {
       title: "Submission error",
-      message: "Something went wrong while sending your request. Please try again or email me directly at contact@samensteeve.com."
+      message: "An error occurred while sending your request. Please try again or email me directly at contact@samensteeve.com."
     }
   },
   footer: {

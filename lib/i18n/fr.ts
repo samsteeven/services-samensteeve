@@ -191,33 +191,65 @@ export const fr = {
     title: "Démarrer un projet",
     subtitle: "Décrivez votre besoin. Je reviens vers vous sous 24h avec une première analyse technique et méthodologique.",
     steps: {
-      projectType: "Étape 1 : Quel type de projet ?",
-      description: "Étape 2 : Décrivez votre projet",
-      context: "Étape 3 : Contexte",
-      contact: "Étape 4 : Vos coordonnées",
+      step1: "Offre",
+      step2: "Portée",
+      step3: "Objectifs",
+      step4: "Contexte",
+      step5: "Contact",
+      step6: "Récapitulatif",
+    },
+    questions: {
+      step1: "Quel type de projet souhaitez-vous démarrer ?",
+      step2: "Dites-moi ce que vous cherchez à faire",
+      step3: "À quoi ressemble la réussite ?",
+      step4: "Partagez tout ce qui m'aide à comprendre",
+      step5: "Où peut-on vous joindre ?",
+      step6: "Un dernier coup d'œil",
     },
     fields: {
       typePlaceholder: "Sélectionnez un ou plusieurs domaines...",
       types: {
-        web: "Développement d'application web",
-        cloud: "Architecture / Migration cloud",
-        security: "Audit de sécurité & correctifs",
-        ai: "Automatisation IA & agents",
-        other: "Autre besoin / Je ne sais pas encore"
+        web: "Développement Web",
+        cloud: "Architecture Cloud",
+        security: "Audit & Sécurité",
+        ai: "Automatisation IA",
+        other: "Pas encore sûr"
       },
-      descLabel: "Qu'est-ce que vous cherchez à construire, sécuriser ou automatiser ?",
-      descPlaceholder: "Décrivez brièvement les objectifs du projet, les fonctionnalités clés attendues et le problème métier que vous cherchez à résoudre...",
+      typesDesc: {
+        web: "Créer ou faire évoluer une application web (SaaS, API, Marketplace) robuste et typée strict.",
+        cloud: "Concevoir, sécuriser et migrer des infrastructures avec failover et résilience.",
+        security: "Audit offensif complet, registre des vulnérabilités et remédiation du code.",
+        ai: "Intégrer des agents IA autonomes (LangGraph, MCP) connectés à vos API métiers.",
+        other: "Aidez-moi à cadrer le besoin et à définir les priorités techniques."
+      },
+      descLabel: "Description du projet",
+      descPlaceholder: "Décrivez les objectifs, les fonctionnalités clés attendues et le problème métier à résoudre. Plus vous êtes précis, mieux je pourrai analyser.",
       codebaseLabel: "Avez-vous déjà une base de code existante ?",
       codebaseOptions: {
-        yes: "Oui, nous avons un projet existant à faire évoluer/sécuriser",
+        yes: "Oui, un projet existant à faire évoluer ou sécuriser",
         no: "Non, c'est un projet à démarrer de zéro"
       },
-      timelineLabel: "Délai souhaité",
+      timelineLabel: "Quand aimeriez-vous commencer ?",
       timelineOptions: {
-        urgent: "Urgent (moins d'un mois)",
-        short: "Court terme (1 à 3 mois)",
-        medium: "Moyen terme (3 à 6 mois)",
-        flexible: "Pas de contrainte / Flexible"
+        urgent: "Dès que possible",
+        short: "D'ici 1 à 3 mois",
+        medium: "D'ici 3 à 6 mois",
+        flexible: "J'explore simplement"
+      },
+      budgetLabel: "Fourchette budgétaire approximative",
+      budgetOptions: {
+        small: "2 000 € à 5 000 €",
+        medium: "5 000 € à 10 000 €",
+        large: "10 000 € à 20 000 €",
+        enterprise: "20 000 €+"
+      },
+      goalsLabel: "Quel résultat visez-vous ?",
+      goalsOptions: {
+        launch: "Lancer un nouveau produit (SaaS, MVP)",
+        automate: "Remplacer ou automatiser des tâches manuelles",
+        secure: "Sécuriser des systèmes et données critiques",
+        scale: "Passer à l'échelle / améliorer la performance",
+        team: "Renforcer et accompagner l'équipe technique"
       },
       teamLabel: "Taille de votre équipe technique actuelle",
       teamOptions: {
@@ -226,24 +258,30 @@ export const fr = {
         medium: "Équipe moyenne (5 à 15 personnes)",
         large: "Grande équipe (plus de 15 personnes)"
       },
+      linksLabel: "Liens utiles (Figma, GitHub, staging)",
+      addLink: "Ajouter un autre lien",
       nameLabel: "Prénom & Nom",
       namePlaceholder: "Jean Dupont",
       emailLabel: "Email professionnel",
       emailPlaceholder: "jean.dupont@entreprise.com",
-      whatsappLabel: "Numéro WhatsApp (optionnel, pour des échanges rapides)",
+      companyLabel: "Entreprise (optionnel)",
+      companyPlaceholder: "Acme Corp",
+      roleLabel: "Votre rôle (optionnel)",
+      rolePlaceholder: "Product Owner, CTO, Fondateur...",
+      whatsappLabel: "Numéro WhatsApp / Téléphone",
       whatsappPlaceholder: "+237 6xx xxx xxx",
       sourceLabel: "Comment avez-vous entendu parler de moi ?",
       sourcePlaceholder: "LinkedIn, recherche Google, recommandation..."
     },
     buttons: {
-      next: "Suivant",
-      prev: "Précédent",
-      submit: "Envoyer ma demande",
+      next: "Continuer",
+      prev: "Retour",
+      submit: "Confirmer & envoyer",
       submitting: "Envoi en cours...",
     },
     success: {
       title: "Demande reçue !",
-      message: "Merci pour votre message. J'analyse vos besoins et je reviens vers vous sous 24h avec une première analyse de faisabilité technique et une proposition de créneau pour en discuter de vive voix."
+      message: "Merci pour votre message. J'analyse vos besoins et je reviens vers vous sous 24h avec une première analyse technique et méthodologique. Vous recevrez également un lien pour planifier un appel si vous le souhaitez."
     },
     error: {
       title: "Erreur lors de l'envoi",

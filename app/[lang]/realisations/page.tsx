@@ -4,6 +4,7 @@ import { createPageMetadata } from "@/lib/metadata";
 import { getT } from "@/lib/translations";
 import { caseStudies } from "@/lib/case-studies";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
@@ -72,9 +73,11 @@ export default async function RealisationsPage({ params }: PageProps) {
                       <div className="md:w-64 shrink-0 bg-paper-raised/80 border-b md:border-b-0 md:border-r border-line/40 p-8 flex items-center justify-center h-48 md:h-auto min-h-[190px] relative overflow-hidden">
                         {/* Grid background effect */}
                         <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-line)_1px,transparent_1px)] bg-[size:16px_16px] opacity-15 pointer-events-none" />
-                        <img
+                        <Image
                           src={cs.coverImage}
                           alt={locale.title}
+                          width={320}
+                          height={120}
                           className="max-h-20 max-w-full object-contain filter dark:brightness-110 group-hover:scale-105 transition-all duration-350 ease-out z-10"
                         />
                       </div>

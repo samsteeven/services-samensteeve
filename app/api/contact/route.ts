@@ -1,7 +1,17 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY || "re_dummykey");
+const resendApiKey = process.env.RESEND_API_KEY;
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
+
+const MAX_DESCRIPTION_LENGTH = 4_000;
+const MAX_TEXT_LENGTH = 200;
+const MAX_LINKS = 5;
+const MAX_LINK_LENGTH = 500;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 5;
+
+const requestCounts = new Map<string, { count: number; resetAt: number }>();
 
 interface ContactPayload {
   types: string[];
@@ -19,6 +29,7 @@ interface ContactPayload {
   whatsapp: string;
   source: string;
   lang: string;
+  website?: string;
 }
 
 const typeLabels: Record<string, string> = {
@@ -58,6 +69,14 @@ const teamLabels: Record<string, string> = {
   large: "Grande équipe (15+)",
 };
 
+const allowedTypes = new Set(Object.keys(typeLabels));
+const allowedTimelines = new Set(Object.keys(timelineLabels));
+const allowedBudgets = new Set(Object.keys(budgetLabels));
+const allowedGoals = new Set(Object.keys(goalLabels));
+const allowedTeamSizes = new Set(Object.keys(teamLabels));
+const allowedCodebaseValues = new Set(["yes", "no"]);
+const allowedLanguages = new Set(["fr", "en"]);
+
 function escapeHtml(value: unknown): string {
   return String(value ?? "")
     .replace(/&/g, "&amp;")
@@ -67,7 +86,84 @@ function escapeHtml(value: unknown): string {
     .replace(/'/g, "&#39;");
 }
 
+function getClientIp(request: Request): string {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  if (forwardedFor) return forwardedFor.split(",")[0].trim();
+  return request.headers.get("x-real-ip") || "unknown";
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const current = requestCounts.get(ip);
+  if (!current || current.resetAt <= now) {
+    requestCounts.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    return false;
+  }
+
+  if (current.count >= RATE_LIMIT_MAX_REQUESTS) return true;
+  current.count += 1;
+  return false;
+}
+
+function isShortText(value: unknown, required = false): value is string {
+  if (!required && value == null) return true;
+  if (typeof value !== "string") return false;
+  const trimmed = value.trim();
+  if (required && !trimmed) return false;
+  return trimmed.length <= MAX_TEXT_LENGTH;
+}
+
+function isValidChoiceArray(value: unknown, allowed: Set<string>, min = 0): value is string[] {
+  return Array.isArray(value)
+    && value.length >= min
+    && value.length <= allowed.size
+    && value.every((item) => typeof item === "string" && allowed.has(item));
+}
+
+function isValidLinks(value: unknown): value is string[] {
+  return Array.isArray(value)
+    && value.length <= MAX_LINKS
+    && value.every((link) => typeof link === "string" && link.length <= MAX_LINK_LENGTH);
+}
+
+function validatePayload(payload: ContactPayload): string | null {
+  if (payload.website?.trim()) return "Spam rejected";
+  if (!isValidChoiceArray(payload.types, allowedTypes, 1)) return "Invalid project types";
+  if (!isValidChoiceArray(payload.goals, allowedGoals, 1)) return "Invalid goals";
+  if (!allowedTimelines.has(payload.timeline)) return "Invalid timeline";
+  if (!allowedBudgets.has(payload.budget)) return "Invalid budget";
+  if (!allowedTeamSizes.has(payload.teamSize)) return "Invalid team size";
+  if (!allowedCodebaseValues.has(payload.hasCodebase)) return "Invalid codebase value";
+  if (!allowedLanguages.has(payload.lang)) return "Invalid language";
+  if (!isShortText(payload.name, true)) return "Invalid name";
+  if (!isShortText(payload.email, true)) return "Invalid email";
+  if (!isShortText(payload.company)) return "Invalid company";
+  if (!isShortText(payload.role)) return "Invalid role";
+  if (!isShortText(payload.whatsapp)) return "Invalid WhatsApp";
+  if (!isShortText(payload.source)) return "Invalid source";
+  if (!isValidLinks(payload.links)) return "Invalid links";
+  if (typeof payload.description !== "string") return "Invalid description";
+  const description = payload.description.trim();
+  if (description.length < 20 || description.length > MAX_DESCRIPTION_LENGTH) {
+    return "Invalid description length";
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email.trim())) {
+    return "Invalid email";
+  }
+  return null;
+}
+
 export async function POST(request: Request) {
+  const ip = getClientIp(request);
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
+  if (!resend) {
+    console.error("[api/contact] RESEND_API_KEY is not configured");
+    return NextResponse.json({ error: "Email service unavailable" }, { status: 503 });
+  }
+
   let payload: ContactPayload;
 
   try {
@@ -94,13 +190,9 @@ export async function POST(request: Request) {
     lang,
   } = payload;
 
-  // Basic server-side validation
-  if (!name?.trim() || !email?.trim() || !description?.trim()) {
-    return NextResponse.json({ error: "Missing required fields" }, { status: 422 });
-  }
-
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return NextResponse.json({ error: "Invalid email" }, { status: 422 });
+  const validationError = validatePayload(payload);
+  if (validationError) {
+    return NextResponse.json({ error: validationError }, { status: 422 });
   }
 
   const typeList = (types ?? []).map((t) => typeLabels[t] ?? escapeHtml(t)).join(", ") || "Non précisé";

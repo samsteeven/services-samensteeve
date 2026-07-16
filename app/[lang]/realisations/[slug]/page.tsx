@@ -5,6 +5,7 @@ import { createPageMetadata } from "@/lib/metadata";
 import { getT } from "@/lib/translations";
 import { caseStudies, getCaseStudyBySlug } from "@/lib/case-studies";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, ArrowRight, CheckCircle2, ExternalLink, Github } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
@@ -64,9 +65,11 @@ export default async function CaseStudyPage({ params }: PageProps) {
           {cs.coverImage && (
             <ScrollReveal delay={40} className="mt-8 overflow-hidden rounded-2xl border border-line bg-paper-raised/30 max-w-3xl flex justify-center p-6 sm:p-12 relative">
               <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-line)_1px,transparent_1px)] bg-[size:20px_20px] opacity-10 pointer-events-none" />
-              <img
+              <Image
                 src={cs.coverImage}
                 alt={locale.title}
+                width={640}
+                height={320}
                 className="w-full max-w-lg h-auto object-contain max-h-[300px] filter dark:brightness-110 z-10"
               />
             </ScrollReveal>

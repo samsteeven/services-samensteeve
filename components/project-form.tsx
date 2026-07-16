@@ -33,6 +33,8 @@ export function ProjectForm({ lang }: Props) {
 
   const getDynamicPlaceholder = () => {
     const types = form.data.types;
+    if (types.length === 0) return fields.descPlaceholder;
+    
     if (types.length === 1) {
       const type = types[0];
       if (type === "web") {
@@ -56,7 +58,24 @@ export function ProjectForm({ lang }: Props) {
           : "Describe the manual or repetitive processes to automate (e.g. invoice processing, lead scoring), tools used, and available APIs...";
       }
     }
-    return fields.descPlaceholder;
+
+    // Multiple selection logic
+    const contains = (t: string) => types.includes(t);
+    if (lang === "fr") {
+      const parts = [];
+      if (contains("web")) parts.push("la plateforme/application web");
+      if (contains("ai")) parts.push("les processus IA à automatiser");
+      if (contains("security")) parts.push("le code/système à auditer et sécuriser");
+      if (contains("cloud")) parts.push("l'infrastructure cloud à migrer/concevoir");
+      return `Décrivez votre projet global en couvrant à la fois : ${parts.join(", ")}. Spécifiez vos objectifs métier et les technos...`;
+    } else {
+      const parts = [];
+      if (contains("web")) parts.push("the web application/platform");
+      if (contains("ai")) parts.push("the AI automation processes");
+      if (contains("security")) parts.push("the codebase/systems to audit and secure");
+      if (contains("cloud")) parts.push("the cloud infrastructure to design/migrate");
+      return `Describe your overall project, covering: ${parts.join(", ")}. Specify your business goals and current stack...`;
+    }
   };
 
   // success view

@@ -1,4 +1,4 @@
-# Services — Samen Steeve
+ Services — Samen Steeve
 
 Site vitrine bilingue (fr/en) pour les services freelance de **Samen Steeve** : ingénierie logicielle, architecture cloud, pentest applicatif, automatisation IA. Blog technique avec 16 articles (8 paires bilingues). Contact via formulaire 6 étapes + envoi email Resend.
 

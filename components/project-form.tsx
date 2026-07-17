@@ -148,7 +148,7 @@ export function ProjectForm({ lang }: Props) {
 
         {/* Labels below */}
         <div className="mt-4 flex items-center justify-between">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-soft/60">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">
             {stepLabels[form.step - 1]}
           </span>
           <div className="flex items-center gap-3">
@@ -188,7 +188,7 @@ export function ProjectForm({ lang }: Props) {
             <button
               type="button"
               onClick={form.clearCurrentStep}
-              className="self-start font-mono text-[10px] uppercase tracking-widest text-ink-soft/50 transition hover:text-accent"
+              className="self-start font-mono text-[10px] uppercase tracking-widest text-ink-soft transition hover:text-accent"
             >
               {buttons.clearStep}
             </button>
@@ -223,7 +223,7 @@ export function ProjectForm({ lang }: Props) {
                   <div className={`text-sm font-bold transition-colors ${isSelected ? "text-ink" : "text-ink-soft group-hover:text-ink"}`}>
                     {label}
                   </div>
-                  <div className="mt-1 text-xs text-ink-soft/60 leading-relaxed font-normal">
+                  <div className="mt-1 text-xs text-ink-soft leading-relaxed font-normal">
                     {description}
                   </div>
                 </div>
@@ -267,7 +267,7 @@ export function ProjectForm({ lang }: Props) {
         <div className="flex flex-col gap-8">
           {/* Target Outcomes (Value metrics) */}
           <div>
-            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-3.5">
+            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-3.5">
               {fields.goalsLabel}
             </label>
             <div className="grid gap-2.5 sm:grid-cols-2">
@@ -298,7 +298,7 @@ export function ProjectForm({ lang }: Props) {
 
           {/* Budget Range */}
           <div>
-            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-3.5">
+            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-3.5">
               {fields.budgetLabel}
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -324,7 +324,7 @@ export function ProjectForm({ lang }: Props) {
 
           {/* Desired Timeline */}
           <div>
-            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-3.5">
+            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-3.5">
               {fields.timelineLabel}
             </label>
             <div className="grid grid-cols-2 gap-2">
@@ -355,7 +355,7 @@ export function ProjectForm({ lang }: Props) {
         <div className="flex flex-col gap-8">
           {/* Codebase */}
           <div>
-            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-3.5">
+            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-3.5">
               {fields.codebaseLabel}
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -386,7 +386,7 @@ export function ProjectForm({ lang }: Props) {
 
           {/* Team Size */}
           <div>
-            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-3.5">
+            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-3.5">
               {fields.teamLabel}
             </label>
             <div className="grid grid-cols-2 gap-2">
@@ -412,7 +412,7 @@ export function ProjectForm({ lang }: Props) {
 
           {/* Links Input Stack */}
           <div>
-            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-2">
+            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-2">
               {fields.linksLabel}
             </label>
             <div className="flex flex-col gap-2">
@@ -464,7 +464,7 @@ export function ProjectForm({ lang }: Props) {
           {/* Identity Grid */}
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-2">
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-2">
                 {fields.nameLabel}
               </label>
               <div className="relative">
@@ -482,7 +482,7 @@ export function ProjectForm({ lang }: Props) {
             </div>
 
             <div>
-              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-2">
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-2">
                 {fields.emailLabel}
               </label>
               <div className="relative">
@@ -503,7 +503,7 @@ export function ProjectForm({ lang }: Props) {
           {/* Company & Role */}
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-2">
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-2">
                 {fields.companyLabel}
               </label>
               <div className="relative">
@@ -521,7 +521,7 @@ export function ProjectForm({ lang }: Props) {
             </div>
 
             <div>
-              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-2">
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-2">
                 {fields.roleLabel}
               </label>
               <div className="relative">
@@ -542,7 +542,7 @@ export function ProjectForm({ lang }: Props) {
           {/* WhatsApp & Source */}
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-2">
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-2">
                 {fields.whatsappLabel}
               </label>
               <div className="relative">
@@ -560,7 +560,7 @@ export function ProjectForm({ lang }: Props) {
             </div>
 
             <div>
-              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60 block mb-2">
+              <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-2">
                 {fields.sourceLabel}
               </label>
               <div className="relative">
@@ -653,7 +653,7 @@ export function ProjectForm({ lang }: Props) {
                 <span className="text-xs text-ink font-medium leading-relaxed">
                   {fields.codebaseOptions[form.data.hasCodebase as keyof typeof fields.codebaseOptions]}
                   <br />
-                  <span className="text-ink-soft/60">{fields.teamOptions[form.data.teamSize as keyof typeof fields.teamOptions]}</span>
+                  <span className="text-ink-soft">{fields.teamOptions[form.data.teamSize as keyof typeof fields.teamOptions]}</span>
                 </span>
               </div>
               {form.data.links.some(l => l.trim() !== "") && (
@@ -681,7 +681,7 @@ export function ProjectForm({ lang }: Props) {
                 {form.data.name} · <span className="font-normal text-ink-soft/70">{form.data.email}</span>
                 {form.data.company && ` · ${form.data.company}`}
                 {form.data.role && ` (${form.data.role})`}
-                {form.data.whatsapp && <span className="block text-[11px] text-ink-soft/60 font-normal mt-0.5">WhatsApp: {form.data.whatsapp}</span>}
+                {form.data.whatsapp && <span className="block text-[11px] text-ink-soft font-normal mt-0.5">WhatsApp: {form.data.whatsapp}</span>}
               </span>
             </div>
           </div>
@@ -707,6 +707,9 @@ export function ProjectForm({ lang }: Props) {
           <TurnstileWidget
             onTokenChange={form.updateTurnstileToken}
             resetSignal={form.turnstileResetSignal}
+            loadingLabel={buttons.verificationLoading}
+            errorLabel={buttons.verificationError}
+            retryLabel={buttons.verificationRetry}
           />
         </div>
       )}

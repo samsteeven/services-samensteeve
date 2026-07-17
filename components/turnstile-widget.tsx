@@ -31,13 +31,23 @@ declare global {
 interface TurnstileWidgetProps {
   onTokenChange: (token: string) => void;
   resetSignal: number;
+  loadingLabel: string;
+  errorLabel: string;
+  retryLabel: string;
 }
 
 const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 const MAX_SCRIPT_RETRIES = 3;
 const RETRY_DELAY_MS = 1500;
+const LOAD_TIMEOUT_MS = 8000;
 
-export function TurnstileWidget({ onTokenChange, resetSignal }: TurnstileWidgetProps) {
+export function TurnstileWidget({
+  onTokenChange,
+  resetSignal,
+  loadingLabel,
+  errorLabel,
+  retryLabel,
+}: TurnstileWidgetProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
   const retryTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -50,6 +60,24 @@ export function TurnstileWidget({ onTokenChange, resetSignal }: TurnstileWidgetP
       if (retryTimerRef.current) clearTimeout(retryTimerRef.current);
     };
   }, []);
+
+  useEffect(() => {
+    const readyCheck = setTimeout(() => {
+      if (window.turnstile) {
+        setScriptReady(true);
+        setLoadFailed(false);
+      }
+    }, 0);
+
+    const timeout = setTimeout(() => {
+      if (!window.turnstile) setLoadFailed(true);
+    }, LOAD_TIMEOUT_MS);
+
+    return () => {
+      clearTimeout(readyCheck);
+      clearTimeout(timeout);
+    };
+  }, [scriptAttempt]);
 
   useEffect(() => {
     if (!siteKey || !scriptReady || !containerRef.current || widgetIdRef.current) return;
@@ -99,7 +127,7 @@ export function TurnstileWidget({ onTokenChange, resetSignal }: TurnstileWidgetP
         key={scriptAttempt}
         src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
         strategy="afterInteractive"
-        onLoad={() => {
+        onReady={() => {
           setLoadFailed(false);
           setScriptReady(true);
         }}
@@ -116,9 +144,14 @@ export function TurnstileWidget({ onTokenChange, resetSignal }: TurnstileWidgetP
         }}
       />
       <div ref={containerRef} className="min-h-[65px]" />
+      {!loadFailed && !scriptReady && (
+        <p className="mt-2 font-mono text-[10px] uppercase tracking-widest text-ink-soft/45">
+          {loadingLabel}
+        </p>
+      )}
       {loadFailed && (
         <div className="mt-2 max-w-sm rounded-xl border border-red-400/30 bg-red-500/5 p-3 text-xs text-red-400">
-          <p className="font-semibold">La vérification anti-bot n'a pas pu se charger.</p>
+          <p className="font-semibold">{errorLabel}</p>
           <button
             type="button"
             onClick={() => {
@@ -133,7 +166,7 @@ export function TurnstileWidget({ onTokenChange, resetSignal }: TurnstileWidgetP
             }}
             className="mt-2 font-mono text-[10px] font-bold uppercase tracking-widest text-red-400 underline underline-offset-4"
           >
-            Réessayer la vérification
+            {retryLabel}
           </button>
         </div>
       )}

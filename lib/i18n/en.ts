@@ -330,6 +330,9 @@ export const en = {
       resetAll: "Reset",
       resetConfirm: "Do you really want to clear the entire form?",
       verification: "Anti-bot verification",
+      verificationLoading: "Loading verification...",
+      verificationError: "The anti-bot verification could not load.",
+      verificationRetry: "Retry verification",
     },
     success: {
       title: "Request received!",

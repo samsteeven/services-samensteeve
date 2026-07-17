@@ -330,6 +330,9 @@ export const fr = {
       resetAll: "Réinitialiser",
       resetConfirm: "Voulez-vous vraiment vider tout le formulaire ?",
       verification: "Vérification anti-bot",
+      verificationLoading: "Chargement de la vérification...",
+      verificationError: "La vérification anti-bot n'a pas pu se charger.",
+      verificationRetry: "Réessayer la vérification",
     },
     success: {
       title: "Demande reçue !",

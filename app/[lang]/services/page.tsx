@@ -67,7 +67,7 @@ export default async function ServicesPage({ params }: PageProps) {
                         <Icon className="h-5 w-5" />
                       </div>
                       <div>
-                        <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/50">
+                        <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft">
                           {String(i + 1).padStart(2, "0")}
                         </p>
                         <h2 className="mt-2 text-balance font-display text-2xl font-extrabold leading-tight text-ink transition-colors duration-300 group-hover:text-accent">

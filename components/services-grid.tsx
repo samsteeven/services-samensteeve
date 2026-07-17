@@ -48,7 +48,7 @@ export function ServicesGrid({ lang }: { lang: Language }) {
                         <Icon className="h-5 w-5" />
                       </div>
                       <div>
-                        <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/50">
+                        <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft">
                           {String(i + 1).padStart(2, "0")}
                         </p>
                         <h3 className="mt-2 text-balance font-display text-2xl font-extrabold leading-tight text-ink transition-colors duration-300 group-hover:text-accent">
@@ -64,7 +64,7 @@ export function ServicesGrid({ lang }: { lang: Language }) {
                   </p>
 
                   <div className="mt-8 rounded-xl bg-paper px-5 py-4 shadow-[inset_0_0_0_1px_var(--color-line)]">
-                    <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/50">
+                    <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft">
                       {lang === "fr" ? "Résultat visé" : "Target outcome"}
                     </p>
                     <p className="mt-3 text-sm font-semibold leading-relaxed text-ink">

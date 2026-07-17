@@ -23,7 +23,7 @@ export function BlogCard({ post, lang }: BlogCardProps) {
 
       <div>
         {/* Date and Read time */}
-        <div className="flex items-center gap-4 text-xs text-ink-soft/60 font-mono mb-4">
+        <div className="flex items-center gap-4 text-xs text-ink-soft font-mono mb-4">
           <span className="flex items-center gap-1">
             <Calendar className="h-3.5 w-3.5" />
             {formattedDate}

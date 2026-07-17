@@ -102,7 +102,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
               { label: t.realisations.period, value: locale.period },
             ].map((item) => (
               <div key={item.label} className="rounded-xl border border-line bg-paper-raised/40 p-4">
-                <p className="font-mono text-[9px] uppercase tracking-wider font-bold text-ink-soft/60">
+                <p className="font-mono text-[9px] uppercase tracking-wider font-bold text-ink-soft">
                   {item.label}
                 </p>
                 <p className="mt-1.5 text-sm font-semibold text-ink">{item.value}</p>

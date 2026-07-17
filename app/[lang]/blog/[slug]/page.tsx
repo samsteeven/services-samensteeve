@@ -153,7 +153,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       <header className="py-16 border-b border-line/40 bg-paper-raised/20">
         <div className="mx-auto max-w-3xl px-4 sm:px-8">
           <ScrollReveal>
-            <div className="flex items-center gap-4 text-xs text-ink-soft/60 font-mono mb-4">
+            <div className="flex items-center gap-4 text-xs text-ink-soft font-mono mb-4">
               <span className="flex items-center gap-1">
                 <Calendar className="h-3.5 w-3.5" />
                 {formattedDate}
@@ -178,7 +178,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </ScrollReveal>
 
           {/* Contextual CTA Footer */}
-          <ScrollReveal delay={120} className="mt-16 pt-12 border-t border-line/50">
+          <ScrollReveal delay={120} className="mt-16 pt-12 border-t border-line">
             <div className="rounded-2xl border border-line bg-paper-raised p-6 sm:p-8 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:shadow-lg transition-shadow duration-300">
               <div className="absolute top-0 right-0 w-40 h-40 bg-accent/3 rounded-full blur-3xl pointer-events-none" />
               <div className="flex items-start gap-4">

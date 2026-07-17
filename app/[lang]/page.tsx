@@ -83,7 +83,7 @@ export default async function HomePage({ params }: PageProps) {
                 <div className="rounded-xl border border-line bg-paper-raised/40 p-5 hover:border-accent/30 hover:bg-paper-raised transition duration-200">
                   <span className="font-mono text-3xl font-extrabold text-accent/20 leading-none">{phase.num}</span>
                   <h3 className="mt-3 font-display text-sm font-bold text-ink">{phase.title}</h3>
-                  <p className="mt-1 font-mono text-[9px] text-ink-soft/60 uppercase tracking-wider">{phase.duration}</p>
+                  <p className="mt-1 font-mono text-[9px] text-ink-soft uppercase tracking-wider">{phase.duration}</p>
                 </div>
               </ScrollReveal>
             ))}

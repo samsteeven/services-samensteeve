@@ -79,7 +79,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
             <ScrollReveal delay={120}>
               <div className="rounded-2xl bg-paper-raised p-6 shadow-[inset_0_0_0_1px_var(--color-line)]">
-                <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/50">
+                <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft">
                   {lang === "fr" ? "Quand c'est pertinent" : "Best fit"}
                 </p>
                 <p className="mt-3 text-sm font-semibold leading-relaxed text-ink">
@@ -122,7 +122,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                   className="group mt-8 flex items-center justify-between gap-4 rounded-2xl bg-paper-raised p-5 text-sm font-medium text-ink shadow-[inset_0_0_0_1px_var(--color-line)] transition-[background-color,color] duration-200 hover:bg-paper hover:text-accent"
                 >
                   <span>
-                    <span className="block font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft/60">
+                    <span className="block font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft">
                       {t.services.relatedProject}
                     </span>
                     <span className="mt-2 block font-display text-lg font-bold capitalize">

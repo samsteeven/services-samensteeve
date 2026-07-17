@@ -66,7 +66,7 @@ export function SiteFooter({ lang }: { lang: Language }) {
             <p className="text-xs leading-relaxed text-ink-soft/80">
               {t.footer.specialty}
             </p>
-            <p className="text-[11px] leading-relaxed text-ink-soft/60">
+            <p className="text-[11px] leading-relaxed text-ink-soft">
               {t.footer.location}
             </p>
           </div>
@@ -129,8 +129,8 @@ export function SiteFooter({ lang }: { lang: Language }) {
         </div>
 
         {/* Divider & Copyright */}
-        <div className="mt-12 border-t border-line/50 pt-8 flex flex-col sm:flex-row justify-between gap-4">
-          <p className="text-[10px] font-mono text-ink-soft/50">
+        <div className="mt-12 border-t border-line pt-8 flex flex-col sm:flex-row justify-between gap-4">
+          <p className="text-[10px] font-mono text-ink-soft">
             &copy; {new Date().getFullYear()} Samen Steeve. {t.footer.rights}
           </p>
           <a

@@ -75,7 +75,7 @@ export function BlogListing({ posts, lang }: BlogListingProps) {
         </div>
       ) : (
         <div className="text-center py-20 border border-line border-dashed rounded-2xl bg-paper-raised/20">
-          <p className="font-mono text-xs text-ink-soft/60">
+          <p className="font-mono text-xs text-ink-soft">
             {lang === "fr" ? "Aucun article trouvé pour cette catégorie." : "No articles found for this category."}
           </p>
         </div>

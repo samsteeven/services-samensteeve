@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
-const turnstileSecretKey = process.env.TURNSTILE_SECRET_KEY;
 const isTurnstileRequired = process.env.NODE_ENV === "production";
 
 const MAX_DESCRIPTION_LENGTH = 4_000;
@@ -170,10 +169,18 @@ function validatePayload(payload: ContactPayload): string | null {
 }
 
 async function verifyTurnstile(token: string, remoteip: string): Promise<boolean> {
+  const turnstileSecretKey = process.env.TURNSTILE_SECRET_KEY?.trim();
+
   if (!isTurnstileRequired && !turnstileSecretKey && !token) return true;
 
   if (!turnstileSecretKey) {
-    console.error("[api/contact] TURNSTILE_SECRET_KEY is not configured");
+    const turnstileEnvKeys = Object.keys(process.env).filter((key) =>
+      key.toLowerCase().includes("turnstile"),
+    );
+    console.error("[api/contact] TURNSTILE_SECRET_KEY is not configured", {
+      nodeEnv: process.env.NODE_ENV,
+      turnstileEnvKeys,
+    });
     return false;
   }
 

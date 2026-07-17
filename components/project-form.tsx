@@ -790,7 +790,7 @@ export function ProjectForm({ lang }: Props) {
             type="button"
             disabled={!form.canNext() || form.submitting}
             onClick={form.handleSubmit}
-            className="inline-flex items-center gap-2.5 rounded-full bg-accent px-7 py-3.5 font-mono text-[11px] uppercase font-bold tracking-widest text-white transition duration-200 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 hover:bg-ink active:scale-[0.96] disabled:hover:scale-100 shadow-lg shadow-accent/20"
+            className="inline-flex items-center gap-2.5 rounded-full bg-accent px-7 py-3.5 font-mono text-[11px] uppercase font-bold tracking-widest text-white transition duration-200 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 hover:brightness-110 active:scale-[0.96] disabled:hover:scale-100 shadow-lg shadow-accent/20"
           >
             {form.submitting ? (
               <>

@@ -335,8 +335,16 @@ export const en = {
       verificationRetry: "Retry verification",
     },
     success: {
+      eyebrow: "Submission confirmed",
       title: "Request received!",
-      message: "Thank you for your message. I am analyzing your needs and will get back to you within 24 hours with an initial technical and methodological assessment. You will also receive a link to schedule a call if you wish."
+      message: "Thank you for your message. I will review your needs and get back to you within 24 hours with an initial technical and methodological assessment.",
+      nextSteps: [
+        "I review the context, risks, and technical priorities.",
+        "I reply with a first concrete assessment.",
+        "We can then scope the project on a short call."
+      ],
+      bookCall: "Schedule a call",
+      newRequest: "New request"
     },
     error: {
       title: "Submission error",

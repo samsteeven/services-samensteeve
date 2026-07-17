@@ -7,6 +7,7 @@ import {
   ArrowLeft,
   Send,
   AlertTriangle,
+  CalendarDays,
   User,
   Mail,
   Phone,
@@ -82,13 +83,58 @@ export function ProjectForm({ lang }: Props) {
   // success view
   if (form.submitted) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 text-center">
-        <div className="relative flex h-20 w-20 items-center justify-center rounded-full border border-accent/30 bg-accent/10 mb-8">
-          <CheckCircle2 className="h-9 w-9 text-accent" />
-          <span className="absolute inset-0 rounded-full animate-ping bg-accent/10" />
+      <div className="mx-auto max-w-2xl py-12">
+        <div className="rounded-3xl border border-accent/25 bg-paper-raised/30 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.16)] sm:p-8">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
+            <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-accent/30 bg-accent/10 text-accent shadow-sm">
+              <CheckCircle2 className="h-7 w-7" />
+              <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-accent shadow-[0_0_0_4px_var(--paper-raised)]" />
+            </div>
+            <div className="min-w-0">
+              <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-accent">
+                {success.eyebrow}
+              </p>
+              <h2 className="mt-2 font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+                {success.title}
+              </h2>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-soft">
+                {success.message}
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-8 grid gap-3 border-t border-line/50 pt-6 sm:grid-cols-3">
+            {success.nextSteps.map((step, index) => (
+              <div key={step} className="rounded-2xl border border-line/60 bg-paper/55 p-4">
+                <span className="font-mono text-[10px] font-bold text-accent/75 tabular-nums">
+                  0{index + 1}
+                </span>
+                <p className="mt-2 text-xs leading-relaxed text-ink-soft">
+                  {step}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="https://cal.com/samen-steeve/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-ink px-5 py-3 font-mono text-[11px] font-bold uppercase tracking-widest text-paper transition-transform duration-200 hover:bg-accent hover:text-white active:scale-[0.96]"
+            >
+              <CalendarDays className="h-3.5 w-3.5" />
+              {success.bookCall}
+            </a>
+            <button
+              type="button"
+              onClick={form.startNewRequest}
+              className="inline-flex min-h-10 items-center justify-center rounded-xl border border-line px-5 py-3 font-mono text-[11px] font-bold uppercase tracking-widest text-ink-soft transition-colors duration-200 hover:border-accent/40 hover:text-accent active:scale-[0.96]"
+            >
+              {success.newRequest}
+            </button>
+          </div>
         </div>
-        <h2 className="font-display text-2xl font-bold text-ink">{success.title}</h2>
-        <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-soft">{success.message}</p>
       </div>
     );
   }

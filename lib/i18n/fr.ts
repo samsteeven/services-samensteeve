@@ -335,8 +335,16 @@ export const fr = {
       verificationRetry: "Réessayer la vérification",
     },
     success: {
+      eyebrow: "Soumission confirmée",
       title: "Demande reçue !",
-      message: "Merci pour votre message. J'analyse vos besoins et je reviens vers vous sous 24h avec une première analyse technique et méthodologique. Vous recevrez également un lien pour planifier un appel si vous le souhaitez."
+      message: "Merci pour votre message. J'analyse vos besoins et je reviens vers vous sous 24h avec une première lecture technique et méthodologique.",
+      nextSteps: [
+        "Je vérifie le contexte, les risques et les priorités techniques.",
+        "Je vous réponds avec une première analyse concrète.",
+        "Nous pouvons ensuite cadrer le projet sur un appel court."
+      ],
+      bookCall: "Planifier un appel",
+      newRequest: "Nouvelle demande"
     },
     error: {
       title: "Erreur lors de l'envoi",

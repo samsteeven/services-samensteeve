@@ -110,6 +110,11 @@ export function useProjectForm(lang: string) {
     return { ...EMPTY_FORM, types: resolvedInitialType ? [resolvedInitialType] : [] };
   });
 
+  const getInitialData = useCallback((): FormData => ({
+    ...EMPTY_FORM,
+    types: resolvedInitialType ? [resolvedInitialType] : [],
+  }), [resolvedInitialType]);
+
   useEffect(() => {
     if (submitted) {
       clearDraft();
@@ -206,7 +211,16 @@ export function useProjectForm(lang: string) {
     setStep(1);
     setSubmitError(false);
     setSubmitted(false);
-    setData({ ...EMPTY_FORM, types: resolvedInitialType ? [resolvedInitialType] : [] });
+    setData(getInitialData());
+    setTurnstileResetSignal((value) => value + 1);
+  };
+
+  const startNewRequest = () => {
+    clearDraft();
+    setStep(1);
+    setSubmitError(false);
+    setSubmitted(false);
+    setData(getInitialData());
     setTurnstileResetSignal((value) => value + 1);
   };
 
@@ -221,6 +235,9 @@ export function useProjectForm(lang: string) {
         body: JSON.stringify({ ...data, lang }),
       });
       if (!res.ok) throw new Error("Failed");
+      clearDraft();
+      setStep(1);
+      setData(getInitialData());
       setSubmitted(true);
     } catch {
       setSubmitError(true);
@@ -245,6 +262,7 @@ export function useProjectForm(lang: string) {
     updateTurnstileToken,
     clearCurrentStep,
     resetForm,
+    startNewRequest,
     canNext,
     handleSubmit,
   };

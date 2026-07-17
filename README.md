@@ -173,3 +173,13 @@ TURNSTILE_SECRET_KEY=
 ```
 
 `NEXT_PUBLIC_TURNSTILE_SITE_KEY` et `TURNSTILE_SECRET_KEY` sont obligatoires en production. En développement local, elles peuvent être omises : le formulaire fonctionne sans Turnstile.
+
+### Configuration email (Resend)
+
+L'adresse d'envoi est `contact@samensteeve.com`. Pour améliorer la délivrabilité :
+
+1. **Dans Resend** : ajouter et vérifier le domaine `samensteeve.com` (ou un sous-domaine comme `mail.samensteeve.com`)
+2. **Dans Cloudflare** : ajouter les enregistrements DNS fournis par Resend (SPF, DKIM, DMARC)
+3. **DMARC** : ajouter un enregistrement `_dmarc.samensteeve.com` avec `v=DMARC1; p=none;` pour commencer en monitoring
+
+L'utilisation d'un sous-domaine (`mail.samensteeve.com`) est recommandée pour protéger la réputation du domaine principal.

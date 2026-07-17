@@ -363,7 +363,7 @@ export async function POST(request: Request) {
 
   try {
     await resend.emails.send({
-      from: "Samen Steeve Services <noreply@samensteeve.com>",
+      from: "Samen Steeve Services <contact@samensteeve.com>",
       to: ["samendjiaha@gmail.com"],
       replyTo: email.trim(),
       subject: `[Services] Nouveau projet — ${subjectName} (${subjectTypes})`,

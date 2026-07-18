@@ -240,17 +240,17 @@ export const en = {
     subtitle: "Describe your needs. I will get back to you within 24 hours with an initial technical and methodological analysis.",
     steps: {
       step1: "Offer",
-      step2: "Scope",
-      step3: "Goals",
-      step4: "Context",
+      step2: "Goals",
+      step3: "Targeted questions",
+      step4: "Extra details",
       step5: "Contact",
       step6: "Summary",
     },
     questions: {
       step1: "What type of project would you like to start?",
-      step2: "Tell me what you are looking to build",
-      step3: "What does success look like?",
-      step4: "Share anything that helps me understand",
+      step2: "What does success look like?",
+      step3: "A few questions to frame this properly",
+      step4: "Anything else to add?",
       step5: "Where can we reach you?",
       step6: "One last look",
     },
@@ -299,12 +299,314 @@ export const en = {
         scale: "Scale up / improve performance",
         team: "Strengthen and support the technical team"
       },
+      serviceGoals: {
+        web: {
+          title: "Expected software outcomes",
+          options: {
+            web_mvp: "Launch an MVP or usable first version",
+            web_platform: "Build a complete business platform",
+            web_api: "Create or stabilize an API / system integration",
+            web_refactor: "Improve an existing product without rewriting everything"
+          }
+        },
+        cloud: {
+          title: "Expected cloud architecture outcomes",
+          options: {
+            cloud_migration: "Migrate to a cloud or hybrid architecture",
+            cloud_resilience: "Improve availability, backups, and recovery",
+            cloud_cost: "Reduce costs and clarify operations",
+            cloud_observability: "Set up monitoring, logs, and alerting"
+          }
+        },
+        security: {
+          title: "Expected security outcomes",
+          options: {
+            security_pentest: "Identify exploitable vulnerabilities",
+            security_remediation: "Prioritize and support remediation",
+            security_compliance: "Prepare for an audit, client requirement, or compliance",
+            security_hardening: "Harden the application, API, or infrastructure"
+          }
+        },
+        ai: {
+          title: "Expected AI automation outcomes",
+          options: {
+            ai_workflow: "Automate a repetitive manual process",
+            ai_agent: "Create an AI agent connected to business tools",
+            ai_data: "Use internal documents, data, or knowledge",
+            ai_integration: "Integrate AI into an existing application"
+          }
+        },
+        other: {
+          title: "Outcomes to clarify",
+          options: {
+            other_scope: "Clarify the need and scope",
+            other_prioritize: "Prioritize risks and next actions",
+            other_architecture: "Choose a coherent technical approach",
+            other_roadmap: "Build a realistic roadmap"
+          }
+        }
+      },
       teamLabel: "Size of your current technical team",
       teamOptions: {
         solo: "No developers (solo project)",
         small: "Small team (2 to 5 people)",
         medium: "Medium team (5 to 15 people)",
         large: "Large team (more than 15 people)"
+      },
+      serviceContextLabel: "Information specific to the selected services",
+      serviceContext: {
+        web: {
+          title: "Software Engineering",
+          placeholder: "Specify the software or product to build: users, roles, workflows, critical features, integrations/APIs, business or delivery constraints...",
+          prompts: ["Users & roles", "Critical features", "Integrations/APIs", "Business constraints"]
+        },
+        cloud: {
+          title: "Cloud Architecture",
+          placeholder: "Describe the current or target infrastructure: hosting provider, environments, expected availability, backups, migration, scalability, or network constraints...",
+          prompts: ["Current infrastructure", "Availability", "Backups", "Migration/scaling"]
+        },
+        security: {
+          title: "Pentest & Security",
+          placeholder: "Describe the audit scope: application/API, authorized environments, test accounts, sensitive data, testing constraints, or already identified risks...",
+          prompts: ["Authorized scope", "Test accounts", "Sensitive data", "Audit constraints"]
+        },
+        ai: {
+          title: "AI Automation",
+          placeholder: "Describe the process to automate: manual tasks, tools used, data sources, human validations, decisions to automate, and risks to avoid...",
+          prompts: ["Current process", "Tools & data", "AI decisions", "Human control"]
+        },
+        other: {
+          title: "Needs to clarify",
+          placeholder: "Explain what is still unclear, the problems you want to solve, the options you are considering, and what would help you choose the right approach...",
+          prompts: ["Main problem", "Options considered", "Constraints", "Expected decision"]
+        }
+      },
+      contextGroups: {
+        web: {
+          title: "Software context",
+          questions: [
+            {
+              key: "stage",
+              label: "Product stage",
+              options: [
+                { value: "idea", label: "Idea or initial scoping" },
+                { value: "prototype", label: "Prototype / mockup already exists" },
+                { value: "live", label: "Product already in production" },
+                { value: "legacy", label: "Existing product to modernize" }
+              ]
+            },
+            {
+              key: "codebase",
+              label: "Technical base",
+              options: [
+                { value: "none", label: "No codebase yet" },
+                { value: "partial", label: "Partial codebase or prototype" },
+                { value: "existing", label: "Existing maintained application" },
+                { value: "unknown", label: "I do not know yet" }
+              ]
+            },
+            {
+              key: "users",
+              label: "Target users",
+              options: [
+                { value: "internal", label: "Internal users" },
+                { value: "customers", label: "Customers / external users" },
+                { value: "both", label: "Internal and external" },
+                { value: "admin", label: "Back office / operations team" }
+              ]
+            },
+            {
+              key: "integration",
+              label: "Expected integrations",
+              options: [
+                { value: "none", label: "No critical integration" },
+                { value: "payments", label: "Payments, email, WhatsApp, or notifications" },
+                { value: "business", label: "ERP, CRM, business API, or existing database" },
+                { value: "unknown", label: "To identify together" }
+              ]
+            }
+          ]
+        },
+        cloud: {
+          title: "Cloud context",
+          questions: [
+            {
+              key: "current",
+              label: "Current infrastructure",
+              options: [
+                { value: "none", label: "No infrastructure yet" },
+                { value: "onprem", label: "Local / on-premise servers" },
+                { value: "cloud", label: "Already on public cloud" },
+                { value: "hybrid", label: "Hybrid cloud + local" }
+              ]
+            },
+            {
+              key: "provider",
+              label: "Current or target environment",
+              options: [
+                { value: "aws", label: "AWS" },
+                { value: "azure", label: "Azure" },
+                { value: "other", label: "Other host / VPS" },
+                { value: "undecided", label: "Not decided yet" }
+              ]
+            },
+            {
+              key: "criticality",
+              label: "Criticality level",
+              options: [
+                { value: "standard", label: "Standard, downtime acceptable" },
+                { value: "business", label: "Important business system, little downtime" },
+                { value: "critical", label: "Critical, high availability expected" },
+                { value: "unknown", label: "To evaluate" }
+              ]
+            },
+            {
+              key: "operations",
+              label: "Operational priority",
+              options: [
+                { value: "migration", label: "Migration" },
+                { value: "resilience", label: "Resilience / backups" },
+                { value: "cost", label: "Cost and optimization" },
+                { value: "monitoring", label: "Monitoring and alerting" }
+              ]
+            }
+          ]
+        },
+        security: {
+          title: "Security context",
+          questions: [
+            {
+              key: "target",
+              label: "Target to test",
+              options: [
+                { value: "web", label: "Web application" },
+                { value: "api", label: "API / backend" },
+                { value: "infra", label: "Infrastructure / network" },
+                { value: "mixed", label: "Mixed scope" }
+              ]
+            },
+            {
+              key: "environment",
+              label: "Authorized environment",
+              options: [
+                { value: "staging", label: "Pre-production / staging" },
+                { value: "production", label: "Controlled production testing" },
+                { value: "both", label: "Staging and production" },
+                { value: "unknown", label: "To define before audit" }
+              ]
+            },
+            {
+              key: "authorization",
+              label: "Authorization and access",
+              options: [
+                { value: "ready", label: "Authorization and accounts are ready" },
+                { value: "accounts", label: "Test accounts need preparation" },
+                { value: "scope", label: "Scope needs formalization" },
+                { value: "help", label: "Need help scoping it legally" }
+              ]
+            },
+            {
+              key: "constraints",
+              label: "Testing constraints",
+              options: [
+                { value: "low-impact", label: "Non-destructive tests only" },
+                { value: "authenticated", label: "Tests with authenticated roles" },
+                { value: "compliance", label: "Audit / compliance constraint" },
+                { value: "none", label: "No specific constraint" }
+              ]
+            }
+          ]
+        },
+        ai: {
+          title: "AI automation context",
+          questions: [
+            {
+              key: "process",
+              label: "Current process",
+              options: [
+                { value: "manual", label: "Very manual and repetitive" },
+                { value: "spreadsheets", label: "Based on files / spreadsheets" },
+                { value: "tools", label: "Already inside business tools" },
+                { value: "unclear", label: "Still unclear" }
+              ]
+            },
+            {
+              key: "data",
+              label: "Data sources",
+              options: [
+                { value: "documents", label: "Documents, PDFs, emails, or messages" },
+                { value: "database", label: "Database / API" },
+                { value: "mixed", label: "Multiple sources" },
+                { value: "not-ready", label: "Data not structured yet" }
+              ]
+            },
+            {
+              key: "humanReview",
+              label: "Human validation",
+              options: [
+                { value: "required", label: "Human validation is mandatory" },
+                { value: "exceptions", label: "Only for uncertain cases" },
+                { value: "autonomous", label: "Mostly autonomous automation" },
+                { value: "unknown", label: "To decide" }
+              ]
+            },
+            {
+              key: "systems",
+              label: "Systems to connect",
+              options: [
+                { value: "none", label: "No existing system" },
+                { value: "saas", label: "SaaS tools / CRM / email" },
+                { value: "internal", label: "Internal application or API" },
+                { value: "multiple", label: "Several systems" }
+              ]
+            }
+          ]
+        },
+        other: {
+          title: "Context to clarify",
+          questions: [
+            {
+              key: "clarity",
+              label: "Clarity level",
+              options: [
+                { value: "problem", label: "The problem is clear, not the solution" },
+                { value: "solution", label: "A solution is already being considered" },
+                { value: "audit", label: "Need an external technical opinion" },
+                { value: "early", label: "Still exploratory" }
+              ]
+            },
+            {
+              key: "constraint",
+              label: "Main constraint",
+              options: [
+                { value: "time", label: "Time / urgency" },
+                { value: "budget", label: "Budget" },
+                { value: "risk", label: "Technical or security risk" },
+                { value: "alignment", label: "Team / decision alignment" }
+              ]
+            },
+            {
+              key: "decision",
+              label: "Expected decision",
+              options: [
+                { value: "build", label: "Build" },
+                { value: "secure", label: "Secure" },
+                { value: "automate", label: "Automate" },
+                { value: "choose", label: "Choose the right direction" }
+              ]
+            },
+            {
+              key: "stakeholders",
+              label: "Stakeholders",
+              options: [
+                { value: "founder", label: "Founder / leadership" },
+                { value: "product", label: "Product / business" },
+                { value: "technical", label: "Technical team" },
+                { value: "mixed", label: "Several profiles" }
+              ]
+            }
+          ]
+        }
       },
       linksLabel: "Useful links (Figma, GitHub, staging)",
       addLink: "Add another link",
@@ -333,6 +635,12 @@ export const en = {
       verificationLoading: "Loading verification...",
       verificationError: "The anti-bot verification could not load.",
       verificationRetry: "Retry verification",
+      edit: "Edit",
+    },
+    quickCall: {
+      title: "Prefer to get straight to the point?",
+      message: "If your need is urgent or hard to frame in a form, you can book a short call directly.",
+      cta: "Book a call"
     },
     success: {
       eyebrow: "Submission confirmed",

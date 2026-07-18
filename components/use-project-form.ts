@@ -12,6 +12,8 @@ export interface FormData {
   teamSize: string;
   budget: string;
   goals: string[];
+  serviceDetails: Record<string, string>;
+  contextAnswers: Record<string, string>;
   links: string[];
   name: string;
   email: string;
@@ -25,6 +27,22 @@ export interface FormData {
 const STORAGE_KEY = "project-form-draft";
 const turnstileEnabled = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
+const SERVICE_GOAL_KEYS: Record<string, string[]> = {
+  web: ["web_mvp", "web_platform", "web_api", "web_refactor"],
+  cloud: ["cloud_migration", "cloud_resilience", "cloud_cost", "cloud_observability"],
+  security: ["security_pentest", "security_remediation", "security_compliance", "security_hardening"],
+  ai: ["ai_workflow", "ai_agent", "ai_data", "ai_integration"],
+  other: ["other_scope", "other_prioritize", "other_architecture", "other_roadmap"],
+};
+
+const SERVICE_CONTEXT_KEYS: Record<string, string[]> = {
+  web: ["stage", "codebase", "users", "integration"],
+  cloud: ["current", "provider", "criticality", "operations"],
+  security: ["target", "environment", "authorization", "constraints"],
+  ai: ["process", "data", "humanReview", "systems"],
+  other: ["clarity", "constraint", "decision", "stakeholders"],
+};
+
 const EMPTY_FORM: FormData = {
   types: [],
   description: "",
@@ -33,6 +51,8 @@ const EMPTY_FORM: FormData = {
   teamSize: "",
   budget: "",
   goals: [],
+  serviceDetails: {},
+  contextAnswers: {},
   links: [""],
   name: "",
   email: "",
@@ -79,6 +99,8 @@ function hasMeaningfulData(data: FormData): boolean {
     || data.teamSize !== ""
     || data.budget !== ""
     || data.goals.length > 0
+    || Object.values(data.serviceDetails).some((detail) => detail.trim() !== "")
+    || Object.values(data.contextAnswers).some((answer) => answer.trim() !== "")
     || data.links.some((link) => link.trim() !== "")
     || data.name.trim() !== ""
     || data.email.trim() !== ""
@@ -123,36 +145,50 @@ export function useProjectForm(lang: string) {
     saveDraft(step, data);
   }, [step, data, submitted]);
 
+  const goalKeysForTypes = (types: string[]) => {
+    const keys = new Set<string>();
+    types.forEach((type) => {
+      SERVICE_GOAL_KEYS[type]?.forEach((goal) => keys.add(goal));
+    });
+    return keys;
+  };
+
+  const contextKeysForTypes = (types: string[]) => {
+    const keys = new Set<string>();
+    types.forEach((type) => {
+      SERVICE_CONTEXT_KEYS[type]?.forEach((key) => keys.add(`${type}.${key}`));
+    });
+    return keys;
+  };
+
+  const buildDescription = (formData: FormData) => {
+    return formData.types
+      .map((type) => formData.serviceDetails[type]?.trim())
+      .filter(Boolean)
+      .join("\n\n");
+  };
+
   const toggleType = (type: string) => {
     setData((prev) => {
       const nextTypes = prev.types.includes(type)
         ? prev.types.filter((t) => t !== type)
         : [...prev.types, type];
 
-      // Auto-select logical goals if the user hasn't manually selected any goals yet
-      let nextGoals = [...prev.goals];
-      if (prev.goals.length === 0 || prev.goals.every(g => ["launch", "automate", "secure", "scale"].includes(g))) {
-        const tempGoals = new Set<string>();
-        if (nextTypes.includes("web")) tempGoals.add("launch");
-        if (nextTypes.includes("cloud")) tempGoals.add("scale");
-        if (nextTypes.includes("security")) tempGoals.add("secure");
-        if (nextTypes.includes("ai")) tempGoals.add("automate");
-        nextGoals = Array.from(tempGoals);
-      }
-
-      // Auto-suggest codebase context based on service types
-      let nextHasCodebase = prev.hasCodebase;
-      if (nextTypes.includes("security") || nextTypes.includes("cloud")) {
-        nextHasCodebase = "yes";
-      } else if (nextTypes.includes("web") && nextTypes.length === 1) {
-        nextHasCodebase = "no";
-      }
+      const allowedGoals = goalKeysForTypes(nextTypes);
+      const allowedContextKeys = contextKeysForTypes(nextTypes);
 
       return {
         ...prev,
         types: nextTypes,
-        goals: nextGoals,
-        hasCodebase: nextHasCodebase,
+        goals: prev.goals.filter((goal) => allowedGoals.has(goal)),
+        hasCodebase: "",
+        teamSize: "",
+        serviceDetails: Object.fromEntries(
+          Object.entries(prev.serviceDetails).filter(([key]) => nextTypes.includes(key)),
+        ),
+        contextAnswers: Object.fromEntries(
+          Object.entries(prev.contextAnswers).filter(([key]) => allowedContextKeys.has(key)),
+        ),
       };
     });
   };
@@ -170,15 +206,45 @@ export function useProjectForm(lang: string) {
     setData((prev) => ({ ...prev, [key]: value }));
   };
 
+  const updateServiceDetail = (type: string, value: string) => {
+    setData((prev) => ({
+      ...prev,
+      serviceDetails: {
+        ...prev.serviceDetails,
+        [type]: value,
+      },
+      description: buildDescription({
+        ...prev,
+        serviceDetails: {
+          ...prev.serviceDetails,
+          [type]: value,
+        },
+      }),
+    }));
+  };
+
+  const updateContextAnswer = (key: string, value: string) => {
+    setData((prev) => ({
+      ...prev,
+      contextAnswers: {
+        ...prev.contextAnswers,
+        [key]: value,
+      },
+    }));
+  };
+
   const updateTurnstileToken = useCallback((token: string) => {
     setData((prev) => ({ ...prev, turnstileToken: token }));
   }, []);
 
   const canNext = (): boolean => {
     if (step === 1) return data.types.length > 0;
-    if (step === 2) return data.description.trim().length > 20;
-    if (step === 3) return data.timeline !== "" && data.budget !== "" && data.goals.length > 0;
-    if (step === 4) return data.hasCodebase !== "" && data.teamSize !== "";
+    if (step === 2) return data.timeline !== "" && data.budget !== "" && data.goals.length > 0;
+    if (step === 3) {
+      const requiredKeys = Array.from(contextKeysForTypes(data.types));
+      return requiredKeys.every((key) => (data.contextAnswers[key] ?? "").trim() !== "");
+    }
+    if (step === 4) return true;
     if (step === 5) return data.name.trim() !== "" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email);
     if (step === 6) return !turnstileEnabled || data.turnstileToken.trim() !== "";
     return false;
@@ -187,10 +253,10 @@ export function useProjectForm(lang: string) {
   const clearCurrentStep = () => {
     setSubmitError(false);
     setData((prev) => {
-      if (step === 1) return { ...prev, types: [], goals: [], hasCodebase: "" };
-      if (step === 2) return { ...prev, description: "" };
-      if (step === 3) return { ...prev, timeline: "", budget: "", goals: [] };
-      if (step === 4) return { ...prev, hasCodebase: "", teamSize: "", links: [""] };
+      if (step === 1) return { ...prev, types: [], goals: [], hasCodebase: "", teamSize: "", serviceDetails: {}, contextAnswers: {} };
+      if (step === 2) return { ...prev, timeline: "", budget: "", goals: [] };
+      if (step === 3) return { ...prev, hasCodebase: "", teamSize: "", contextAnswers: {} };
+      if (step === 4) return { ...prev, description: "", serviceDetails: {}, links: [""] };
       if (step === 5) {
         return {
           ...prev,
@@ -232,7 +298,7 @@ export function useProjectForm(lang: string) {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, lang }),
+        body: JSON.stringify({ ...data, description: buildDescription(data), lang }),
       });
       if (!res.ok) throw new Error("Failed");
       clearDraft();
@@ -259,6 +325,8 @@ export function useProjectForm(lang: string) {
     toggleType,
     toggleGoal,
     updateField,
+    updateServiceDetail,
+    updateContextAnswer,
     updateTurnstileToken,
     clearCurrentStep,
     resetForm,

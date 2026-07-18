@@ -33,52 +33,31 @@ export function ProjectForm({ lang }: Props) {
   const { fields, buttons, steps, success, error, questions } = t.contact;
   const form = useProjectForm(lang);
 
-  const getDynamicPlaceholder = () => {
-    const types = form.data.types;
-    if (types.length === 0) return fields.descPlaceholder;
-    
-    if (types.length === 1) {
-      const type = types[0];
-      if (type === "web") {
-        return lang === "fr"
-          ? "Décrivez le logiciel, la plateforme métier, l'API ou le produit à concevoir, les rôles utilisateurs, les workflows et les contraintes de production..."
-          : "Describe the software product, business platform, API, or system to build, user roles, workflows, and production constraints...";
-      }
-      if (type === "cloud") {
-        return lang === "fr"
-          ? "Décrivez votre infrastructure actuelle (on-premise ou cloud), les hébergeurs utilisés, et vos contraintes de résilience ou de migration..."
-          : "Describe your current infrastructure (on-premise or cloud), hosting providers used, and resilience or migration constraints...";
-      }
-      if (type === "security") {
-        return lang === "fr"
-          ? "Décrivez la cible à tester (application, API, backoffice, portail client), les rôles disponibles, l'environnement autorisé et les risques déjà identifiés..."
-          : "Describe the target to test (application, API, back office, customer portal), available roles, authorized environment, and risks already identified...";
-      }
-      if (type === "ai") {
-        return lang === "fr"
-          ? "Décrivez les processus manuels ou répétitifs à automatiser (ex: traitement de factures, qualification de leads), les outils utilisés et les API disponibles..."
-          : "Describe the manual or repetitive processes to automate (e.g. invoice processing, lead scoring), tools used, and available APIs...";
-      }
+  const getGoalLabel = (goal: string) => {
+    for (const type of form.data.types) {
+      const options = fields.serviceGoals[type as keyof typeof fields.serviceGoals]?.options;
+      const label = options?.[goal as keyof typeof options];
+      if (label) return label;
     }
-
-    // Multiple selection logic
-    const contains = (t: string) => types.includes(t);
-    if (lang === "fr") {
-      const parts = [];
-      if (contains("web")) parts.push("le logiciel ou produit à construire");
-      if (contains("ai")) parts.push("les processus IA à automatiser");
-      if (contains("security")) parts.push("la cible à tester et sécuriser");
-      if (contains("cloud")) parts.push("l'infrastructure cloud à migrer/concevoir");
-      return `Décrivez votre projet global en couvrant à la fois : ${parts.join(", ")}. Spécifiez vos objectifs métier et les technos...`;
-    } else {
-      const parts = [];
-      if (contains("web")) parts.push("the software product or system to build");
-      if (contains("ai")) parts.push("the AI automation processes");
-      if (contains("security")) parts.push("the target to test and secure");
-      if (contains("cloud")) parts.push("the cloud infrastructure to design/migrate");
-      return `Describe your overall project, covering: ${parts.join(", ")}. Specify your business goals and current stack...`;
-    }
+    return goal;
   };
+
+  const getContextAnswerLabel = (type: string, questionKey: string, value: string) => {
+    const group = fields.contextGroups[type as keyof typeof fields.contextGroups];
+    const question = group?.questions.find((item) => item.key === questionKey);
+    const option = question?.options.find((item) => item.value === value);
+    return option?.label ?? value;
+  };
+
+  const renderEditButton = (targetStep: number) => (
+    <button
+      type="button"
+      onClick={() => form.setStep(targetStep)}
+      className="rounded-full border border-line px-3 py-1 font-mono text-[9px] font-bold uppercase tracking-widest text-ink-soft transition hover:border-accent/40 hover:text-accent"
+    >
+      {buttons.edit}
+    </button>
+  );
 
   // success view
   if (form.submitted) {
@@ -244,99 +223,111 @@ export function ProjectForm({ lang }: Props) {
 
       {/* ── Step 1: Offer / Services ────────────────────────────────────────── */}
       {form.step === 1 && (
-        <div className="grid gap-3 sm:grid-cols-2">
-          {Object.entries(fields.types).map(([key, label]) => {
-            const Icon = getContactTypeIcon(key as ContactTypeKey);
-            const isSelected = form.data.types.includes(key);
-            const description = fields.typesDesc[key as keyof typeof fields.typesDesc];
-            return (
-              <button
-                key={key}
-                type="button"
-                onClick={() => form.toggleType(key)}
-                className={`group flex items-start gap-4 rounded-2xl border px-5 py-4.5 text-left transition-all duration-200 ${
-                  isSelected
-                    ? "border-accent bg-accent/5 shadow-sm shadow-accent/5"
-                    : "border-line bg-paper-raised/15 hover:border-accent/40 hover:bg-paper-raised/30"
-                }`}
-              >
-                <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-all duration-200 ${
-                  isSelected ? "bg-accent text-white" : "bg-paper-raised text-ink-soft group-hover:bg-accent/10 group-hover:text-accent"
-                }`}>
-                  <Icon className="h-4.5 w-4.5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className={`text-sm font-bold transition-colors ${isSelected ? "text-ink" : "text-ink-soft group-hover:text-ink"}`}>
-                    {label}
+        <div className="flex flex-col gap-5">
+          <div className="grid gap-3 sm:grid-cols-2">
+            {Object.entries(fields.types).map(([key, label]) => {
+              const Icon = getContactTypeIcon(key as ContactTypeKey);
+              const isSelected = form.data.types.includes(key);
+              const description = fields.typesDesc[key as keyof typeof fields.typesDesc];
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => form.toggleType(key)}
+                  className={`group flex items-start gap-4 rounded-2xl border px-5 py-4.5 text-left transition-all duration-200 ${
+                    isSelected
+                      ? "border-accent bg-accent/5 shadow-sm shadow-accent/5"
+                      : "border-line bg-paper-raised/15 hover:border-accent/40 hover:bg-paper-raised/30"
+                  }`}
+                >
+                  <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-all duration-200 ${
+                    isSelected ? "bg-accent text-white" : "bg-paper-raised text-ink-soft group-hover:bg-accent/10 group-hover:text-accent"
+                  }`}>
+                    <Icon className="h-4.5 w-4.5" />
                   </div>
-                  <div className="mt-1 text-xs text-ink-soft leading-relaxed font-normal">
-                    {description}
+                  <div className="flex-1 min-w-0">
+                    <div className={`text-sm font-bold transition-colors ${isSelected ? "text-ink" : "text-ink-soft group-hover:text-ink"}`}>
+                      {label}
+                    </div>
+                    <div className="mt-1 text-xs text-ink-soft leading-relaxed font-normal">
+                      {description}
+                    </div>
                   </div>
-                </div>
-                <div className={`flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded border transition-all duration-200 ${
-                  isSelected ? "border-accent bg-accent text-white scale-105" : "border-line bg-transparent"
-                }`}>
-                  {isSelected && <Check className="h-3 w-3" />}
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      )}
+                  <div className={`flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded border transition-all duration-200 ${
+                    isSelected ? "border-accent bg-accent text-white scale-105" : "border-line bg-transparent"
+                  }`}>
+                    {isSelected && <Check className="h-3 w-3" />}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
 
-      {/* ── Step 2: Scope / Description ──────────────────────────────────────── */}
-      {form.step === 2 && (
-        <div className="flex flex-col gap-4">
-          <div className="relative">
-            <textarea
-              value={form.data.description}
-              onChange={(e) => form.updateField("description", e.target.value)}
-              placeholder={getDynamicPlaceholder()}
-              rows={8}
-              className="w-full resize-none rounded-2xl border border-line bg-paper-raised/20 px-5 py-4 text-sm leading-relaxed text-ink placeholder:text-ink-soft/30 outline-none focus:border-accent/40 focus:bg-paper-raised/30 focus:ring-2 focus:ring-accent/5 transition duration-200"
-            />
-            <div className="absolute bottom-3 right-4">
-              <span className={`font-mono text-[10px] transition-colors ${
-                form.data.description.trim().length < 20 ? "text-ink-soft/30" : "text-accent font-semibold"
-              }`}>
-                {form.data.description.trim().length < 20
-                  ? `${form.data.description.trim().length}/20 min`
-                  : lang === "fr" ? "✓ Suffisant" : "✓ Good"}
-              </span>
+          <div className="rounded-2xl border border-line bg-paper-raised/10 p-4 sm:flex sm:items-center sm:justify-between sm:gap-5">
+            <div>
+              <p className="text-sm font-bold text-ink">{t.contact.quickCall.title}</p>
+              <p className="mt-1 text-xs leading-relaxed text-ink-soft">
+                {t.contact.quickCall.message}
+              </p>
             </div>
+            <a
+              href="https://cal.com/samen-steeve/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-line px-5 py-3 font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft transition hover:border-accent/40 hover:text-accent active:scale-[0.96] sm:mt-0"
+            >
+              <CalendarDays className="h-3.5 w-3.5" />
+              {t.contact.quickCall.cta}
+            </a>
           </div>
         </div>
       )}
 
-      {/* ── Step 3: Goals & Success criteria ──────────────────────────────────── */}
-      {form.step === 3 && (
+      {/* ── Step 2: Goals & Success criteria ──────────────────────────────────── */}
+      {form.step === 2 && (
         <div className="flex flex-col gap-8">
           {/* Target Outcomes (Value metrics) */}
           <div>
             <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-3.5">
               {fields.goalsLabel}
             </label>
-            <div className="grid gap-2.5 sm:grid-cols-2">
-              {Object.entries(fields.goalsOptions).map(([key, label]) => {
-                const isSelected = form.data.goals.includes(key);
+            <div className="grid gap-4">
+              {form.data.types.map((type) => {
+                const Icon = getContactTypeIcon(type as ContactTypeKey);
+                const group = fields.serviceGoals[type as keyof typeof fields.serviceGoals];
+                if (!group) return null;
+
                 return (
-                  <button
-                    key={key}
-                    type="button"
-                    onClick={() => form.toggleGoal(key)}
-                    className={`group flex items-start gap-3 rounded-xl border p-3.5 text-left text-xs font-semibold leading-relaxed transition-all duration-200 ${
-                      isSelected
-                        ? "border-accent bg-accent/5 text-ink"
-                        : "border-line bg-paper-raised/15 text-ink-soft hover:border-accent/40 hover:text-ink hover:bg-paper-raised/30"
-                    }`}
-                  >
-                    <div className={`mt-0.5 flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded border transition-all ${
-                      isSelected ? "border-accent bg-accent text-white scale-105" : "border-line bg-transparent"
-                    }`}>
-                      {isSelected && <Check className="h-3 w-3" />}
+                  <div key={type} className="rounded-2xl border border-line bg-paper-raised/15 p-4">
+                    <div className="mb-3 flex items-center gap-2 text-sm font-bold text-ink">
+                      <Icon className="h-4 w-4 text-accent" />
+                      {group.title}
                     </div>
-                    <span className="flex-1">{label}</span>
-                  </button>
+                    <div className="grid gap-2.5 sm:grid-cols-2">
+                      {Object.entries(group.options).map(([key, label]) => {
+                        const isSelected = form.data.goals.includes(key);
+                        return (
+                          <button
+                            key={key}
+                            type="button"
+                            onClick={() => form.toggleGoal(key)}
+                            className={`group flex items-start gap-3 rounded-xl border p-3.5 text-left text-xs font-semibold leading-relaxed transition-all duration-200 ${
+                              isSelected
+                                ? "border-accent bg-accent/5 text-ink"
+                                : "border-line bg-paper-raised/15 text-ink-soft hover:border-accent/40 hover:text-ink hover:bg-paper-raised/30"
+                            }`}
+                          >
+                            <div className={`mt-0.5 flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded border transition-all ${
+                              isSelected ? "border-accent bg-accent text-white scale-105" : "border-line bg-transparent"
+                            }`}>
+                              {isSelected && <Check className="h-3 w-3" />}
+                            </div>
+                            <span className="flex-1">{label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
                 );
               })}
             </div>
@@ -396,64 +387,99 @@ export function ProjectForm({ lang }: Props) {
         </div>
       )}
 
-      {/* ── Step 4: Context / Tech Details ────────────────────────────────────── */}
+      {/* ── Step 3: Targeted technical questions ─────────────────────────────── */}
+      {form.step === 3 && (
+        <div className="flex flex-col gap-8">
+          {form.data.types.map((type) => {
+            const Icon = getContactTypeIcon(type as ContactTypeKey);
+            const group = fields.contextGroups[type as keyof typeof fields.contextGroups];
+            if (!group) return null;
+
+            return (
+              <div key={type} className="rounded-2xl border border-line bg-paper-raised/15 p-4">
+                <div className="mb-4 flex items-center gap-2 text-sm font-bold text-ink">
+                  <Icon className="h-4 w-4 text-accent" />
+                  {group.title}
+                </div>
+                <div className="grid gap-5">
+                  {group.questions.map((question) => (
+                    <div key={question.key}>
+                      <label className="mb-3 block font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft">
+                        {question.label}
+                      </label>
+                      <div className="grid gap-2 sm:grid-cols-2">
+                        {question.options.map((option) => {
+                          const answerKey = `${type}.${question.key}`;
+                          const isSelected = form.data.contextAnswers[answerKey] === option.value;
+                          return (
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() => form.updateContextAnswer(answerKey, option.value)}
+                              className={`rounded-xl border px-4 py-3 text-left text-xs font-semibold leading-relaxed transition-all duration-200 ${
+                                isSelected
+                                  ? "border-accent bg-accent/5 text-ink"
+                                  : "border-line bg-paper-raised/15 text-ink-soft hover:border-accent/40 hover:bg-paper-raised/30 hover:text-ink"
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* ── Step 4: Optional details / links ─────────────────────────────────── */}
       {form.step === 4 && (
         <div className="flex flex-col gap-8">
-          {/* Codebase */}
-          <div>
-            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-3.5">
-              {fields.codebaseLabel}
-            </label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {Object.entries(fields.codebaseOptions).map(([val, label]) => {
-                const isSelected = form.data.hasCodebase === val;
-                return (
-                  <button
-                    key={val}
-                    type="button"
-                    onClick={() => form.updateField("hasCodebase", val)}
-                    className={`flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left text-xs font-bold transition-all duration-200 ${
-                      isSelected
-                        ? "border-accent bg-accent/5 text-ink shadow-sm"
-                        : "border-line bg-paper-raised/15 text-ink-soft hover:border-accent/40 hover:text-ink hover:bg-paper-raised/30"
-                    }`}
-                  >
-                    <div className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-all ${
-                      isSelected ? "border-accent scale-105" : "border-line"
-                    }`}>
-                      {isSelected && <div className="h-2 w-2 rounded-full bg-accent" />}
-                    </div>
-                    {label}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
+          <div className="grid gap-4">
+          {form.data.types.map((type) => {
+            const Icon = getContactTypeIcon(type as ContactTypeKey);
+            const config = fields.serviceContext[type as keyof typeof fields.serviceContext];
+            const label = fields.types[type as keyof typeof fields.types];
+            const value = form.data.serviceDetails[type] ?? "";
 
-          {/* Team Size */}
-          <div>
-            <label className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft block mb-3.5">
-              {fields.teamLabel}
-            </label>
-            <div className="grid grid-cols-2 gap-2">
-              {Object.entries(fields.teamOptions).map(([val, label]) => {
-                const isSelected = form.data.teamSize === val;
-                return (
-                  <button
-                    key={val}
-                    type="button"
-                    onClick={() => form.updateField("teamSize", val)}
-                    className={`rounded-xl border px-4 py-3 text-left text-xs font-semibold transition-all duration-200 ${
-                      isSelected
-                        ? "border-accent bg-accent/5 text-ink"
-                        : "border-line bg-paper-raised/15 text-ink-soft hover:border-accent/40 hover:text-ink hover:bg-paper-raised/30"
-                    }`}
-                  >
-                    {label}
-                  </button>
-                );
-              })}
-            </div>
+            return (
+              <div key={type} className="rounded-2xl border border-line bg-paper-raised/15 p-4">
+                <div className="mb-3 flex items-start gap-3">
+                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-accent/20 bg-accent/5 text-accent">
+                    <Icon className="h-4 w-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-bold text-ink">{config?.title ?? label}</p>
+                    {config?.prompts && (
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {config.prompts.map((prompt) => (
+                          <span key={prompt} className="rounded-full border border-line/70 bg-paper/40 px-2 py-1 font-mono text-[9px] text-ink-soft">
+                            {prompt}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <textarea
+                  value={value}
+                  onChange={(e) => form.updateServiceDetail(type, e.target.value)}
+                  placeholder={config?.placeholder}
+                  rows={4}
+                  className="min-h-[130px] w-full resize-y rounded-xl border border-line bg-paper-raised/20 px-4 py-3 text-sm leading-relaxed text-ink placeholder:text-ink-soft/35 outline-none transition duration-200 focus:border-accent/40 focus:bg-paper-raised/30 focus:ring-2 focus:ring-accent/5"
+                />
+                <p className="mt-2 text-right font-mono text-[10px] text-ink-soft/35">
+                  {value.trim().length > 0
+                    ? lang === "fr" ? "Complément ajouté" : "Additional detail added"
+                    : lang === "fr" ? "Optionnel" : "Optional"}
+                </p>
+              </div>
+            );
+          })}
           </div>
 
           {/* Links Input Stack */}
@@ -633,9 +659,12 @@ export function ProjectForm({ lang }: Props) {
           <div className="rounded-2xl border border-line bg-paper-raised/15 p-6 flex flex-col gap-6">
             {/* Offer row */}
             <div className="flex flex-col gap-2">
-              <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
-                {stepLabels[0]}
-              </span>
+              <div className="flex items-center justify-between gap-3">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
+                  {stepLabels[0]}
+                </span>
+                {renderEditButton(1)}
+              </div>
               <div className="flex flex-wrap gap-2">
                 {form.data.types.map((type) => {
                   const Icon = getContactTypeIcon(type as ContactTypeKey);
@@ -650,25 +679,18 @@ export function ProjectForm({ lang }: Props) {
               </div>
             </div>
 
-            {/* Scope row */}
-            <div className="flex flex-col gap-2">
-              <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
-                {stepLabels[1]}
-              </span>
-              <p className="text-xs text-ink-soft/85 leading-relaxed bg-paper-raised/20 rounded-xl p-4 border border-line/40 whitespace-pre-wrap italic">
-                "{form.data.description}"
-              </p>
-            </div>
-
             {/* Goals & Budget row */}
             <div className="grid gap-4 sm:grid-cols-3 border-t border-line/40 pt-4">
               <div className="flex flex-col gap-1">
-                <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
-                  {lang === "fr" ? "Objectifs" : "Goals"}
-                </span>
+                <div className="flex items-center justify-between gap-3">
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
+                    {lang === "fr" ? "Objectifs" : "Goals"}
+                  </span>
+                  {renderEditButton(2)}
+                </div>
                 <ul className="text-xs text-ink list-disc pl-4 flex flex-col gap-0.5 font-medium">
                   {form.data.goals.map((g) => (
-                    <li key={g}>{fields.goalsOptions[g as keyof typeof fields.goalsOptions]}</li>
+                    <li key={g}>{getGoalLabel(g)}</li>
                   ))}
                 </ul>
               </div>
@@ -690,39 +712,92 @@ export function ProjectForm({ lang }: Props) {
               </div>
             </div>
 
-            {/* Context row */}
-            <div className="grid gap-4 sm:grid-cols-2 border-t border-line/40 pt-4">
-              <div className="flex flex-col gap-1">
+            {/* Technical context row */}
+            <div className="border-t border-line/40 pt-4">
+              <div className="flex items-center justify-between gap-3">
                 <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
-                  {lang === "fr" ? "Code existant & Équipe" : "Existing Code & Team"}
+                  {lang === "fr" ? "Contexte technique" : "Technical context"}
                 </span>
-                <span className="text-xs text-ink font-medium leading-relaxed">
-                  {fields.codebaseOptions[form.data.hasCodebase as keyof typeof fields.codebaseOptions]}
-                  <br />
-                  <span className="text-ink-soft">{fields.teamOptions[form.data.teamSize as keyof typeof fields.teamOptions]}</span>
+                {renderEditButton(3)}
+              </div>
+              <div className="mt-3 grid gap-3">
+                {form.data.types.map((type) => {
+                  const group = fields.contextGroups[type as keyof typeof fields.contextGroups];
+                  if (!group) return null;
+
+                  return (
+                    <div key={type} className="rounded-xl border border-line/40 bg-paper-raised/15 p-3">
+                      <p className="mb-2 text-xs font-bold text-ink">{group.title}</p>
+                      <div className="grid gap-1.5 text-xs text-ink-soft/85">
+                        {group.questions.map((question) => {
+                          const answerKey = `${type}.${question.key}`;
+                          const answer = form.data.contextAnswers[answerKey];
+                          if (!answer) return null;
+                          return (
+                            <p key={answerKey}>
+                              <span className="text-ink-soft/55">{question.label}: </span>
+                              <span className="font-semibold text-ink">{getContextAnswerLabel(type, question.key, answer)}</span>
+                            </p>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="border-t border-line/40 pt-4">
+              <div className="flex items-center justify-between gap-3">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
+                  {stepLabels[3]}
                 </span>
+                {renderEditButton(4)}
+              </div>
+              <div className="mt-3 grid gap-3">
+                {form.data.types.some((type) => form.data.serviceDetails[type]?.trim()) ? form.data.types.map((type) => {
+                  const config = fields.serviceContext[type as keyof typeof fields.serviceContext];
+                  const detail = form.data.serviceDetails[type]?.trim();
+                  if (!detail) return null;
+
+                  return (
+                    <div key={type} className="rounded-xl border border-line/40 bg-paper-raised/20 p-4">
+                      <p className="mb-1 text-xs font-bold text-ink">{config?.title ?? fields.types[type as keyof typeof fields.types]}</p>
+                      <p className="whitespace-pre-wrap text-xs leading-relaxed text-ink-soft/85">
+                        {detail}
+                      </p>
+                    </div>
+                  );
+                }) : (
+                  <p className="rounded-xl border border-line/40 bg-paper-raised/20 p-4 text-xs leading-relaxed text-ink-soft/75">
+                    {lang === "fr" ? "Aucun complément ajouté." : "No extra details added."}
+                  </p>
+                )}
               </div>
               {form.data.links.some(l => l.trim() !== "") && (
-                <div className="flex flex-col gap-1">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
-                    Links
-                  </span>
-                  <div className="flex flex-col gap-1 font-mono text-[10px] text-accent">
-                    {form.data.links.filter(l => l.trim() !== "").map((l, idx) => (
-                      <a key={idx} href={l} target="_blank" rel="noopener noreferrer" className="hover:underline truncate max-w-xs block">
-                        {l}
-                      </a>
-                    ))}
-                  </div>
+                <div className="mt-4">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
+                  Links
+                </span>
+                <div className="mt-2 flex flex-col gap-1 font-mono text-[10px] text-accent">
+                  {form.data.links.filter(l => l.trim() !== "").map((l, idx) => (
+                    <a key={idx} href={l} target="_blank" rel="noopener noreferrer" className="hover:underline truncate max-w-xs block">
+                      {l}
+                    </a>
+                  ))}
+                </div>
                 </div>
               )}
-            </div>
+              </div>
 
             {/* Contact details */}
             <div className="border-t border-line/40 pt-4 flex flex-col gap-1">
-              <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
-                Contact
-              </span>
+              <div className="flex items-center justify-between gap-3">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
+                  Contact
+                </span>
+                {renderEditButton(5)}
+              </div>
               <span className="text-xs text-ink font-semibold">
                 {form.data.name} · <span className="font-normal text-ink-soft/70">{form.data.email}</span>
                 {form.data.company && ` · ${form.data.company}`}

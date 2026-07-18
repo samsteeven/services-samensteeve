@@ -6,6 +6,8 @@ const resend = resendApiKey ? new Resend(resendApiKey) : null;
 const isTurnstileRequired = process.env.NODE_ENV === "production";
 
 const MAX_DESCRIPTION_LENGTH = 4_000;
+const MAX_SERVICE_DETAIL_LENGTH = 1_200;
+const MAX_CONTEXT_ANSWER_LENGTH = 80;
 const MAX_TEXT_LENGTH = 200;
 const MAX_LINKS = 5;
 const MAX_LINK_LENGTH = 500;
@@ -22,6 +24,8 @@ interface ContactPayload {
   teamSize: string;
   budget: string;
   goals: string[];
+  serviceDetails: Record<string, string>;
+  contextAnswers: Record<string, string>;
   links: string[];
   name: string;
   email: string;
@@ -50,6 +54,14 @@ const typeLabels: Record<string, string> = {
   other: "Autre / Pas encore défini",
 };
 
+const serviceContextKeys: Record<string, string[]> = {
+  web: ["stage", "codebase", "users", "integration"],
+  cloud: ["current", "provider", "criticality", "operations"],
+  security: ["target", "environment", "authorization", "constraints"],
+  ai: ["process", "data", "humanReview", "systems"],
+  other: ["clarity", "constraint", "decision", "stakeholders"],
+};
+
 const timelineLabels: Record<string, string> = {
   urgent: "Dès que possible / Urgent",
   short: "Sous 1 à 3 mois",
@@ -70,6 +82,26 @@ const goalLabels: Record<string, string> = {
   secure: "Sécuriser des systèmes et données critiques",
   scale: "Passer à l'échelle / améliorer la performance",
   team: "Renforcer et accompagner l'équipe technique",
+  web_mvp: "Lancer un MVP ou une première version exploitable",
+  web_platform: "Construire une plateforme métier complète",
+  web_api: "Créer ou stabiliser une API / intégration système",
+  web_refactor: "Améliorer un produit existant sans tout réécrire",
+  cloud_migration: "Migrer vers une architecture cloud ou hybride",
+  cloud_resilience: "Améliorer disponibilité, sauvegardes et reprise",
+  cloud_cost: "Réduire les coûts et clarifier l'exploitation",
+  cloud_observability: "Mettre en place monitoring, logs et alerting",
+  security_pentest: "Identifier les vulnérabilités exploitables",
+  security_remediation: "Prioriser et accompagner les corrections",
+  security_compliance: "Préparer un audit, une exigence client ou conformité",
+  security_hardening: "Durcir l'application, l'API ou l'infrastructure",
+  ai_workflow: "Automatiser un processus manuel répétitif",
+  ai_agent: "Créer un agent IA connecté aux outils métier",
+  ai_data: "Exploiter documents, données ou connaissances internes",
+  ai_integration: "Intégrer l'IA dans une application existante",
+  other_scope: "Clarifier le besoin et le périmètre",
+  other_prioritize: "Prioriser les risques et prochaines actions",
+  other_architecture: "Choisir une approche technique cohérente",
+  other_roadmap: "Construire une feuille de route réaliste",
 };
 
 const teamLabels: Record<string, string> = {
@@ -77,6 +109,52 @@ const teamLabels: Record<string, string> = {
   small: "Petite équipe (2-5 pers.)",
   medium: "Équipe moyenne (5-15 pers.)",
   large: "Grande équipe (15+)",
+};
+
+const contextQuestionLabels: Record<string, string> = {
+  "web.stage": "Stade du produit",
+  "web.codebase": "Base technique",
+  "web.users": "Utilisateurs visés",
+  "web.integration": "Intégrations attendues",
+  "cloud.current": "Infrastructure actuelle",
+  "cloud.provider": "Environnement cible ou actuel",
+  "cloud.criticality": "Niveau de criticité",
+  "cloud.operations": "Gestion opérationnelle",
+  "security.target": "Cible de l'audit",
+  "security.environment": "Environnement technique",
+  "security.authorization": "Autorisations et accès",
+  "security.constraints": "Contraintes spécifiques",
+  "ai.process": "Processus à automatiser",
+  "ai.data": "Données impliquées",
+  "ai.humanReview": "Validation humaine",
+  "ai.systems": "Systèmes existants",
+  "other.clarity": "Clarté du besoin",
+  "other.constraint": "Contraintes techniques",
+  "other.decision": "Aide à la décision",
+  "other.stakeholders": "Parties prenantes",
+};
+
+const contextOptionLabels: Record<string, Record<string, string>> = {
+  "web.stage": { idea: "Idée ou cadrage initial", prototype: "Prototype / maquette déjà existante", live: "Produit déjà en production", legacy: "Produit existant à moderniser" },
+  "web.codebase": { none: "Aucune base de code", partial: "Base partielle ou prototype", existing: "Application existante maintenue", unknown: "Je ne sais pas encore" },
+  "web.users": { internal: "Utilisateurs internes", customers: "Clients / utilisateurs externes", both: "Interne et externe", admin: "Back-office / équipe opérationnelle" },
+  "web.integration": { none: "Pas d'intégration critique", payments: "Paiement, email, WhatsApp ou notifications", business: "ERP, CRM, API métier ou base existante", unknown: "À identifier ensemble" },
+  "cloud.current": { none: "Pas encore d'infrastructure", onprem: "Serveurs locaux / on-premise", cloud: "Déjà sur cloud public", hybrid: "Hybride cloud + local" },
+  "cloud.provider": { aws: "AWS", azure: "Azure", other: "Autre hébergeur / VPS", undecided: "Pas encore décidé" },
+  "cloud.criticality": { standard: "Standard, interruption acceptable", business: "Métier important, peu d'interruption", critical: "Critique, haute disponibilité attendue", unknown: "À évaluer" },
+  "cloud.operations": { managed: "Gestion externalisée (Managed Services)", internal: "Équipe interne dédiée", hybrid: "Mix interne / externe", unknown: "À définir" },
+  "security.target": { webapp: "Application web / SaaS", api: "API / backend", infra: "Infrastructure / réseau", full: "Audit complet (app + infra)" },
+  "security.environment": { production: "Environnement de production", staging: "Pré-production / staging", dev: "Environnement de développement", multi: "Multi-environnements" },
+  "security.authorization": { full: "Accès complet fourni", limited: "Accès limité (scope défini)", none: "Pas encore d'accès", legal: "Accès soumis à validation juridique" },
+  "security.constraints": { deadline: "Contrainte de deadline", compliance: "Conformité (RGPD, PCI-DSS, etc.)", zeroDowntime: "Zéro interruption acceptée", none: "Pas de contrainte spécifique" },
+  "ai.process": { manual: "Processus 100% manuel actuellement", semi: "Partiellement automatisé", existing: "Déjà automatisé, à améliorer", unknown: "À identifier ensemble" },
+  "ai.data": { documents: "Documents / PDF / notes", database: "Base de données structurée", api: "Données via API / services externes", mixed: "Mix de plusieurs sources" },
+  "ai.humanReview": { yes: "Oui, validation obligatoire", partial: "Validation sur cas limites uniquement", no: "Non, automatisation complète souhaitée", unsure: "Pas encore décidé" },
+  "ai.systems": { none: "Aucun système existant", crm: "CRM / outil métier", erp: "ERP / système de gestion", custom: "Application sur-mesure existante" },
+  "other.clarity": { clear: "Besoin clair et documenté", partial: "Idée générale, détails à préciser", vague: "Problème identifié, solution à trouver", discovery: "Besoin d'un travail de discovery" },
+  "other.constraint": { deadline: "Contrainte de délai forte", budget: "Contrainte budgétaire stricte", technical: "Contrainte technique (legacy, stack imposé)", none: "Pas de contrainte majeure" },
+  "other.decision": { ready: "Prêt à démarrer, choix technique à valider", compare: "Comparer des options techniques", validate: "Valider une approche proposée", explore: "Explorer les possibilités" },
+  "other.stakeholders": { solo: "Décideur seul", team: "Avec une équipe interne", committee: "Comité de décision", client: "Pour un client (prestation)" },
 };
 
 const allowedTypes = new Set(Object.keys(typeLabels));
@@ -136,14 +214,44 @@ function isValidLinks(value: unknown): value is string[] {
     && value.every((link) => typeof link === "string" && link.length <= MAX_LINK_LENGTH);
 }
 
+function isValidServiceDetails(value: unknown, selectedTypes: string[]): value is Record<string, string> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+
+  const entries = Object.entries(value);
+  return entries.every(([key, detail]) =>
+    allowedTypes.has(key)
+    && selectedTypes.includes(key)
+    && typeof detail === "string"
+    && detail.trim().length <= MAX_SERVICE_DETAIL_LENGTH,
+  );
+}
+
+function isValidContextAnswers(value: unknown, selectedTypes: string[]): value is Record<string, string> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const allowedKeys = new Set(
+    selectedTypes.flatMap((type) => (serviceContextKeys[type] ?? []).map((key) => `${type}.${key}`)),
+  );
+  const entriesAreValid = Object.entries(value).every(([key, answer]) =>
+    allowedKeys.has(key)
+    && typeof answer === "string"
+    && answer.trim().length > 0
+    && answer.trim().length <= MAX_CONTEXT_ANSWER_LENGTH,
+  );
+  const requiredAnswersExist = Array.from(allowedKeys).every((key) => {
+    const answer = (value as Record<string, unknown>)[key];
+    return typeof answer === "string" && answer.trim().length > 0;
+  });
+  return entriesAreValid && requiredAnswersExist;
+}
+
 function validatePayload(payload: ContactPayload): string | null {
   if (payload.website?.trim()) return "Spam rejected";
   if (!isValidChoiceArray(payload.types, allowedTypes, 1)) return "Invalid project types";
   if (!isValidChoiceArray(payload.goals, allowedGoals, 1)) return "Invalid goals";
   if (!allowedTimelines.has(payload.timeline)) return "Invalid timeline";
   if (!allowedBudgets.has(payload.budget)) return "Invalid budget";
-  if (!allowedTeamSizes.has(payload.teamSize)) return "Invalid team size";
-  if (!allowedCodebaseValues.has(payload.hasCodebase)) return "Invalid codebase value";
+  if (payload.teamSize && !allowedTeamSizes.has(payload.teamSize)) return "Invalid team size";
+  if (payload.hasCodebase && !allowedCodebaseValues.has(payload.hasCodebase)) return "Invalid codebase value";
   if (!allowedLanguages.has(payload.lang)) return "Invalid language";
   if (!isShortText(payload.name, true)) return "Invalid name";
   if (!isShortText(payload.email, true)) return "Invalid email";
@@ -152,6 +260,8 @@ function validatePayload(payload: ContactPayload): string | null {
   if (!isShortText(payload.whatsapp)) return "Invalid WhatsApp";
   if (!isShortText(payload.source)) return "Invalid source";
   if (!isValidLinks(payload.links)) return "Invalid links";
+  if (!isValidServiceDetails(payload.serviceDetails, payload.types)) return "Invalid service details";
+  if (!isValidContextAnswers(payload.contextAnswers, payload.types)) return "Invalid context answers";
   if (!isTurnstileRequired && !payload.turnstileToken) return null;
   if (typeof payload.turnstileToken !== "string" || payload.turnstileToken.length > 2048) {
     return "Invalid verification token";
@@ -159,7 +269,7 @@ function validatePayload(payload: ContactPayload): string | null {
   if (!payload.turnstileToken.trim()) return "Missing verification token";
   if (typeof payload.description !== "string") return "Invalid description";
   const description = payload.description.trim();
-  if (description.length < 20 || description.length > MAX_DESCRIPTION_LENGTH) {
+  if (description.length > MAX_DESCRIPTION_LENGTH) {
     return "Invalid description length";
   }
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email.trim())) {
@@ -232,11 +342,11 @@ export async function POST(request: Request) {
   const {
     types,
     description,
-    hasCodebase,
     timeline,
-    teamSize,
     budget,
     goals,
+    serviceDetails,
+    contextAnswers,
     links,
     name,
     email,
@@ -265,6 +375,22 @@ export async function POST(request: Request) {
     .filter(Boolean)
     .map(escapeHtml)
     .join("<br>") || "Aucun lien fourni";
+  const serviceDetailsList = (types ?? [])
+    .map((type) => {
+      const label = typeLabels[type] ?? escapeHtml(type);
+      const detail = escapeHtml(serviceDetails[type]?.trim() ?? "");
+      if (!detail) return "";
+      return `<p style="margin: 0 0 14px;"><strong>${label}</strong><br><span style="white-space: pre-wrap;">${detail}</span></p>`;
+    })
+    .filter(Boolean)
+    .join("") || "Non précisé";
+  const contextAnswersList = Object.entries(contextAnswers ?? {})
+    .map(([key, value]) => {
+      const questionLabel = contextQuestionLabels[key] ?? key;
+      const optionLabel = contextOptionLabels[key]?.[value] ?? value;
+      return `<p style="margin: 0 0 8px;"><strong>${escapeHtml(questionLabel)}</strong> : ${escapeHtml(optionLabel)}</p>`;
+    })
+    .join("") || "Non précisé";
 
   const safeName = escapeHtml(name.trim());
   const safeEmail = escapeHtml(email.trim());
@@ -275,7 +401,6 @@ export async function POST(request: Request) {
   const safeSource = source ? escapeHtml(source.trim()) : "";
   const timelineLabel = timelineLabels[timeline] ?? escapeHtml(timeline);
   const budgetLabel = budgetLabels[budget] ?? `Non précisé (${escapeHtml(budget)})`;
-  const teamLabel = teamLabels[teamSize] ?? escapeHtml(teamSize);
   const subjectName = name.trim().replace(/[\r\n]+/g, " ");
   const subjectTypes = typeList.replace(/[\r\n]+/g, " ");
 
@@ -326,6 +451,16 @@ export async function POST(request: Request) {
   </div>
 
   <div class="section">
+    <div class="label">Contexte spécifique par service</div>
+    <div class="value">${serviceDetailsList}</div>
+  </div>
+
+  <div class="section">
+    <div class="label">Réponses techniques ciblées</div>
+    <div class="value">${contextAnswersList}</div>
+  </div>
+
+  <div class="section">
     <div class="label">Budget estimé</div>
     <div class="value">${budgetLabel}</div>
   </div>
@@ -338,18 +473,8 @@ export async function POST(request: Request) {
   <hr class="divider">
 
   <div class="section">
-    <div class="label">Base de code existante</div>
-    <div class="value">${hasCodebase === "yes" ? "Oui, projet existant" : "Non, démarrage de zéro"}</div>
-  </div>
-
-  <div class="section">
     <div class="label">Quand commencer</div>
     <div class="value">${timelineLabel}</div>
-  </div>
-
-  <div class="section">
-    <div class="label">Taille de l'équipe technique</div>
-    <div class="value">${teamLabel}</div>
   </div>
 
   ${safeSource ? `<div class="section">

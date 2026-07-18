@@ -240,17 +240,17 @@ export const fr = {
     subtitle: "Décrivez votre besoin. Je reviens vers vous sous 24h avec une première analyse technique et méthodologique.",
     steps: {
       step1: "Offre",
-      step2: "Portée",
-      step3: "Objectifs",
-      step4: "Contexte",
+      step2: "Objectifs",
+      step3: "Questions ciblées",
+      step4: "Compléments",
       step5: "Contact",
       step6: "Récapitulatif",
     },
     questions: {
       step1: "Quel type de projet souhaitez-vous démarrer ?",
-      step2: "Dites-moi ce que vous cherchez à faire",
-      step3: "À quoi ressemble la réussite ?",
-      step4: "Partagez tout ce qui m'aide à comprendre",
+      step2: "À quoi ressemble la réussite ?",
+      step3: "Quelques questions pour cadrer correctement",
+      step4: "Quelque chose à ajouter ?",
       step5: "Où peut-on vous joindre ?",
       step6: "Un dernier coup d'œil",
     },
@@ -299,12 +299,314 @@ export const fr = {
         scale: "Passer à l'échelle / améliorer la performance",
         team: "Renforcer et accompagner l'équipe technique"
       },
+      serviceGoals: {
+        web: {
+          title: "Résultats attendus pour le logiciel",
+          options: {
+            web_mvp: "Lancer un MVP ou une première version exploitable",
+            web_platform: "Construire une plateforme métier complète",
+            web_api: "Créer ou stabiliser une API / intégration système",
+            web_refactor: "Améliorer un produit existant sans tout réécrire"
+          }
+        },
+        cloud: {
+          title: "Résultats attendus pour l'architecture cloud",
+          options: {
+            cloud_migration: "Migrer vers une architecture cloud ou hybride",
+            cloud_resilience: "Améliorer disponibilité, sauvegardes et reprise",
+            cloud_cost: "Réduire les coûts et clarifier l'exploitation",
+            cloud_observability: "Mettre en place monitoring, logs et alerting"
+          }
+        },
+        security: {
+          title: "Résultats attendus pour la sécurité",
+          options: {
+            security_pentest: "Identifier les vulnérabilités exploitables",
+            security_remediation: "Prioriser et accompagner les corrections",
+            security_compliance: "Préparer un audit, une exigence client ou conformité",
+            security_hardening: "Durcir l'application, l'API ou l'infrastructure"
+          }
+        },
+        ai: {
+          title: "Résultats attendus pour l'automatisation IA",
+          options: {
+            ai_workflow: "Automatiser un processus manuel répétitif",
+            ai_agent: "Créer un agent IA connecté aux outils métier",
+            ai_data: "Exploiter documents, données ou connaissances internes",
+            ai_integration: "Intégrer l'IA dans une application existante"
+          }
+        },
+        other: {
+          title: "Résultats attendus à clarifier",
+          options: {
+            other_scope: "Clarifier le besoin et le périmètre",
+            other_prioritize: "Prioriser les risques et prochaines actions",
+            other_architecture: "Choisir une approche technique cohérente",
+            other_roadmap: "Construire une feuille de route réaliste"
+          }
+        }
+      },
       teamLabel: "Taille de votre équipe technique actuelle",
       teamOptions: {
         solo: "Aucun développeur (projet solo)",
         small: "Petite équipe (2 à 5 personnes)",
         medium: "Équipe moyenne (5 à 15 personnes)",
         large: "Grande équipe (plus de 15 personnes)"
+      },
+      serviceContextLabel: "Informations spécifiques aux services sélectionnés",
+      serviceContext: {
+        web: {
+          title: "Ingénierie logicielle",
+          placeholder: "Précisez le logiciel ou produit à construire : utilisateurs, rôles, workflows, fonctionnalités critiques, intégrations/API, contraintes métier ou de livraison...",
+          prompts: ["Utilisateurs & rôles", "Fonctionnalités critiques", "Intégrations/API", "Contraintes métier"]
+        },
+        cloud: {
+          title: "Architecture Cloud",
+          placeholder: "Décrivez l'infrastructure actuelle ou cible : hébergeur, environnements, disponibilité attendue, sauvegardes, migration, scalabilité ou contraintes réseau...",
+          prompts: ["Infrastructure actuelle", "Disponibilité", "Sauvegardes", "Migration/scalabilité"]
+        },
+        security: {
+          title: "Pentest & Sécurité",
+          placeholder: "Décrivez le périmètre à auditer : application/API, environnements autorisés, comptes de test, données sensibles, contraintes de test ou risques déjà identifiés...",
+          prompts: ["Périmètre autorisé", "Comptes de test", "Données sensibles", "Contraintes d'audit"]
+        },
+        ai: {
+          title: "Automatisation IA",
+          placeholder: "Décrivez le processus à automatiser : tâches manuelles, outils utilisés, sources de données, validations humaines, décisions à automatiser et risques à éviter...",
+          prompts: ["Processus actuel", "Outils & données", "Décisions IA", "Contrôle humain"]
+        },
+        other: {
+          title: "Besoin à cadrer",
+          placeholder: "Expliquez ce qui est encore flou, les problèmes que vous voulez résoudre, les pistes envisagées et ce qui vous aiderait à décider de la bonne approche...",
+          prompts: ["Problème principal", "Pistes envisagées", "Contraintes", "Décision attendue"]
+        }
+      },
+      contextGroups: {
+        web: {
+          title: "Contexte logiciel",
+          questions: [
+            {
+              key: "stage",
+              label: "Stade du produit",
+              options: [
+                { value: "idea", label: "Idée ou cadrage initial" },
+                { value: "prototype", label: "Prototype / maquette déjà existante" },
+                { value: "live", label: "Produit déjà en production" },
+                { value: "legacy", label: "Produit existant à moderniser" }
+              ]
+            },
+            {
+              key: "codebase",
+              label: "Base technique",
+              options: [
+                { value: "none", label: "Aucune base de code" },
+                { value: "partial", label: "Base partielle ou prototype" },
+                { value: "existing", label: "Application existante maintenue" },
+                { value: "unknown", label: "Je ne sais pas encore" }
+              ]
+            },
+            {
+              key: "users",
+              label: "Utilisateurs visés",
+              options: [
+                { value: "internal", label: "Utilisateurs internes" },
+                { value: "customers", label: "Clients / utilisateurs externes" },
+                { value: "both", label: "Interne et externe" },
+                { value: "admin", label: "Back-office / équipe opérationnelle" }
+              ]
+            },
+            {
+              key: "integration",
+              label: "Intégrations attendues",
+              options: [
+                { value: "none", label: "Pas d'intégration critique" },
+                { value: "payments", label: "Paiement, email, WhatsApp ou notifications" },
+                { value: "business", label: "ERP, CRM, API métier ou base existante" },
+                { value: "unknown", label: "À identifier ensemble" }
+              ]
+            }
+          ]
+        },
+        cloud: {
+          title: "Contexte cloud",
+          questions: [
+            {
+              key: "current",
+              label: "Infrastructure actuelle",
+              options: [
+                { value: "none", label: "Pas encore d'infrastructure" },
+                { value: "onprem", label: "Serveurs locaux / on-premise" },
+                { value: "cloud", label: "Déjà sur cloud public" },
+                { value: "hybrid", label: "Hybride cloud + local" }
+              ]
+            },
+            {
+              key: "provider",
+              label: "Environnement cible ou actuel",
+              options: [
+                { value: "aws", label: "AWS" },
+                { value: "azure", label: "Azure" },
+                { value: "other", label: "Autre hébergeur / VPS" },
+                { value: "undecided", label: "Pas encore décidé" }
+              ]
+            },
+            {
+              key: "criticality",
+              label: "Niveau de criticité",
+              options: [
+                { value: "standard", label: "Standard, interruption acceptable" },
+                { value: "business", label: "Métier important, peu d'interruption" },
+                { value: "critical", label: "Critique, haute disponibilité attendue" },
+                { value: "unknown", label: "À évaluer" }
+              ]
+            },
+            {
+              key: "operations",
+              label: "Priorité opérationnelle",
+              options: [
+                { value: "migration", label: "Migration" },
+                { value: "resilience", label: "Résilience / sauvegardes" },
+                { value: "cost", label: "Coûts et optimisation" },
+                { value: "monitoring", label: "Monitoring et alerting" }
+              ]
+            }
+          ]
+        },
+        security: {
+          title: "Contexte sécurité",
+          questions: [
+            {
+              key: "target",
+              label: "Cible à tester",
+              options: [
+                { value: "web", label: "Application web" },
+                { value: "api", label: "API / backend" },
+                { value: "infra", label: "Infrastructure / réseau" },
+                { value: "mixed", label: "Périmètre mixte" }
+              ]
+            },
+            {
+              key: "environment",
+              label: "Environnement autorisé",
+              options: [
+                { value: "staging", label: "Préproduction / staging" },
+                { value: "production", label: "Production encadrée" },
+                { value: "both", label: "Staging et production" },
+                { value: "unknown", label: "À définir avant audit" }
+              ]
+            },
+            {
+              key: "authorization",
+              label: "Autorisation et accès",
+              options: [
+                { value: "ready", label: "Autorisation et comptes prêts" },
+                { value: "accounts", label: "Comptes de test à préparer" },
+                { value: "scope", label: "Périmètre à formaliser" },
+                { value: "help", label: "Besoin d'aide pour cadrer légalement" }
+              ]
+            },
+            {
+              key: "constraints",
+              label: "Contraintes de test",
+              options: [
+                { value: "low-impact", label: "Tests non destructifs uniquement" },
+                { value: "authenticated", label: "Tests avec rôles authentifiés" },
+                { value: "compliance", label: "Contrainte audit / conformité" },
+                { value: "none", label: "Aucune contrainte particulière" }
+              ]
+            }
+          ]
+        },
+        ai: {
+          title: "Contexte automatisation IA",
+          questions: [
+            {
+              key: "process",
+              label: "Processus actuel",
+              options: [
+                { value: "manual", label: "Très manuel et répétitif" },
+                { value: "spreadsheets", label: "Basé sur fichiers / tableurs" },
+                { value: "tools", label: "Déjà dans des outils métier" },
+                { value: "unclear", label: "Encore flou" }
+              ]
+            },
+            {
+              key: "data",
+              label: "Sources de données",
+              options: [
+                { value: "documents", label: "Documents, PDF, emails ou messages" },
+                { value: "database", label: "Base de données / API" },
+                { value: "mixed", label: "Sources multiples" },
+                { value: "not-ready", label: "Données pas encore structurées" }
+              ]
+            },
+            {
+              key: "humanReview",
+              label: "Validation humaine",
+              options: [
+                { value: "required", label: "Validation humaine obligatoire" },
+                { value: "exceptions", label: "Seulement sur cas douteux" },
+                { value: "autonomous", label: "Automatisation largement autonome" },
+                { value: "unknown", label: "À décider" }
+              ]
+            },
+            {
+              key: "systems",
+              label: "Systèmes à connecter",
+              options: [
+                { value: "none", label: "Aucun système existant" },
+                { value: "saas", label: "Outils SaaS / CRM / email" },
+                { value: "internal", label: "Application ou API interne" },
+                { value: "multiple", label: "Plusieurs systèmes" }
+              ]
+            }
+          ]
+        },
+        other: {
+          title: "Contexte à clarifier",
+          questions: [
+            {
+              key: "clarity",
+              label: "Niveau de clarté",
+              options: [
+                { value: "problem", label: "Le problème est clair, pas la solution" },
+                { value: "solution", label: "Une solution est envisagée" },
+                { value: "audit", label: "Besoin d'un avis technique externe" },
+                { value: "early", label: "C'est encore exploratoire" }
+              ]
+            },
+            {
+              key: "constraint",
+              label: "Contrainte principale",
+              options: [
+                { value: "time", label: "Temps / urgence" },
+                { value: "budget", label: "Budget" },
+                { value: "risk", label: "Risque technique ou sécurité" },
+                { value: "alignment", label: "Alignement équipe / décision" }
+              ]
+            },
+            {
+              key: "decision",
+              label: "Décision attendue",
+              options: [
+                { value: "build", label: "Construire" },
+                { value: "secure", label: "Sécuriser" },
+                { value: "automate", label: "Automatiser" },
+                { value: "choose", label: "Choisir la bonne direction" }
+              ]
+            },
+            {
+              key: "stakeholders",
+              label: "Parties prenantes",
+              options: [
+                { value: "founder", label: "Fondateur / direction" },
+                { value: "product", label: "Produit / métier" },
+                { value: "technical", label: "Équipe technique" },
+                { value: "mixed", label: "Plusieurs profils" }
+              ]
+            }
+          ]
+        }
       },
       linksLabel: "Liens utiles (Figma, GitHub, staging)",
       addLink: "Ajouter un autre lien",
@@ -333,6 +635,12 @@ export const fr = {
       verificationLoading: "Chargement de la vérification...",
       verificationError: "La vérification anti-bot n'a pas pu se charger.",
       verificationRetry: "Réessayer la vérification",
+      edit: "Modifier",
+    },
+    quickCall: {
+      title: "Vous préférez aller droit au but ?",
+      message: "Si votre besoin est urgent ou difficile à cadrer dans un formulaire, vous pouvez réserver directement un appel court.",
+      cta: "Réserver un appel"
     },
     success: {
       eyebrow: "Soumission confirmée",

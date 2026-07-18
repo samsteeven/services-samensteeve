@@ -95,7 +95,8 @@ app/
 - `hero-section.tsx` — Hero avec grille SVG animée, badge disponibilité, dual CTA
 - `services-grid.tsx` — Grille 2×2 avec mini-visuals interactifs par service
 - `process-timeline.tsx` — Timeline verticale 4 phases (alterné gauche/droite)
-- `project-form.tsx` — Formulaire multi-étapes (client)
+- `project-form.tsx` — Orchestrateur formulaire multi-étapes (client)
+- `project-form/` — Composants extraits : step-service, step-goals, step-context, step-details, step-contact, step-recap, types, contact-api-adapter
 - `use-project-form.ts` — Hook de logique formulaire (validation, soumission POST)
 - `blog-listing.tsx` — Listing articles avec filtrage par tag (client)
 - `blog-card.tsx` — Carte d'article
@@ -104,7 +105,7 @@ app/
 
 ## Services
 
-4 services définis dans `lib/services.ts` :
+4 services définis dans `lib/service-registry.ts` (réexportés via `lib/services.ts`) :
 
 | Slug | Type contact | Étude liée |
 |---|---|---|
@@ -114,6 +115,8 @@ app/
 | `automatisation-ia` | `ai` | digitrans-cm |
 
 Chaque service a une icône, un type de contact associé (pour le formulaire), et une étude de cas liée.
+
+Constantes partagées (`lib/constants.ts`) : `SITE_URL`, `PORTFOLIO_URL`, `CONTACT_EMAIL`, `CAL_URL`, `WHATSAPP_URL`, `SOCIAL_LINKS`.
 
 ## Études de cas
 

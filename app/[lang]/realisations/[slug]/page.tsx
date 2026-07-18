@@ -25,13 +25,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const cs = getCaseStudyBySlug(slug);
   if (!cs) return {};
   const locale = lang === "fr" ? cs.fr : cs.en;
-  return createPageMetadata({
+  
+  const metadata = createPageMetadata({
     lang: langKey,
     title: locale.title,
     description: locale.tagline,
     path: `/realisations/${slug}`,
     type: "article",
   });
+  
+  // Canonical cross-domain pointant vers le portfolio principal (source originale)
+  // pour éviter le contenu dupliqué entre services.samensteeve.com et samensteeve.com
+  const portfolioCanonical = `https://samensteeve.com/${lang}/work/${slug}`;
+  
+  return {
+    ...metadata,
+    alternates: {
+      ...metadata.alternates,
+      canonical: portfolioCanonical,
+    },
+  };
 }
 
 export default async function CaseStudyPage({ params }: PageProps) {

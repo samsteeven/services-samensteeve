@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import type { Language } from "@/lib/translations";
+import type { Language } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
-import { getT } from "@/lib/translations";
+import { getT } from "@/lib/i18n";
 import { caseStudies } from "@/lib/case-studies";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,12 +15,11 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   const langKey = lang as Language;
+  const t = getT(langKey);
   return createPageMetadata({
     lang: langKey,
-    title: lang === "fr" ? "Réalisations" : "Case Studies",
-    description: lang === "fr"
-      ? "Études de cas de projets conçus, développés et déployés en production : plateforme legaltech, architecture cloud hybride, microservices agro-industriels."
-      : "Case studies of projects designed, built, and shipped to production: legaltech platform, hybrid cloud architecture, agro-industrial microservices.",
+    title: t.metadata.realisationsTitle,
+    description: t.metadata.realisationsDescription,
     path: "/realisations",
   });
 }

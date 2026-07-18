@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import type { Language } from "@/lib/translations";
+import type { Language } from "@/lib/i18n";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://services.samensteeve.com";

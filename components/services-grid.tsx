@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getT, type Language } from "@/lib/translations";
+import { getT, type Language } from "@/lib/i18n";
 import { services } from "@/lib/services";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { ScrollReveal } from "./scroll-reveal";
@@ -65,7 +65,7 @@ export function ServicesGrid({ lang }: { lang: Language }) {
 
                   <div className="mt-8 rounded-xl bg-paper px-5 py-4 shadow-[inset_0_0_0_1px_var(--color-line)]">
                     <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft">
-                      {lang === "fr" ? "Résultat visé" : "Target outcome"}
+                      {t.servicesPage.outcomeLabel}
                     </p>
                     <p className="mt-3 text-sm font-semibold leading-relaxed text-ink">
                       {primaryOutcome}
@@ -95,7 +95,7 @@ export function ServicesGrid({ lang }: { lang: Language }) {
 
                     <div className="mt-8 flex items-center justify-between border-t border-line/40 pt-5">
                       <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink transition-colors duration-300 group-hover:text-accent">
-                        {lang === "fr" ? "Voir le détail" : "View details"}
+                        {t.servicesPage.viewDetails}
                       </span>
                       <span className="h-px w-12 bg-line transition-colors duration-300 group-hover:bg-accent" />
                     </div>

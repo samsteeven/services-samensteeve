@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import type { Language } from "@/lib/translations";
+import type { Language } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
-import { getT } from "@/lib/translations";
+import { getT } from "@/lib/i18n";
 import { caseStudies, getCaseStudyBySlug } from "@/lib/case-studies";
 import Link from "next/link";
 import Image from "next/image";
@@ -166,7 +166,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
           <ScrollReveal>
             <div>
               <h2 className="font-display text-lg font-bold text-ink">
-                {lang === "fr" ? "Défis" : "Challenges"}
+                {t.caseStudy.challenges}
               </h2>
               <ul className="mt-6 flex flex-col gap-4">
                 {locale.challenges.map((c, i) => (
@@ -183,7 +183,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
           <ScrollReveal delay={80}>
             <div>
               <h2 className="font-display text-lg font-bold text-ink">
-                {lang === "fr" ? "Solutions" : "Solutions"}
+                {t.caseStudy.solutions}
               </h2>
               <ul className="mt-6 flex flex-col gap-4">
                 {locale.solutions.map((s, i) => (
@@ -200,7 +200,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
           <ScrollReveal delay={160}>
             <div>
               <h2 className="font-display text-lg font-bold text-ink">
-                {lang === "fr" ? "Résultats" : "Results"}
+                {t.caseStudy.results}
               </h2>
               <ul className="mt-6 flex flex-col gap-4">
                 {locale.results.map((r, i) => (
@@ -220,12 +220,10 @@ export default async function CaseStudyPage({ params }: PageProps) {
         <ScrollReveal delay={300} className="mt-20 rounded-2xl border border-line bg-paper-raised/40 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h3 className="font-display text-xl font-bold text-ink">
-              {lang === "fr" ? "Un projet similaire ?" : "A similar project?"}
+              {t.bottomCta.similarProject}
             </h3>
             <p className="mt-2 text-sm text-ink-soft">
-              {lang === "fr"
-                ? "Parlons de votre besoin. Je reviens sous 24h avec une analyse concrète."
-                : "Let's talk about your need. I'll get back within 24h with a concrete analysis."}
+              {t.bottomCta.similarDescription}
             </p>
           </div>
           <Link

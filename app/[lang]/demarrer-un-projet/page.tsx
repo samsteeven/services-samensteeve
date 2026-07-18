@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import type { Language } from "@/lib/translations";
+import type { Language } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
-import { getT } from "@/lib/translations";
+import { getT } from "@/lib/i18n";
 import { ProjectForm } from "@/components/project-form";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { Suspense } from "react";
@@ -13,12 +13,11 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   const langKey = lang as Language;
+  const t = getT(langKey);
   return createPageMetadata({
     lang: langKey,
-    title: lang === "fr" ? "Démarrer un projet" : "Start a project",
-    description: lang === "fr"
-      ? "Décrivez votre projet en 6 étapes simples. Réponse sous 24h avec une analyse technique et une proposition concrète."
-      : "Describe your project in 6 simple steps. Response within 24h with a technical analysis and a concrete proposal.",
+    title: t.metadata.contactTitle,
+    description: t.metadata.contactDescription,
     path: "/demarrer-un-projet",
   });
 }
@@ -48,7 +47,7 @@ export default async function StartProjectPage({ params }: PageProps) {
           <Suspense fallback={
             <div className="w-full max-w-2xl flex items-center justify-center py-20">
               <span className="font-mono text-xs text-ink-soft/40 animate-pulse">
-                {lang === "fr" ? "Chargement du formulaire..." : "Loading form..."}
+                {t.contact.recapLabels.loading}
               </span>
             </div>
           }>

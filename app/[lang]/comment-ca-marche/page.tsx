@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import type { Language } from "@/lib/translations";
+import type { Language } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
-import { getT } from "@/lib/translations";
+import { getT } from "@/lib/i18n";
 import { ProcessTimeline } from "@/components/process-timeline";
 
 import { ScrollReveal } from "@/components/scroll-reveal";
@@ -13,12 +13,11 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   const langKey = lang as Language;
+  const t = getT(langKey);
   return createPageMetadata({
     lang: langKey,
-    title: lang === "fr" ? "Comment ça marche" : "How It Works",
-    description: lang === "fr"
-      ? "Une méthodologie transparente en 4 phases : cadrage, architecture, développement itératif et livraison. Pas de boîte noire, des livrables concrets à chaque étape."
-      : "A transparent 4-phase methodology: scoping, architecture, iterative development, and delivery. No black box, concrete deliverables at each stage.",
+    title: t.metadata.processTitle,
+    description: t.metadata.processDescription,
     path: "/comment-ca-marche",
   });
 }

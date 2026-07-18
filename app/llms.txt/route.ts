@@ -2,7 +2,7 @@ import { blogMetadata } from "@/content/blog/index";
 import { BASE_URL } from "@/lib/metadata";
 import { caseStudies } from "@/lib/case-studies";
 import { services } from "@/lib/services";
-import { getT } from "@/lib/translations";
+import { getT } from "@/lib/i18n";
 
 export const dynamic = "force-static";
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import type { Language } from "@/lib/translations";
+import type { Language } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
-import { getT } from "@/lib/translations";
+import { getT } from "@/lib/i18n";
 import { services } from "@/lib/services";
 import Link from "next/link";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
@@ -14,12 +14,11 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   const langKey = lang as Language;
+  const t = getT(langKey);
   return createPageMetadata({
     lang: langKey,
-    title: lang === "fr" ? "Services d'ingénierie logicielle" : "Software engineering services",
-    description: lang === "fr"
-      ? "Ingénierie logicielle, architecture cloud, pentest applicatif et automatisation IA pour systèmes de production."
-      : "Software engineering, cloud architecture, application pentesting, and AI automation for production systems.",
+    title: t.metadata.servicesTitle,
+    description: t.metadata.servicesDescription,
     path: "/services",
   });
 }
@@ -118,9 +117,7 @@ export default async function ServicesPage({ params }: PageProps) {
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-8">
           <ScrollReveal>
             <p className="text-sm text-ink-soft">
-              {lang === "fr"
-                ? "Vous ne savez pas encore quelle prestation correspond à votre situation ?"
-                : "Not sure which service fits your situation yet?"}
+              {t.servicesPage.ctaUnsure}
             </p>
             <Link
               href={`/${lang}/demarrer-un-projet`}

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import type { Language } from "@/lib/translations";
+import type { Language } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
-import { getT } from "@/lib/translations";
+import { getT } from "@/lib/i18n";
 import { blogMetadata, getPostBySlug } from "@/content/blog/index";
 import { notFound } from "next/navigation";
 import Link from "next/link";

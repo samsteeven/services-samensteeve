@@ -1,13 +1,15 @@
 import Link from "next/link";
 import { PostMeta } from "@/content/blog/types";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { getT, type Language } from "@/lib/i18n";
 
 interface BlogCardProps {
   post: PostMeta;
-  lang: string;
+  lang: Language;
 }
 
 export function BlogCard({ post, lang }: BlogCardProps) {
+  const t = getT(lang);
   const formattedDate = new Date(post.date).toLocaleDateString(
     lang === "fr" ? "fr-FR" : "en-US",
     { year: "numeric", month: "short", day: "numeric" }
@@ -30,7 +32,7 @@ export function BlogCard({ post, lang }: BlogCardProps) {
           </span>
           <span className="flex items-center gap-1">
             <Clock className="h-3.5 w-3.5" />
-            {post.readTime} min {lang === "fr" ? "lecture" : "read"}
+            {post.readTime} min {t.blog.readTime}
           </span>
         </div>
 
@@ -60,7 +62,7 @@ export function BlogCard({ post, lang }: BlogCardProps) {
 
         {/* Arrow */}
         <span className="flex items-center gap-1 font-mono text-[10px] uppercase font-bold tracking-widest text-accent opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
-          {lang === "fr" ? "Lire" : "Read"}
+          {t.blog.readMore}
           <ArrowRight className="h-3 w-3" />
         </span>
       </div>

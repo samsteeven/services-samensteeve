@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import type { Language } from "@/lib/translations";
+import type { Language } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
-import { getT } from "@/lib/translations";
+import { getT } from "@/lib/i18n";
 import { HeroSection } from "@/components/hero-section";
 import { ServicesGrid } from "@/components/services-grid";
 import Link from "next/link";
@@ -15,14 +15,11 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   const langKey = lang as Language;
+  const t = getT(langKey);
   return createPageMetadata({
     lang: langKey,
-    title: lang === "fr"
-      ? "Ingénieur Logiciel Freelance & Architecte Solutions — Douala"
-      : "Freelance Software Engineer & Solution Architect — Douala",
-    description: lang === "fr"
-      ? "Je conçois, sécurise et automatise des systèmes logiciels pour des entreprises qui ont besoin que ça fonctionne en production. Ingénierie logicielle, architecture cloud, pentest applicatif, automatisation IA."
-      : "I design, secure, and automate software systems for companies that need things to work in production. Software engineering, cloud architecture, application pentesting, AI automation.",
+    title: t.metadata.homeTitle,
+    description: t.metadata.homeDescription,
     path: "",
   });
 }
@@ -56,7 +53,7 @@ export default async function HomePage({ params }: PageProps) {
             <div className="max-w-2xl">
               <ScrollReveal>
                 <span className="font-mono text-[10px] uppercase tracking-[0.2em] font-bold text-accent">
-                  {lang === "fr" ? "Méthodologie" : "Methodology"}
+                  {t.processPage.methodology}
                 </span>
               </ScrollReveal>
               <ScrollReveal delay={60} className="mt-4">
@@ -70,7 +67,7 @@ export default async function HomePage({ params }: PageProps) {
                 href={`/${lang}/comment-ca-marche`}
                 className="inline-flex shrink-0 items-center gap-2 rounded-full border border-line bg-paper-raised px-5 py-2.5 font-mono text-[10px] uppercase font-bold tracking-widest text-ink hover:border-accent/40 hover:text-accent transition duration-200"
               >
-                {lang === "fr" ? "Voir le processus détaillé" : "View detailed process"}
+                {t.processPage.viewProcess}
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </ScrollReveal>
@@ -137,15 +134,13 @@ export default async function HomePage({ params }: PageProps) {
         <div className="mx-auto max-w-3xl px-4 sm:px-8 text-center">
           <ScrollReveal>
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] font-bold text-accent mb-6 block">
-              {lang === "fr" ? "Prêt à lancer ?" : "Ready to Start?"}
+              {t.bottomCta.ready}
             </span>
             <h2 className="font-display text-3xl font-extrabold tracking-tight text-ink sm:text-5xl leading-[1.1]">
-              {lang === "fr" ? "Besoin de construire, sécuriser ou automatiser ?" : "Need to build, secure, or automate?"}
+              {t.bottomCta.needToBuild}
             </h2>
             <p className="mt-6 text-sm md:text-base leading-relaxed text-ink-soft max-w-2xl mx-auto">
-              {lang === "fr"
-                ? "Décrivez-moi votre projet. Je reviens sous 24h avec une analyse technique et une proposition concrète."
-                : "Tell me about your project. I'll get back to you within 24h with a technical analysis and a concrete proposal."}
+              {t.bottomCta.description}
             </p>
           </ScrollReveal>
           <ScrollReveal delay={100} className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">

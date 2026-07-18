@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getT, type Language } from "@/lib/translations";
+import { getT, type Language } from "@/lib/i18n";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { ScrollReveal } from "./scroll-reveal";
 
@@ -12,11 +12,6 @@ const GRAIN_URL =
 
 export function HeroSection({ lang }: { lang: Language }) {
   const t = getT(lang);
-
-  const heroSub =
-    lang === "fr"
-      ? "Ingénieur logiciel indépendant et Tech Lead basé à Douala. Je conçois des systèmes logiciels robustes, déploie des infrastructures cloud hybrides et automatise vos workflows métier avec des agents IA supervisables."
-      : "Freelance Software Engineer and Tech Lead based in Douala. I design robust software systems, deploy hybrid cloud infrastructures, and automate business workflows with supervisable AI agents.";
 
   return (
     <section className="relative overflow-hidden pt-12 pb-16 md:pt-16 md:pb-24 border-b border-line/40 bg-paper">
@@ -75,41 +70,31 @@ export function HeroSection({ lang }: { lang: Language }) {
         <ScrollReveal delay={0}>
           <span className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/8 px-4 py-1.5 font-mono text-[10px] uppercase tracking-widest font-bold text-accent mb-6">
             <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse inline-block" />
-            {lang === "fr" ? "Disponible · Douala, Cameroun" : "Available · Douala, Cameroon"}
+            {t.hero.availability}
           </span>
         </ScrollReveal>
 
         {/* H1 */}
         <ScrollReveal delay={70}>
           <h1 className="font-display text-4xl font-extrabold tracking-tight text-ink sm:text-5xl md:text-[3.75rem] lg:text-[4.25rem] leading-[1.15] md:leading-[1.1]">
-            {lang === "fr" ? (
-              <>
-                Vos systèmes tiennent en{" "}
-                <span className="relative inline-block px-4 py-1 mx-1 bg-accent text-white rounded-md transform -rotate-1 select-none">
-                  {/* Pink Dot */}
-                  <span className="absolute -top-1.5 -left-1.5 w-3 h-3 rounded-full bg-pink-500 border-2 border-white dark:border-zinc-950 animate-pulse" />
-                  production
-                </span>
-                {". C'est mon seul critère."}
-              </>
-            ) : (
-              <>
-                Your systems hold in{" "}
-                <span className="relative inline-block px-4 py-1 mx-1 bg-accent text-white rounded-md transform -rotate-1 select-none">
-                  {/* Pink Dot */}
-                  <span className="absolute -top-1.5 -left-1.5 w-3 h-3 rounded-full bg-pink-500 border-2 border-white dark:border-zinc-950 animate-pulse" />
-                  production
-                </span>
-                {". That's my only standard."}
-              </>
-            )}
+            {t.hero.headline.split("**production**").map((part, i) => (
+              <span key={i}>
+                {part}
+                {i === 0 && (
+                  <span className="relative inline-block px-4 py-1 mx-1 bg-accent text-white rounded-md transform -rotate-1 select-none">
+                    <span className="absolute -top-1.5 -left-1.5 w-3 h-3 rounded-full bg-pink-500 border-2 border-white dark:border-zinc-950 animate-pulse" />
+                    production
+                  </span>
+                )}
+              </span>
+            ))}
           </h1>
         </ScrollReveal>
 
         {/* Sous-titre */}
         <ScrollReveal delay={160} className="mt-5 max-w-2xl">
           <p className="text-sm md:text-base leading-relaxed text-ink-soft">
-            {heroSub}
+            {t.hero.heroSub}
           </p>
         </ScrollReveal>
 
@@ -131,7 +116,7 @@ export function HeroSection({ lang }: { lang: Language }) {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 font-mono text-[10px] uppercase font-bold tracking-widest text-white transition-all duration-300 hover:scale-105 hover:brightness-110 hover:shadow-lg hover:shadow-accent/30 active:scale-[0.96]"
           >
-            {lang === "fr" ? "Réserver un appel de 30 min" : "Book a 30-min call"}
+            {t.hero.ctaCall}
           </a>
         </ScrollReveal>
 
@@ -141,7 +126,7 @@ export function HeroSection({ lang }: { lang: Language }) {
             href={`/${lang}/services`}
             className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-ink-soft/55 hover:text-accent transition-colors duration-200 group"
           >
-            {lang === "fr" ? "ou explorez les offres" : "or explore the services"}
+            {t.hero.ctaExplore}
             <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5" />
           </Link>
         </ScrollReveal>
@@ -150,7 +135,7 @@ export function HeroSection({ lang }: { lang: Language }) {
         <ScrollReveal delay={420} className="mt-10">
           <div className="flex flex-col items-center gap-2">
             <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-ink-soft/35">
-              {lang === "fr" ? "Découvrir" : "Explore"}
+              {t.hero.scrollDown}
             </span>
             <ChevronDown className="h-4 w-4 text-ink-soft/30 animate-bounce" />
           </div>

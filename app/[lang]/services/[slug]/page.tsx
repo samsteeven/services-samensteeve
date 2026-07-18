@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import type { Language } from "@/lib/translations";
+import type { Language } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
-import { getT } from "@/lib/translations";
+import { getT } from "@/lib/i18n";
 import { services, getServiceBySlug } from "@/lib/services";
 import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
@@ -80,7 +80,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             <ScrollReveal delay={120}>
               <div className="rounded-2xl bg-paper-raised p-6 shadow-[inset_0_0_0_1px_var(--color-line)]">
                 <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft">
-                  {lang === "fr" ? "Quand c'est pertinent" : "Best fit"}
+                  {t.serviceDetail.bestFit}
                 </p>
                 <p className="mt-3 text-sm font-semibold leading-relaxed text-ink">
                   {item.cases[0]}
@@ -103,7 +103,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
           <ScrollReveal>
             <aside className="lg:sticky lg:top-28">
               <h2 className="font-display text-xl font-bold text-ink">
-                {lang === "fr" ? "Capacités mobilisées" : "Capabilities used"}
+                {t.serviceDetail.capabilities}
               </h2>
               <div className="mt-6 flex flex-wrap gap-2">
                 {item.stack.map((capability) => (
@@ -139,7 +139,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             <ScrollReveal delay={80}>
               <section>
                 <h2 className="font-display text-2xl font-bold text-ink">
-                  {lang === "fr" ? "Résultats attendus" : "Expected outcomes"}
+                  {t.serviceDetail.expectedOutcomes}
                 </h2>
                 <div className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
                   {item.outcomes.map((outcome) => (
@@ -157,7 +157,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             <ScrollReveal delay={120}>
               <section>
                 <h2 className="font-display text-2xl font-bold text-ink">
-                  {lang === "fr" ? "Périmètre d'intervention" : "Engagement scope"}
+                  {t.serviceDetail.engagementScope}
                 </h2>
                 <div className="mt-6 grid gap-4">
                   {item.scope.map((scopeItem) => (
@@ -204,12 +204,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
         <ScrollReveal delay={220} className="mt-20 rounded-2xl bg-ink p-8 text-center md:p-10">
           <h3 className="text-balance font-display text-2xl font-bold text-paper">
-            {lang === "fr" ? "On clarifie votre besoin avant de vendre une solution." : "We clarify the need before selling a solution."}
+            {t.bottomCta.clarify}
           </h3>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-paper/65">
-            {lang === "fr"
-              ? "Décrivez le contexte, les contraintes et ce qui bloque aujourd'hui. Je vous réponds avec une lecture technique concrète."
-              : "Share the context, constraints, and what is blocked today. I will respond with a concrete technical read."}
+            {t.bottomCta.clarifyDescription}
           </p>
           <Link
             href={`/${lang}/demarrer-un-projet?service=${service.slug}`}

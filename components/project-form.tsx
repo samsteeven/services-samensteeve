@@ -1,6 +1,6 @@
 "use client";
 
-import { getT, type Language } from "@/lib/translations";
+import { getT, type Language } from "@/lib/i18n";
 import {
   Check,
   CheckCircle2,
@@ -474,8 +474,8 @@ export function ProjectForm({ lang }: Props) {
                 />
                 <p className="mt-2 text-right font-mono text-[10px] text-ink-soft/35">
                   {value.trim().length > 0
-                    ? lang === "fr" ? "Complément ajouté" : "Additional detail added"
-                    : lang === "fr" ? "Optionnel" : "Optional"}
+                    ? t.contact.recapLabels.detailAdded
+                    : t.contact.recapLabels.optional}
                 </p>
               </div>
             );
@@ -684,7 +684,7 @@ export function ProjectForm({ lang }: Props) {
               <div className="flex flex-col gap-1">
                 <div className="flex items-center justify-between gap-3">
                   <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
-                    {lang === "fr" ? "Objectifs" : "Goals"}
+                    {t.contact.recapLabels.goals}
                   </span>
                   {renderEditButton(2)}
                 </div>
@@ -696,7 +696,7 @@ export function ProjectForm({ lang }: Props) {
               </div>
               <div className="flex flex-col gap-1">
                 <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
-                  {lang === "fr" ? "Budget estimé" : "Budget range"}
+                  {t.contact.recapLabels.budget}
                 </span>
                 <span className="text-xs font-bold text-accent">
                   {fields.budgetOptions[form.data.budget as keyof typeof fields.budgetOptions]}
@@ -704,7 +704,7 @@ export function ProjectForm({ lang }: Props) {
               </div>
               <div className="flex flex-col gap-1">
                 <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
-                  {lang === "fr" ? "Démarrage" : "Timeline"}
+                  {t.contact.recapLabels.timeline}
                 </span>
                 <span className="text-xs font-medium text-ink">
                   {fields.timelineOptions[form.data.timeline as keyof typeof fields.timelineOptions]}
@@ -716,7 +716,7 @@ export function ProjectForm({ lang }: Props) {
             <div className="border-t border-line/40 pt-4">
               <div className="flex items-center justify-between gap-3">
                 <span className="font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
-                  {lang === "fr" ? "Contexte technique" : "Technical context"}
+                  {t.contact.recapLabels.context}
                 </span>
                 {renderEditButton(3)}
               </div>
@@ -770,7 +770,7 @@ export function ProjectForm({ lang }: Props) {
                   );
                 }) : (
                   <p className="rounded-xl border border-line/40 bg-paper-raised/20 p-4 text-xs leading-relaxed text-ink-soft/75">
-                    {lang === "fr" ? "Aucun complément ajouté." : "No extra details added."}
+                    {t.contact.recapLabels.noDetails}
                   </p>
                 )}
               </div>

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getT, type Language } from "@/lib/translations";
+import { getT, type Language } from "@/lib/i18n";
 import { ScrollReveal } from "./scroll-reveal";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 

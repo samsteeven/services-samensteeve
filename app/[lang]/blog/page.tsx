@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import type { Language } from "@/lib/translations";
+import type { Language } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
+import { getT } from "@/lib/i18n";
 import { blogMetadata } from "@/content/blog/index";
 import { BlogListing } from "@/components/blog-listing";
 import { ScrollReveal } from "@/components/scroll-reveal";
@@ -12,12 +13,11 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { lang } = await params;
   const langKey = lang as Language;
+  const t = getT(langKey);
   return createPageMetadata({
     lang: langKey,
-    title: lang === "fr" ? "Notes de terrain — Blog" : "Field Notes — Blog",
-    description: lang === "fr"
-      ? "Analyses techniques et retours d'expérience réels sur l'IA, le cloud, la sécurité et le développement logiciel en production par Samen Steeve."
-      : "Technical deep dives and real-world post-mortems on AI, cloud, security, and software engineering in production by Samen Steeve.",
+    title: t.metadata.blogTitle,
+    description: t.metadata.blogDescription,
     path: "/blog",
   });
 }
@@ -30,15 +30,15 @@ export default async function BlogListingPage({ params }: PageProps) {
   const { lang } = await params;
   const langKey = lang as Language;
 
+  const t = getT(langKey);
+
   // Filter posts by language
   const langPosts = blogMetadata.filter((post) => post.lang === langKey);
 
-  const blogTitle = langKey === "fr" ? "Notes de terrain" : "Field Notes";
-  const blogSubtitle = langKey === "fr"
-    ? "Analyses techniques et retours d'expérience réels sur l'IA, le cloud, la sécurité et le développement logiciel en production."
-    : "Technical deep dives and real-world post-mortems on AI, cloud, security, and software engineering in production.";
+  const blogTitle = t.blog.heading;
+  const blogSubtitle = t.blog.subtitle;
 
-  const categoryLabel = langKey === "fr" ? "BLOG & RETOURS D'EXPÉRIENCE" : "BLOG & FIELD NOTES";
+  const categoryLabel = t.blog.eyebrow;
 
   return (
     <div className="flex flex-col min-h-screen">

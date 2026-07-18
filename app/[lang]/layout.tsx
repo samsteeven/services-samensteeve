@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import type { Language } from "@/lib/translations";
+import type { Language } from "@/lib/i18n";
 
 interface LayoutProps {
   children: ReactNode;

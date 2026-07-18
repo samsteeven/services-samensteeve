@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { blogMetadata } from "@/content/blog/index";
 import { caseStudies, getCaseStudyBySlug } from "@/lib/case-studies";
 import { services, getServiceBySlug } from "@/lib/services";
-import { getT, type Language } from "@/lib/translations";
+import { getT, type Language } from "@/lib/i18n";
 
 function langFromSlug(slug: string[]): Language {
   return slug[0] === "en" ? "en" : "fr";
@@ -141,7 +141,7 @@ export async function GET(
     if (rest.length === 1) {
       const posts = blogMetadata.filter((post) => post.lang === lang);
       return markdownResponse([
-        `# ${lang === "fr" ? "Notes de terrain" : "Field Notes"}`,
+        `# ${t.blog.fieldNotes}`,
         "",
         ...posts.map((post) => `- [${post.title}](${prefix}/blog/${post.slug}) (${post.date}): ${post.excerpt}`),
       ]);

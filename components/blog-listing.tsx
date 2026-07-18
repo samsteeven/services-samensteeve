@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { type Language } from "@/lib/translations";
+import { type Language } from "@/lib/i18n";
+import { getT } from "@/lib/i18n";
 import { type PostMeta } from "@/content/blog/types";
 import { BlogCard } from "@/components/blog-card";
 import { ScrollReveal } from "@/components/scroll-reveal";
@@ -13,6 +14,7 @@ interface BlogListingProps {
 
 export function BlogListing({ posts, lang }: BlogListingProps) {
   const [activeTag, setActiveTag] = useState<string>("all");
+  const t = getT(lang);
 
   // Get unique tags across all posts of this language
   const allTags = Array.from(new Set(posts.flatMap((post) => post.tags)));
@@ -25,7 +27,7 @@ export function BlogListing({ posts, lang }: BlogListingProps) {
   // Sort by date desc
   const sortedPosts = [...filteredPosts].sort((a, b) => b.date.localeCompare(a.date));
 
-  const allTagLabel = lang === "fr" ? "Tous" : "All";
+  const allTagLabel = t.blog.allTags;
 
   return (
     <div className="mx-auto max-w-5xl px-4 sm:px-8">
@@ -76,7 +78,7 @@ export function BlogListing({ posts, lang }: BlogListingProps) {
       ) : (
         <div className="text-center py-20 border border-line border-dashed rounded-2xl bg-paper-raised/20">
           <p className="font-mono text-xs text-ink-soft">
-            {lang === "fr" ? "Aucun article trouvé pour cette catégorie." : "No articles found for this category."}
+            {t.blog.emptyState}
           </p>
         </div>
       )}

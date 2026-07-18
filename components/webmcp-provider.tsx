@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { services } from "@/lib/service-registry";
+import { SITE_URL } from "@/lib/constants";
 
 interface WebMcpTool {
   name: string;
@@ -14,7 +15,7 @@ interface ModelContext {
   registerTool: (tool: WebMcpTool) => void;
 }
 
-const BASE = "https://services.samensteeve.com";
+const BASE = SITE_URL;
 
 function getSiteMetadata() {
   return {

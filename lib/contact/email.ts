@@ -1,4 +1,5 @@
 import { getT, type Language } from "@/lib/i18n";
+import { SITE_URL } from "@/lib/constants";
 import type { ContactPayload } from "./validation";
 
 function escapeHtml(value: unknown): string {
@@ -101,7 +102,7 @@ export function renderContactEmail(
 </style></head>
 <body>
 <div class="card">
-  <div class="badge">services.samensteeve.com</div>
+  <div class="badge">${new URL(SITE_URL).host}</div>
   <h1>🚀 Nouveau projet entrant</h1>
   <p class="meta">Reçu depuis le formulaire de contact · Langue : ${lang === "fr" ? "Français" : "English"}</p>
 

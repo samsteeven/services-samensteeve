@@ -3,6 +3,7 @@ import { BASE_URL } from "@/lib/metadata";
 import { caseStudies } from "@/lib/case-studies";
 import { services } from "@/lib/services";
 import { getT } from "@/lib/i18n";
+import { CONTACT_EMAIL } from "@/lib/constants";
 
 export const dynamic = "force-static";
 
@@ -50,7 +51,7 @@ export function GET() {
     "",
     "## Contact",
     "",
-    "For project inquiries: contact@samensteeve.com",
+    `For project inquiries: ${CONTACT_EMAIL}`,
     "",
     "---",
     "",

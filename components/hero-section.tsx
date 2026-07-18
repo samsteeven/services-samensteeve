@@ -1,10 +1,8 @@
 import Link from "next/link";
 import { getT, type Language } from "@/lib/i18n";
+import { CAL_URL } from "@/lib/constants";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { ScrollReveal } from "./scroll-reveal";
-
-// 👉 Remplacer par l'URL Cal.com réelle
-const CAL_URL = "https://cal.com/samensteeve/30min";
 
 // Grain SVG en data-URL — aucun appel réseau
 const GRAIN_URL =

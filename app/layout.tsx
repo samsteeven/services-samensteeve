@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { WebMcpProvider } from "@/components/webmcp-provider";
+import { SITE_URL, PORTFOLIO_URL, SOCIAL_LINKS } from "@/lib/constants";
 
 // Polices auto-hébergées via fontsource — aucun appel réseau à Google au runtime
 import "@fontsource/inter/400.css";
@@ -33,11 +34,11 @@ const personJsonLd = {
   "@type": "Person",
   name: "Samen Steeve",
   alternateName: "samsteeven",
-  url: "https://samensteeve.com",
+  url: PORTFOLIO_URL,
   image: "/profil.png",
   sameAs: [
-    "https://github.com/samsteeven",
-    "https://linkedin.com/in/samensteeve",
+    SOCIAL_LINKS.github,
+    SOCIAL_LINKS.linkedin,
   ],
   jobTitle: "Software Engineer & Solution Architect",
   description:
@@ -56,12 +57,12 @@ const personJsonLd = {
   ],
   mainEntityOfPage: {
     "@type": "WebPage",
-    "@id": "https://services.samensteeve.com",
+    "@id": SITE_URL,
   },
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://services.samensteeve.com"),
+  metadataBase: new URL(SITE_URL),
   robots: {
     index: true,
     follow: true,

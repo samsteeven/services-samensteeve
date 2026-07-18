@@ -1,4 +1,5 @@
 import { BASE_URL } from "@/lib/metadata";
+import { CONTACT_EMAIL } from "@/lib/constants";
 
 export const dynamic = "force-static";
 
@@ -86,7 +87,7 @@ export function GET() {
     "",
     "## Contact",
     "",
-    "For inquiries about agent access or commercial use: contact@samensteeve.com",
+    `For inquiries about agent access or commercial use: ${CONTACT_EMAIL}`,
   ].join("\n");
 
   return new Response(body, {

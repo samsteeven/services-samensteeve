@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import type { Language } from "@/lib/i18n";
+import { SITE_URL } from "@/lib/constants";
 
-const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://services.samensteeve.com";
+const BASE_URL = SITE_URL;
 
 const PROFILE_IMAGE = "/profil.png";
 

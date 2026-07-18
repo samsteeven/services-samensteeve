@@ -1,6 +1,7 @@
 "use client";
 
 import { getT, type Language } from "@/lib/i18n";
+import { CAL_URL } from "@/lib/constants";
 import {
   Check,
   CheckCircle2,
@@ -97,7 +98,7 @@ export function ProjectForm({ lang }: Props) {
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
-              href="https://cal.com/samen-steeve/30min"
+              href={CAL_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-ink px-5 py-3 font-mono text-[11px] font-bold uppercase tracking-widest text-paper transition-transform duration-200 hover:bg-accent hover:text-white active:scale-[0.96]"
@@ -271,7 +272,7 @@ export function ProjectForm({ lang }: Props) {
               </p>
             </div>
             <a
-              href="https://cal.com/samen-steeve/30min"
+              href={CAL_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 inline-flex min-h-10 items-center justify-center gap-2 rounded-full border border-line px-5 py-3 font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft transition hover:border-accent/40 hover:text-accent active:scale-[0.96] sm:mt-0"

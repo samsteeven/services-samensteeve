@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { Language } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
 import { getT } from "@/lib/i18n";
+import { CONTACT_EMAIL } from "@/lib/constants";
 import { HeroSection } from "@/components/hero-section";
 import { ServicesGrid } from "@/components/services-grid";
 import Link from "next/link";
@@ -152,7 +153,7 @@ export default async function HomePage({ params }: PageProps) {
               <ArrowRight className="h-4 w-4" />
             </Link>
             <a
-              href="mailto:contact@samensteeve.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="inline-flex items-center justify-center gap-2.5 rounded-full border border-line bg-paper-raised px-7 py-4 font-sans text-sm font-medium text-ink hover:border-accent/40 hover:text-accent transition duration-200 hover:scale-105 w-full sm:w-auto"
             >
               <Mail className="h-4 w-4 text-ink-soft" />

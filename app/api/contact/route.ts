@@ -2,6 +2,7 @@ import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { validatePayload, type ContactPayload } from "@/lib/contact/validation";
 import { renderContactEmail } from "@/lib/contact/email";
+import { CONTACT_EMAIL } from "@/lib/constants";
 
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
@@ -114,7 +115,7 @@ export async function POST(request: Request) {
 
   try {
     await resend.emails.send({
-      from: "Samen Steeve Services <contact@samensteeve.com>",
+      from: `Samen Steeve Services <${CONTACT_EMAIL}>`,
       to: ["samendjiaha@gmail.com"],
       replyTo: payload.email.trim(),
       subject,

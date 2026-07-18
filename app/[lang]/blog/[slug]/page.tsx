@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { Language } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
 import { getT } from "@/lib/i18n";
+import { PORTFOLIO_URL } from "@/lib/constants";
 import { blogMetadata, getPostBySlug } from "@/content/blog/index";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -104,7 +105,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     author: {
       "@type": "Person",
       name: "Samen Steeve",
-      url: "https://samensteeve.com",
+      url: PORTFOLIO_URL,
     },
     publisher: {
       "@type": "Organization",

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "./theme-toggle";
 import { getT, getOppositeUrl, type Language } from "@/lib/i18n";
+import { PORTFOLIO_URL } from "@/lib/constants";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 
 export function SiteHeader({ lang }: { lang: Language }) {
@@ -196,7 +197,7 @@ export function SiteHeader({ lang }: { lang: Language }) {
 
           {/* ── Moi / Portfolio ── */}
           <a
-            href="https://samensteeve.com"
+            href={PORTFOLIO_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="py-1 transition-all duration-200 hover:text-accent"
@@ -291,7 +292,7 @@ export function SiteHeader({ lang }: { lang: Language }) {
 
             {/* Moi */}
             <a
-              href="https://samensteeve.com"
+              href={PORTFOLIO_URL}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}

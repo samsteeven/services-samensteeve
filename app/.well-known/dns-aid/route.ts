@@ -1,9 +1,10 @@
 import { BASE_URL } from "@/lib/metadata";
+import { SITE_URL } from "@/lib/constants";
 
 export const dynamic = "force-static";
 
 export function GET() {
-  const domain = "services.samensteeve.com";
+  const domain = new URL(SITE_URL).host;
 
   const dnsAid = {
     $schema: "https://isitagentready.com/schemas/dns-aid/v1",

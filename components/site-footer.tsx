@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getT, type Language } from "@/lib/i18n";
+import { CONTACT_EMAIL, CAL_URL, WHATSAPP_URL, WHATSAPP_NUMBER, SOCIAL_LINKS, PORTFOLIO_URL } from "@/lib/constants";
 import { Mail, Calendar, Linkedin, Github } from "lucide-react";
 import {SVGProps} from "react";
 
@@ -22,19 +23,19 @@ export function SiteFooter({ lang }: { lang: Language }) {
 
   const contactLinks = [
     {
-      href: "mailto:contact@samensteeve.com",
+      href: `mailto:${CONTACT_EMAIL}`,
       icon: Mail,
       label: "Email",
-      text: "contact@samensteeve.com",
+      text: CONTACT_EMAIL,
     },
     {
-      href: "https://wa.me/237654557446",
+      href: WHATSAPP_URL,
       icon: WhatsappIcon,
       label: "WhatsApp",
-      text: "+237 654 557 446",
+      text: WHATSAPP_NUMBER,
     },
     {
-      href: "https://cal.com/samen-steeve/30min",
+      href: CAL_URL,
       icon: Calendar,
       label: t.footer.bookCall,
       text: "Cal.com (30 min)",
@@ -43,12 +44,12 @@ export function SiteFooter({ lang }: { lang: Language }) {
 
   const socialLinks = [
     {
-      href: "https://linkedin.com/in/samensteeve",
+      href: SOCIAL_LINKS.linkedin,
       icon: Linkedin,
       label: "LinkedIn",
     },
     {
-      href: "https://github.com/samsteeven",
+      href: SOCIAL_LINKS.github,
       icon: Github,
       label: "GitHub",
     },
@@ -134,7 +135,7 @@ export function SiteFooter({ lang }: { lang: Language }) {
             &copy; {new Date().getFullYear()} Samen Steeve. {t.footer.rights}
           </p>
           <a
-            href="https://samensteeve.com"
+            href={PORTFOLIO_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="text-[10px] font-mono text-accent hover:underline"

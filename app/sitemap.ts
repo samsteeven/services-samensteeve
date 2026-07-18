@@ -2,9 +2,10 @@ import type { MetadataRoute } from "next";
 import { blogMetadata } from "@/content/blog/index";
 import { caseStudies } from "@/lib/case-studies";
 import { services } from "@/lib/services";
+import { SITE_URL } from "@/lib/constants";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://services.samensteeve.com";
+  const baseUrl = SITE_URL;
   const langs = ["fr", "en"];
 
   // Static pages

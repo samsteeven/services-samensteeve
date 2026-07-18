@@ -4,7 +4,7 @@ import type { Language } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
 import { getT } from "@/lib/i18n";
 import { services, getServiceBySlug } from "@/lib/services";
-import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, HelpCircle } from "lucide-react";
 import Link from "next/link";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
@@ -196,6 +196,23 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                       </li>
                     ))}
                   </ul>
+                </div>
+              </section>
+            </ScrollReveal>
+
+            <ScrollReveal delay={200}>
+              <section>
+                <h2 className="font-display text-2xl font-bold text-ink flex items-center gap-3">
+                  <HelpCircle className="h-6 w-6 text-accent" />
+                  FAQ
+                </h2>
+                <div className="mt-6 grid gap-4">
+                  {item.faq.map((faqItem, index) => (
+                    <div key={index} className="rounded-xl bg-paper-raised p-5 shadow-[inset_0_0_0_1px_var(--color-line)]">
+                      <h3 className="font-semibold text-ink">{faqItem.q}</h3>
+                      <p className="mt-2 text-sm leading-relaxed text-ink-soft">{faqItem.a}</p>
+                    </div>
+                  ))}
                 </div>
               </section>
             </ScrollReveal>

@@ -73,6 +73,24 @@ export const fr = {
           "Produit interne pour remplacer des fichiers Excel, traitements manuels ou outils dispersés",
           "API ou backend critique à fiabiliser avant montée en charge",
           "Refonte technique d'un logiciel existant devenu difficile à maintenir"
+        ],
+        faq: [
+          {
+            q: "Combien de temps faut-il pour développer mon projet ?",
+            a: "Un projet typique (plateforme métier, SaaS) prend entre 4 et 12 semaines selon la complexité. Je livre par phases itératives pour que vous puissiez valider régulièrement l'avancement."
+          },
+          {
+            q: "Est-ce que je garde la propriété du code ?",
+            a: "Oui, vous êtes propriétaire de 100% du code source livré. Je fournis également la documentation technique pour que votre équipe puisse reprendre le projet."
+          },
+          {
+            q: "Comment se déroule la collaboration ?",
+            a: "Nous commençons par un appel de cadrage gratuit (30 min). Si le projet correspond à mes compétences, je vous envoie une proposition détaillée avec estimation, livrables et planning."
+          },
+          {
+            q: "Travaillez-vous avec des frameworks spécifiques ?",
+            a: "Je travaille principalement avec Laravel (backend) et React/Next.js ou Angular (frontend). Je peux m'adapter à votre stack existant si nécessaire."
+          }
         ]
       },
       "architecture-cloud": {
@@ -105,6 +123,24 @@ export const fr = {
           "Migration progressive d'infrastructures physiques (on-premise) vers le cloud",
           "Mise en place de stratégies de sauvegarde redondantes et sécurisées hors-site",
           "Automatisation du provisionnement des serveurs via Infrastructure as Code"
+        ],
+        faq: [
+          {
+            q: "Combien de temps dure une mission d'architecture ?",
+            a: "Une mission typique d'audit et conception d'architecture dure entre 2 et 4 semaines. La migration effective peut être plus longue selon la complexité."
+          },
+          {
+            q: "Travaillez-vous uniquement avec AWS et Azure ?",
+            a: "Je travaille principalement avec AWS et Azure mais je peux m'adapter à d'autres providers (GCP, OVH, etc.) selon vos contraintes ou préférences."
+          },
+          {
+            q: "Est-ce que vous gérez la migration des données ?",
+            a: "Oui, je conçois le plan de migration et peux accompagner l'exécution. Pour les volumes critiques, je recommande une approche progressive avec validation à chaque étape."
+          },
+          {
+            q: "Que se passe-t-il après la mission ?",
+            a: "Je livre la documentation complète et forme votre équipe IT à l'exploitation de la nouvelle architecture. Je peux rester disponible pour du support ponctuel."
+          }
         ]
       },
       "audit-securite": {
@@ -137,6 +173,24 @@ export const fr = {
           "Audit d'API, backoffice, portail client, marketplace ou plateforme SaaS",
           "Vérification des rôles, permissions, accès indirects et failles de logique métier",
           "Analyse post-incident pour comprendre le chemin d'attaque et fermer les portes"
+        ],
+        faq: [
+          {
+            q: "Quelle est la différence entre un pentest et une revue de code ?",
+            a: "Un pentest teste l'application comme un attaquant réel, en exploitant les failles. Une revue de code analyse le source pour trouver des vulnérabilités potentielles. Je combine les deux approches pour une évaluation complète."
+          },
+          {
+            q: "Combien de temps dure un pentest ?",
+            a: "Un pentest standard dure entre 3 et 10 jours selon la surface d'attaque. Je livre un rapport préliminaire à mi-parcours et le rapport final avec les recommandations détaillées."
+          },
+          {
+            q: "Est-ce que vous testez aussi les APIs ?",
+            a: "Oui, je teste les APIs REST/GraphQL avec la même rigueur que les interfaces web : authentification, autorisation, injection, rate limiting, logique métier et data exposure."
+          },
+          {
+            q: "Que se passe-t-il après le pentest ?",
+            a: "Je livre un rapport avec les vulnérabilités classées par criticité et un plan de remédiation priorisé. Je peux accompagner vos développeurs dans la correction et faire un retest des failles critiques."
+          }
         ]
       },
       "automatisation-ia": {
@@ -169,6 +223,24 @@ export const fr = {
           "Agents de qualification de leads et de support client niveau 2 avec accès BDD",
           "Génération automatique de rapports d'activité complexes basés sur des données multi-sources",
           "Orchestration de tâches administratives multi-étapes sans intervention humaine"
+        ],
+        faq: [
+          {
+            q: "Quelle est la différence avec un chatbot classique ?",
+            a: "Contrairement à un chatbot qui répond à des questions, mes agents IA exécutent des actions concrètes dans vos systèmes : créer des enregistrements, générer des documents, déclencher des workflows, avec validation humaine aux points critiques."
+          },
+          {
+            q: "Comment garantir que l'IA ne fait pas d'erreurs ?",
+            a: "Je mets en place des garde-fous : permissions limitées, logs détaillés, étapes de validation humaine, et tests sur des données historiques. L'IA est supervisée, pas autonome sans contrôle."
+          },
+          {
+            q: "Est-ce que ça marche avec mes outils existants ?",
+            a: "Oui, je m'intègre à vos APIs, bases de données, CRM, ERP ou applications internes. L'objectif est que l'IA travaille à l'intérieur de votre écosystème existant, pas de vous forcer à tout changer."
+          },
+          {
+            q: "Combien de temps pour voir des résultats ?",
+            a: "Un POC fonctionnel peut être livré en 2 à 4 semaines pour un workflow ciblé. Cela permet de valider l'approche avant de l'étendre à d'autres processus."
+          }
         ]
       }
     }

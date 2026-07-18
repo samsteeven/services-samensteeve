@@ -73,6 +73,24 @@ export const en = {
           "Internal product replacing spreadsheets, manual processing, or scattered tools",
           "Critical API or backend to stabilize before scaling",
           "Technical rebuild of an existing product that became hard to maintain"
+        ],
+        faq: [
+          {
+            q: "How long does it take to develop my project?",
+            a: "A typical project (business platform, SaaS) takes between 4 and 12 weeks depending on complexity. I deliver in iterative phases so you can regularly validate progress."
+          },
+          {
+            q: "Do I keep ownership of the code?",
+            a: "Yes, you own 100% of the delivered source code. I also provide technical documentation so your team can take over the project."
+          },
+          {
+            q: "How does the collaboration work?",
+            a: "We start with a free scoping call (30 min). If the project matches my skills, I send you a detailed proposal with estimate, deliverables, and timeline."
+          },
+          {
+            q: "Do you work with specific frameworks?",
+            a: "I primarily work with Laravel (backend) and React/Next.js or Angular (frontend). I can adapt to your existing stack if necessary."
+          }
         ]
       },
       "architecture-cloud": {
@@ -105,6 +123,24 @@ export const en = {
           "Progressive migration of physical server rooms (on-premise) to the cloud",
           "Setting up redundant, secure off-site backup strategies (Azure Blob, etc.)",
           "Automating server provisioning and configuration using Infrastructure as Code"
+        ],
+        faq: [
+          {
+            q: "How long does an architecture mission take?",
+            a: "A typical audit and architecture design mission lasts between 2 and 4 weeks. The actual migration may be longer depending on complexity."
+          },
+          {
+            q: "Do you only work with AWS and Azure?",
+            a: "I primarily work with AWS and Azure but can adapt to other providers (GCP, OVH, etc.) based on your constraints or preferences."
+          },
+          {
+            q: "Do you handle data migration?",
+            a: "Yes, I design the migration plan and can support execution. For critical volumes, I recommend a progressive approach with validation at each step."
+          },
+          {
+            q: "What happens after the mission?",
+            a: "I deliver complete documentation and train your IT team on operating the new architecture. I can remain available for ad-hoc support."
+          }
         ]
       },
       "audit-securite": {
@@ -137,6 +173,24 @@ export const en = {
           "API, back-office, customer portal, marketplace, or SaaS platform audit",
           "Verification of roles, permissions, indirect access, and business-logic flaws",
           "Post-incident analysis to understand the attack path and close the gaps"
+        ],
+        faq: [
+          {
+            q: "What's the difference between a pentest and a code review?",
+            a: "A pentest tests the application like a real attacker, exploiting actual weaknesses. A code review analyzes source code for potential vulnerabilities. I combine both approaches for a comprehensive assessment."
+          },
+          {
+            q: "How long does a pentest take?",
+            a: "A standard pentest lasts between 3 and 10 days depending on attack surface. I deliver a preliminary report at mid-point and the final report with detailed recommendations."
+          },
+          {
+            q: "Do you also test APIs?",
+            a: "Yes, I test REST/GraphQL APIs with the same rigor as web interfaces: authentication, authorization, injection, rate limiting, business logic, and data exposure."
+          },
+          {
+            q: "What happens after the pentest?",
+            a: "I deliver a report with vulnerabilities ranked by severity and a prioritized remediation plan. I can support your developers in fixing and retest critical vulnerabilities."
+          }
         ]
       },
       "automatisation-ia": {
@@ -169,6 +223,24 @@ export const en = {
           "Lead qualification and L2 support agents with secure database query capabilities",
           "Automated generation of complex business reports pulling from multiple sources",
           "Orchestrating administrative multi-step tasks without human bottlenecking"
+        ],
+        faq: [
+          {
+            q: "What's the difference with a classic chatbot?",
+            a: "Unlike a chatbot that answers questions, my AI agents execute concrete actions in your systems: creating records, generating documents, triggering workflows, with human validation at critical points."
+          },
+          {
+            q: "How do you ensure the AI doesn't make errors?",
+            a: "I implement guardrails: limited permissions, detailed logs, human validation steps, and testing on historical data. The AI is supervised, not autonomous without control."
+          },
+          {
+            q: "Does it work with my existing tools?",
+            a: "Yes, I integrate with your APIs, databases, CRM, ERP, or internal applications. The goal is for the AI to work inside your existing ecosystem, not force you to change everything."
+          },
+          {
+            q: "How long to see results?",
+            a: "A functional POC can be delivered in 2 to 4 weeks for a targeted workflow. This allows validating the approach before extending to other processes."
+          }
         ]
       }
     }

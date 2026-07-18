@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { services } from "@/lib/service-registry";
 
 interface WebMcpTool {
   name: string;
@@ -44,28 +45,11 @@ const tools: WebMcpTool[] = [
       required: [],
     },
     execute: async () => ({
-      services: [
-        {
-          slug: "ingenierie-logicielle",
-          title: "Ingénierie logicielle",
-          description: "Conception, développement et maintenance de systèmes logiciels robustes.",
-        },
-        {
-          slug: "architecture-cloud",
-          title: "Architecture Cloud & Hybride",
-          description: "Conception d'architectures cloud scalables et résilientes.",
-        },
-        {
-          slug: "pentest-securite",
-          title: "Pentest & Sécurité applicative",
-          description: "Audit de sécurité, tests de pénétration et recommandations.",
-        },
-        {
-          slug: "automatisation-ia",
-          title: "Automatisation IA",
-          description: "Intégration d'agents IA et d'automatisations intelligentes.",
-        },
-      ],
+      services: services.map((s) => ({
+        slug: s.slug,
+        title: s.mcp.title,
+        description: s.mcp.description,
+      })),
     }),
   },
   {
@@ -76,7 +60,7 @@ const tools: WebMcpTool[] = [
       properties: {
         slug: {
           type: "string",
-          description: "Service slug (e.g. 'ingenierie-logicielle', 'architecture-cloud', 'pentest-securite', 'automatisation-ia')",
+          description: `Service slug (${services.map((s) => `'${s.slug}'`).join(", ")})`,
         },
         lang: {
           type: "string",
@@ -89,9 +73,11 @@ const tools: WebMcpTool[] = [
     execute: async (input: Record<string, unknown>) => {
       const slug = input.slug as string;
       const lang = (input.lang as string) || "fr";
+      const service = services.find((s) => s.slug === slug);
       return {
         slug,
         lang,
+        title: service?.mcp.title ?? slug,
         url: `${BASE}/${lang}/services/${slug}`,
         note: "Fetch the page for full details, or use Accept: text/markdown header for markdown content.",
       };

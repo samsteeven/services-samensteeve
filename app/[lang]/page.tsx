@@ -5,6 +5,7 @@ import { getT } from "@/lib/i18n";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import { HeroSection } from "@/components/hero-section";
 import { ServicesGrid } from "@/components/services-grid";
+import { TestimonialsCarousel } from "@/components/testimonials-carousel";
 import Link from "next/link";
 import { ArrowRight, Mail } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
@@ -24,15 +25,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     path: "",
   });
 }
-
-// Témoignage unique mis en avant sur la homepage
-const featuredTestimonial = {
-  quote:
-    "Steeve a conçu notre infrastructure microservices hybride depuis zéro. La synchronisation offline-first a résolu des années d'échecs de sync pour nos agents terrain. Une approche technique rigoureuse qui a tenu toutes ses promesses.",
-  author: "Jean-Pierre Ndongo",
-  role: "Directeur des Systèmes d'Information",
-  company: "AGROCAM S.A.",
-};
 
 export default async function HomePage({ params }: PageProps) {
   const { lang } = await params;
@@ -89,46 +81,8 @@ export default async function HomePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Featured Testimonial */}
-      <section className="py-20 bg-paper transition-all duration-300 relative overflow-hidden border-t border-line">
-        {/* Horizontal Line across viewport (behind the box) */}
-        <div className="absolute top-1/2 left-0 right-0 h-px bg-line -translate-y-1/2 pointer-events-none" />
-
-        <div className="mx-auto max-w-5xl px-4 sm:px-8 relative flex items-center justify-center">
-          {/* Centered Box with vertical borders */}
-          <div className="w-full max-w-2xl bg-paper px-6 sm:px-10 py-10 border-l border-r border-line relative z-10 flex flex-col items-start text-left">
-            
-            {/* Emerald Quote Icon */}
-            <div className="mb-5 flex h-7 w-7 items-center justify-center rounded bg-emerald-500/10 text-emerald-500 dark:text-emerald-400">
-              <svg className="h-4.5 w-4.5 fill-current" viewBox="0 0 24 24">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-            </div>
-
-            {/* Testimonial Quote */}
-            <blockquote className="font-sans text-sm sm:text-base leading-relaxed text-ink/90 font-medium">
-              &ldquo;{featuredTestimonial.quote}&rdquo;
-            </blockquote>
-
-            {/* Author Block */}
-            <div className="mt-8 flex items-center gap-3">
-              {/* Initials Avatar */}
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent font-mono text-[10px] font-bold border border-accent/20">
-                JN
-              </div>
-              <div className="flex flex-col">
-                <span className="font-sans text-xs font-bold text-ink leading-none">
-                  {featuredTestimonial.author}
-                </span>
-                <span className="mt-1 font-mono text-[9px] uppercase tracking-wider text-ink-soft/75">
-                  {featuredTestimonial.role} · {featuredTestimonial.company}
-                </span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
+      {/* Testimonials Carousel */}
+      <TestimonialsCarousel lang={langKey} />
 
       {/* Bottom CTA Banner */}
       <section className="py-24 md:py-32 border-t border-line/40 transition-all duration-300">

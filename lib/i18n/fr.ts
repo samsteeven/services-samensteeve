@@ -813,5 +813,29 @@ export const fr = {
     location: "Disponible en télétravail international et sur site à Douala.",
     specialty: "Samen Steeve · Ingénieur Logiciel & Architecte Solutions",
     bookCall: "Réserver un appel (30 min)"
+  },
+  testimonials: {
+    title: "Recommandations",
+    subtitle: "Ce que les clients et collègues disent de notre collaboration.",
+    items: [
+      {
+        quote: "Steeve a conçu notre infrastructure microservices hybride depuis zéro. La synchronisation offline-first a résolu des années d'échecs de sync pour nos agents terrain. Une approche technique rigoureuse qui a tenu toutes ses promesses.",
+        author: "Jean-Pierre Ndongo",
+        role: "Directeur des Systèmes d'Information",
+        company: "AGROCAM S.A."
+      },
+      {
+        quote: "L'audit de sécurité qu'il a mené sur notre plateforme a révélé des vulnérabilités critiques que nous n'aurions jamais détectées seuls. Son rapport était clair, exploitable, et il nous a accompagnés jusqu'à la remédiation complète.",
+        author: "Hervé Nkili",
+        role: "CEO",
+        company: "OpenCode Labs"
+      },
+      {
+        quote: "Steeve a repris notre backend Laravel existant et l'a complètement transformé. Tests automatisés, CI/CD, documentation API — tout ce qui manquait est maintenant en place. Le projet a été livré dans les délais.",
+        author: "Carole Mvele",
+        role: "Lead Developer",
+        company: "Digital Services Group"
+      }
+    ]
   }
 } as const;

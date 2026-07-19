@@ -813,5 +813,29 @@ export const en = {
     location: "Available for international remote work and on-site in Douala.",
     specialty: "Samen Steeve · Software Engineer & Solution Architect",
     bookCall: "Book a call (30 min)"
+  },
+  testimonials: {
+    title: "Recommendations",
+    subtitle: "What clients and colleagues say about our collaboration.",
+    items: [
+      {
+        quote: "Steeve designed our hybrid microservices infrastructure from scratch. The offline-first synchronization resolved years of sync failures for our field agents. A rigorous technical approach that delivered on every promise.",
+        author: "Jean-Pierre Ndongo",
+        role: "Director of Information Systems",
+        company: "AGROCAM S.A."
+      },
+      {
+        quote: "The security audit he conducted on our platform uncovered critical vulnerabilities we would never have caught on our own. His report was clear, actionable, and he stayed with us through full remediation.",
+        author: "Hervé Nkili",
+        role: "CEO",
+        company: "OpenCode Labs"
+      },
+      {
+        quote: "Steeve took over our existing Laravel backend and completely transformed it. Automated tests, CI/CD, API documentation — everything that was missing is now in place. The project was delivered on schedule.",
+        author: "Carole Mvele",
+        role: "Lead Developer",
+        company: "Digital Services Group"
+      }
+    ]
   }
 } as const;

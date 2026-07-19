@@ -128,7 +128,13 @@ export function useProjectForm(lang: string) {
   const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
   const [data, setData] = useState<FormData>(() => {
     const draft = loadDraft();
-    if (draft) return draft.data;
+    if (draft) {
+      // If URL has a service param, override the draft's types
+      if (resolvedInitialType) {
+        return { ...draft.data, types: [resolvedInitialType] };
+      }
+      return draft.data;
+    }
     return { ...EMPTY_FORM, types: resolvedInitialType ? [resolvedInitialType] : [] };
   });
 

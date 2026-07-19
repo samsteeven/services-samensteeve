@@ -26,7 +26,7 @@ export function TestimonialsCarousel({ lang }: TestimonialsCarouselProps) {
   const isPausedRef    = useRef(false);
   const isAnimRef      = useRef(false);        // mirrors isAnimating without stale closure
   const elapsedRef     = useRef(0);            // ms elapsed in current slide
-  const lastTickRef    = useRef(performance.now());
+  const lastTickRef    = useRef(0);
   const rafRef         = useRef<number | null>(null);
   const progressBarRef = useRef<HTMLSpanElement | null>(null); // active dot fill
   const currentIdxRef  = useRef(0);

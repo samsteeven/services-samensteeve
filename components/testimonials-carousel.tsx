@@ -133,7 +133,11 @@ export function TestimonialsCarousel({ lang }: TestimonialsCarouselProps) {
                     <span
                       key={`dot-${tick}`}
                       className="absolute inset-y-0 left-0 rounded-full bg-accent"
-                      style={{ width: "0%", animation: "testimonialProgress 5s linear forwards" }}
+                      style={{
+                        width: "0%",
+                        animation: "testimonialProgress 5s linear forwards",
+                        animationPlayState: isPaused ? "paused" : "running",
+                      }}
                     />
                   )}
                 </button>

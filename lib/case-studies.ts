@@ -27,7 +27,7 @@ export interface CaseStudy {
 export const caseStudies: CaseStudy[] = [
   {
     slug: "tribunejustice",
-    service: ["developpement-web", "audit-securite"],
+    service: ["ingenierie-logicielle", "audit-securite"],
     coverPlaceholder: "#1e293b",
     coverImage: "/projects/logoTBJ.png",
     fr: {
@@ -85,7 +85,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "digitrans-cm",
-    service: ["architecture-cloud", "developpement-web"],
+    service: ["architecture-cloud", "ingenierie-logicielle"],
     coverPlaceholder: "#0f172a",
     coverImage: "/projects/archi_cloud.png",
     fr: {

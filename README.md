@@ -109,7 +109,7 @@ app/
 
 | Slug | Type contact | Étude liée |
 |---|---|---|
-| `developpement-web` | `web` | tribunejustice |
+| `ingenierie-logicielle` | `web` | tribunejustice |
 | `architecture-cloud` | `cloud` | shopnow |
 | `audit-securite` | `security` | tribunejustice |
 | `automatisation-ia` | `ai` | digitrans-cm |

@@ -11,7 +11,7 @@ export const fr = {
     cta: "Démarrer un projet",
     opposite: "EN",
     serviceItems: [
-      { label: "Ingénierie logicielle", slug: "developpement-web" },
+      { label: "Ingénierie logicielle", slug: "ingenierie-logicielle" },
       { label: "Architecture Cloud", slug: "architecture-cloud" },
       { label: "Pentest & Sécurité", slug: "audit-securite" },
       { label: "Automatisation IA", slug: "automatisation-ia" },
@@ -43,7 +43,7 @@ export const fr = {
     relatedProject: "Réalisation associée",
     contactCTA: "Discuter de ce besoin",
     items: {
-      "developpement-web": {
+      "ingenierie-logicielle": {
         title: "Ingénierie Logicielle",
         punchline: "Je conçois et construis des produits logiciels complets : plateformes métier, APIs, backends critiques, interfaces et intégrations.",
         shortDesc: "Conception, développement et industrialisation de systèmes logiciels robustes, pas seulement des interfaces web.",

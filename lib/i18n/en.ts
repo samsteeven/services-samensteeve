@@ -11,7 +11,7 @@ export const en = {
     cta: "Start a project",
     opposite: "FR",
     serviceItems: [
-      { label: "Software Engineering", slug: "developpement-web" },
+      { label: "Software Engineering", slug: "ingenierie-logicielle" },
       { label: "Cloud Architecture", slug: "architecture-cloud" },
       { label: "Pentest & Security", slug: "audit-securite" },
       { label: "AI Automation", slug: "automatisation-ia" },
@@ -43,7 +43,7 @@ export const en = {
     relatedProject: "Related project",
     contactCTA: "Discuss this service",
     items: {
-      "developpement-web": {
+      "ingenierie-logicielle": {
         title: "Software Engineering",
         punchline: "I design and build complete software products: business platforms, APIs, critical backends, interfaces, and integrations.",
         shortDesc: "Design, development, and industrialization of robust software systems, not just web interfaces.",

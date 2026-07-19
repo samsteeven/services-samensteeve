@@ -10,7 +10,7 @@ import {
 import type { ComponentType } from "react";
 
 export type ServiceSlug =
-  | "developpement-web"
+  | "ingenierie-logicielle"
   | "architecture-cloud"
   | "audit-securite"
   | "automatisation-ia";
@@ -31,7 +31,7 @@ export interface ServiceConfig {
 
 export const services: ServiceConfig[] = [
   {
-    slug: "developpement-web",
+    slug: "ingenierie-logicielle",
     icon: Code2,
     contactType: "web",
     formIcon: Laptop2,

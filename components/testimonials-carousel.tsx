@@ -118,27 +118,27 @@ export function TestimonialsCarousel({ lang }: TestimonialsCarouselProps) {
             </div>
           </div>
 
-          {/* Progress Bar */}
-          <div className="mt-6 h-0.5 w-full rounded-full bg-line/30 overflow-hidden">
-            <div
-              key={`pb-${currentIndex}-${tick}`}
-              className="h-full rounded-full bg-accent/60"
-              style={{ width: "0%", animation: "testimonialProgress 5s linear forwards" }}
-            />
-          </div>
-
-          {/* Dots Indicator */}
-          <div className="mt-4 flex gap-2 justify-center w-full">
-            {testimonials.map((_, index: number) => (
-              <button
-                key={index}
-                onClick={() => { setCurrentIndex(index); setTick((v) => v + 1); }}
-                className={`h-1.5 rounded-full transition-all duration-200 ${
-                  index === currentIndex ? "w-6 bg-accent" : "w-1.5 bg-line/60 hover:bg-line"
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
+          {/* Dots Indicator with inline progress */}
+          <div className="mt-8 flex gap-2 justify-center w-full">
+            {testimonials.map((_, index: number) => {
+              const isActive = index === currentIndex;
+              return (
+                <button
+                  key={index}
+                  onClick={() => { setCurrentIndex(index); setTick((v) => v + 1); }}
+                  className="relative h-1.5 w-6 overflow-hidden rounded-full bg-line/30"
+                  aria-label={`Go to testimonial ${index + 1}`}
+                >
+                  {isActive && (
+                    <span
+                      key={`dot-${tick}`}
+                      className="absolute inset-y-0 left-0 rounded-full bg-accent"
+                      style={{ width: "0%", animation: "testimonialProgress 5s linear forwards" }}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>

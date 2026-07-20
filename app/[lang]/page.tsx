@@ -18,12 +18,93 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { lang } = await params;
   const langKey = lang as Language;
   const t = getT(langKey);
-  return createPageMetadata({
+  
+  const metadata = createPageMetadata({
     lang: langKey,
     title: t.metadata.homeTitle,
     description: t.metadata.homeDescription,
     path: "",
   });
+
+  // Schema.org ProfessionalService pour la homepage
+  const professionalServiceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Samen Steeve — Software Engineering Services",
+    "description": t.metadata.homeDescription,
+    "image": "https://services.samensteeve.com/profil.png",
+    "provider": {
+      "@type": "Person",
+      "name": "Samen Steeve",
+      "jobTitle": "Software Engineer & Solution Architect",
+      "url": "https://samensteeve.com",
+      "sameAs": [
+        "https://linkedin.com/in/samensteeve",
+        "https://github.com/samsteeven"
+      ]
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Cameroon"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": `https://services.samensteeve.com/${lang}`,
+      "serviceLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "CM"
+        }
+      }
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Software Development Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Software Engineering",
+            "description": "Custom software development with Laravel, React, and modern frameworks"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Cloud Architecture",
+            "description": "AWS/Azure cloud and hybrid infrastructure design"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Application Security",
+            "description": "Penetration testing and security audits"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "AI Automation",
+            "description": "Autonomous AI agents and workflow automation"
+          }
+        }
+      ]
+    }
+  };
+
+  return {
+    ...metadata,
+    other: {
+      ...metadata.other,
+      "application/ld+json": JSON.stringify(professionalServiceJsonLd)
+    }
+  };
 }
 
 export default async function HomePage({ params }: PageProps) {

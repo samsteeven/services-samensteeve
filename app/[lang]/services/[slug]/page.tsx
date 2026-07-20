@@ -25,12 +25,68 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const service = getServiceBySlug(slug);
   if (!service) return {};
   const item = t.services.items[service.slug];
-  return createPageMetadata({
+  
+  const metadata = createPageMetadata({
     lang: langKey,
     title: item.title,
     description: item.shortDesc,
     path: `/services/${service.slug}`,
   });
+
+  // Schema.org ProfessionalService pour le SEO
+  const professionalServiceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": item.title,
+    "description": item.shortDesc,
+    "provider": {
+      "@type": "Person",
+      "name": "Samen Steeve",
+      "jobTitle": "Software Engineer & Solution Architect",
+      "url": "https://samensteeve.com",
+      "sameAs": [
+        "https://linkedin.com/in/samensteeve",
+        "https://github.com/samsteeven"
+      ]
+    },
+    "areaServed": {
+      "@type": "Country",
+      "name": "Cameroon"
+    },
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceUrl": `https://services.samensteeve.com/${lang}/services/${service.slug}`,
+      "serviceLocation": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "CM"
+        }
+      }
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Software Development Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": item.title,
+            "description": item.shortDesc
+          }
+        }
+      ]
+    }
+  };
+
+  return {
+    ...metadata,
+    other: {
+      ...metadata.other,
+      "application/ld+json": JSON.stringify(professionalServiceJsonLd)
+    }
+  };
 }
 
 export default async function ServiceDetailPage({ params }: PageProps) {

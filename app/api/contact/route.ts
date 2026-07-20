@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { validatePayload, type ContactPayload } from "@/lib/contact/validation";
 import { renderContactEmail } from "@/lib/contact/email";
 import { CONTACT_EMAIL } from "@/lib/constants";
+import { getTursoClient, saveContactSubmission, initializeDatabase } from "@/lib/db/turso";
 
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
@@ -88,11 +89,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Too many requests" }, { status: 429 });
   }
 
-  if (!resend) {
-    console.error("[api/contact] RESEND_API_KEY is not configured");
-    return NextResponse.json({ error: "Email service unavailable" }, { status: 503 });
-  }
-
   let payload: ContactPayload;
 
   try {
@@ -109,6 +105,42 @@ export async function POST(request: Request) {
   const turnstileOk = await verifyTurnstile(payload.turnstileToken ?? "", ip);
   if (!turnstileOk) {
     return NextResponse.json({ error: "Verification failed" }, { status: 403 });
+  }
+
+  // Sauvegarder dans Turso
+  try {
+    await initializeDatabase();
+    await saveContactSubmission({
+      name: payload.name,
+      email: payload.email,
+      company: payload.company,
+      role: payload.role,
+      whatsapp: payload.whatsapp,
+      source: payload.source,
+      lang: payload.lang,
+      website: payload.website,
+      types: payload.types,
+      description: payload.description,
+      hasCodebase: payload.hasCodebase,
+      timeline: payload.timeline,
+      teamSize: payload.teamSize,
+      budget: payload.budget,
+      goals: payload.goals,
+      serviceDetails: payload.serviceDetails,
+      contextAnswers: payload.contextAnswers,
+      links: payload.links,
+      ipAddress: ip,
+      userAgent: request.headers.get("user-agent") || undefined,
+    });
+  } catch (err) {
+    console.error("[api/contact] Turso save error:", err);
+    // On continue quand même avec l'email si Turso échoue
+  }
+
+  // Envoyer l'email de notification
+  if (!resend) {
+    console.error("[api/contact] RESEND_API_KEY is not configured");
+    return NextResponse.json({ error: "Email service unavailable" }, { status: 503 });
   }
 
   const { subject, html } = renderContactEmail(payload, payload.serviceDetails);

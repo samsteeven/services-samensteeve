@@ -5,6 +5,10 @@ const tursoAuthToken = process.env.TURSO_AUTH_TOKEN;
 
 let client: ReturnType<typeof createClient> | null = null;
 
+export function isTursoConfigured(): boolean {
+  return !!(tursoUrl && tursoAuthToken);
+}
+
 export function getTursoClient() {
   if (!tursoUrl) {
     throw new Error("TURSO_DATABASE_URL is not configured");

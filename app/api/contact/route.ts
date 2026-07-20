@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { validatePayload, type ContactPayload } from "@/lib/contact/validation";
 import { renderContactEmail } from "@/lib/contact/email";
 import { CONTACT_EMAIL } from "@/lib/constants";
-import { getTursoClient, saveContactSubmission, initializeDatabase } from "@/lib/db/turso";
+import { getTursoClient, saveContactSubmission, initializeDatabase, isTursoConfigured } from "@/lib/db/turso";
 
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
@@ -107,34 +107,36 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Verification failed" }, { status: 403 });
   }
 
-  // Sauvegarder dans Turso
-  try {
-    await initializeDatabase();
-    await saveContactSubmission({
-      name: payload.name,
-      email: payload.email,
-      company: payload.company,
-      role: payload.role,
-      whatsapp: payload.whatsapp,
-      source: payload.source,
-      lang: payload.lang,
-      website: payload.website,
-      types: payload.types,
-      description: payload.description,
-      hasCodebase: payload.hasCodebase,
-      timeline: payload.timeline,
-      teamSize: payload.teamSize,
-      budget: payload.budget,
-      goals: payload.goals,
-      serviceDetails: payload.serviceDetails,
-      contextAnswers: payload.contextAnswers,
-      links: payload.links,
-      ipAddress: ip,
-      userAgent: request.headers.get("user-agent") || undefined,
-    });
-  } catch (err) {
-    console.error("[api/contact] Turso save error:", err);
-    // On continue quand même avec l'email si Turso échoue
+  // Sauvegarder dans Turso (seulement si configuré)
+  if (isTursoConfigured()) {
+    try {
+      await initializeDatabase();
+      await saveContactSubmission({
+        name: payload.name,
+        email: payload.email,
+        company: payload.company,
+        role: payload.role,
+        whatsapp: payload.whatsapp,
+        source: payload.source,
+        lang: payload.lang,
+        website: payload.website,
+        types: payload.types,
+        description: payload.description,
+        hasCodebase: payload.hasCodebase,
+        timeline: payload.timeline,
+        teamSize: payload.teamSize,
+        budget: payload.budget,
+        goals: payload.goals,
+        serviceDetails: payload.serviceDetails,
+        contextAnswers: payload.contextAnswers,
+        links: payload.links,
+        ipAddress: ip,
+        userAgent: request.headers.get("user-agent") || undefined,
+      });
+    } catch (err) {
+      console.error("[api/contact] Turso save error:", err);
+      // On continue quand même avec l'email si Turso échoue
+    }
   }
 
   // Envoyer l'email de notification

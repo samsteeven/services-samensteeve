@@ -9,6 +9,7 @@ Site vitrine bilingue (fr/en) pour les services freelance de **Samen Steeve** : 
 - **Tailwind CSS v4** (CSS-first, pas de `tailwind.config.js`)
 - **lucide-react** — icônes
 - **Resend** — envoi d'emails transactionnels (formulaire de contact)
+- **Turso / libSQL** — base de données SQLite managée pour la persistance des demandes de contact
 - **TypeScript strict**
 - **@fontsource/** — polices auto-hébergées (Inter, Outfit, Instrument Sans, JetBrains Mono, Syne)
 
@@ -157,10 +158,11 @@ Les agents peuvent lire et résumer le contenu public. Ils ne doivent soumettre 
 ## Commandes
 
 ```bash
-npm run dev           # Serveur de développement (port 3001)
-npm run build         # Build de production
-npm run start         # Serveur production (port 3001)
-npm run lint          # ESLint
+npm run dev                    # Serveur de développement (port 3001)
+npm run build                  # Build de production
+npm run start                  # Serveur production (port 3001)
+npm run lint                   # ESLint
+npx tsx scripts/init-turso.ts  # Initialiser les tables/index de la base Turso
 ```
 
 ## Déploiement
@@ -173,9 +175,12 @@ Variables d'environnement requises :
 RESEND_API_KEY=
 NEXT_PUBLIC_TURNSTILE_SITE_KEY=
 TURNSTILE_SECRET_KEY=
+TURSO_DATABASE_URL=
+TURSO_AUTH_TOKEN=
 ```
 
 `NEXT_PUBLIC_TURNSTILE_SITE_KEY` et `TURNSTILE_SECRET_KEY` sont obligatoires en production. En développement local, elles peuvent être omises : le formulaire fonctionne sans Turnstile.
+Si `TURSO_DATABASE_URL` et `TURSO_AUTH_TOKEN` sont configurés, les soumissions de contact seront enregistrées en base de données. Si elles sont absentes ou échouent, l'e-mail de notification sera quand même envoyé sans interrompre l'expérience utilisateur.
 
 ### Configuration email (Resend)
 

@@ -24,7 +24,11 @@ export function getTursoClient() {
   return client;
 }
 
+let isInitialized = false;
+
 export async function initializeDatabase() {
+  if (isInitialized) return;
+
   const db = getTursoClient();
 
   // Créer la table des demandes de contact
@@ -73,6 +77,8 @@ export async function initializeDatabase() {
     CREATE INDEX IF NOT EXISTS idx_contact_submissions_created_at 
     ON contact_submissions(created_at DESC)
   `);
+
+  isInitialized = true;
 }
 
 export async function saveContactSubmission(data: {
@@ -80,8 +86,8 @@ export async function saveContactSubmission(data: {
   email: string;
   company?: string;
   role?: string;
-  whatsapp: string;
-  source: string;
+  whatsapp?: string;
+  source?: string;
   lang: string;
   website?: string;
   types: string[];
@@ -114,8 +120,8 @@ export async function saveContactSubmission(data: {
       data.email,
       data.company || null,
       data.role || null,
-      data.whatsapp,
-      data.source,
+      data.whatsapp || null,
+      data.source || null,
       data.lang,
       data.website || null,
       JSON.stringify(data.types),

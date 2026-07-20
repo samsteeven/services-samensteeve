@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { validatePayload, type ContactPayload } from "@/lib/contact/validation";
 import { renderContactEmail } from "@/lib/contact/email";
 import { CONTACT_EMAIL } from "@/lib/constants";
-import { getTursoClient, saveContactSubmission, initializeDatabase, isTursoConfigured } from "@/lib/db/turso";
+import { saveContactSubmission, initializeDatabase, isTursoConfigured } from "@/lib/db/turso";
 
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;

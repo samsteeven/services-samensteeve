@@ -139,6 +139,25 @@ export async function POST(request: Request) {
     }
   }
 
+  // Optionnel : Envoi du payload à un webhook n8n si configuré
+  const n8nWebhookUrl = process.env.N8N_WEBHOOK_URL;
+  if (n8nWebhookUrl) {
+    try {
+      // Envoi asynchrone sans bloquer le reste de l'exécution
+      fetch(n8nWebhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...payload,
+          ipAddress: ip,
+          submittedAt: new Date().toISOString(),
+        }),
+      }).catch((err) => console.error("[api/contact] n8n webhook trigger error:", err));
+    } catch (err) {
+      console.error("[api/contact] Failed to fire n8n webhook:", err);
+    }
+  }
+
   // Envoyer l'email de notification
   if (!resend) {
     console.error("[api/contact] RESEND_API_KEY is not configured");

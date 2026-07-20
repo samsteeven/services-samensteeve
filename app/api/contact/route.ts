@@ -143,10 +143,19 @@ export async function POST(request: Request) {
   const n8nWebhookUrl = process.env.N8N_WEBHOOK_URL;
   if (n8nWebhookUrl) {
     try {
+      const n8nHeaders: Record<string, string> = {
+        "Content-Type": "application/json",
+      };
+
+      // Si un token secret est configuré, on l'ajoute dans les entêtes pour authentifier l'appel sur n8n
+      if (process.env.N8N_WEBHOOK_SECRET) {
+        n8nHeaders["X-Webhook-Token"] = process.env.N8N_WEBHOOK_SECRET;
+      }
+
       // Envoi asynchrone sans bloquer le reste de l'exécution
       fetch(n8nWebhookUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: n8nHeaders,
         body: JSON.stringify({
           ...payload,
           ipAddress: ip,

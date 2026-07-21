@@ -2,6 +2,7 @@ import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { validatePayload, type ContactPayload } from "@/lib/contact/validation";
 import { renderContactEmail } from "@/lib/contact/email";
+import { buildN8nPayload, getN8nHeaders } from "@/lib/contact/n8n";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import { saveContactSubmission, initializeDatabase, isTursoConfigured } from "@/lib/db/turso";
 
@@ -108,10 +109,11 @@ export async function POST(request: Request) {
   }
 
   // Sauvegarder dans Turso (seulement si configuré)
+  let submissionId: number | undefined;
   if (isTursoConfigured()) {
     try {
       await initializeDatabase();
-      await saveContactSubmission({
+      const id = await saveContactSubmission({
         name: payload.name,
         email: payload.email,
         company: payload.company,
@@ -133,38 +135,31 @@ export async function POST(request: Request) {
         ipAddress: ip,
         userAgent: request.headers.get("user-agent") || undefined,
       });
+      submissionId = id != null ? Number(id) : undefined;
     } catch (err) {
       console.error("[api/contact] Turso save error:", err);
       // On continue quand même avec l'email si Turso échoue
     }
   }
 
-  // Optionnel : Envoi du payload à un webhook n8n si configuré
+  // Envoi du payload structuré à un webhook n8n si configuré
   const n8nWebhookUrl = process.env.N8N_WEBHOOK_URL;
   if (n8nWebhookUrl) {
-    try {
-      const n8nHeaders: Record<string, string> = {
-        "Content-Type": "application/json",
-      };
+    const n8nPayload = buildN8nPayload(payload, ip, submissionId);
+    const n8nHeaders = getN8nHeaders();
 
-      // Si un token secret est configuré, on l'ajoute dans les entêtes pour authentifier l'appel sur n8n
-      if (process.env.N8N_WEBHOOK_SECRET) {
-        n8nHeaders["X-Webhook-Token"] = process.env.N8N_WEBHOOK_SECRET;
-      }
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10_000);
 
-      // Envoi asynchrone sans bloquer le reste de l'exécution
-      fetch(n8nWebhookUrl, {
-        method: "POST",
-        headers: n8nHeaders,
-        body: JSON.stringify({
-          ...payload,
-          ipAddress: ip,
-          submittedAt: new Date().toISOString(),
-        }),
-      }).catch((err) => console.error("[api/contact] n8n webhook trigger error:", err));
-    } catch (err) {
-      console.error("[api/contact] Failed to fire n8n webhook:", err);
-    }
+    fetch(n8nWebhookUrl, {
+      method: "POST",
+      headers: n8nHeaders,
+      body: JSON.stringify(n8nPayload),
+      signal: controller.signal,
+    })
+      .then(() => console.log("[api/contact] n8n webhook delivered", { submissionId }))
+      .catch((err) => console.error("[api/contact] n8n webhook error:", err))
+      .finally(() => clearTimeout(timeout));
   }
 
   // Envoyer l'email de notification

@@ -68,7 +68,7 @@ export const services: ServiceConfig[] = [
     icon: Cpu,
     contactType: "ai",
     formIcon: BrainCircuit,
-    relatedCaseStudy: "digitrans-cm",
+    relatedCaseStudy: "lead-qualification-agent",
     mcp: {
       title: "Automatisation IA",
       description: "Intégration d'agents IA et d'automatisations intelligentes.",

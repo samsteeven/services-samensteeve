@@ -1,4 +1,4 @@
-export type CaseStudySlug = "tribunejustice" | "digitrans-cm" | "shopnow";
+export type CaseStudySlug = "tribunejustice" | "digitrans-cm" | "shopnow" | "lead-qualification-agent";
 
 export interface CaseStudyLocale {
   title: string;
@@ -200,6 +200,68 @@ export const caseStudies: CaseStudy[] = [
         "M365 migration: 30% reduction in IT administrative workload by month 3",
         "Year-1 budget: 56M XAF (~€86K) — in line with initial estimates",
         "Disaster Recovery Plan validated: actual RTO 1h45 / actual RPO 28min during the test run",
+      ],
+    },
+  },
+  {
+    slug: "lead-qualification-agent",
+    service: ["automatisation-ia"],
+    coverPlaceholder: "#1a1a2e",
+    coverImage: "/projects/ia_agent.png",
+    fr: {
+      title: "Agent IA de Qualification de Leads",
+      tagline: "Pipeline intelligent interceptant les formulaires de contact, enrichissant les données et qualifiant les prospects avec scoring automatique.",
+      role: "Architecte IA & Ingénieur logiciel",
+      period: "Juillet 2026",
+      stack: ["n8n", "Claude Haiku 4.5", "Tavily API", "OpenRouter", "TypeScript", "Next.js", "Turso", "MCP"],
+      services: ["Automatisation IA", "Ingénierie logicielle"],
+      summary:
+        "Développement d'un agent IA autonome de qualification de leads pour services-samensteeve.com. Le workflow n8n intercepte les soumissions de formulaire via webhook sécurisé (header auth), enrichit les données entreprise via Tavily, matche les besoins avec le catalogue de services, score les leads de 1-10 et rédige une réponse personnalisée en français ou anglais. Le tout avec gestion d'erreur, CRM persistant (Data Table n8n) et intégration MCP pour pilotage depuis opencode.",
+      challenges: [
+        "Qualifier automatiquement les leads entrants sans intervention humaine tout en maintenant la pertinence des réponses",
+        "Enrichir les données entreprise en temps réel pour un scoring précis (budget, fit, timeline)",
+        "Intégrer un pipeline IA dans un existant Next.js sans casser le flux utilisateur actuel",
+      ],
+      solutions: [
+        "Workflow n8n avec webhook sécurisé (Header Auth), agent IA (Claude Haiku 4.5) et Structured Output Parser pour JSON garanti",
+        "Outil Tavily pour l'enrichissement temps réel des données entreprise (recherche web)",
+        "CRM persistant via Data Table n8n — les scores et statuts survivent aux redémarrages",
+        "Branchement MCP (Model Context Protocol) pour piloter le workflow depuis opencode avec des commandes naturelles",
+        "Gestion d'erreur : onError continueErrorOutput + branche de log des échecs dans la table CRM",
+      ],
+      results: [
+        "Temps de réponse aux leads réduit de plusieurs heures à quelques secondes",
+        "Scoring automatisé éliminant les leads de mauvaise qualité avant contact humain",
+        "Emails de réponse personnalisés rédigés en < 30 secondes avec contexte complet",
+        "Architecture modulaire : modèle, outils et CRM interchangeables sans refactorer l'agent",
+      ],
+    },
+    en: {
+      title: "AI Lead Qualification Agent",
+      tagline: "Intelligent pipeline intercepting contact forms, enriching data and qualifying prospects with automatic scoring.",
+      role: "AI Architect & Software Engineer",
+      period: "July 2026",
+      stack: ["n8n", "Claude Haiku 4.5", "Tavily API", "OpenRouter", "TypeScript", "Next.js", "Turso", "MCP"],
+      services: ["AI Automation", "Software Engineering"],
+      summary:
+        "Development of an autonomous AI agent for lead qualification for services-samensteeve.com. The n8n workflow intercepts form submissions via secured webhook (header auth), enriches company data via Tavily, matches needs with the service catalog, scores leads from 1-10, and drafts personalized responses in French or English. Complete with error handling, persistent CRM (n8n Data Table), and MCP integration for control from opencode.",
+      challenges: [
+        "Automatically qualifying inbound leads without human intervention while maintaining response relevance",
+        "Enriching company data in real-time for accurate scoring (budget, fit, timeline)",
+        "Integrating an AI pipeline into an existing Next.js app without breaking the current user flow",
+      ],
+      solutions: [
+        "n8n workflow with secured webhook (Header Auth), AI agent (Claude Haiku 4.5), and Structured Output Parser for guaranteed JSON",
+        "Tavily tool for real-time company data enrichment (web search)",
+        "Persistent CRM via n8n Data Table — scores and statuses survive restarts",
+        "MCP (Model Context Protocol) branching for workflow control from opencode with natural commands",
+        "Error handling: onError continueErrorOutput + failure logging branch to CRM table",
+      ],
+      results: [
+        "Lead response time reduced from several hours to a few seconds",
+        "Automated scoring eliminating poor-quality leads before human contact",
+        "Personalized response emails drafted in < 30 seconds with full context",
+        "Modular architecture: model, tools, and CRM interchangeable without refactoring the agent",
       ],
     },
   },

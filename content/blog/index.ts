@@ -6,6 +6,15 @@ import { BlogPost, PostMeta } from "./types";
 export const blogMetadata: PostMeta[] = [
   // ─── FRENCH POSTS ───
   {
+    slug: "n8n-deploiement-vps-production",
+    title: "Déployer n8n en production sur un VPS partagé : retour d'expérience",
+    excerpt: "Comment j'ai auto-hébergé n8n sur un VPS déjà en production sans rien casser : isolation Docker, reverse proxy nginx, HTTPS, et les trois incidents de debugging que les tutoriels ne mentionnent pas.",
+    date: "2026-07-21",
+    tags: ["DevOps", "Docker", "Automatisation", "n8n", "Infrastructure"],
+    readTime: 7,
+    lang: "fr"
+  },
+  {
     slug: "securiser-agent-mcp-bdd",
     title: "Injection de prompt applicatif : sécuriser un agent MCP avec accès BDD",
     excerpt: "Comment protéger un agent autonome utilisant le protocole MCP (Model Context Protocol) contre l'exécution de requêtes malveillantes directes sur vos bases PostgreSQL/MySQL.",

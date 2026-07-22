@@ -42,6 +42,3 @@ next-env.d.ts
 
 # IDE
 .idea/
-
-# n8n workflow (managed in n8n, not in repo)
-n8n-workflow-lead-qualification.ts

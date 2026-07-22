@@ -87,7 +87,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "digitrans-cm",
     service: ["architecture-cloud", "ingenierie-logicielle"],
     coverPlaceholder: "#0f172a",
-    coverImage: "/projects/archi_cloud.png",
+    coverImage: "",
     fr: {
       title: "DIGITRANS-CM (AGROCAM S.A.)",
       tagline: "Architecture microservices cloud-native pour une agro-industrie avec synchronisation offline-first en zone rurale.",
@@ -147,7 +147,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "shopnow",
     service: ["architecture-cloud"],
     coverPlaceholder: "#172554",
-    coverImage: "/projects/archi_onpromise.png",
+    coverImage: "/projects/archi_cloud.png",
     fr: {
       title: "ShopNow — Infrastructure Cloud Hybride",
       tagline: "Infrastructure multi-sites sécurisée pour un e-commerce camerounais avec migration M365 et plan de reprise d'activité.",

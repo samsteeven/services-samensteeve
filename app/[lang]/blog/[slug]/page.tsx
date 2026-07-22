@@ -55,6 +55,14 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const { meta, Content } = post;
 
+  // ── Prev / Next navigation for blog posts ──
+  const langPosts = blogMetadata
+    .filter((p) => p.lang === langKey)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const currentIndex = langPosts.findIndex((p) => p.slug === slug);
+  const prevPost = currentIndex > 0 ? langPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex < langPosts.length - 1 ? langPosts[currentIndex + 1] : null;
+
   const formattedDate = new Date(meta.date).toLocaleDateString(
     langKey === "fr" ? "fr-FR" : "en-US",
     { year: "numeric", month: "long", day: "numeric" }
@@ -200,6 +208,64 @@ export default async function BlogPostPage({ params }: PageProps) {
               </Link>
             </div>
           </ScrollReveal>
+
+          {/* ── Prev / Next blog post navigation ── */}
+          {(prevPost || nextPost) && (
+            <ScrollReveal delay={160} className="mt-16 pt-12 border-t border-line/40">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-ink-soft/40 mb-6">
+                {langKey === "fr" ? "Continuer la lecture" : "Continue reading"}
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Prev */}
+                {prevPost ? (
+                  <Link
+                    href={`/${langKey}/blog/${prevPost.slug}`}
+                    className="group flex flex-col gap-3 rounded-2xl border border-line bg-paper-raised/30 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-paper-raised/60 hover:shadow-md"
+                  >
+                    <div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-widest text-ink-soft/40">
+                      <ArrowLeft className="h-3 w-3 transition-transform duration-200 group-hover:-translate-x-0.5" />
+                      {langKey === "fr" ? "Article précédent" : "Previous article"}
+                    </div>
+                    <div>
+                      <div className="flex flex-wrap gap-1 mb-2">
+                        {prevPost.tags.slice(0, 2).map((t) => (
+                          <span key={t} className="font-mono text-[8px] uppercase tracking-wider font-bold text-accent bg-accent/10 border border-accent/20 px-1.5 py-0.5 rounded-full">{t}</span>
+                        ))}
+                      </div>
+                      <p className="font-display text-sm font-bold text-ink group-hover:text-accent transition-colors duration-200 leading-snug">
+                        {prevPost.title}
+                      </p>
+                      <p className="mt-1 font-mono text-[9px] text-ink-soft/60">{prevPost.date} · {prevPost.readTime} min</p>
+                    </div>
+                  </Link>
+                ) : <div />}
+
+                {/* Next */}
+                {nextPost ? (
+                  <Link
+                    href={`/${langKey}/blog/${nextPost.slug}`}
+                    className="group flex flex-col gap-3 rounded-2xl border border-line bg-paper-raised/30 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-paper-raised/60 hover:shadow-md sm:text-right"
+                  >
+                    <div className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-widest text-ink-soft/40 sm:justify-end">
+                      {langKey === "fr" ? "Article suivant" : "Next article"}
+                      <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-0.5" />
+                    </div>
+                    <div>
+                      <div className="flex flex-wrap gap-1 mb-2 sm:justify-end">
+                        {nextPost.tags.slice(0, 2).map((t) => (
+                          <span key={t} className="font-mono text-[8px] uppercase tracking-wider font-bold text-accent bg-accent/10 border border-accent/20 px-1.5 py-0.5 rounded-full">{t}</span>
+                        ))}
+                      </div>
+                      <p className="font-display text-sm font-bold text-ink group-hover:text-accent transition-colors duration-200 leading-snug">
+                        {nextPost.title}
+                      </p>
+                      <p className="mt-1 font-mono text-[9px] text-ink-soft/60">{nextPost.date} · {nextPost.readTime} min</p>
+                    </div>
+                  </Link>
+                ) : <div />}
+              </div>
+            </ScrollReveal>
+          )}
         </div>
       </main>
     </div>

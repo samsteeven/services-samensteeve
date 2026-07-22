@@ -68,17 +68,29 @@ export default async function RealisationsPage({ params }: PageProps) {
                     className="group flex flex-col md:flex-row overflow-hidden rounded-2xl border border-line bg-paper-raised/40 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-md"
                   >
                     {/* Numeration or Logo Block */}
-                    {cs.slug === "tribunejustice" ? (
-                      <div className="md:w-64 shrink-0 bg-paper-raised/80 border-b md:border-b-0 md:border-r border-line/40 p-8 flex items-center justify-center h-48 md:h-auto min-h-[190px] relative overflow-hidden">
+                    {cs.coverImage ? (
+                      <div className="md:w-64 shrink-0 border-b md:border-b-0 md:border-r border-line/40 h-48 md:h-auto min-h-[190px] relative overflow-hidden">
                         {/* Grid background effect */}
-                        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-line)_1px,transparent_1px)] bg-[size:16px_16px] opacity-15 pointer-events-none" />
-                        <Image
-                          src={cs.coverImage}
-                          alt={locale.title}
-                          width={320}
-                          height={120}
-                          className="max-h-20 max-w-full object-contain filter dark:brightness-110 group-hover:scale-105 transition-all duration-350 ease-out z-10"
-                        />
+                        <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-line)_1px,transparent_1px)] bg-[size:16px_16px] opacity-15 pointer-events-none z-10" />
+                        {cs.slug === "tribunejustice" ? (
+                          <div className="flex items-center justify-center w-full h-full p-8 bg-paper-raised/80">
+                            <Image
+                              src={cs.coverImage}
+                              alt={locale.title}
+                              width={220}
+                              height={80}
+                              className="max-h-16 max-w-full object-contain filter dark:brightness-110 group-hover:scale-105 transition-all duration-350 ease-out z-20"
+                            />
+                          </div>
+                        ) : (
+                          <Image
+                            src={cs.coverImage}
+                            alt={locale.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-all duration-350 ease-out z-20"
+                            sizes="(max-width: 768px) 100vw, 256px"
+                          />
+                        )}
                       </div>
                     ) : (
                       <div className="md:w-64 shrink-0 bg-paper-raised/35 border-b md:border-b-0 md:border-r border-line/40 p-8 flex items-center justify-center font-display text-6xl font-extrabold text-ink/15 group-hover:text-accent/25 transition-all duration-350 ease-out h-48 md:h-auto min-h-[190px] relative select-none">

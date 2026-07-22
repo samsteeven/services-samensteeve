@@ -1,4 +1,5 @@
 import React from "react";
+import { CodeWindow } from "@/components/code-window";
 
 export default function N8nVpsProductionDeployment() {
   return (
@@ -32,28 +33,21 @@ export default function N8nVpsProductionDeployment() {
       <h3 className="font-display text-base font-bold text-ink mt-6">
         1. Prepare Dedicated Directory
       </h3>
-      <div className="rounded-xl border border-line bg-paper-raised/40 overflow-hidden font-mono text-xs my-4">
-        <div className="border-b border-line/40 px-4 py-2 text-[11px] text-ink-soft bg-paper-raised/80 font-bold flex items-center justify-between">
-          <span>Bash — Directory Creation</span>
-          <span className="text-[10px] text-accent">Terminal</span>
-        </div>
-        <pre className="p-4 overflow-x-auto text-ink-soft bg-paper-raised/20 m-0">
-{`sudo mkdir -p /opt/n8n
+      <CodeWindow
+        filename="Terminal — Bash"
+        badge="Bash"
+        code={`sudo mkdir -p /opt/n8n
 cd /opt/n8n
 sudo mkdir -p n8n_data postgres_data`}
-        </pre>
-      </div>
+      />
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
         2. Environment Variables (.env)
       </h3>
-      <div className="rounded-xl border border-line bg-paper-raised/40 overflow-hidden font-mono text-xs my-4">
-        <div className="border-b border-line/40 px-4 py-2 text-[11px] text-ink-soft bg-paper-raised/80 font-bold flex items-center justify-between">
-          <span>.env</span>
-          <span className="text-[10px] text-accent">Config</span>
-        </div>
-        <pre className="p-4 overflow-x-auto text-ink-soft bg-paper-raised/20 m-0">
-{`N8N_HOST=n8n.samensteeve.com
+      <CodeWindow
+        filename=".env"
+        badge="Config"
+        code={`N8N_HOST=n8n.samensteeve.com
 N8N_PROTOCOL=https
 N8N_WEBHOOK_URL=https://n8n.samensteeve.com/
 N8N_ENCRYPTION_KEY=<generated_key>
@@ -69,19 +63,15 @@ DB_POSTGRESDB_PASSWORD=<strong_password>
 POSTGRES_USER=n8n_user
 POSTGRES_PASSWORD=<same_strong_password>
 POSTGRES_DB=n8n`}
-        </pre>
-      </div>
+      />
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
         3. Write <code>docker-compose.yml</code>
       </h3>
-      <div className="rounded-xl border border-line bg-paper-raised/40 overflow-hidden font-mono text-xs my-4">
-        <div className="border-b border-line/40 px-4 py-2 text-[11px] text-ink-soft bg-paper-raised/80 font-bold flex items-center justify-between">
-          <span>docker-compose.yml</span>
-          <span className="text-[10px] text-accent">Docker</span>
-        </div>
-        <pre className="p-4 overflow-x-auto text-ink-soft bg-paper-raised/20 m-0">
-{`services:
+      <CodeWindow
+        filename="docker-compose.yml"
+        badge="Docker"
+        code={`services:
   postgres:
     image: postgres:16-alpine
     container_name: n8n_postgres
@@ -115,8 +105,7 @@ POSTGRES_DB=n8n`}
 networks:
   n8n_net:
     driver: bridge`}
-        </pre>
-      </div>
+      />
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         Real-World Debugging Lessons

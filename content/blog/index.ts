@@ -89,6 +89,15 @@ export const blogMetadata: PostMeta[] = [
 
   // ─── ENGLISH POSTS ───
   {
+    slug: "n8n-vps-production-deployment",
+    title: "Deploying n8n in Production on a Shared VPS: Field Retrospective",
+    excerpt: "How I self-hosted n8n on a production VPS without breaking anything: Docker isolation, Nginx reverse proxy, HTTPS, and real-world debugging lessons.",
+    date: "2026-07-21",
+    tags: ["DevOps", "Docker", "Automation", "n8n", "Infrastructure"],
+    readTime: 7,
+    lang: "en"
+  },
+  {
     slug: "securing-mcp-agent-database",
     title: "Application Prompt Injection: Securing an MCP Agent with DB Access",
     excerpt: "How to protect an autonomous agent using the Model Context Protocol (MCP) from executing malicious direct queries on your PostgreSQL/MySQL databases.",

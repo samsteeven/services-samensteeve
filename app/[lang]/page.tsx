@@ -8,6 +8,8 @@ import { ServicesGrid } from "@/components/services-grid";
 import { TestimonialsCarousel } from "@/components/testimonials-carousel";
 import Link from "next/link";
 import { ArrowRight, Mail } from "lucide-react";
+import { blogMetadata } from "@/content/blog/index";
+import { BlogCard } from "@/components/blog-card";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
 interface PageProps {
@@ -158,6 +160,46 @@ export default async function HomePage({ params }: PageProps) {
                 </div>
               </ScrollReveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Recent Blog / Field Notes Section */}
+      <section className="py-24 md:py-32 bg-paper transition-all duration-300 border-t border-line/40">
+        <div className="mx-auto max-w-6xl px-4 sm:px-8">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-8 border-b border-line/30">
+            <div className="max-w-2xl">
+              <ScrollReveal>
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] font-bold text-accent">
+                  {t.blog.eyebrow}
+                </span>
+              </ScrollReveal>
+              <ScrollReveal delay={60} className="mt-4">
+                <h2 className="font-display text-3xl font-extrabold tracking-tight text-ink sm:text-5xl leading-[1.1]">
+                  {t.blog.heading}
+                </h2>
+              </ScrollReveal>
+            </div>
+            <ScrollReveal delay={120} className="shrink-0">
+              <Link
+                href={`/${lang}/blog`}
+                className="inline-flex shrink-0 items-center gap-2 rounded-full border border-line bg-paper-raised px-5 py-2.5 font-mono text-[10px] uppercase font-bold tracking-widest text-ink hover:border-accent/40 hover:text-accent transition duration-200"
+              >
+                {t.nav.blog}
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </ScrollReveal>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+            {blogMetadata
+              .filter((post) => post.lang === langKey)
+              .slice(0, 3)
+              .map((post, i) => (
+                <ScrollReveal key={post.slug} delay={i * 80} className="h-full">
+                  <BlogCard post={post} lang={langKey} />
+                </ScrollReveal>
+              ))}
           </div>
         </div>
       </section>

@@ -37,36 +37,47 @@ export default function N8nDeploiementVpsProduction() {
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         Le déploiement, étape par étape
       </h2>
-      <p>
-        Voici le processus complet, du serveur vierge (côté n8n) jusqu&apos;au premier workflow. Les commandes sont volontairement détaillées : c&apos;est ce niveau de granularité qui manque le plus souvent dans les tutoriels génériques.
-      </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
         1. Préparer l&apos;arborescence dédiée
       </h3>
-      <pre className="p-4 rounded-xl border border-line bg-paper-raised/80 font-mono text-xs text-ink-soft overflow-x-auto">
+      <div className="rounded-xl border border-line bg-paper-raised/40 overflow-hidden font-mono text-xs my-4">
+        <div className="border-b border-line/40 px-4 py-2 text-[11px] text-ink-soft bg-paper-raised/80 font-bold flex items-center justify-between">
+          <span>Bash — Création des dossiers</span>
+          <span className="text-[10px] text-accent">Terminal</span>
+        </div>
+        <pre className="p-4 overflow-x-auto text-ink-soft bg-paper-raised/20 m-0">
 {`sudo mkdir -p /opt/n8n
 cd /opt/n8n
 sudo mkdir -p n8n_data postgres_data`}
-      </pre>
+        </pre>
+      </div>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
         2. Générer la clé de chiffrement
       </h3>
       <p>
-        Cette clé chiffre tous les credentials stockés par n8n (mots de passe d&apos;API, tokens OAuth). Sans elle, impossible de restaurer un backup sur une nouvelle instance.
+        Cette clé chiffre tous les credentials stockés par n8n (mots de passe d&apos;API, tokens OAuth).
       </p>
-      <pre className="p-4 rounded-xl border border-line bg-paper-raised/80 font-mono text-xs text-ink-soft overflow-x-auto">
+      <div className="rounded-xl border border-line bg-paper-raised/40 overflow-hidden font-mono text-xs my-4">
+        <div className="border-b border-line/40 px-4 py-2 text-[11px] text-ink-soft bg-paper-raised/80 font-bold flex items-center justify-between">
+          <span>Bash — Clef OpenSSL</span>
+          <span className="text-[10px] text-accent">Secret</span>
+        </div>
+        <pre className="p-4 overflow-x-auto text-ink-soft bg-paper-raised/20 m-0">
 {`openssl rand -hex 32`}
-      </pre>
+        </pre>
+      </div>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        3. Définir les variables d&apos;environnement
+        3. Fichier de variables d&apos;environnement
       </h3>
-      <p>
-        Un fichier <code>.env</code> centralise la configuration. Point de vigilance important que j&apos;aborderai dans la section debugging : <code>POSTGRES_USER</code> et <code>DB_POSTGRESDB_USER</code> doivent être <strong>strictement identiques</strong>.
-      </p>
-      <pre className="p-4 rounded-xl border border-line bg-paper-raised/80 font-mono text-xs text-ink-soft overflow-x-auto">
+      <div className="rounded-xl border border-line bg-paper-raised/40 overflow-hidden font-mono text-xs my-4">
+        <div className="border-b border-line/40 px-4 py-2 text-[11px] text-ink-soft bg-paper-raised/80 font-bold flex items-center justify-between">
+          <span>.env</span>
+          <span className="text-[10px] text-accent">Config</span>
+        </div>
+        <pre className="p-4 overflow-x-auto text-ink-soft bg-paper-raised/20 m-0">
 {`N8N_HOST=n8n.samensteeve.com
 N8N_PROTOCOL=https
 N8N_WEBHOOK_URL=https://n8n.samensteeve.com/
@@ -83,15 +94,18 @@ DB_POSTGRESDB_PASSWORD=<mot de passe fort>
 POSTGRES_USER=n8n_user
 POSTGRES_PASSWORD=<le même mot de passe fort>
 POSTGRES_DB=n8n`}
-      </pre>
+        </pre>
+      </div>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        4. Écrire le <code>docker-compose.yml</code>
+        4. Définir le <code>docker-compose.yml</code>
       </h3>
-      <p>
-        Deux services : Postgres (dédié, isolé) et n8n, reliés par un réseau Docker privé. La condition <code>service_healthy</code> sur Postgres garantit que n8n ne démarre qu&apos;une fois la base réellement prête — pas juste le conteneur lancé.
-      </p>
-      <pre className="p-4 rounded-xl border border-line bg-paper-raised/80 font-mono text-xs text-ink-soft overflow-x-auto">
+      <div className="rounded-xl border border-line bg-paper-raised/40 overflow-hidden font-mono text-xs my-4">
+        <div className="border-b border-line/40 px-4 py-2 text-[11px] text-ink-soft bg-paper-raised/80 font-bold flex items-center justify-between">
+          <span>docker-compose.yml</span>
+          <span className="text-[10px] text-accent">Docker</span>
+        </div>
+        <pre className="p-4 overflow-x-auto text-ink-soft bg-paper-raised/20 m-0">
 {`services:
   postgres:
     image: postgres:16-alpine
@@ -126,23 +140,18 @@ POSTGRES_DB=n8n`}
 networks:
   n8n_net:
     driver: bridge`}
-      </pre>
+        </pre>
+      </div>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        5. Lancer la stack
+        5. Reverse Proxy Nginx & SSL Let&apos;s Encrypt
       </h3>
-      <pre className="p-4 rounded-xl border border-line bg-paper-raised/80 font-mono text-xs text-ink-soft overflow-x-auto">
-{`sudo docker compose up -d
-sudo docker compose logs -f n8n`}
-      </pre>
-
-      <h3 className="font-display text-base font-bold text-ink mt-6">
-        6. Configurer nginx en reverse proxy
-      </h3>
-      <p>
-        Sur le nginx déjà en place, ajout d&apos;un <code>server_block</code> dédié au sous-domaine. Les en-têtes <code>Upgrade</code> et <code>Connection</code> sont essentiels pour que les WebSockets de l&apos;interface n8n fonctionnent correctement.
-      </p>
-      <pre className="p-4 rounded-xl border border-line bg-paper-raised/80 font-mono text-xs text-ink-soft overflow-x-auto">
+      <div className="rounded-xl border border-line bg-paper-raised/40 overflow-hidden font-mono text-xs my-4">
+        <div className="border-b border-line/40 px-4 py-2 text-[11px] text-ink-soft bg-paper-raised/80 font-bold flex items-center justify-between">
+          <span>/etc/nginx/sites-available/n8n.samensteeve.com</span>
+          <span className="text-[10px] text-accent">Nginx</span>
+        </div>
+        <pre className="p-4 overflow-x-auto text-ink-soft bg-paper-raised/20 m-0">
 {`server {
     listen 80;
     server_name n8n.samensteeve.com;
@@ -158,36 +167,14 @@ sudo docker compose logs -f n8n`}
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 }`}
-      </pre>
-      <pre className="p-4 rounded-xl border border-line bg-paper-raised/80 font-mono text-xs text-ink-soft overflow-x-auto">
-{`sudo ln -s /etc/nginx/sites-available/n8n.samensteeve.com /etc/nginx/sites-enabled/
-sudo nginx -t
-sudo systemctl reload nginx`}
-      </pre>
-
-      <h3 className="font-display text-base font-bold text-ink mt-6">
-        7. Activer le HTTPS avec Let&apos;s Encrypt
-      </h3>
-      <pre className="p-4 rounded-xl border border-line bg-paper-raised/80 font-mono text-xs text-ink-soft overflow-x-auto">
-{`sudo apt install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d n8n.samensteeve.com`}
-      </pre>
-      <p>
-        Certbot édite automatiquement la config nginx pour rediriger tout le trafic HTTP vers HTTPS et gère le renouvellement automatique du certificat.
-      </p>
-
-      <h3 className="font-display text-base font-bold text-ink mt-6">
-        8. Premier accès et création du compte owner
-      </h3>
-      <p>
-        À la première visite de <code>https://n8n.samensteeve.com</code>, n8n affiche l&apos;écran de setup owner : email + mot de passe. Cet écran ne s&apos;affiche <strong>qu&apos;une seule fois</strong> — une fois le compte créé, n8n désactive définitivement l&apos;auto-inscription. Toute invitation future doit passer par <em>Settings → Users</em>.
-      </p>
+        </pre>
+      </div>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         Ce que le déploiement "propre" ne dit pas : le debugging réel
       </h2>
       <p>
-        La théorie d&apos;un déploiement Docker + nginx + SSL est bien documentée. La pratique, sur un serveur qui vit déjà, l&apos;est moins. Voici les trois incidents rencontrés et comment je les ai résolus — c&apos;est souvent là que se joue la vraie compétence DevOps.
+        La théorie d&apos;un déploiement Docker + nginx + SSL est bien documentée. La pratique, sur un serveur qui vit déjà, l&apos;est moins. Voici les trois incidents rencontrés et comment je les ai résolus.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
@@ -197,43 +184,66 @@ sudo certbot --nginx -d n8n.samensteeve.com`}
         Error: EACCES: permission denied, open &apos;/home/node/.n8n/config&apos;
       </div>
       <p>
-        Le processus n8n dans le conteneur tourne sous l&apos;UID <code>1000</code> (utilisateur <code>node</code>), mais le dossier créé côté hôte appartenait à <code>root</code>. Diagnostic simple une fois qu&apos;on sait où chercher : <code>chown -R 1000:1000</code> sur le volume a résolu le blocage.
+        Le processus n8n dans le conteneur tourne sous l&apos;UID <code>1000</code> (utilisateur <code>node</code>), mais le dossier créé côté hôte appartenait à <code>root</code>. Diagnostic : <code>chown -R 1000:1000</code> sur le volume a résolu le blocage.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        2. Incohérence entre les identifiants Postgres
+        2. Le sous-domaine flaggé "site dangereux" par Google
       </h3>
       <p>
-        Une erreur d&apos;inattention classique : les variables <code>POSTGRES_USER</code> (utilisées à l&apos;initialisation du conteneur Postgres) et <code>DB_POSTGRESDB_USER</code> (utilisées par n8n pour s&apos;y connecter) n&apos;étaient pas alignées. Comme Postgres n&apos;initialise sa base qu&apos;au tout premier démarrage, un simple changement de <code>.env</code> après coup ne suffisait pas — il a fallu supprimer le volume de données pour repartir sur des identifiants cohérents.
+        Le plus instructif des trois. Une fois le service opérationnel et le HTTPS activé, Chrome s&apos;est mis à bloquer brutalement l&apos;accès au sous-domaine avec un avertissement rouge d&apos;hameçonnage — alors que le contenu était parfaitement légitime.
+      </p>
+
+      {/* Screenshot 1 : Avertissement Google Safe Browsing */}
+      <figure className="my-6 rounded-2xl border border-line overflow-hidden bg-paper-raised/50 shadow-md">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/blog/n8n-google-warning.png"
+          alt="Avertissement Google Safe Browsing - Site Dangereux sur n8n.samensteeve.com"
+          className="w-full object-cover"
+        />
+        <figcaption className="p-3 text-center font-mono text-xs text-ink-soft border-t border-line/40 bg-paper-raised">
+          Figure 1 : Blocage heuristique Chrome / Google Safe Browsing lors du premier accès au sous-domaine n8n.
+        </figcaption>
+      </figure>
+
+      <p>
+        En creusant (Google Search Console, forums communautaires n8n), j&apos;ai découvert un pattern documenté : une page de connexion nue, sur un sous-domaine tout neuf, derrière un CDN, correspond statistiquement au profil d&apos;une page de phishing pour les classifieurs heuristiques de Google Safe Browsing.
+      </p>
+      <p>
+        La résolution a nécessité une démarche administrative plutôt que technique : validation de la propriété du domaine via Search Console, puis demande de révision manuelle auprès des équipes Google.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        3. Le sous-domaine flaggé "site dangereux" par Google
+        3. Victoire : l&apos;instance n8n opérationnelle en production
       </h3>
       <p>
-        Le plus instructif des trois. Une fois le service opérationnel, Chrome s&apos;est mis à bloquer l&apos;accès au sous-domaine avec un avertissement hameçonnage — alors que le contenu était parfaitement légitime. En creusant (Google Search Console, forums communautaires n8n), j&apos;ai découvert un pattern documenté : une page de connexion nue, sur un sous-domaine tout neuf, derrière un CDN, correspond statistiquement au profil d&apos;une page de phishing pour les classifieurs heuristiques de Google Safe Browsing. Plusieurs utilisateurs n8n rapportent exactement le même faux positif.
+        Une fois le faux positif levé par Google et les permissions de volumes corrigées, l&apos;instance n8n est enfin accessible de manière sécurisée et prête à orchestrer nos automatisations.
       </p>
-      <p>
-        La résolution a nécessité une démarche administrative plutôt que technique : validation de la propriété du domaine via Search Console, puis demande de révision manuelle. Un rappel utile que la sécurité <em>perçue</em> par des outils automatisés n&apos;est pas toujours corrélée à la sécurité réelle d&apos;un système — et qu&apos;il faut savoir distinguer les deux rapidement pour ne pas perdre de temps à chercher un problème qui n&apos;existe pas là où on le cherche.
-      </p>
+
+      {/* Screenshot 2 : Dashboard n8n fonctionnel */}
+      <figure className="my-6 rounded-2xl border border-line overflow-hidden bg-paper-raised/50 shadow-md">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/blog/n8n-dashboard.png"
+          alt="Dashboard n8n en ligne - Que veux-tu construire Sam ?"
+          className="w-full object-cover"
+        />
+        <figcaption className="p-3 text-center font-mono text-xs text-ink-soft border-t border-line/40 bg-paper-raised">
+          Figure 2 : Interface n8n sécurisée et opérationnelle sur n8n.samensteeve.com.
+        </figcaption>
+      </figure>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
-        La sécurisation finale
+        La sécurisation finale & Ce que je retiens
       </h2>
       <div className="border border-line rounded-xl bg-paper/60 p-4 font-mono text-xs text-ink/80 space-y-1">
         <div>— <strong>2FA</strong> activée sur le compte administrateur</div>
-        <div>— <strong>Backups automatisés</strong> (fichiers de configuration + dump PostgreSQL quotidien) via script cron, rotation sur 7 jours</div>
-        <div>— Compte owner <strong>verrouillé après création</strong> — tout nouvel utilisateur doit être invité explicitement depuis l&apos;interface</div>
+        <div>— <strong>Backups automatisés</strong> (dump PostgreSQL quotidien) via script cron, rotation sur 7 jours</div>
+        <div>— Compte owner <strong>verrouillé après création</strong> — tout nouvel utilisateur doit être invité explicitement</div>
       </div>
-
-      <h2 className="font-display text-xl font-bold text-ink mt-8">
-        Ce que je retiens
-      </h2>
-      <p>
-        Ce type de déploiement — modeste en apparence — mobilise tout un spectre de compétences : architecture système (isolation, réseaux Docker), sécurité (permissions, chiffrement, authentification), réseau (DNS, reverse proxy, certificats SSL), et une méthode rigoureuse pour diagnostiquer des pannes qui ne sont documentées nulle part de façon évidente.
-      </p>
-      <p>
-        C&apos;est exactement le type de problème que je rencontre au quotidien sur TribuneJustice et sur d&apos;autres projets. Si vous avez un besoin similaire — orchestrer des automatisations sur votre infrastructure sans multiplier les abonnements cloud — c&apos;est le type de mission sur lequel j&apos;interviens directement.
+      <p className="mt-4">
+        Ce type de déploiement — modeste en apparence — mobilise tout un spectre de compétences : architecture système (isolation, réseaux Docker), sécurité (permissions, chiffrement, authentification), réseau (DNS, reverse proxy, certificats SSL), et une méthode rigoureuse pour diagnostiquer des pannes réelles.
       </p>
     </article>
   );

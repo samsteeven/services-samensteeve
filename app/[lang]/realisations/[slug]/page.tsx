@@ -8,6 +8,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, CheckCircle2, ExternalLink, Github } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { ZoomableImage } from "@/components/zoomable-image";
 
 interface PageProps {
   params: Promise<{ lang: string; slug: string }>;
@@ -77,28 +78,25 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
           {cs.coverImage && (
             <ScrollReveal delay={40} className="mt-8">
-              <div className="overflow-hidden rounded-2xl border border-line max-w-3xl relative" style={{ aspectRatio: '16/9' }}>
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-line)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-line)_1px,transparent_1px)] bg-[size:20px_20px] opacity-10 pointer-events-none z-10" />
-                {cs.slug === "tribunejustice" ? (
-                  <div className="flex items-center justify-center w-full h-full p-12 bg-paper-raised/30">
+              {cs.slug === "tribunejustice" ? (
+                <div className="overflow-hidden rounded-2xl border border-line max-w-3xl relative bg-paper-raised/30" style={{ aspectRatio: '16/9' }}>
+                  <div className="flex items-center justify-center w-full h-full p-12">
                     <Image
                       src={cs.coverImage}
                       alt={locale.title}
                       width={640}
                       height={200}
-                      className="max-h-32 max-w-full object-contain filter dark:brightness-110 z-20"
+                      className="max-h-32 max-w-full object-contain filter dark:brightness-110"
                     />
                   </div>
-                ) : (
-                  <Image
-                    src={cs.coverImage}
-                    alt={locale.title}
-                    fill
-                    className="object-cover z-20"
-                    sizes="(max-width: 768px) 100vw, 768px"
-                  />
-                )}
-              </div>
+                </div>
+              ) : (
+                <ZoomableImage
+                  src={cs.coverImage}
+                  alt={locale.title}
+                  priority
+                />
+              )}
             </ScrollReveal>
           )}
 

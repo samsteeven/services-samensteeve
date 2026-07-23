@@ -112,6 +112,46 @@ export async function GET(
     if (!caseStudy) return notFound();
     const locale = lang === "fr" ? caseStudy.fr : caseStudy.en;
 
+    const sectionsMd: string[] = [];
+
+    if (locale.metrics && locale.metrics.length > 0) {
+      sectionsMd.push("## Key Metrics");
+      sectionsMd.push("");
+      locale.metrics.forEach((m) => {
+        sectionsMd.push(`- **${m.value}** : ${m.label} ${m.description ? `(${m.description})` : ""}`);
+      });
+      sectionsMd.push("");
+    }
+
+    if (locale.sections && locale.sections.length > 0) {
+      locale.sections.forEach((sec) => {
+        sectionsMd.push(`## ${sec.title}`);
+        sectionsMd.push("");
+        sectionsMd.push(sec.content);
+        sectionsMd.push("");
+        if (sec.quote) {
+          sectionsMd.push(`> "${sec.quote}"`);
+          sectionsMd.push("");
+        }
+        if (sec.highlights && sec.highlights.length > 0) {
+          sec.highlights.forEach((h) => {
+            sectionsMd.push(`- **${h.title}**: ${h.description}`);
+          });
+          sectionsMd.push("");
+        }
+      });
+    } else {
+      if (locale.challenges) {
+        sectionsMd.push("## Challenges", "", ...locale.challenges.map((c) => `- ${c}`), "");
+      }
+      if (locale.solutions) {
+        sectionsMd.push("## Solutions", "", ...locale.solutions.map((s) => `- ${s}`), "");
+      }
+      if (locale.results) {
+        sectionsMd.push("## Results", "", ...locale.results.map((r) => `- ${r}`), "");
+      }
+    }
+
     return markdownResponse([
       `# ${locale.title}`,
       "",
@@ -123,17 +163,7 @@ export async function GET(
       "",
       locale.summary,
       "",
-      "## Challenges",
-      "",
-      ...locale.challenges.map((challenge) => `- ${challenge}`),
-      "",
-      "## Solutions",
-      "",
-      ...locale.solutions.map((solution) => `- ${solution}`),
-      "",
-      "## Results",
-      "",
-      ...locale.results.map((result) => `- ${result}`),
+      ...sectionsMd,
     ]);
   }
 

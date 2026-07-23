@@ -216,7 +216,41 @@ networks:
       </figure>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
-        La sécurisation finale & Ce que je retiens
+        Ce qui tourne en production aujourd&apos;hui
+      </h2>
+      <p>
+        L&apos;instance n8n n&apos;est plus un simple orchestrateur de tâches récurrentes. Deux workflows critiques y tournent en production, connectés par une <strong>même Data Table CRM</strong> — le cœur du système.
+      </p>
+
+      <h3 className="font-display text-base font-bold text-ink mt-6">
+        Lead Qualification Agent (écriture)
+      </h3>
+      <p>
+        Agent IA autonome qui intercepte les soumissions de formulaire, enrichit les données via Tavily, score le lead de 1 à 10, et <strong>écrit</strong> dans la CRM Data Table (upsert par email). Email de notification personnalisé envoyé au prospect en &lt; 30 secondes. Mémoire Redis, Output Parser strict (schéma JSON contraint), retry sur Gmail et Tavily.
+      </p>
+
+      <h3 className="font-display text-base font-bold text-ink mt-6">
+        WhatsApp CRM Assistant (lecture &amp; opérationnel)
+      </h3>
+      <p>
+        Agent WhatsApp qui permet de <strong>lire</strong> et interroger la même CRM en langage naturel — consulter les leads récents, chercher par email, mettre à jour un statut, envoyer un email professionnel. Mémoire Redis pour le contexte conversationnel.
+      </p>
+
+      <h3 className="font-display text-base font-bold text-ink mt-6">
+        Le pipeline complet
+      </h3>
+      <p>
+        Les deux workflows forment un système unifié : le Lead Agent <strong>peuple</strong> la CRM avec des leads qualifiés et enrichis, le WhatsApp Assistant permet de <strong>consulter</strong> et <strong>agir</strong> sur ces données directement depuis WhatsApp — sans ouvrir l&apos;interface n8n. Mémoire Redis partagée pour la continuité conversationnelle entre les deux agents.
+      </p>
+
+      <div className="rounded-xl border border-accent/20 bg-accent/5 p-4 font-mono text-xs text-ink/80 space-y-1">
+        <div>— Chaque workflow a sa propre logique de sécurité : Header Auth (<code>X-Webhook-Secret</code>) pour le Lead Agent, authentification WhatsApp Business pour le CRM Assistant.</div>
+        <div>— <code>retryOnFail</code> configuré sur les nœuds critiques (Gmail, Tavily, HTTP).</div>
+        <div>— Mémoire Redis partagée pour la persistance conversationnelle.</div>
+      </div>
+
+      <h2 className="font-display text-xl font-bold text-ink mt-8">
+        La sécurisation finale &amp; Ce que je retiens
       </h2>
       <div className="border border-line rounded-xl bg-paper/60 p-4 font-mono text-xs text-ink/80 space-y-1">
         <div>— <strong>2FA</strong> activée sur le compte administrateur</div>

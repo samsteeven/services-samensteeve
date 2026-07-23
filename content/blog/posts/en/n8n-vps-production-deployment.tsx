@@ -148,6 +148,40 @@ networks:
       </figure>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
+        What&apos;s Running in Production Today
+      </h2>
+      <p>
+        The n8n instance is no longer just a task orchestrator. Two critical workflows run in production, connected by a <strong>shared CRM Data Table</strong> — the core of the system.
+      </p>
+
+      <h3 className="font-display text-base font-bold text-ink mt-6">
+        Lead Qualification Agent (write)
+      </h3>
+      <p>
+        Autonomous AI agent that intercepts form submissions, enriches data via Tavily, scores the lead 1-10, and <strong>writes</strong> to the CRM Data Table (upsert by email). Personalized response email sent to the prospect in &lt; 30s. Redis memory, strict Output Parser (constrained JSON schema), retry on Gmail and Tavily.
+      </p>
+
+      <h3 className="font-display text-base font-bold text-ink mt-6">
+        WhatsApp CRM Assistant (read &amp; operational)
+      </h3>
+      <p>
+        WhatsApp agent that allows <strong>reading</strong> and querying the same CRM in natural language — check recent leads, look up by email, update status, send professional emails. Redis memory for conversation context.
+      </p>
+
+      <h3 className="font-display text-base font-bold text-ink mt-6">
+        The Complete Pipeline
+      </h3>
+      <p>
+        Both workflows form a unified system: the Lead Agent <strong>populates</strong> the CRM with qualified, enriched leads, while the WhatsApp Assistant allows <strong>querying</strong> and <strong>acting</strong> on that data directly from WhatsApp — without opening the n8n interface. Shared Redis memory for conversation continuity between both agents.
+      </p>
+
+      <div className="border border-line rounded-xl bg-paper/60 p-4 font-mono text-xs text-ink/80 space-y-1">
+        <div>— Each workflow has its own security model: Header Auth (<code>X-Webhook-Secret</code>) for the Lead Agent, WhatsApp Business authentication for the CRM Assistant.</div>
+        <div>— <code>retryOnFail</code> configured on critical nodes (Gmail, Tavily, HTTP) with 3 attempts.</div>
+        <div>— Shared Redis memory for conversation persistence.</div>
+      </div>
+
+      <h2 className="font-display text-xl font-bold text-ink mt-8">
         Takeaways
       </h2>
       <p>

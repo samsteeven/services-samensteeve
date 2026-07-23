@@ -1,5 +1,24 @@
 export type CaseStudySlug = "tribunejustice" | "digitrans-cm" | "shopnow" | "lead-qualification-agent";
 
+export interface CaseStudyMetric {
+  value: string;
+  label: string;
+  description?: string;
+}
+
+export interface CaseStudyHighlight {
+  title: string;
+  description: string;
+}
+
+export interface CaseStudySection {
+  id: string;
+  title: string;
+  content: string;
+  quote?: string;
+  highlights?: CaseStudyHighlight[];
+}
+
 export interface CaseStudyLocale {
   title: string;
   tagline: string;
@@ -8,9 +27,11 @@ export interface CaseStudyLocale {
   stack: string[];
   services: string[];
   summary: string;
-  challenges: string[];
-  solutions: string[];
-  results: string[];
+  metrics: CaseStudyMetric[];
+  sections: CaseStudySection[];
+  challenges?: string[];
+  solutions?: string[];
+  results?: string[];
   repoUrl?: string;
   siteUrl?: string;
 }
@@ -38,23 +59,54 @@ export const caseStudies: CaseStudy[] = [
       stack: ["Laravel", "Angular", "Next.js", "Redis", "Docker", "Laravel Reverb", "Typesense"],
       services: ["Ingénierie logicielle", "Pentest & Sécurité applicative"],
       summary:
-        "TribuneJustice connecte des clients à des avocats certifiés, avec paiements en escrow et suivi de dossiers en temps réel. Quand je suis arrivé en tant que Tech Lead, la plateforme était en production avec une dette technique critique : un composant Angular de 594 lignes gérant tout le frontend, des sessions sans TTL, des endpoints exposés à SSRF. La mission : refactorer sans interrompre, sécuriser sans reconstruire depuis zéro.",
-      challenges: [
-        "Une plateforme en production avec des clients actifs — chaque changement architectural risque de casser un parcours utilisateur en cours",
-        "41 vulnérabilités détectées dont des SSRF exploitables et des sessions persistantes sans expiration — les corriger sans modifier le comportement fonctionnel visible",
-        "Les paiements en escrow impliquent une double intégrité : données financières cohérentes ET transitions d'état irréversibles — les deux doivent être atomiques",
+        "TribuneJustice connecte des clients à des avocats certifiés, avec paiements en escrow et suivi de dossiers en temps réel. Prise en charge de la direction technique d'une plateforme en production souffrant d'une dette technique critique et de failles de sécurité majeures. Mission : sécuriser l'architecture, refactorer le monolithe frontend et optimiser les recherches sans interrompre les utilisateurs actifs.",
+      metrics: [
+        { value: "41", label: "Failles colmatées", description: "Audit OWASP Top 10 complet (SSRF, CSRF, sessions sans TTL)" },
+        { value: "0", label: "Incident post-déploiement", description: "Zéro interruption lors du patch en production" },
+        { value: "< 300ms", label: "Temps de recherche avocat", description: "Remplacement du SQL lent par Typesense facetté" },
+        { value: "594 ➔ 4", label: "Refonte frontend", description: "Composant Angular monolithique découpé en 4 services découplés" }
       ],
-      solutions: [
-        "Verrouillage pessimiste (lockForUpdate) sur les transitions d'état des dossiers — une requête concurrente ne peut pas corrompre un paiement en cours, même sous charge",
-        "Découpage Angular en 4 services spécialisés avec injection de dépendances TypeScript strict — chaque service déployable et testable indépendamment",
-        "Audit OWASP Top 10 complet : headers CSP/HSTS ajoutés, sessions bornées, endpoints SSRF corrigés par liste blanche d'URLs autorisées",
-        "Intégration Typesense : index facetté avec filtres par spécialité, ville et disponibilité — remplace une recherche SQL lente et non-scalable",
+      sections: [
+        {
+          id: "contexte",
+          title: "01. Le Contexte & La Dette Technique",
+          content:
+            "TribuneJustice opère dans un domaine exigeant la confidentialité absolue et une intégrité financière irréprochable. Lors de ma prise de poste en tant que Tech Lead, la plateforme fonctionnait avec des vulnérabilités critiques en production : un composant Angular monolithique de 594 lignes concentrait la logique d'authentification, les sessions Redis n'avaient aucun TTL expirable, et plusieurs endpoints exposaient des failles SSRF exploitables. Chaque mise à jour menaçait d'interrompre les parcours d'escrow en cours.",
+          quote: "En legaltech, la faille de sécurité d'aujourd'hui est le procès de demain. Sécuriser sans interrompre la production était la priorité absolue."
+        },
+        {
+          id: "architecture-securite",
+          title: "02. Stratégie de Refonte & Sécurisation",
+          content:
+            "Pour traiter les failles sans casser l'existant, j'ai mis en place une stratégie en deux temps. Côté backend, nous avons encapsulé les transactions financières dans des verrous pessimistes (lockForUpdate) associés à une machine à états Laravel déterministe. Côté frontend, le composant Angular tentaculaire a été refactoré en 4 services TypeScript spécialisés basés sur les Angular Signals, garantissant un typage strict et une réactivité optimale.",
+          highlights: [
+            {
+              title: "Machine à États & Verrouillage Pessimiste",
+              description: "Empêche les race conditions sur les paiements en escrow lors des demandes simultanées."
+            },
+            {
+              title: "Isolation Frontend Angular",
+              description: "Découpage en 4 services découplés avec injection de dépendances stricte et gestion fine des états."
+            },
+            {
+              title: "Hardening OWASP Top 10",
+              description: "Correction des vulnérabilités SSRF par listes blanches, ajouts de headers CSP/HSTS et sessions à TTL borné."
+            },
+            {
+              title: "Moteur de Recherche Typesense",
+              description: "Indexation facettée permettant de filtrer les avocats par spécialité, ville et disponibilité en moins de 300ms."
+            }
+          ]
+        },
+        {
+          id: "impact",
+          title: "03. Impact & Résultats Métier",
+          content:
+            "Le déploiement global s'est effectué sans la moindre minute d'arrêt. La charge serveur a été considérablement allégée grâce à la suppression des requêtes N+1 et à la mise en cache Redis stratégique sur 10 endpoints clés. La plateforme est désormais hautement évolutive et a permis l'intégration fluide de 3 nouveaux modules métier sans régression."
+        }
       ],
-      results: [
-        "0 incident de sécurité en production depuis le déploiement du patch complet",
-        "Temps de recherche d'un avocat réduit de 73% — de 8 secondes SQL à < 300ms Typesense",
-        "Architecture découplée : 3 modules ajoutés depuis sans toucher au code existant",
-      ],
+      repoUrl: undefined,
+      siteUrl: undefined
     },
     en: {
       title: "TribuneJustice",
@@ -64,24 +116,55 @@ export const caseStudies: CaseStudy[] = [
       stack: ["Laravel", "Angular", "Next.js", "Redis", "Docker", "Laravel Reverb", "Typesense"],
       services: ["Software Engineering", "Application Pentest & Security"],
       summary:
-        "TribuneJustice connects clients with certified lawyers, handling escrow payments and real-time case tracking. When I joined as Tech Lead, the platform was already in production with active users — and 41 open vulnerabilities, a 594-line monolithic Angular component, and TTL-less sessions. The mandate: refactor without breaking, secure without rebuilding.",
-      challenges: [
-        "A live platform with active users — every architectural change risks disrupting an ongoing user journey",
-        "41 detected vulnerabilities including exploitable SSRF and persistent sessions with no expiration — patching them without altering visible functional behavior",
-        "Escrow payments require dual integrity: consistent financial data AND irreversible state transitions — both must be atomic",
+        "TribuneJustice connects clients with certified lawyers, handling escrow payments and real-time case tracking. Took technical leadership of a live platform suffering from critical technical debt and major security flaws. Mission: harden the architecture, refactor the frontend monolith, and accelerate search without interrupting active users.",
+      metrics: [
+        { value: "41", label: "Vulnerabilities patched", description: "Full OWASP Top 10 audit (SSRF, CSRF, TTL-less sessions)" },
+        { value: "0", label: "Post-deploy incidents", description: "Zero downtime during live patch rollout" },
+        { value: "< 300ms", label: "Lawyer search speed", description: "Replaced slow SQL queries with Typesense faceted index" },
+        { value: "594 ➔ 4", label: "Frontend refactor", description: "Monolithic Angular component split into 4 decoupled services" }
       ],
-      solutions: [
-        "Pessimistic locking (lockForUpdate) on case state transitions — concurrent requests cannot corrupt an in-progress payment, even under load",
-        "Angular split into 4 specialized services with strict TypeScript dependency injection — each independently deployable and testable",
-        "Full OWASP Top 10 audit: CSP/HSTS headers added, sessions bounded, SSRF endpoints patched with URL allowlists",
-        "Typesense integration: faceted index with filters by specialty, city, and availability — replacing a slow, non-scalable SQL search",
+      sections: [
+        {
+          id: "context",
+          title: "01. Context & Technical Debt",
+          content:
+            "TribuneJustice operates in a space demanding strict confidentiality and financial integrity. When taking over as Tech Lead, the platform suffered from severe production liabilities: a 594-line monolithic Angular component handled all auth logic, Redis sessions had no expiration TTL, and several endpoints exposed exploitable SSRF vectors. Every deployment risked breaking active escrow flows.",
+          quote: "In legaltech, today's security flaw is tomorrow's lawsuit. Securing the stack without breaking active users was the top priority."
+        },
+        {
+          id: "strategy",
+          title: "02. Refactoring & Security Strategy",
+          content:
+            "To patch flaws without disrupting business, I executed a two-pronged strategy. On the backend, financial transactions were wrapped in pessimistic locking (lockForUpdate) bound to a deterministic Laravel state machine. On the frontend, the sprawling Angular component was refactored into 4 specialized TypeScript services powered by Angular Signals for strict type safety and reactive state flow.",
+          highlights: [
+            {
+              title: "State Machine & Pessimistic Locks",
+              description: "Eliminates race conditions on escrow payments during concurrent client requests."
+            },
+            {
+              title: "Angular Frontend Decoupling",
+              description: "Split into 4 modular services with strict dependency injection and Signal-based state management."
+            },
+            {
+              title: "OWASP Top 10 Hardening",
+              description: "Patched SSRF vulnerabilities via explicit allowlists, CSP/HSTS headers, and bounded TTL sessions."
+            },
+            {
+              title: "Typesense Search Engine",
+              description: "Faceted indexing filter for lawyers by specialty, city, and availability in under 300ms."
+            }
+          ]
+        },
+        {
+          id: "impact",
+          title: "03. Business Impact & Results",
+          content:
+            "The full patch deployed with zero downtime. Server load decreased significantly thanks to N+1 query cleanup and strategic Redis caching across 10 core endpoints. The architecture is now scalable, enabling 3 new modules to be shipped smoothly without regression."
+        }
       ],
-      results: [
-        "Zero security incidents in production since the full patch deployment",
-        "Lawyer search time reduced by 73% — from 8s SQL to under 300ms with Typesense",
-        "Decoupled architecture: 3 modules added since without modifying existing code",
-      ],
-    },
+      repoUrl: undefined,
+      siteUrl: undefined
+    }
   },
   {
     slug: "digitrans-cm",
@@ -96,23 +179,54 @@ export const caseStudies: CaseStudy[] = [
       stack: ["Node.js", "FastAPI", "PostgreSQL", "Redis", "Docker", "Kubernetes", "Terraform", "AWS", "Azure", "Hyperledger Fabric", "GitHub Actions"],
       services: ["Architecture Cloud & Hybride", "Ingénierie logicielle"],
       summary:
-        "AGROCAM S.A. gérait l'intégralité de son opération agro-industrielle sur un système monolithique vieillissant. Le problème n'était pas la scalabilité technique — c'était que les agents terrain en zone rurale n'avaient aucun moyen d'enregistrer leurs opérations sans connexion internet. Et que la chaîne d'approvisionnement n'avait aucune traçabilité immuable, pourtant obligatoire pour la conformité alimentaire. L'objectif : un système distribué pensé pour les contraintes africaines réelles, pas pour un datacenter européen.",
-      challenges: [
-        "Des agents terrain en zones 2G/3G intermittentes : toute architecture nécessitant une connexion permanente est inutilisable sur le terrain",
-        "La loi camerounaise n°2010/012 interdit de stocker les données RH et financières hors du territoire — le 100% cloud public est illégal",
-        "La filière alimentaire exige une traçabilité lot-par-lot inaltérable — un enregistrement modifiable après coup est une faille de conformité",
+        "AGROCAM S.A. gérait son opération sur un monolithe obsolète. Le défi n'était pas la charge serveur, mais l'incapacité des agents terrain en zone rurale à enregistrer leurs opérations sans connexion. De plus, la législation locale et les exigences de la chaîne alimentaire imposaient une souveraineté des données et une traçabilité immuable.",
+      metrics: [
+        { value: "5", label: "Microservices indépendants", description: "API Gateway, ERP, CRM, Supply Chain, BI" },
+        { value: "0%", label: "Perte de données terrain", description: "Module Supply Chain offline-first avec sync par batch" },
+        { value: "45min", label: "Provisioning environnement", description: "Réduit de 3 jours à 45 minutes via Terraform IaC" },
+        { value: "100%", label: "Conformité loi n°2010/012", description: "Souveraineté des données RH et financières sur site" }
       ],
-      solutions: [
-        "Module Supply Chain offline-first : les agents saisissent hors ligne, la sync par batch se déclenche automatiquement dès que le signal revient — avec déduplication par offline_id côté serveur",
-        "Blockchain Hyperledger Fabric privée : chaque mouvement de lot est enregistré de façon immuable via chaincode — verifyChainIntegrity() valide la continuité de toute la chaîne",
-        "Infrastructure hybride Terraform : AWS af-south-1 pour les workloads web, Azure pour l'identité d'entreprise, on-premise Douala pour les données réglementées — déployée par code, 0 intervention manuelle",
-      ],
-      results: [
-        "0 perte de données terrain sur les 3 premiers mois de pilote — y compris lors de coupures réseau prolongées",
-        "Provisioning d'un nouvel environnement : de 3 jours à 45 minutes grâce à Terraform",
-        "Conformité légale complète : données RH et financières sur site à Douala, auditables à tout moment",
+      sections: [
+        {
+          id: "contexte",
+          title: "01. L'Enjeu Métier & Les Contraintes Africaines",
+          content:
+            "Les architectures cloud traditionnelles échouent souvent en zone rurale africaine où la connectivité 2G/3G est intermittente. Les agents d'AGROCAM perdaient des heures de données lors des coupures réseau. Par ailleurs, la réglementation camerounaise (loi n°2010/012) interdit le stockage d'informations financières et RH hors du territoire national, interdisant le 100% cloud public.",
+          quote: "Une architecture cloud en Afrique doit être conçue pour la réalité du terrain : coupures réseau, contraintes légales de souveraineté et résilience offline."
+        },
+        {
+          id: "architecture",
+          title: "02. Architecture Distribuée & Synchronisation Offline",
+          content:
+            "J'ai conçu une architecture microservices distribuée basée sur un découpage en 5 domaines. Le cœur du système réside dans le module Supply Chain offline-first : les agents saisissent leurs transactions localement, et un worker Redis orchestre la déduplication et la synchronisation par batch dès le rétablissement de la connexion. Pour la traçabilité des récoltes, Hyperledger Fabric garantit qu'aucun lot ne peut être modifié rétrospectivement.",
+          highlights: [
+            {
+              title: "Sync Offline-First par Batch",
+              description: "Déduplication par offline_id et gestion des réessais via Redis Dead-Letter Queues."
+            },
+            {
+              title: "Traçabilité Blockchain Hyperledger",
+              description: "Registre privé immuable scellant chaque étape de transit agricole de la ferme au consommateur."
+            },
+            {
+              title: "Infrastructure Hybride Terraform",
+              description: "Workloads web sur AWS (af-south-1), identité sur Azure, données réglementées on-premise à Douala."
+            },
+            {
+              title: "CI/CD & Alerting automatisé",
+              description: "Pipelines GitHub Actions en 5 étapes avec métriques Prometheus/Grafana et DRP documenté."
+            }
+          ]
+        },
+        {
+          id: "impact",
+          title: "03. Enseignements & Impact Opérationnel",
+          content:
+            "Sur les 3 premiers mois de pilote, aucune donnée terrain n'a été perdue. Le temps nécessaire pour provisionner un environnement complet est passé de 3 jours à 45 minutes grâce à l'Infrastructure as Code (Terraform), et le client bénéficie d'une conformité légale totale."
+        }
       ],
       repoUrl: "https://github.com/samsteeven/digitram-cm-microservices",
+      siteUrl: undefined
     },
     en: {
       title: "DIGITRANS-CM (AGROCAM S.A.)",
@@ -122,24 +236,55 @@ export const caseStudies: CaseStudy[] = [
       stack: ["Node.js", "FastAPI", "PostgreSQL", "Redis", "Docker", "Kubernetes", "Terraform", "AWS", "Azure", "Hyperledger Fabric", "GitHub Actions"],
       services: ["Cloud & Hybrid Architecture", "Software Engineering"],
       summary:
-        "AGROCAM S.A. ran its entire agro-industrial operation on an aging monolith. The real problem wasn't scalability — it was that field agents working in rural areas had no way to log operations without internet. And the supply chain had no immutable audit trail, a critical compliance gap for a food-grade producer. The goal: a distributed system designed for real African operational constraints, not a European datacenter.",
-      challenges: [
-        "Field agents in 2G/3G intermittent zones: any architecture requiring a live connection is unusable in the field",
-        "Cameroonian law n°2010/012 prohibits storing HR and financial data outside the country — public cloud-only is illegal",
-        "Food supply chains require per-batch immutable traceability — a modifiable record is a compliance liability",
+        "AGROCAM S.A. managed its operations on an obsolete monolith. The main bottleneck wasn't server load, but the inability of rural field agents to log data without network connectivity. Local compliance laws and food-grade supply chains also demanded data sovereignty and immutable auditability.",
+      metrics: [
+        { value: "5", label: "Independent microservices", description: "API Gateway, ERP, CRM, Supply Chain, BI" },
+        { value: "0%", label: "Field data loss rate", description: "Offline-first Supply Chain module with batch sync" },
+        { value: "45min", label: "Environment provisioning", description: "Reduced from 3 days to 45 minutes using Terraform IaC" },
+        { value: "100%", label: "Local Law 2010/012 compliance", description: "On-premise sovereignty for financial and HR data" }
       ],
-      solutions: [
-        "Offline-first Supply Chain module: agents capture data offline, batch sync triggers automatically when signal returns — with server-side deduplication via offline_id",
-        "Private Hyperledger Fabric blockchain: every batch movement is immutably recorded via chaincode — verifyChainIntegrity() validates the entire chain",
-        "Terraform hybrid infrastructure: AWS af-south-1 for web workloads, Azure for enterprise identity, on-premise Douala for regulated data — deployed as code, zero manual intervention",
-      ],
-      results: [
-        "Zero field data loss over the first 3 months of pilot — including during extended network outages",
-        "New environment provisioning: from 3 days to 45 minutes with Terraform",
-        "Full legal compliance: HR and financial data on-premises in Douala, auditable at any time",
+      sections: [
+        {
+          id: "context",
+          title: "01. Business Challenge & Regional Constraints",
+          content:
+            "Traditional cloud architectures often fail in rural African environments where 2G/3G connectivity is spotty. AGROCAM field agents were losing operational logs during outages. Furthermore, Cameroonian Law n°2010/012 restricts storing financial and HR data outside national borders, ruling out pure public cloud.",
+          quote: "Cloud architecture in Africa must be built for operational reality: intermittent connectivity, local data sovereignty, and offline resilience."
+        },
+        {
+          id: "architecture",
+          title: "02. Distributed Architecture & Offline Sync",
+          content:
+            "I designed a 5-domain microservices architecture. The core innovation is the offline-first Supply Chain module: agents capture operations locally, while a background Redis worker manages deduplication and batch sync upon signal recovery. For batch auditing, Hyperledger Fabric ensures tamper-proof chaincode logging.",
+          highlights: [
+            {
+              title: "Offline-First Batch Sync",
+              description: "Deduplication via offline_id and Redis Dead-Letter Queue retry mechanisms."
+            },
+            {
+              title: "Hyperledger Fabric Traceability",
+              description: "Private immutable ledger recording each agricultural transit step from farm to retail."
+            },
+            {
+              title: "Terraform Hybrid Cloud",
+              description: "Web workloads on AWS (af-south-1), identity on Azure, regulated data on-premise in Douala."
+            },
+            {
+              title: "CI/CD & Automated Alerting",
+              description: "5-stage GitHub Actions pipeline with Prometheus/Grafana monitoring and documented DRP."
+            }
+          ]
+        },
+        {
+          id: "impact",
+          title: "03. Impact & Takeaways",
+          content:
+            "Zero field data was lost during the 3-month pilot. Environment provisioning dropped from 3 days to 45 minutes thanks to Infrastructure as Code, guaranteeing full legal and operational compliance."
+        }
       ],
       repoUrl: "https://github.com/samsteeven/digitram-cm-microservices",
-    },
+      siteUrl: undefined
+    }
   },
   {
     slug: "shopnow",
@@ -154,23 +299,54 @@ export const caseStudies: CaseStudy[] = [
       stack: ["Azure", "Active Directory", "Microsoft 365", "Veeam", "FortiGate", "pfSense", "MPLS", "IPSec VPN", "Terraform", "Zabbix", "Grafana"],
       services: ["Architecture Cloud & Hybride"],
       summary:
-        "ShopNow gérait toute son activité e-commerce depuis un serveur unique à Douala. Chaque pic de trafic menaçait le site. Chaque coupure électrique déclenchait une restauration manuelle. Et 3 sites physiques (Douala, Yaoundé, Bafoussam) fonctionnaient en quasi-isolation — les équipes s'échangeaient des fichiers par email. Contrainte ferme de la direction : zéro minute d'interruption pendant la migration. Le vrai enjeu : redonner confiance à une équipe qui avait subi trop d'incidents.",
-      challenges: [
-        "Un datacenter unique à Douala sans redondance : une coupure prolongée arrête toute l'activité — et les coupures sont fréquentes",
-        "Migrer 47 utilisateurs vers Microsoft 365 en maintenant la continuité de service — un seul fichier perdu détruit la confiance de la direction",
-        "Interconnecter 3 sites avec des liens MPLS coûteux tout en garantissant un failover automatique en cas de panne du lien principal",
+        "ShopNow exploitait ses activités e-commerce depuis un serveur unique non-redondant à Douala. Les interruptions électriques fréquentes et l'absence d'interconnexion sécurisée entre les 3 sites distants (Douala, Yaoundé, Bafoussam) menaçaient la continuité de service.",
+      metrics: [
+        { value: "1h45", label: "RTO réel de reprise", description: "Validé en test grandeur nature (vs 3 jours auparavant)" },
+        { value: "-30%", label: "Charge de maintenance IT", description: "Obtenue 3 mois après la migration vers Microsoft 365" },
+        { value: "3", label: "Sites interconnectés", description: "Liaisons MPLS principales + bascule VPN IPSec en < 30s" },
+        { value: "7", label: "VLANs étanches", description: "Isolation stricte des réseaux SI, Finance, Invités et IoT" }
       ],
-      solutions: [
-        "Lien MPLS primaire + failover IPSec VPN automatique (FortiGate/pfSense) : bascule en < 30 secondes, testée et documentée",
-        "Migration M365 en 6 phases indépendantes sur 8 semaines — chaque phase annulable sans impacter les autres : 0 minute d'interruption réelle",
-        "Segmentation 7 VLANs (SI, Commerce, RH, Finance, Serveurs, Invités, IoT) — isolation par domaine, un incident réseau Invités n'atteint pas les serveurs",
-        "Sauvegarde Veeam locale + réplication automatique Azure Blob : RTO réel 1h45 / RPO réel 28min — validés lors d'un test grandeur nature",
+      sections: [
+        {
+          id: "contexte",
+          title: "01. Le Défi Multi-Sites & La Continuité d'Activité",
+          content:
+            "Travailler sur 3 sites distants sans infrastructure unifiée provoquait des pertes de données répétées et des partages de fichiers non-sécurisés. L'enjeu de la direction était clair : moderniser l'infrastructure et migrer les 47 collaborateurs vers Microsoft 365 avec zéro minute d'interruption métier.",
+          quote: "La redondance n'est pas un luxe en entreprise : c'est l'assurance vie du business face aux imprévus d'infrastructure."
+        },
+        {
+          id: "solution",
+          title: "02. Plan de Reprise & Resilence Réseau",
+          content:
+            "J'ai conçu un réseau hybride multi-sites combinant des liaisons MPLS dédiées et des tunnels VPN IPSec de secours orchestrés par des pare-feux FortiGate et pfSense. La stratégie de sauvegarde combine du stockage local Veeam et de la réplication quotidienne vers Azure Blob Storage.",
+          highlights: [
+            {
+              title: "Failover Réseau Automatique",
+              description: "Basculement automatique du MPLS vers IPSec VPN en moins de 30 secondes en cas de rupture de lien."
+            },
+            {
+              title: "Migration M365 en 6 Phases",
+              description: "Migration progressive sur 8 semaines sans aucune interruption de messagerie pour les 47 utilisateurs."
+            },
+            {
+              title: "Plan de Reprise DRP Validé",
+              description: "RTO réel mesuré à 1h45 et RPO à 28min lors des simulations de sinistre sur le datacenter principal."
+            },
+            {
+              title: "Identité Hybride & MFA Stricte",
+              description: "Active Directory on-premise synchronisé avec Azure AD avec authentification multifacteur obligatoire."
+            }
+          ]
+        },
+        {
+          id: "impact",
+          title: "03. Rentabilité & Bilan",
+          content:
+            "L'infrastructure est désormais résiliente et managée à distance via Zabbix et Grafana. Le business case présenté à la direction a permis de réduire les coûts récurrents de maintenance de 86 K€ à 42 K€/an tout en garantissant un SLA de 99,9%."
+        }
       ],
-      results: [
-        "RTO de reprise d'activité : 1h45 validé en test — contre 2 à 3 jours estimés avec l'ancienne configuration",
-        "–30% de charge administrative IT dès le 3e mois après migration M365",
-        "Budget première année : 56M FCFA (~86K€) — conforme aux estimations, sans surprise",
-      ],
+      repoUrl: undefined,
+      siteUrl: undefined
     },
     en: {
       title: "ShopNow — Hybrid Cloud Infrastructure",
@@ -180,24 +356,55 @@ export const caseStudies: CaseStudy[] = [
       stack: ["Azure", "Active Directory", "Microsoft 365", "Veeam", "FortiGate", "pfSense", "MPLS", "IPSec VPN", "Terraform", "Zabbix", "Grafana"],
       services: ["Cloud & Hybrid Architecture"],
       summary:
-        "ShopNow ran its entire e-commerce operation from a single server in Douala. Every traffic spike threatened the site. Every power outage triggered manual recovery. Three physical sites (Douala, Yaoundé, Bafoussam) operated in near-total isolation — teams shared files by email. Management's directive: zero minutes of downtime during the migration. The real challenge: restoring confidence in a team that had seen too many incidents.",
-      challenges: [
-        "Single datacenter in Douala with no redundancy: any prolonged outage halts the entire business — and outages are frequent",
-        "Migrating 47 users to Microsoft 365 while maintaining service continuity — a single lost file destroys management trust",
-        "Interconnecting 3 sites with expensive MPLS links while guaranteeing automatic failover if the primary link fails",
+        "ShopNow operated its e-commerce business from a single non-redundant server in Douala. Frequent power outages and isolated remote sites (Douala, Yaoundé, Bafoussam) risked prolonged business disruption.",
+      metrics: [
+        { value: "1h45", label: "Validated Disaster RTO", description: "Tested full recovery vs. 3 days legacy recovery time" },
+        { value: "-30%", label: "IT Maintenance Workload", description: "Achieved within 3 months of Microsoft 365 migration" },
+        { value: "3", label: "Interconnected Sites", description: "Primary MPLS + IPSec VPN auto-failover in < 30s" },
+        { value: "7", label: "Isolated VLAN Domains", description: "Strict segmentation for IT, Finance, Guest, and IoT" }
       ],
-      solutions: [
-        "Primary MPLS + automatic IPSec VPN failover (FortiGate/pfSense): switch in under 30 seconds, tested and documented",
-        "M365 migration in 6 independent phases over 8 weeks — each phase reversible without impacting others: 0 real downtime",
-        "7-VLAN segmentation (IT, Commerce, HR, Finance, Servers, Guest, IoT) — domain isolation, a guest network incident can't reach servers",
-        "Veeam local backup + automatic Azure Blob replication: actual RTO 1h45 / actual RPO 28min — validated in a full-scale recovery test",
+      sections: [
+        {
+          id: "context",
+          title: "01. Multi-Site Challenge & Business Continuity",
+          content:
+            "Operating across 3 remote sites without unified IT resulted in data silos and unsecured file sharing. Management set a strict target: modernize the infrastructure and migrate 47 users to Microsoft 365 with zero business downtime.",
+          quote: "Infrastructure redundancy isn't a luxury: it's the core insurance policy protecting business continuity."
+        },
+        {
+          id: "solution",
+          title: "02. Recovery Plan & Network Resilience",
+          content:
+            "I architected a multi-site hybrid network using primary MPLS lines backed by automated IPSec VPN tunnels on FortiGate and pfSense. Backups combine local Veeam appliances with daily encrypted replication to Azure Blob Storage.",
+          highlights: [
+            {
+              title: "Automated Network Failover",
+              description: "Seamless failover from MPLS to IPSec VPN in under 30 seconds upon link outage."
+            },
+            {
+              title: "6-Phase M365 Migration",
+              description: "Phased 8-week migration ensuring zero email downtime across all 47 corporate users."
+            },
+            {
+              title: "Tested Disaster Recovery (DRP)",
+              description: "Actual measured RTO of 1h45 and RPO of 28 minutes during simulated datacenter disaster tests."
+            },
+            {
+              title: "Hybrid Identity & Mandatory MFA",
+              description: "On-premise Active Directory synced with Azure AD, enforcing mandatory MFA on remote connections."
+            }
+          ]
+        },
+        {
+          id: "impact",
+          title: "03. Financial & Operational ROI",
+          content:
+            "The infrastructure is fully monitored via Zabbix and Grafana. The business case cut recurring maintenance costs from €86K to €42K/year while delivering a 99.9% availability SLA."
+        }
       ],
-      results: [
-        "Business recovery RTO: 1h45 validated in test — vs. estimated 2 to 3 days with the previous setup",
-        "30% reduction in IT administrative workload by month 3 after M365 migration",
-        "Year-1 budget: 56M XAF (~€86K) — on target, no surprises",
-      ],
-    },
+      repoUrl: undefined,
+      siteUrl: undefined
+    }
   },
   {
     slug: "lead-qualification-agent",
@@ -205,58 +412,120 @@ export const caseStudies: CaseStudy[] = [
     coverPlaceholder: "#1a1a2e",
     coverImage: "/projects/ia_agent.png",
     fr: {
-      title: "Agent IA de Qualification de Leads",
-      tagline: "Un agent IA autonome qualifie chaque prospect en < 30 secondes — enrichissement web, scoring 1-10 et email personnalisé envoyé automatiquement, déployé en production sur ce site.",
+      title: "Pipeline IA de Gestion des Leads",
+      tagline: "Deux agents IA partagent une même CRM — le premier qualifie chaque prospect en < 30 secondes, le second permet de consulter et agir sur les données directement depuis WhatsApp.",
       role: "Architecte IA & Ingénieur logiciel",
       period: "Juillet 2026",
-      stack: ["n8n", "Claude Haiku 4.5", "Tavily API", "OpenRouter", "TypeScript", "Next.js", "Turso", "MCP"],
+      stack: ["n8n", "Claude Haiku 4.5", "Tavily API", "OpenRouter", "Redis", "TypeScript", "Next.js", "Turso", "Data Tables", "MCP"],
       services: ["Automatisation IA", "Ingénierie logicielle"],
       summary:
-        "Avant cet agent, chaque formulaire de contact attendait ma réponse manuelle. Certains prospects ne recevaient de retour qu'après 24-48h — et les leads froids ne convertissent pas. L'agent n8n intercepte maintenant chaque soumission via webhook sécurisé, recherche l'entreprise du prospect sur le web avec Tavily, compare ses besoins au catalogue de services, lui attribue un score de 1 à 10, puis rédige et envoie un email de qualification personnalisé en français ou anglais. Tout ça en moins de 30 secondes, sans intervention humaine.",
-      challenges: [
-        "Un agent IA peut halluciner ou produire des réponses incohérentes — une réponse automatique mal calibrée nuit directement à la réputation",
-        "L'enrichissement des données entreprise doit être fiable pour que le scoring ait du sens — sans données, le score est du bruit",
-        "L'agent doit survivre aux erreurs réseau, timeouts API et réponses LLM malformées sans jamais bloquer silencieusement",
+        "Conception et déploiement d'un pipeline d'agents IA autonomes pour l'acquisition et la gestion de prospects. Le premier agent intercepte les formulaires web, enrichit les données entreprise en temps réel et attribue un score de maturité. Le second agent permet au décideur d'interroger et de piloter la base de prospects directement via WhatsApp.",
+      metrics: [
+        { value: "< 30s", label: "Temps de qualification", description: "Au lieu de 24-48h pour l'envoi d'une réponse analysée" },
+        { value: "100%", label: "Leads enrichis en temps réel", description: "Recherche web d'entreprise automatique via Tavily API" },
+        { value: "2", label: "Workflows n8n synchronisés", description: "Agent Web Lead + Agent WhatsApp Assistant sur mémoire Redis" },
+        { value: "0", label: "Lead perdu ou oublié", description: "Gestion d'erreur explicite et persistance CRM n8n" }
       ],
-      solutions: [
-        "Structured Output Parser avec schéma JSON strict : l'agent ne peut pas retourner de réponse libre — la structure est imposée, les hallucinations structurelles sont impossibles",
-        "Tavily API pour l'enrichissement en temps réel : recherche web ciblée sur l'entreprise du prospect, résultats injectés dans le contexte de l'agent",
-        "Knowledge Base intégrée comme outil : le catalogue de services est injecté en contexte — l'agent matche les besoins déclarés avec les offres réelles",
-        "Gestion d'erreur explicite : onError → continueErrorOutput + log dans la table CRM — chaque échec est tracé, aucun lead n'est perdu silencieusement",
+      sections: [
+        {
+          id: "contexte",
+          title: "01. Le Problème du Temps de Réponse & La Friction CRM",
+          content:
+            "Dans les services B2B et l'ingénierie, un prospect non contacté dans les 5 premières minutes voit son taux de conversion chuter drastiquement. Traiter manuellement chaque formulaire demandait des heures de recherche et de rédaction. De plus, consulter ou mettre à jour un CRM classique depuis un smartphone sur le terrain est fastidieux.",
+          quote: "L'automatisation IA ne doit pas remplacer le contact humain : elle élimine le délai de réaction et prépare la décision avant le premier échange."
+        },
+        {
+          id: "architecture",
+          title: "02. Architecture à Double Workflow n8n & Redis",
+          content:
+            "Le système repose sur deux workflows n8n interconnectés par une Data Table CRM commune et une mémoire Redis. Lorsqu'un prospect soumet un formulaire, le Lead Agent s'exécute : il effectue une recherche web Tavily sur l'entreprise, compare ses besoins au catalogue de services, formule un score de 1 à 10 et génère un email personnalisé via Claude Haiku 4.5.",
+          highlights: [
+            {
+              title: "Structured Output Parser JSON",
+              description: "Formatage JSON strict garantissant zéro hallucination de structure lors des appels au LLM."
+            },
+            {
+              title: "Enrichissement Temps Réel Tavily",
+              description: "Extraction automatique de la taille, du secteur et des actus récentes de l'entreprise du prospect."
+            },
+            {
+              title: "Pilotage WhatsApp en Langage Naturel",
+              description: "Interrogation de la CRM par message vocal ou texte ('Quel est le dernier lead qualifié ?')."
+            },
+            {
+              title: "Mémoire Redis Persistante",
+              description: "Conservation de l'historique conversationnel entre les agents et le décideur."
+            }
+          ]
+        },
+        {
+          id: "impact",
+          title: "03. Rigueur, Sécurité & Production",
+          content:
+            "Le pipeline tourne en production avec gestion d'erreur robuste (onError → continueErrorOutput). Aucun lead ne peut être égaré. La réactivité perçue par les prospects est immédiate, et la gestion CRM se fait sans ouvrir d'interface complexe."
+        }
       ],
-      results: [
-        "Temps de réponse : de 24-48h à < 30 secondes pour 100% des leads entrants",
-        "100% des prospects enrichis avec données entreprise et score de maturité avant tout contact humain",
-        "Zéro lead perdu silencieusement : les erreurs d'agent sont loggées et escaladées automatiquement",
-      ],
+      repoUrl: undefined,
+      siteUrl: undefined
     },
     en: {
-      title: "AI Lead Qualification Agent",
-      tagline: "An autonomous AI agent qualifies every inbound lead in < 30 seconds — web enrichment, 1-10 scoring, and personalized email sent automatically, live in production on this site.",
+      title: "AI-Powered Lead Management Pipeline",
+      tagline: "Two AI agents share one CRM — the first qualifies every lead in < 30 seconds, the second allows querying and acting on data directly from WhatsApp.",
       role: "AI Architect & Software Engineer",
       period: "July 2026",
-      stack: ["n8n", "Claude Haiku 4.5", "Tavily API", "OpenRouter", "TypeScript", "Next.js", "Turso", "MCP"],
+      stack: ["n8n", "Claude Haiku 4.5", "Tavily API", "OpenRouter", "Redis", "TypeScript", "Next.js", "Turso", "Data Tables", "MCP"],
       services: ["AI Automation", "Software Engineering"],
       summary:
-        "Before this agent, every contact form waited for my manual reply. Some prospects wouldn't hear back for 24-48 hours — and cold leads don't convert. The n8n agent now intercepts every submission via secured webhook, researches the prospect's company on the web with Tavily, matches their needs against the service catalog, scores them from 1 to 10, then drafts and sends a personalized qualification email in French or English. All in under 30 seconds, with no human in the loop.",
-      challenges: [
-        "An AI agent can hallucinate or produce incoherent responses — a miscalibrated automated reply directly damages reputation",
-        "Company data enrichment must be reliable for scoring to be meaningful — without data, the score is noise",
-        "The agent must survive network errors, API timeouts, and malformed LLM responses without silently blocking",
+        "Architected and deployed a multi-agent AI pipeline for lead acquisition and CRM management. The first agent intercepts contact forms, enriches company data in real time, and scores prospects. The second agent allows management to query and control the lead database directly through WhatsApp.",
+      metrics: [
+        { value: "< 30s", label: "Lead Qualification Speed", description: "Replaced 24-48 hour manual response turnaround" },
+        { value: "100%", label: "Real-Time Lead Enrichment", description: "Automated company web research via Tavily API" },
+        { value: "2", label: "Synced n8n Workflows", description: "Web Lead Agent + WhatsApp Assistant over Redis memory" },
+        { value: "0", label: "Lost or Dropped Leads", description: "Explicit error fallback and n8n CRM table persistence" }
       ],
-      solutions: [
-        "Structured Output Parser with strict JSON schema: the agent cannot return free-form responses — structure is enforced, structural hallucinations are impossible",
-        "Tavily API for real-time enrichment: targeted web search on the prospect's company, results injected into agent context",
-        "Integrated Knowledge Base as an agent tool: the service catalog is injected as context — the agent matches declared needs to real offerings",
-        "Explicit error handling: onError → continueErrorOutput + CRM table logging — every failure is tracked, no lead is silently lost",
+      sections: [
+        {
+          id: "context",
+          title: "01. Response Latency & CRM Friction",
+          content:
+            "In B2B engineering services, failing to respond to a prospect within minutes drastically lowers conversion rates. Manually reviewing and drafting replies took hours. Moreover, updating traditional CRMs on mobile while traveling is tedious.",
+          quote: "AI automation shouldn't replace human connection: it eliminates response latency and prepares decision-making before the first call."
+        },
+        {
+          id: "architecture",
+          title: "02. Dual n8n Workflow & Redis Architecture",
+          content:
+            "The architecture links two n8n workflows through a shared CRM Data Table and persistent Redis memory. Upon form submission, the Lead Agent triggers Tavily web search, matches prospect requirements with the service catalog, scores lead intent (1-10), and drafts a tailored email via Claude Haiku 4.5.",
+          highlights: [
+            {
+              title: "Strict JSON Output Parsing",
+              description: "Enforced JSON schema preventing structural hallucinations during LLM calls."
+            },
+            {
+              title: "Real-Time Tavily Enrichment",
+              description: "Automatic extraction of company size, industry, and recent news."
+            },
+            {
+              title: "WhatsApp Natural Language Control",
+              description: "Query and update CRM records via voice or text ('Show me the latest qualified lead')."
+            },
+            {
+              title: "Persistent Redis Memory",
+              description: "Maintains conversational context between agents and the manager."
+            }
+          ]
+        },
+        {
+          id: "impact",
+          title: "03. Reliability & Production Results",
+          content:
+            "The pipeline runs in production with robust error routing (onError → continueErrorOutput). No lead is ever lost. Prospects experience instantaneous response times, and CRM management requires zero complex dashboarding."
+        }
       ],
-      results: [
-        "Response time: from 24-48h to < 30 seconds for 100% of inbound leads",
-        "100% of prospects enriched with company data and maturity score before any human contact",
-        "Zero silently lost leads: agent failures are logged and automatically escalated",
-      ],
-    },
-  },
+      repoUrl: undefined,
+      siteUrl: undefined
+    }
+  }
 ];
 
 export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {

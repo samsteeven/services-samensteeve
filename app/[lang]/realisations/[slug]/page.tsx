@@ -6,7 +6,7 @@ import { getT } from "@/lib/i18n";
 import { caseStudies, getCaseStudyBySlug } from "@/lib/case-studies";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight, CheckCircle2, ExternalLink, Github } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, ExternalLink, Github, Sparkles, Quote } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { ZoomableImage } from "@/components/zoomable-image";
 
@@ -35,8 +35,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     type: "article",
   });
   
-  // Canonical cross-domain pointant vers le portfolio principal (source originale)
-  // pour éviter le contenu dupliqué entre services.samensteeve.com et samensteeve.com
   const portfolioCanonical = `https://samensteeve.com/${lang}/work/${slug}`;
   
   return {
@@ -64,7 +62,6 @@ export default async function CaseStudyPage({ params }: PageProps) {
   const nextCs = currentIndex < caseStudies.length - 1 ? caseStudies[currentIndex + 1] : null;
   const prevLocale = prevCs ? (lang === "fr" ? prevCs.fr : prevCs.en) : null;
   const nextLocale = nextCs ? (lang === "fr" ? nextCs.fr : nextCs.en) : null;
-
 
   return (
     <div className="flex flex-col">
@@ -123,7 +120,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
             <h1 className="font-display text-3xl font-extrabold tracking-tight text-ink sm:text-5xl leading-tight">
               {locale.title}
             </h1>
-            <p className="mt-4 text-base md:text-xl leading-relaxed text-ink-soft max-w-2xl">
+            <p className="mt-4 text-base md:text-xl leading-relaxed text-ink-soft max-w-3xl">
               {locale.tagline}
             </p>
           </ScrollReveal>
@@ -186,68 +183,150 @@ export default async function CaseStudyPage({ params }: PageProps) {
       </header>
 
       {/* Case Study Body */}
-      <div className="mx-auto max-w-5xl w-full px-4 sm:px-8 py-16 md:py-24">
-        {/* Summary */}
+      <div className="mx-auto max-w-5xl w-full px-4 sm:px-8 py-12 md:py-20">
+        
+        {/* ── Key Impact Metrics Stat Banner ── */}
+        {locale.metrics && locale.metrics.length > 0 && (
+          <ScrollReveal className="mb-16">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 p-6 rounded-2xl border border-accent/20 bg-accent/5 backdrop-blur-sm">
+              {locale.metrics.map((metric, idx) => (
+                <div key={idx} className="flex flex-col justify-between p-3 rounded-xl bg-paper/60 border border-line/50">
+                  <span className="font-display text-2xl sm:text-3xl font-black text-accent tracking-tight">
+                    {metric.value}
+                  </span>
+                  <div className="mt-2">
+                    <p className="text-xs font-bold text-ink leading-snug">{metric.label}</p>
+                    {metric.description && (
+                      <p className="text-[11px] text-ink-soft leading-tight mt-1 opacity-80">{metric.description}</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+        )}
+
+        {/* Executive Summary */}
         <ScrollReveal>
-          <p className="text-base md:text-lg leading-relaxed text-ink-soft border-l-2 border-accent pl-5 py-1">
-            {locale.summary}
-          </p>
+          <div className="rounded-2xl border border-line bg-paper-raised/30 p-6 md:p-8 mb-16 relative overflow-hidden">
+            <div className="flex items-center gap-2 font-mono text-[10px] uppercase font-bold tracking-widest text-accent mb-3">
+              <Sparkles className="h-3.5 w-3.5 text-accent" />
+              {lang === "fr" ? "Synthèse Exécutive" : "Executive Summary"}
+            </div>
+            <p className="text-base md:text-lg leading-relaxed text-ink font-medium">
+              {locale.summary}
+            </p>
+          </div>
         </ScrollReveal>
 
-        <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-10">
-          {/* Challenges */}
-          <ScrollReveal>
-            <div>
-              <h2 className="font-display text-lg font-bold text-ink">
-                {t.caseStudy.challenges}
-              </h2>
-              <ul className="mt-6 flex flex-col gap-4">
-                {locale.challenges.map((c, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
-                    <span className="font-mono text-xs font-bold text-accent/60 shrink-0 mt-0.5">0{i + 1}</span>
-                    {c}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </ScrollReveal>
+        {/* ── Rich Editorial Article Stream ── */}
+        {locale.sections && locale.sections.length > 0 ? (
+          <div className="flex flex-col gap-16">
+            {locale.sections.map((section, idx) => (
+              <ScrollReveal key={section.id || idx} delay={idx * 40}>
+                <section className="prose prose-neutral dark:prose-invert max-w-none">
+                  <h2 className="font-display text-2xl md:text-3xl font-extrabold text-ink tracking-tight mb-6 pb-3 border-b border-line/40 flex items-center justify-between">
+                    <span>{section.title}</span>
+                  </h2>
+                  <p className="text-base md:text-lg leading-relaxed text-ink-soft font-normal whitespace-pre-line">
+                    {section.content}
+                  </p>
 
-          {/* Solutions */}
-          <ScrollReveal delay={80}>
-            <div>
-              <h2 className="font-display text-lg font-bold text-ink">
-                {t.caseStudy.solutions}
-              </h2>
-              <ul className="mt-6 flex flex-col gap-4">
-                {locale.solutions.map((s, i) => (
-                  <li key={i} className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-accent mt-0.5" />
-                    {s}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </ScrollReveal>
+                  {/* Optional Pull Quote */}
+                  {section.quote && (
+                    <blockquote className="my-8 rounded-2xl border-l-4 border-accent bg-accent/5 p-6 md:p-8 italic text-ink font-medium leading-relaxed shadow-sm flex items-start gap-4 not-italic">
+                      <Quote className="h-6 w-6 text-accent shrink-0 mt-1 opacity-80" />
+                      <div className="text-base md:text-lg text-ink font-medium leading-relaxed">
+                        "{section.quote}"
+                      </div>
+                    </blockquote>
+                  )}
 
-          {/* Results */}
-          <ScrollReveal delay={160}>
-            <div>
-              <h2 className="font-display text-lg font-bold text-ink">
-                {t.caseStudy.results}
-              </h2>
-              <ul className="mt-6 flex flex-col gap-4">
-                {locale.results.map((r, i) => (
-                  <li
-                    key={i}
-                    className="rounded-xl border border-accent/20 bg-accent/5 p-4 text-sm leading-relaxed font-medium text-ink"
-                  >
-                    {r}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </ScrollReveal>
-        </div>
+                  {/* Optional Highlights Grid */}
+                  {section.highlights && section.highlights.length > 0 && (
+                    <div className="my-8 grid grid-cols-1 sm:grid-cols-2 gap-4 not-prose">
+                      {section.highlights.map((h, hIdx) => (
+                        <div
+                          key={hIdx}
+                          className="rounded-xl border border-line bg-paper-raised/40 p-5 hover:border-accent/40 transition duration-200 flex flex-col justify-between"
+                        >
+                          <div>
+                            <h4 className="font-display text-sm font-bold text-ink mb-2 flex items-center gap-2">
+                              <CheckCircle2 className="h-4 w-4 text-accent shrink-0" />
+                              {h.title}
+                            </h4>
+                            <p className="text-xs text-ink-soft leading-relaxed">
+                              {h.description}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </section>
+              </ScrollReveal>
+            ))}
+          </div>
+        ) : (
+          /* Legacy Fallback Grid if sections not present */
+          <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-10">
+            {locale.challenges && (
+              <ScrollReveal>
+                <div>
+                  <h2 className="font-display text-lg font-bold text-ink">
+                    {t.caseStudy.challenges}
+                  </h2>
+                  <ul className="mt-6 flex flex-col gap-4">
+                    {locale.challenges.map((c, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
+                        <span className="font-mono text-xs font-bold text-accent/60 shrink-0 mt-0.5">0{i + 1}</span>
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </ScrollReveal>
+            )}
+
+            {locale.solutions && (
+              <ScrollReveal delay={80}>
+                <div>
+                  <h2 className="font-display text-lg font-bold text-ink">
+                    {t.caseStudy.solutions}
+                  </h2>
+                  <ul className="mt-6 flex flex-col gap-4">
+                    {locale.solutions.map((s, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm leading-relaxed text-ink-soft">
+                        <CheckCircle2 className="h-4 w-4 shrink-0 text-accent mt-0.5" />
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </ScrollReveal>
+            )}
+
+            {locale.results && (
+              <ScrollReveal delay={160}>
+                <div>
+                  <h2 className="font-display text-lg font-bold text-ink">
+                    {t.caseStudy.results}
+                  </h2>
+                  <ul className="mt-6 flex flex-col gap-4">
+                    {locale.results.map((r, i) => (
+                      <li
+                        key={i}
+                        className="rounded-xl border border-accent/20 bg-accent/5 p-4 text-sm leading-relaxed font-medium text-ink"
+                      >
+                        {r}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </ScrollReveal>
+            )}
+          </div>
+        )}
 
         {/* Bottom CTA */}
         <ScrollReveal delay={300} className="mt-20 rounded-2xl border border-line bg-paper-raised/40 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">

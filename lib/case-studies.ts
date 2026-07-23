@@ -16,6 +16,8 @@ export interface CaseStudySection {
   title: string;
   content: string;
   quote?: string;
+  image?: string;
+  imageAlt?: string;
   highlights?: CaseStudyHighlight[];
 }
 
@@ -438,7 +440,9 @@ export const caseStudies: CaseStudy[] = [
           id: "architecture",
           title: "02. Architecture à Double Workflow n8n & Redis",
           content:
-            "Le système repose sur deux workflows n8n interconnectés par une Data Table CRM commune et une mémoire Redis. Lorsqu'un prospect soumet un formulaire, le Lead Agent s'exécute : il effectue une recherche web Tavily sur l'entreprise, compare ses besoins au catalogue de services, formule un score de 1 à 10 et génère un email personnalisé via Claude Haiku 4.5.",
+            "Le système repose sur deux workflows n8n interconnectés par une Data Table CRM commune et une mémoire Redis. Lorsqu'un prospect soumet un formulaire, le Lead Agent s'exécute : il effectue une recherche web Tavily sur l'entreprise, compare ses besoins au catalogue de services, formule un score de 1 à 10 et génère un email personnalisé via Claude Haiku 4.5. Le second workflow — le WhatsApp CRM Assistant — permet au décideur d'interroger cette même CRM en langage naturel directement depuis WhatsApp, sans ouvrir aucun dashboard.",
+          image: "/projects/whatsapp_workflow.jpg",
+          imageAlt: "Workflow n8n du WhatsApp CRM Assistant — réception du message, extraction, agent IA avec mémoire Redis, outils CRM et envoi de réponse",
           highlights: [
             {
               title: "Structured Output Parser JSON",
@@ -454,7 +458,7 @@ export const caseStudies: CaseStudy[] = [
             },
             {
               title: "Mémoire Redis Persistante",
-              description: "Conservation de l'historique conversationnel entre les agents et le décideur."
+              description: "Conservation de l'historique conversationnel entre les agents et le décideur entre chaque session."
             }
           ]
         },
@@ -495,7 +499,9 @@ export const caseStudies: CaseStudy[] = [
           id: "architecture",
           title: "02. Dual n8n Workflow & Redis Architecture",
           content:
-            "The architecture links two n8n workflows through a shared CRM Data Table and persistent Redis memory. Upon form submission, the Lead Agent triggers Tavily web search, matches prospect requirements with the service catalog, scores lead intent (1-10), and drafts a tailored email via Claude Haiku 4.5.",
+            "The architecture links two n8n workflows through a shared CRM Data Table and persistent Redis memory. Upon form submission, the Lead Agent triggers Tavily web search, matches prospect requirements with the service catalog, scores lead intent (1-10), and drafts a tailored email via Claude Haiku 4.5. The second workflow — the WhatsApp CRM Assistant — lets the decision-maker query that same CRM in natural language directly from WhatsApp, without opening any dashboard.",
+          image: "/projects/whatsapp_workflow.jpg",
+          imageAlt: "n8n WhatsApp CRM Assistant workflow — message trigger, extraction, AI agent with Redis memory, CRM tools and reply delivery",
           highlights: [
             {
               title: "Strict JSON Output Parsing",
@@ -511,7 +517,7 @@ export const caseStudies: CaseStudy[] = [
             },
             {
               title: "Persistent Redis Memory",
-              description: "Maintains conversational context between agents and the manager."
+              description: "Maintains conversational context between agents and the manager across sessions."
             }
           ]
         },

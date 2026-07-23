@@ -234,12 +234,27 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
                   {/* Optional Pull Quote */}
                   {section.quote && (
-                    <blockquote className="my-8 rounded-2xl border-l-4 border-accent bg-accent/5 p-6 md:p-8 italic text-ink font-medium leading-relaxed shadow-sm flex items-start gap-4 not-italic">
+                    <blockquote className="my-8 rounded-2xl border border-line bg-paper-raised/40 p-6 md:p-8 text-ink font-medium leading-relaxed shadow-sm flex items-start gap-4 not-italic">
                       <Quote className="h-6 w-6 text-accent shrink-0 mt-1 opacity-80" />
                       <div className="text-base md:text-lg text-ink font-medium leading-relaxed">
                         "{section.quote}"
                       </div>
                     </blockquote>
+                  )}
+
+                  {/* Optional Section Image */}
+                  {section.image && (
+                    <div className="my-8 not-prose">
+                      <ZoomableImage
+                        src={section.image}
+                        alt={section.imageAlt ?? section.title}
+                      />
+                      {section.imageAlt && (
+                        <p className="mt-2 text-center text-[11px] font-mono text-ink-soft/70 uppercase tracking-wider">
+                          {section.imageAlt}
+                        </p>
+                      )}
+                    </div>
                   )}
 
                   {/* Optional Highlights Grid */}

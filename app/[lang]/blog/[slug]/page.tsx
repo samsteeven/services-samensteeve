@@ -8,6 +8,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, ArrowRight, ShieldCheck, Cpu, Code2, Cloud } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { TableOfContents } from "@/components/table-of-contents";
 import { BASE_URL } from "@/lib/metadata";
 
 interface PageProps {
@@ -181,7 +182,8 @@ export default async function BlogPostPage({ params }: PageProps) {
 
       {/* Article Content */}
       <main className="py-12 md:py-16 flex-1 bg-paper/10">
-        <div className="mx-auto max-w-3xl px-4 sm:px-8">
+        <div className="mx-auto max-w-3xl px-4 sm:px-8 relative">
+          <TableOfContents lang={langKey} />
           <ScrollReveal delay={80}>
             <Content />
           </ScrollReveal>

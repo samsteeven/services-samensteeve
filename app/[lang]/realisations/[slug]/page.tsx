@@ -9,6 +9,7 @@ import Image from "next/image";
 import { ArrowLeft, ArrowRight, CheckCircle2, ExternalLink, Github, Sparkles, Quote } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { ZoomableImage } from "@/components/zoomable-image";
+import { CopyButtons } from "@/components/copy-buttons";
 
 interface PageProps {
   params: Promise<{ lang: string; slug: string }>;
@@ -55,6 +56,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
   if (!cs) notFound();
 
   const locale = lang === "fr" ? cs.fr : cs.en;
+  const portfolioCanonical = `https://samensteeve.com/${lang}/work/${slug}`;
 
   // ── Prev / Next navigation ──
   const currentIndex = caseStudies.findIndex((s) => s.slug === slug);
@@ -152,9 +154,9 @@ export default async function CaseStudyPage({ params }: PageProps) {
             ))}
           </ScrollReveal>
 
-          {/* External links */}
-          {(locale.repoUrl || locale.siteUrl) && (
-            <ScrollReveal delay={200} className="mt-8 flex gap-4">
+          {/* External links & Copy Buttons */}
+          <ScrollReveal delay={200} className="mt-8 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex gap-4">
               {locale.repoUrl && (
                 <a
                   href={locale.repoUrl}
@@ -177,8 +179,21 @@ export default async function CaseStudyPage({ params }: PageProps) {
                   {t.realisations.visitSite}
                 </a>
               )}
-            </ScrollReveal>
-          )}
+            </div>
+            <CopyButtons
+              url={portfolioCanonical}
+              shareText={[
+                locale.title,
+                "",
+                locale.tagline,
+                "",
+                locale.services.map((s) => `#${s.replace(/\s+/g, "")}`).join(" "),
+                "",
+                portfolioCanonical,
+              ].join("\n").trim()}
+              lang={langKey}
+            />
+          </ScrollReveal>
         </div>
       </header>
 

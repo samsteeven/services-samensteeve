@@ -11,6 +11,8 @@ import { ScrollReveal } from "@/components/scroll-reveal";
 import { TableOfContents } from "@/components/table-of-contents";
 import { BASE_URL } from "@/lib/metadata";
 
+import { CopyButtons } from "@/components/copy-buttons";
+
 interface PageProps {
   params: Promise<{ lang: string; slug: string }>;
 }
@@ -103,6 +105,18 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const CtaIconComponent = ctaIcon;
   const canonicalUrl = `${BASE_URL}/${langKey}/blog/${meta.slug}`;
+
+  const shareText = [
+    meta.title,
+    "",
+    meta.excerpt,
+    "",
+    meta.tags.map((t) => `#${t.replace(/\s+/g, "")}`).join(" "),
+    "",
+    canonicalUrl,
+  ]
+    .join("\n")
+    .trim();
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -176,6 +190,9 @@ export default async function BlogPostPage({ params }: PageProps) {
             <h1 className="font-display text-2xl font-extrabold tracking-tight text-ink sm:text-4xl leading-tight">
               {meta.title}
             </h1>
+            <div className="mt-6 flex items-center justify-between gap-4">
+              <CopyButtons url={canonicalUrl} shareText={shareText} lang={langKey} />
+            </div>
           </ScrollReveal>
         </div>
       </header>

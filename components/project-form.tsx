@@ -210,14 +210,14 @@ export function ProjectForm({ lang }: Props) {
       </div>
 
       {/* ── Step Content ──────────────────────────────────────────────────── */}
-      {form.step === 1 && <StepService form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
-      {form.step === 2 && <StepGoals form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
-      {form.step === 3 && <StepContext form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
-      {form.step === 4 && <StepDetails form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
-      {form.step === 5 && <StepContact form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
-      {form.step === 6 && <StepRecap form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
+      {displayStep === 1 && <StepService form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
+      {displayStep === 2 && <StepGoals form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
+      {displayStep === 3 && <StepContext form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
+      {displayStep === 4 && <StepDetails form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
+      {displayStep === 5 && <StepContact form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
+      {displayStep === 6 && <StepRecap form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
 
-      {form.step === 6 && (
+      {displayStep === 6 && (
         <div className="mt-6 rounded-2xl border border-line bg-paper-raised/15 p-4">
           <p className="mb-3 font-mono text-[9px] uppercase tracking-widest text-ink-soft/45">
             {buttons.verification}
@@ -234,7 +234,7 @@ export function ProjectForm({ lang }: Props) {
 
       {/* ── Navigation Actions ──────────────────────────────────────────────── */}
       <div className="mt-10 flex items-center justify-between gap-4">
-        {form.step > 1 ? (
+        {displayStep > 1 ? (
           <button
             type="button"
             onClick={() => form.setStep((s) => s - 1)}
@@ -247,7 +247,7 @@ export function ProjectForm({ lang }: Props) {
           <div />
         )}
 
-        {form.step < TOTAL_STEPS ? (
+        {displayStep < TOTAL_STEPS ? (
           <button
             type="button"
             disabled={!form.canNext()}

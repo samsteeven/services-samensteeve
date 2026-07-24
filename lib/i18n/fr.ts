@@ -95,51 +95,51 @@ export const fr = {
       },
       "architecture-cloud": {
         title: "Architecture Cloud & Hybride",
-        punchline: "Des architectures cloud et hybrides pensées pour les contraintes réelles : réseau instable, sites distants, sécurité et continuité.",
-        shortDesc: "Infrastructures cloud et hybrides sécurisées et résilientes, adaptées aux réalités de connectivité du terrain africain.",
-        longDesc: "Je conçois et déploie des architectures cloud (AWS/Azure) et hybrides. Ayant une forte expérience du terrain en Afrique centrale, j'intègre les contraintes réelles (liens MPLS onéreux, coupures électriques, connectivité variable, souveraineté locale des données) pour proposer des architectures hybrides pragmatiques et hautement disponibles.",
+        punchline: "La plupart des architectures cloud supposent une fibre garantie et un courant continu. Je conçois des infrastructures résilientes (AWS/Azure/Hybride) taillées pour les contraintes réelles du terrain.",
+        shortDesc: "Infrastructures cloud et hybrides résilientes (AWS/Azure) : interconnexion multi-sites, basculement automatique, tolérance aux coupures et maîtrise des coûts.",
+        longDesc: "La plupart des architectures cloud sont conçues pour des environnements idéaux : connectivité stable, courant continu, équipes IT pléthoriques. Ce n'est pas la réalité du terrain en Afrique centrale. Je conçois des infrastructures hybrides et cloud résilientes qui continuent de fonctionner quand le lien MPLS tombe, quand le courant coupe et quand vos données doivent respecter des exigences de souveraineté locale. Le modèle hybride n'est pas un compromis — c'est l'architecture responsable pour maintenir la continuité d'activité.",
         stack: ["Cloud AWS/Azure", "Infrastructure hybride", "Réseau & VPN", "IaC Terraform", "Sauvegarde & PRA", "Monitoring", "Identité Microsoft 365", "Runbooks"],
         outcomes: [
-          "Une infrastructure documentée, reproductible et alignée sur vos contraintes de terrain.",
-          "Un plan de continuité clair : sauvegarde, reprise, supervision, alertes et responsabilités.",
-          "Des sites, utilisateurs et workloads interconnectés sans dépendre d'un seul point de panne.",
-          "Une équipe IT capable d'opérer l'environnement après transfert."
+          "Une infrastructure résiliente aux pannes : basculement automatique des liens réseau, sauvegardes redondantes et PCA/PRA testé.",
+          "Des coûts maîtrisés et prévisibles : optimisation des instances et suppression du surdimensionnement (ex. coûts récurrents divisés par 2 dès la 2e année).",
+          "Interconnexion fluide et sécurisée des sites distants (siège et agences) sans dépendre d'un seul point de rupture.",
+          "Transfert de compétences complet : documentation, runbooks et équipes IT locales autonomes sur l'exploitation."
         ],
         scope: [
-          "Audit de l'existant : réseau, serveurs, cloud, identité, sauvegarde, sécurité et coûts.",
-          "Conception d'architecture cible avec scénarios de migration réalistes et phasés.",
-          "Mise en place d'infrastructure as code, supervision, sauvegarde et procédures de reprise.",
-          "Documentation opérationnelle et accompagnement des équipes IT locales."
+          "Audit d'infrastructure & réseau : cartographie des équipements, liaisons distantes, charges de travail, souveraineté des données et coûts d'exploitation.",
+          "Conception d'architecture cible : intégration du failover automatique, stratégie de stockage hybride et dimensionnement réaliste.",
+          "Déploiement par le code (IaC Terraform) : automatisation de l'infrastructure, procédures de sauvegarde et plan de reprise d'activité (PRA/PCA).",
+          "Migration & accompagnement : plan de migration phasé sans interruption de service critique et formation opérationnelle des équipes."
         ],
         deliverables: [
-          "Dossier d'Architecture Documenté (Diagrammes détaillés et ADR - Architecture Decision Records)",
-          "Infrastructure en production déployée par code (Terraform)",
-          "Plan de migration cloud progressif découpé en phases autonomes",
-          "Plan de Reprise d'Activité (PRA/PCA) avec RTO et RPO définis et testés",
-          "Sessions de transfert de compétences pour votre équipe IT locale"
+          "Dossier d'Architecture Documenté (Diagrammes réseau/cloud détaillés et ADR - Architecture Decision Records)",
+          "Infrastructure en production entièrement provisionnée par code (Terraform)",
+          "Plan de migration cloud progressif découpé en phases autonomes sans coupure métier",
+          "Plan de Reprise d'Activité (PRA/PCA) avec RTO et RPO mesurés et testés en conditions réelles",
+          "Documentation d'exploitation complète et sessions de transfert de compétences pour l'équipe IT"
         ],
         cases: [
-          "Interconnexion de sites distants (sièges et agences) avec failover automatique",
-          "Migration progressive d'infrastructures physiques (on-premise) vers le cloud",
-          "Mise en place de stratégies de sauvegarde redondantes et sécurisées hors-site",
-          "Automatisation du provisionnement des serveurs via Infrastructure as Code"
+          "Interconnexion de 3 sites distants avec basculement automatique et réduction des coûts récurrents de 86 500 € à 41 700 €/an",
+          "Migration progressive d'infrastructures physiques (on-premise) vers un cloud hybride AWS/Azure",
+          "Stratégie de sauvegarde redondante hors-site avec chiffrement et garantie d'immuabilité",
+          "Automatisation complète du provisionnement réseau et serveurs via Infrastructure as Code (Terraform)"
         ],
         faq: [
           {
             q: "Combien de temps dure une mission d'architecture ?",
-            a: "Une mission typique d'audit et conception d'architecture dure entre 2 et 4 semaines. La migration effective peut être plus longue selon la complexité."
+            a: "Une mission typique d'audit et conception d'architecture dure entre 2 et 4 semaines. La migration effective est découpée en phases autonomes pour éviter toute interruption."
           },
           {
             q: "Travaillez-vous uniquement avec AWS et Azure ?",
-            a: "Je travaille principalement avec AWS et Azure mais je peux m'adapter à d'autres providers (GCP, OVH, etc.) selon vos contraintes ou préférences."
+            a: "Je travaille principalement avec AWS et Azure mais je m'adapte à vos hébergeurs existants (GCP, OVH, datacenters locaux) pour construire une solution hybride cohérente."
           },
           {
-            q: "Est-ce que vous gérez la migration des données ?",
-            a: "Oui, je conçois le plan de migration et peux accompagner l'exécution. Pour les volumes critiques, je recommande une approche progressive avec validation à chaque étape."
+            q: "Comment gérez-vous la continuité en cas de coupure internet ou d'électricité ?",
+            a: "C'est le cœur de l'approche hybride : stockage local en cache/relais, basculement automatique sur liaison secondaire (4G/5G, SD-WAN) et synchronisation différée vers le cloud dès le rétablissement."
           },
           {
             q: "Que se passe-t-il après la mission ?",
-            a: "Je livre la documentation complète et forme votre équipe IT à l'exploitation de la nouvelle architecture. Je peux rester disponible pour du support ponctuel."
+            a: "Je livre la documentation complète (ADR, runbooks), forme votre équipe IT à l'exploitation autonome de la nouvelle infrastructure, et reste disponible pour du support ponctuel."
           }
         ]
       },

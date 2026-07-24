@@ -95,51 +95,51 @@ export const en = {
       },
       "architecture-cloud": {
         title: "Cloud & Hybrid Architecture",
-        punchline: "Cloud and hybrid architectures designed for real constraints: unstable networks, remote sites, security, and continuity.",
-        shortDesc: "Secure and resilient cloud and hybrid infrastructures, tailored for the connectivity realities of the African market.",
-        longDesc: "I design and deploy cloud (AWS/Azure) and hybrid architectures. Having solid ground experience in Central Africa, I integrate real-world constraints (expensive MPLS links, power outages, variable connectivity, local data sovereignty regulations) to deliver highly available, pragmatic hybrid architectures.",
+        punchline: "Most cloud architectures assume guaranteed fiber and uninterrupted power. I design resilient infrastructures (AWS/Azure/Hybrid) built for real field constraints.",
+        shortDesc: "Resilient cloud and hybrid infrastructures (AWS/Azure): multi-site interconnect, automatic failover, outage tolerance, and cost control.",
+        longDesc: "Most cloud architectures are designed for ideal environments: stable connectivity, continuous power, abundant IT teams. That's not the reality on the ground in Central Africa. I design resilient hybrid and cloud infrastructures that keep running when MPLS links drop, when power cuts out, and when your data must respect local sovereignty regulations. The hybrid model is not a compromise — it is the responsible architecture for business continuity.",
         stack: ["AWS/Azure cloud", "Hybrid infrastructure", "Network & VPN", "Terraform IaC", "Backup & DRP", "Monitoring", "Microsoft 365 identity", "Runbooks"],
         outcomes: [
-          "A documented, reproducible infrastructure aligned with field constraints.",
-          "A clear continuity plan: backup, recovery, monitoring, alerts, and ownership.",
-          "Sites, users, and workloads interconnected without a single point of failure.",
-          "An IT team able to operate the environment after handover."
+          "Outage-resilient infrastructure: automated network link failover, redundant backups, and fully tested BCP/DRP.",
+          "Controlled, predictable costs: instance optimization and elimination of over-provisioning (e.g. recurring costs cut in half by year 2).",
+          "Seamless and secure interconnection of remote sites (headquarters & branches) without a single point of failure.",
+          "Complete skill transfer: documentation, runbooks, and local IT teams fully autonomous in daily operations."
         ],
         scope: [
-          "Audit of the existing environment: network, servers, cloud, identity, backup, security, and costs.",
-          "Target architecture design with realistic phased migration scenarios.",
-          "Infrastructure as code, monitoring, backup, and recovery procedure implementation.",
-          "Operational documentation and support for local IT teams."
+          "Infrastructure & network audit: mapping hardware, remote links, workloads, data sovereignty constraints, and operational costs.",
+          "Target architecture design: integrating automatic failover, hybrid storage strategy, and pragmatic sizing.",
+          "Infrastructure as Code deployment (Terraform): infrastructure automation, backup procedures, and Disaster Recovery Plans (DRP/BCP).",
+          "Migration & enablement: phased migration plan without critical downtime and operational training for IT teams."
         ],
         deliverables: [
-          "Detailed Architecture Design Document (Component diagrams and Architecture Decision Records)",
-          "Production infrastructure deployed and managed as code (Terraform)",
-          "Step-by-step cloud migration plan broken down into autonomous phases",
-          "Disaster Recovery Plan (DRP/BCP) with fully tested RTO and RPO metrics",
-          "Knowledge transfer sessions for your local IT operations team"
+          "Documented Architecture Dossier (Detailed network/cloud diagrams and Architecture Decision Records - ADRs)",
+          "Production infrastructure fully provisioned as code (Terraform)",
+          "Step-by-step cloud migration plan broken into autonomous phases with zero business downtime",
+          "Disaster Recovery Plan (DRP/BCP) with RTO and RPO measured and tested under real conditions",
+          "Comprehensive operational documentation and skill transfer sessions for your local IT team"
         ],
         cases: [
-          "Interconnecting remote branches and headquarters with automated failover",
-          "Progressive migration of physical server rooms (on-premise) to the cloud",
-          "Setting up redundant, secure off-site backup strategies (Azure Blob, etc.)",
-          "Automating server provisioning and configuration using Infrastructure as Code"
+          "Interconnecting 3 remote branch sites with automatic failover and cutting recurring costs from €86,500 to €41,700/year",
+          "Progressive migration of physical server rooms (on-premise) to an AWS/Azure hybrid cloud",
+          "Redundant off-site backup strategy with encryption and immutability guarantees",
+          "Full automation of network and server provisioning via Infrastructure as Code (Terraform)"
         ],
         faq: [
           {
-            q: "How long does an architecture mission take?",
-            a: "A typical audit and architecture design mission lasts between 2 and 4 weeks. The actual migration may be longer depending on complexity."
+            q: "How long does an architecture engagement take?",
+            a: "A typical audit and architecture design engagement takes 2 to 4 weeks. The actual migration is executed in autonomous phases to avoid business downtime."
           },
           {
             q: "Do you only work with AWS and Azure?",
-            a: "I primarily work with AWS and Azure but can adapt to other providers (GCP, OVH, etc.) based on your constraints or preferences."
+            a: "I primarily work with AWS and Azure, but I adapt to your existing hosts (GCP, OVH, local datacenters) to build a cohesive hybrid solution."
           },
           {
-            q: "Do you handle data migration?",
-            a: "Yes, I design the migration plan and can support execution. For critical volumes, I recommend a progressive approach with validation at each step."
+            q: "How do you handle continuity during power or internet outages?",
+            a: "That's the core of the hybrid approach: local cache/relay storage, automatic failover to secondary links (4G/5G, SD-WAN), and deferred cloud sync upon reconnection."
           },
           {
-            q: "What happens after the mission?",
-            a: "I deliver complete documentation and train your IT team on operating the new architecture. I can remain available for ad-hoc support."
+            q: "What happens after the engagement?",
+            a: "I deliver full documentation (ADRs, runbooks), train your IT team to operate the new infrastructure independently, and remain available for ad-hoc support."
           }
         ]
       },

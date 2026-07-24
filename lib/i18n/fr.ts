@@ -45,54 +45,55 @@ export const fr = {
     items: {
       "ingenierie-logicielle": {
         title: "Ingénierie Logicielle",
-        punchline: "Je conçois et construis des produits logiciels complets : plateformes métier, APIs, backends critiques, interfaces et intégrations.",
-        shortDesc: "Conception, développement et industrialisation de systèmes logiciels robustes, pas seulement des interfaces web.",
-        longDesc: "Je prends en charge la construction de logiciels de production : cadrage fonctionnel, architecture applicative, backend, frontend, APIs, intégrations, données, tests et déploiement. L'objectif n'est pas de livrer des écrans, mais un système fiable, maintenable et exploitable par votre équipe.",
+        punchline: "La plupart des projets logiciels livrent des écrans. Je construis des systèmes fiables, maintenables et faits pour durer sans dépendre du développeur.",
+        shortDesc: "Conception, développement et industrialisation de logiciels de production robustes : architecture, APIs, backends critiques et interfaces métier.",
+        longDesc: "La plupart des projets logiciels livrent des interfaces. Ce qui manque ensuite : un système qui tient sous la charge, que votre équipe peut maintenir, et qui reflète vraiment vos processus métier. Je prends en charge la construction complète — cadrage fonctionnel, architecture applicative, backend, APIs, frontend, tests et déploiement. Ce que vous recevez à la fin : un produit robuste que vous possédez à 100% et que vous pouvez faire évoluer sereinement.",
         stack: ["Architecture applicative", "Backend & APIs", "Frontend produit", "Bases de données", "Intégrations métier", "Tests & CI/CD", "Observabilité", "Documentation"],
         outcomes: [
-          "Un produit logiciel fiable, maintenable et aligné sur vos processus métier.",
-          "Une architecture capable d'évoluer sans transformer chaque nouvelle fonctionnalité en dette technique.",
-          "Des workflows critiques sécurisés : paiements, rôles, validations, synchronisation, recherche ou reporting.",
-          "Une base de code documentée, testée et transmissible à une équipe interne."
+          "Un produit logiciel fiable, maintenable et aligné sur vos processus métier — pas une simple maquette livrée sans suivi.",
+          "Une architecture capable d'absorber la montée en charge sans transformer chaque nouvelle fonctionnalité en dette technique.",
+          "Des workflows critiques sécurisés : paiements, gestion des rôles, validations complexes, synchronisation, recherche et reporting.",
+          "Une base de code propre, entièrement documentée, testée et transmissible à vos équipes."
         ],
         scope: [
-          "Cadrage du besoin, modélisation du domaine et définition des flux métier avant développement.",
-          "Conception backend, API, base de données, règles d'accès, jobs, événements et intégrations externes.",
-          "Développement d'interfaces web ou dashboards quand elles servent le produit, sans limiter l'offre au web.",
-          "Mise en place de tests, CI/CD, monitoring applicatif et documentation technique exploitable."
+          "Cadrage du besoin & modélisation : définition précise du domaine et des flux métier avant d'écrire la moindre ligne de code.",
+          "Architecture & Backend : conception des APIs, de la base de données, des rôles d'accès, des règles métier et des jobs d'arrière-plan.",
+          "Interfaces & Dashboards : développement de composants frontend modernes et réactifs lorsque le produit l'exige.",
+          "Industrialisation : mise en place de la CI/CD, des tests automatisés, du monitoring et de la documentation d'exploitation."
         ],
         deliverables: [
-          "Architecture applicative documentée avec modèles de données et décisions techniques",
-          "Backend, APIs et interfaces nécessaires au produit, livrés avec code source structuré",
+          "Architecture applicative documentée (Modèles de données, décisions d'architecture ADR et schémas)",
+          "Backend, APIs et interfaces nécessaires au produit, livrés avec code source structuré et commenté",
           "Système d'authentification, rôles, permissions et workflows métier critiques",
-          "Tests unitaires, intégration continue et environnement de staging",
-          "Documentation technique et transfert pour reprise par votre équipe"
+          "Suite de tests automatisés, pipeline CI/CD et environnement de staging pré-production",
+          "Documentation technique d'exploitation et session de transfert pour vos développeurs"
         ],
         cases: [
-          "Plateforme métier ou SaaS avec logique complexe et plusieurs profils utilisateurs",
-          "Produit interne pour remplacer des fichiers Excel, traitements manuels ou outils dispersés",
-          "API ou backend critique à fiabiliser avant montée en charge",
-          "Refonte technique d'un logiciel existant devenu difficile à maintenir"
+          "Refonte technique d'une plateforme legaltech (TribuneJustice) : découpage du monolithe, cache Redis sur 10 endpoints et élimination des requêtes N+1",
+          "Plateforme métier ou SaaS avec logique complexe et plusieurs profils d'utilisateurs",
+          "Outil interne sur-mesure pour remplacer des fichiers Excel, des traitements manuels ou des outils dispersés",
+          "Stabilisation et optimisation d'une API ou d'un backend critique avant montée en charge"
         ],
         faq: [
           {
             q: "Combien de temps faut-il pour développer mon projet ?",
-            a: "Un projet typique (plateforme métier, SaaS) prend entre 4 et 12 semaines selon la complexité. Je livre par phases itératives pour que vous puissiez valider régulièrement l'avancement."
+            a: "Un MVP ou module ciblé (authentification, CRUD, workflows de base) prend 4 à 6 semaines. Une plateforme métier complète avec rôles multiples, intégrations API et paiements prend 8 à 16 semaines. Je découpe toujours le projet en jalons livrables pour que vous puissiez valider et ajuster au fur et à mesure."
           },
           {
             q: "Est-ce que je garde la propriété du code ?",
-            a: "Oui, vous êtes propriétaire de 100% du code source livré. Je fournis également la documentation technique pour que votre équipe puisse reprendre le projet."
+            a: "Oui, vous êtes propriétaire à 100% du code source livré. Je fournis également la documentation technique complète pour que votre équipe puisse reprendre ou faire évoluer le projet sans blocage."
           },
           {
             q: "Comment se déroule la collaboration ?",
-            a: "Nous commençons par un appel de cadrage gratuit (30 min). Si le projet correspond à mes compétences, je vous envoie une proposition détaillée avec estimation, livrables et planning."
+            a: "Nous commençons par un échange de cadrage gratuit (30 min). Si le projet correspond à mes compétences, je vous fournis une analyse technique préliminaire avec livrables, jalons et chiffrage clair."
           },
           {
             q: "Travaillez-vous avec des frameworks spécifiques ?",
-            a: "Je travaille principalement avec Laravel (backend) et React/Next.js ou Angular (frontend). Je peux m'adapter à votre stack existant si nécessaire."
+            a: "Je travaille principalement avec Laravel (backend), Next.js / React ou Angular (frontend), et PostgreSQL / Redis (données). Je m'adapte à votre stack existante si elle est pertinente pour vos objectifs."
           }
         ]
       },
+
       "architecture-cloud": {
         title: "Architecture Cloud & Hybride",
         punchline: "La plupart des architectures cloud supposent une fibre garantie et un courant continu. Je conçois des infrastructures résilientes (AWS/Azure/Hybride) taillées pour les contraintes réelles du terrain.",

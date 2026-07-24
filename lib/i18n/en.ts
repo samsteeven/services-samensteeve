@@ -45,51 +45,51 @@ export const en = {
     items: {
       "ingenierie-logicielle": {
         title: "Software Engineering",
-        punchline: "I design and build complete software products: business platforms, APIs, critical backends, interfaces, and integrations.",
-        shortDesc: "Design, development, and industrialization of robust software systems, not just web interfaces.",
-        longDesc: "I take ownership of production software: product scoping, application architecture, backend, frontend, APIs, integrations, data, tests, and deployment. The goal is not to ship screens, but a reliable, maintainable system your team can operate.",
+        punchline: "Most software projects ship screens. I build reliable, maintainable systems built to last without depending on the developer.",
+        shortDesc: "Design, development, and industrialization of robust production software: architecture, APIs, critical backends, and business interfaces.",
+        longDesc: "Most software projects ship interfaces. What's missing next: a system that holds under load, that your team can maintain, and that genuinely reflects your business processes. I handle full construction — product scoping, application architecture, backend, APIs, frontend, tests, and deployment. What you receive at the end: a robust product you own 100% and can evolve with confidence.",
         stack: ["Application architecture", "Backend & APIs", "Product frontend", "Databases", "Business integrations", "Tests & CI/CD", "Observability", "Documentation"],
         outcomes: [
-          "A reliable, maintainable software product aligned with your business processes.",
-          "An architecture that can evolve without turning each new feature into technical debt.",
-          "Critical workflows secured: payments, roles, approvals, sync, search, or reporting.",
-          "A documented, tested codebase that can be handed over to an internal team."
+          "A reliable, maintainable software product aligned with your business processes — not a raw prototype handed over without support.",
+          "An architecture capable of absorbing growth without turning each new feature into technical debt.",
+          "Critical workflows secured: payments, role permissions, complex approvals, sync, search, and reporting.",
+          "A clean, fully documented, tested codebase ready to be handed over to your team."
         ],
         scope: [
-          "Needs framing, domain modeling, and business workflow definition before implementation.",
-          "Backend, API, database, access rules, jobs, events, and external integration design.",
-          "Web interfaces or dashboards when they serve the product, without reducing the offer to web.",
-          "Testing, CI/CD, application monitoring, and usable technical documentation."
+          "Scoping & domain modeling: precise definition of domain and business flows before writing a single line of code.",
+          "Architecture & Backend: designing APIs, database schemas, access roles, business rules, and background jobs.",
+          "Interfaces & Dashboards: building modern, responsive frontend components when the product demands them.",
+          "Industrialization: implementing CI/CD pipelines, automated testing, application monitoring, and runbooks."
         ],
         deliverables: [
-          "Documented application architecture with data models and technical decisions",
-          "Backend, APIs, and product interfaces delivered with structured source code",
-          "Authentication, roles, permissions, and critical business workflows",
-          "Unit tests, continuous integration, and staging environment",
-          "Technical documentation and handover for your team"
+          "Documented application architecture (Data models, ADR architecture decision records, and flow diagrams)",
+          "Backend, APIs, and product interfaces delivered with structured, clean source code",
+          "Authentication system, role-based permissions, and critical business workflows",
+          "Automated test suite, CI/CD pipeline, and staging environment",
+          "Technical operational documentation and handover session for your development team"
         ],
         cases: [
+          "Technical refactoring of a legaltech platform (TribuneJustice): breaking down a monolith into 4 specialized services, Redis cache on 10 endpoints, and N+1 query elimination",
           "Business platform or SaaS with complex logic and multiple user profiles",
-          "Internal product replacing spreadsheets, manual processing, or scattered tools",
-          "Critical API or backend to stabilize before scaling",
-          "Technical rebuild of an existing product that became hard to maintain"
+          "Custom internal tool replacing spreadsheets, manual processing, or scattered software",
+          "Stabilization and performance optimization of a critical API or backend before scaling"
         ],
         faq: [
           {
             q: "How long does it take to develop my project?",
-            a: "A typical project (business platform, SaaS) takes between 4 and 12 weeks depending on complexity. I deliver in iterative phases so you can regularly validate progress."
+            a: "A targeted MVP or module (authentication, CRUD, core workflows) takes 4 to 6 weeks. A full business platform with multiple roles, API integrations, and payments takes 8 to 16 weeks. I always break projects into autonomous milestones so you can validate and adjust along the way."
           },
           {
             q: "Do I keep ownership of the code?",
-            a: "Yes, you own 100% of the delivered source code. I also provide technical documentation so your team can take over the project."
+            a: "Yes, you own 100% of the delivered source code. I also provide complete technical documentation so your team can take over or evolve the project without vendor lock-in."
           },
           {
             q: "How does the collaboration work?",
-            a: "We start with a free scoping call (30 min). If the project matches my skills, I send you a detailed proposal with estimate, deliverables, and timeline."
+            a: "We start with a free scoping call (30 min). If the project aligns with my skillset, I provide a preliminary technical analysis with deliverables, milestones, and clear pricing."
           },
           {
             q: "Do you work with specific frameworks?",
-            a: "I primarily work with Laravel (backend) and React/Next.js or Angular (frontend). I can adapt to your existing stack if necessary."
+            a: "I primarily work with Laravel (backend), Next.js / React or Angular (frontend), and PostgreSQL / Redis (data). I adapt to your existing stack if relevant to your business goals."
           }
         ]
       },

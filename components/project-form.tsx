@@ -165,7 +165,7 @@ export function ProjectForm({ lang }: Props) {
             {stepLabels[displayStep - 1]}
           </span>
           <div className="flex items-center gap-3">
-            {form.hasDraftData && (
+            {hydrated && form.hasDraftData && (
               <button
                 type="button"
                 onClick={() => {

@@ -337,14 +337,14 @@ export const en = {
       types: {
         web: "Software Engineering",
         cloud: "Cloud Architecture",
-        security: "Pentest & Security",
+        security: "Security Audit & Pentest",
         ai: "AI Automation",
         other: "Not sure yet"
       },
       typesDesc: {
         web: "Design or evolve business software, a platform, an API, or a complete product.",
         cloud: "Design, secure, and migrate infrastructures with auto-failover and high resilience.",
-        security: "Offensively test an application, API, or exposed surface, then prioritize remediation.",
+        security: "Map exposed vulnerabilities, test intrusions (infra, app, cloud) and prioritize remediation.",
         ai: "Integrate autonomous AI agents (LangGraph, MCP) connected to your business APIs.",
         other: "Help me scope the needs and define the technical priorities."
       },
@@ -399,10 +399,10 @@ export const en = {
         security: {
           title: "Expected security outcomes",
           options: {
-            security_pentest: "Identify exploitable vulnerabilities",
-            security_remediation: "Prioritize and support remediation",
-            security_compliance: "Prepare for an audit, client requirement, or compliance",
-            security_hardening: "Harden the application, API, or infrastructure"
+            security_exposure: "Map my attack surface as seen from the Internet",
+            security_pentest: "Test intrusions (internal infra, web/API app, mobile)",
+            security_cloud: "Audit my cloud environments (AWS, Azure, GCP)",
+            security_remediation: "Get a prioritized and supported remediation plan"
           }
         },
         ai: {
@@ -444,9 +444,9 @@ export const en = {
           prompts: ["Current infrastructure", "Availability", "Backups", "Migration/scaling"]
         },
         security: {
-          title: "Pentest & Security",
-          placeholder: "Describe the audit scope: application/API, authorized environments, test accounts, sensitive data, testing constraints, or already identified risks...",
-          prompts: ["Authorized scope", "Test accounts", "Sensitive data", "Audit constraints"]
+          title: "Security Audit & Pentest",
+          placeholder: "Describe the audit scope: type of test (exposure analysis, infra/app pentest, cloud audit), authorized environments, available test accounts, sensitive data involved, testing constraints and already identified risks...",
+          prompts: ["Test type (exposure/pentest/cloud)", "Authorized scope", "Test accounts", "Audit constraints"]
         },
         ai: {
           title: "AI Automation",
@@ -554,13 +554,23 @@ export const en = {
           title: "Security context",
           questions: [
             {
-              key: "target",
-              label: "Target to test",
+              key: "testType",
+              label: "Type of audit requested",
               options: [
-                { value: "web", label: "Web application" },
-                { value: "api", label: "API / backend" },
-                { value: "infra", label: "Infrastructure / network" },
-                { value: "mixed", label: "Mixed scope" }
+                { value: "exposure", label: "Exposure analysis (attack surface visible from Internet)" },
+                { value: "pentest", label: "Internal infra pentest (Active Directory, network)" },
+                { value: "apppentest", label: "Application pentest (web, API, mobile)" },
+                { value: "cloud", label: "Cloud audit (AWS, Azure, GCP)" }
+              ]
+            },
+            {
+              key: "approach",
+              label: "Testing approach",
+              options: [
+                { value: "blackbox", label: "Black box (no info provided, real attack simulation)" },
+                { value: "greybox", label: "Grey box (partial access, authenticated portals)" },
+                { value: "whitebox", label: "White box (full collaboration with IT teams)" },
+                { value: "unknown", label: "To define together" }
               ]
             },
             {
@@ -575,22 +585,12 @@ export const en = {
             },
             {
               key: "authorization",
-              label: "Authorization and access",
+              label: "Preparation and authorization",
               options: [
-                { value: "ready", label: "Authorization and accounts are ready" },
+                { value: "ready", label: "Signed authorization and test accounts ready" },
                 { value: "accounts", label: "Test accounts need preparation" },
                 { value: "scope", label: "Scope needs formalization" },
                 { value: "help", label: "Need help scoping it legally" }
-              ]
-            },
-            {
-              key: "constraints",
-              label: "Testing constraints",
-              options: [
-                { value: "low-impact", label: "Non-destructive tests only" },
-                { value: "authenticated", label: "Tests with authenticated roles" },
-                { value: "compliance", label: "Audit / compliance constraint" },
-                { value: "none", label: "No specific constraint" }
               ]
             }
           ]

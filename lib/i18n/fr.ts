@@ -337,14 +337,14 @@ export const fr = {
       types: {
         web: "Ingénierie logicielle",
         cloud: "Architecture Cloud",
-        security: "Pentest & Sécurité",
+        security: "Audit Sécurité & Pentest",
         ai: "Automatisation IA",
         other: "Pas encore sûr"
       },
       typesDesc: {
         web: "Concevoir ou faire évoluer un logiciel métier, une plateforme, une API ou un produit complet.",
         cloud: "Concevoir, sécuriser et migrer des infrastructures avec failover et résilience.",
-        security: "Tester offensivement une application, une API ou une surface exposée, puis prioriser la remédiation.",
+        security: "Cartographier les vulnérabilités exposées, tester les intrusions (infra, app, cloud) et prioriser la remédiation.",
         ai: "Intégrer des agents IA autonomes (LangGraph, MCP) connectés à vos API métiers.",
         other: "Aidez-moi à cadrer le besoin et à définir les priorités techniques."
       },
@@ -399,10 +399,10 @@ export const fr = {
         security: {
           title: "Résultats attendus pour la sécurité",
           options: {
-            security_pentest: "Identifier les vulnérabilités exploitables",
-            security_remediation: "Prioriser et accompagner les corrections",
-            security_compliance: "Préparer un audit, une exigence client ou conformité",
-            security_hardening: "Durcir l'application, l'API ou l'infrastructure"
+            security_exposure: "Cartographier ma surface d'exposition vue depuis Internet",
+            security_pentest: "Tester l'intrusion (infra interne, appli web/API, mobile)",
+            security_cloud: "Auditer mes environnements cloud (AWS, Azure, GCP)",
+            security_remediation: "Obtenir un plan de remédiation priorisé et accompagné"
           }
         },
         ai: {
@@ -444,9 +444,9 @@ export const fr = {
           prompts: ["Infrastructure actuelle", "Disponibilité", "Sauvegardes", "Migration/scalabilité"]
         },
         security: {
-          title: "Pentest & Sécurité",
-          placeholder: "Décrivez le périmètre à auditer : application/API, environnements autorisés, comptes de test, données sensibles, contraintes de test ou risques déjà identifiés...",
-          prompts: ["Périmètre autorisé", "Comptes de test", "Données sensibles", "Contraintes d'audit"]
+          title: "Audit Sécurité & Pentest",
+          placeholder: "Décrivez le périmètre à auditer : type de test souhaité (exposition, pentest infra/appli, audit cloud), environnements autorisés, comptes de test disponibles, données sensibles concernées, contraintes de test et risques déjà identifiés...",
+          prompts: ["Type de test (exposition/pentest/cloud)", "Périmètre autorisé", "Comptes de test", "Contraintes d'audit"]
         },
         ai: {
           title: "Automatisation IA",
@@ -554,13 +554,23 @@ export const fr = {
           title: "Contexte sécurité",
           questions: [
             {
-              key: "target",
-              label: "Cible à tester",
+              key: "testType",
+              label: "Type d'audit souhaité",
               options: [
-                { value: "web", label: "Application web" },
-                { value: "api", label: "API / backend" },
-                { value: "infra", label: "Infrastructure / réseau" },
-                { value: "mixed", label: "Périmètre mixte" }
+                { value: "exposure", label: "Analyse d'exposition (surface visible depuis Internet)" },
+                { value: "pentest", label: "Pentest infra interne (Active Directory, réseau)" },
+                { value: "apppentest", label: "Pentest applicatif (web, API, mobile)" },
+                { value: "cloud", label: "Audit cloud (AWS, Azure, GCP)" }
+              ]
+            },
+            {
+              key: "approach",
+              label: "Approche de test",
+              options: [
+                { value: "blackbox", label: "Boîte noire (aucune info fournie, simulation réelle)" },
+                { value: "greybox", label: "Boîte grise (accès partiel, portails authentifiés)" },
+                { value: "whitebox", label: "Boîte blanche (collaboration complète avec les équipes IT)" },
+                { value: "unknown", label: "À définir ensemble" }
               ]
             },
             {
@@ -575,22 +585,12 @@ export const fr = {
             },
             {
               key: "authorization",
-              label: "Autorisation et accès",
+              label: "Préparation et autorisation",
               options: [
-                { value: "ready", label: "Autorisation et comptes prêts" },
+                { value: "ready", label: "Autorisation signée et comptes de test prêts" },
                 { value: "accounts", label: "Comptes de test à préparer" },
                 { value: "scope", label: "Périmètre à formaliser" },
                 { value: "help", label: "Besoin d'aide pour cadrer légalement" }
-              ]
-            },
-            {
-              key: "constraints",
-              label: "Contraintes de test",
-              options: [
-                { value: "low-impact", label: "Tests non destructifs uniquement" },
-                { value: "authenticated", label: "Tests avec rôles authentifiés" },
-                { value: "compliance", label: "Contrainte audit / conformité" },
-                { value: "none", label: "Aucune contrainte particulière" }
               ]
             }
           ]

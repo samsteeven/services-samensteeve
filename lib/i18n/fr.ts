@@ -195,51 +195,50 @@ export const fr = {
       },
       "automatisation-ia": {
         title: "Automatisation IA",
-        punchline: "Automatiser des processus réels avec des agents IA supervisables, intégrés à vos outils et à vos données.",
-        shortDesc: "Intégration d'agents IA autonomes dans vos logiciels pour automatiser vos tâches répétitives complexes.",
-        longDesc: "Je ne vends pas de gadgets IA. J'intègre des systèmes d'agents autonomes directement connectés à vos bases de données et API de production. Grâce à des protocoles comme MCP et des frameworks d'orchestration de graphes (LangGraph), l'IA exécute des workflows complexes et fiables à l'intérieur de vos outils existants.",
+        punchline: "Vos équipes perdent du temps sur des tâches prévisibles. J'intègre des agents IA supervisables dans vos outils métier pour transformer ce qui ralentit votre activité en workflows fiables — sans casser votre organisation.",
+        shortDesc: "Automatisation de processus réels : agents IA connectés à vos outils métier (CRM, ERP, APIs), supervisables, documentés et intégrés à votre environnement de production.",
+        longDesc: "Je ne vends pas de gadgets IA. J'identifie les processus à fort potentiel d'automatisation dans votre organisation, je conçois les agents adaptés, et je les intègre directement dans vos outils existants — CRM, ERP, base de données, API, application interne. Via MCP et LangGraph, les agents exécutent des workflows complexes en plusieurs étapes, avec des garde-fous clairs : permissions limitées, logs détaillés, validation humaine aux points critiques et reprise en cas d'erreur. Vous gardez la maîtrise ; l'IA prend en charge le reste.",
         stack: ["Agents IA", "MCP", "LangGraph", "Outils métier", "Validation humaine", "RAG", "APIs LLM", "Journalisation"],
         outcomes: [
-          "Des tâches répétitives traitées plus vite sans perdre le contrôle humain.",
-          "Des agents connectés à vos outils existants plutôt qu'un chatbot isolé.",
-          "Des garde-fous : permissions, logs, validation, reprise en cas d'erreur.",
-          "Un retour mesurable sur les processus automatisés."
+          "Les tâches manuelles répétitives (saisie, tri, qualification, reporting) sont traitées automatiquement, sans perte de contrôle.",
+          "L'agent travaille à l'intérieur de votre écosystème existant — pas un chatbot isolé, mais un système branché sur vos vraies données.",
+          "Des garde-fous solides : permissions limitées, logs détaillés, validation humaine sur les décisions sensibles, reprise en cas d'erreur.",
+          "Un retour mesurable : gain de temps quantifié, volume de tâches traitées, erreurs évitées."
         ],
         scope: [
-          "Identification des workflows à fort ROI et des risques d'automatisation.",
-          "Conception d'agents, outils, permissions, mémoire, étapes de validation et logs.",
-          "Intégration aux APIs, bases de données, documents, CRM, ERP ou applications internes.",
-          "Tableau de supervision pour suivre, corriger et améliorer les automatisations."
+          "Analyse des processus : identification des tâches à fort ROI, des risques d'automatisation et du bon niveau d'autonomie à confier à l'IA.",
+          "Conception de l'agent : outils, permissions, mémoire, logique métier, étapes de validation humaine et gestion des erreurs.",
+          "Intégration dans votre environnement : APIs, bases de données, CRM, ERP, documents ou application interne existante.",
+          "Supervision et amélioration : tableau de bord pour suivre les actions, détecter les dérives et ajuster le comportement des agents."
         ],
         deliverables: [
-          "Document de cadrage identifiant les processus à fort ROI automatisables par l'IA",
-          "Workflow d'agents IA conçu, modélisé et testé (gestion de mémoire et d'outils)",
-          "Intégration transparente dans votre application existante (Laravel, Next.js, etc.)",
-          "Console de supervision pour suivre et valider les actions des agents IA",
-          "Documentation technique et guide d'exploitation opérationnel"
+          "Document de cadrage : processus à fort ROI identifiés, niveau d'autonomie défini, risques et plan de test",
+          "Workflow d'agents conçu, modélisé, testé et intégré dans votre environnement existant",
+          "Console de supervision pour suivre, valider et corriger les actions des agents en production",
+          "Documentation technique complète et guide d'exploitation pour votre équipe"
         ],
         cases: [
-          "Traitement automatique de documents entrants (factures, devis, contrats complexes)",
-          "Agents de qualification de leads et de support client niveau 2 avec accès BDD",
-          "Génération automatique de rapports d'activité complexes basés sur des données multi-sources",
-          "Orchestration de tâches administratives multi-étapes sans intervention humaine"
+          "Lecture et extraction automatique de factures, devis ou contrats entrants",
+          "Qualification de leads avec scoring et résumé prêt pour l'équipe commerciale",
+          "Génération de rapports d'activité complexes agrégeant plusieurs sources de données",
+          "Traitement de demandes support simples avec escalade automatique vers le bon interlocuteur"
         ],
         faq: [
           {
             q: "Quelle est la différence avec un chatbot classique ?",
-            a: "Contrairement à un chatbot qui répond à des questions, mes agents IA exécutent des actions concrètes dans vos systèmes : créer des enregistrements, générer des documents, déclencher des workflows, avec validation humaine aux points critiques."
+            a: "Un chatbot répond à des questions. Un agent IA exécute des actions concrètes dans vos systèmes : créer un enregistrement, générer un rapport, déclencher un workflow, qualifier un lead — avec validation humaine aux points critiques."
           },
           {
             q: "Comment garantir que l'IA ne fait pas d'erreurs ?",
-            a: "Je mets en place des garde-fous : permissions limitées, logs détaillés, étapes de validation humaine, et tests sur des données historiques. L'IA est supervisée, pas autonome sans contrôle."
+            a: "Par conception : permissions limitées au strict nécessaire, logs détaillés de chaque action, étapes de validation humaine sur les décisions sensibles, et tests sur des données historiques avant mise en production. L'IA est supervisée, pas autonome sans garde-fou."
           },
           {
-            q: "Est-ce que ça marche avec mes outils existants ?",
-            a: "Oui, je m'intègre à vos APIs, bases de données, CRM, ERP ou applications internes. L'objectif est que l'IA travaille à l'intérieur de votre écosystème existant, pas de vous forcer à tout changer."
+            q: "Est-ce que ça s'intègre à mes outils actuels ?",
+            a: "C'est précisément l'objectif. Je m'intègre à vos APIs, bases de données, CRM, ERP ou applications internes. L'agent travaille dans votre écosystème existant — vous n'avez pas à tout changer pour commencer."
           },
           {
-            q: "Combien de temps pour voir des résultats ?",
-            a: "Un POC fonctionnel peut être livré en 2 à 4 semaines pour un workflow ciblé. Cela permet de valider l'approche avant de l'étendre à d'autres processus."
+            q: "Combien de temps avant de voir des résultats concrets ?",
+            a: "Un POC fonctionnel sur un processus ciblé peut être livré en 2 à 4 semaines. Cela permet de valider l'approche, mesurer le gain réel, et décider sereinement si et comment étendre l'automatisation."
           }
         ]
       }

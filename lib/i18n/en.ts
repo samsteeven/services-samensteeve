@@ -195,51 +195,50 @@ export const en = {
       },
       "automatisation-ia": {
         title: "AI Automation",
-        punchline: "Automating real processes with supervisable AI agents integrated into your tools and data.",
-        shortDesc: "Integrating autonomous AI agent workflows into your software to automate complex, repetitive tasks.",
-        longDesc: "I do not sell AI hype. I build autonomous agent workflows that connect directly to your production databases and APIs. Using Model Context Protocol (MCP) and graph orchestration (LangGraph), the AI reliably executes multi-step, complex workflows directly inside your existing business tools.",
+        punchline: "Your teams lose time on predictable, repetitive tasks. I integrate supervisable AI agents into your business tools to turn what slows you down into reliable workflows — without disrupting your existing organization.",
+        shortDesc: "Real-process automation: AI agents connected to your business tools (CRM, ERP, APIs), supervisable, documented, and integrated into your production environment.",
+        longDesc: "I do not sell AI hype. I identify the high-potential processes in your organization, design the right agents, and integrate them directly into your existing tools — CRM, ERP, database, API, internal application. Via MCP and LangGraph, agents execute complex multi-step workflows with clear guardrails: limited permissions, detailed logs, human approval at critical decision points, and error recovery. You stay in control; the AI handles the rest.",
         stack: ["AI agents", "MCP", "LangGraph", "Business tools", "Human approval", "RAG", "LLM APIs", "Logging"],
         outcomes: [
-          "Repetitive tasks handled faster without losing human control.",
-          "Agents connected to existing tools instead of an isolated chatbot.",
-          "Guardrails: permissions, logs, approval steps, and recovery paths.",
-          "Measurable return on automated processes."
+          "Manual repetitive tasks (data entry, triage, qualification, reporting) handled automatically, without losing control.",
+          "The agent works inside your existing ecosystem — not an isolated chatbot, but a system wired to your real data.",
+          "Solid guardrails: limited permissions, detailed logs, human validation on sensitive decisions, error recovery built in.",
+          "Measurable return: quantified time saved, volume of tasks handled, errors avoided."
         ],
         scope: [
-          "Identification of high-ROI workflows and automation risks.",
-          "Agent, tool, permission, memory, approval-step, and logging design.",
-          "Integration with APIs, databases, documents, CRM, ERP, or internal apps.",
-          "Supervision dashboard to track, correct, and improve automations."
+          "Process analysis: identifying high-ROI tasks, automation risks, and the right level of autonomy to delegate to the AI.",
+          "Agent design: tools, permissions, memory, business logic, human approval steps, and error handling.",
+          "Integration into your environment: APIs, databases, CRM, ERP, documents, or existing internal application.",
+          "Supervision and improvement: dashboard to track actions, detect drift, and adjust agent behavior over time."
         ],
         deliverables: [
-          "Scoping document identifying high-ROI workflows suitable for AI automation",
-          "Custom-designed AI agent graph modeled, built, and tested with memory tools",
-          "Seamless integration into your existing systems (Laravel, Next.js backends)",
-          "Supervision dashboard to track, log, and manually approve AI agent actions",
-          "Technical documentation and operational runbook for continuous maintenance"
+          "Scoping document: high-ROI processes identified, autonomy level defined, risks and test plan included",
+          "Agent workflow designed, modeled, tested and integrated into your existing environment",
+          "Supervision dashboard to track, validate and correct AI agent actions in production",
+          "Complete technical documentation and operational runbook for your team"
         ],
         cases: [
-          "Automated processing of incoming documents (invoices, custom quotes, legal contracts)",
-          "Lead qualification and L2 support agents with secure database query capabilities",
-          "Automated generation of complex business reports pulling from multiple sources",
-          "Orchestrating administrative multi-step tasks without human bottlenecking"
+          "Automatic reading and extraction of incoming invoices, quotes, or contracts",
+          "Lead qualification with scoring and summary ready for the sales team",
+          "Complex activity report generation aggregating multiple internal data sources",
+          "Simple support request handling with automatic escalation to the right person"
         ],
         faq: [
           {
             q: "What's the difference with a classic chatbot?",
-            a: "Unlike a chatbot that answers questions, my AI agents execute concrete actions in your systems: creating records, generating documents, triggering workflows, with human validation at critical points."
+            a: "A chatbot answers questions. An AI agent executes concrete actions in your systems: creating a record, generating a report, triggering a workflow, qualifying a lead — with human approval at critical points."
           },
           {
             q: "How do you ensure the AI doesn't make errors?",
-            a: "I implement guardrails: limited permissions, detailed logs, human validation steps, and testing on historical data. The AI is supervised, not autonomous without control."
+            a: "By design: permissions limited to what's strictly necessary, detailed logs of every action, human approval on sensitive decisions, and testing on historical data before production rollout. The AI is supervised, not autonomous without guardrails."
           },
           {
-            q: "Does it work with my existing tools?",
-            a: "Yes, I integrate with your APIs, databases, CRM, ERP, or internal applications. The goal is for the AI to work inside your existing ecosystem, not force you to change everything."
+            q: "Does it integrate with my current tools?",
+            a: "That's precisely the goal. I integrate with your APIs, databases, CRM, ERP, or internal applications. The agent works inside your existing ecosystem — you don't have to change everything to get started."
           },
           {
-            q: "How long to see results?",
-            a: "A functional POC can be delivered in 2 to 4 weeks for a targeted workflow. This allows validating the approach before extending to other processes."
+            q: "How long before seeing concrete results?",
+            a: "A functional POC on a targeted process can be delivered in 2 to 4 weeks. This validates the approach, measures the real gain, and lets you decide calmly whether and how to extend the automation."
           }
         ]
       }

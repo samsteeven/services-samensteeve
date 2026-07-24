@@ -210,14 +210,14 @@ export function ProjectForm({ lang }: Props) {
       </div>
 
       {/* ── Step Content ──────────────────────────────────────────────────── */}
-      {displayStep === 1 && <StepService form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
-      {displayStep === 2 && <StepGoals form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
-      {displayStep === 3 && <StepContext form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
-      {displayStep === 4 && <StepDetails form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
-      {displayStep === 5 && <StepContact form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
-      {displayStep === 6 && <StepRecap form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
+      {hydrated && displayStep === 1 && <StepService form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
+      {hydrated && displayStep === 2 && <StepGoals form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
+      {hydrated && displayStep === 3 && <StepContext form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
+      {hydrated && displayStep === 4 && <StepDetails form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
+      {hydrated && displayStep === 5 && <StepContact form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
+      {hydrated && displayStep === 6 && <StepRecap form={formActions} t={t} lang={lang} getContactTypeIcon={getIcon} />}
 
-      {displayStep === 6 && (
+      {hydrated && displayStep === 6 && (
         <div className="mt-6 rounded-2xl border border-line bg-paper-raised/15 p-4">
           <p className="mb-3 font-mono text-[9px] uppercase tracking-widest text-ink-soft/45">
             {buttons.verification}
@@ -233,6 +233,7 @@ export function ProjectForm({ lang }: Props) {
       )}
 
       {/* ── Navigation Actions ──────────────────────────────────────────────── */}
+      {hydrated && (
       <div className="mt-10 flex items-center justify-between gap-4">
         {displayStep > 1 ? (
           <button
@@ -278,6 +279,7 @@ export function ProjectForm({ lang }: Props) {
           </button>
         )}
       </div>
+      )}
 
     </div>
   );

@@ -59,8 +59,8 @@ export const services: ServiceConfig[] = [
     formIcon: ShieldCheck,
     relatedCaseStudy: "tribunejustice",
     mcp: {
-      title: "Pentest & Sécurité applicative",
-      description: "Audit de sécurité, tests de pénétration et recommandations.",
+      title: "Audit Sécurité & Pentest",
+      description: "Analyse d'exposition, tests d'intrusion (infra/applicatif) et audit cloud (AWS/Azure/GCP).",
     },
   },
   {

@@ -13,7 +13,7 @@ export const en = {
     serviceItems: [
       { label: "Software Engineering", slug: "ingenierie-logicielle" },
       { label: "Cloud Architecture", slug: "architecture-cloud" },
-      { label: "Pentest & Security", slug: "audit-securite" },
+      { label: "Security Audit & Pentest", slug: "audit-securite" },
       { label: "AI Automation", slug: "automatisation-ia" },
     ],
   },
@@ -144,52 +144,52 @@ export const en = {
         ]
       },
       "audit-securite": {
-        title: "Application Pentest & Security",
-        punchline: "Not just a code review: an offensive approach to verify what an attacker can actually do.",
-        shortDesc: "Application penetration testing, exposure review, access-control analysis, and remediation support.",
-        longDesc: "I assess your applications as real targets: reconnaissance, attack-surface mapping, OWASP testing, business logic, authentication, authorization, sessions, APIs, configuration, and exploit paths. Code review can be part of the mission, but it is only one tool among others.",
-        stack: ["Web/API pentest", "OWASP Top 10", "Auth & sessions", "Access control", "Business logic", "Attack surface", "Hardening", "Retest"],
+        title: "Security Audit & Pentest",
+        punchline: "Map your vulnerabilities before an attacker does — exposure analysis, infra & application pentesting, cloud audit.",
+        shortDesc: "Exposure analysis, penetration testing (infra, application, cloud AWS/Azure/GCP) and remediation support to durably harden your security posture.",
+        longDesc: "I assess your systems as a real attacker would. From mapping your external attack surface to internal penetration tests (Active Directory, privilege escalation, compromised network access), application testing (OWASP, APIs, mobile) and cloud audits (AWS/Azure/GCP: misconfigurations, excessive privileges, exposed services), I reproduce concrete attack scenarios to identify exploitable vulnerabilities and deliver an actionable remediation plan. A three-pillar approach — exposure analysis, infrastructure & application pentest, cloud environment audit — tailored to your maturity.",
+        stack: ["Exposure analysis", "Infra pentest", "App pentest", "OWASP Top 10", "Cloud audit AWS/Azure/GCP", "Active Directory", "Red Team", "Black/grey/white box"],
         outcomes: [
-          "A clear view of truly exploitable weaknesses, not a raw scanner dump.",
-          "Impact evidence that leadership can understand and developers can act on.",
-          "A remediation plan prioritized by business risk and fix effort.",
-          "Post-fix validation to reduce residual risk."
+          "A precise map of your attack surface as seen from the Internet — before an attacker draws it for you.",
+          "Concrete proof of exploitable weaknesses, ranked by real impact, not a raw scanner dump.",
+          "A remediation plan prioritized by business risk, with clear and actionable steps for your teams.",
+          "A full debrief and retest report to validate fixes and reduce residual risk."
         ],
         scope: [
-          "Reconnaissance, attack-surface mapping, and exposed entry-point analysis.",
-          "Manual testing of authentication, authorization, sessions, APIs, files, uploads, and business logic.",
-          "OWASP risk verification: injection, XSS, SSRF, IDOR, CSRF, misconfiguration, secrets.",
-          "Remediation support and retest of critical vulnerabilities."
+          "Exposure analysis: technical scan of IPs and domains, service mapping, known vulnerability identification, and manual exploitation of sensitive targets (Phase 1: assessment, Phase 2: targeted exploitation).",
+          "Internal penetration test: simulating an attacker who has gained network access (compromised VPN, Wi-Fi, physical access) — Active Directory mapping, privilege escalation, access to sensitive data (HR, business servers, confidential files).",
+          "Application pentest: offensive testing on web apps, REST/GraphQL APIs and mobile apps (Android/iOS) against OWASP benchmarks — authentication, authorization, injections, business logic, data exposure.",
+          "Cloud audit (AWS/Azure/GCP): configuration review, detection of misconfigured services, excessive privileges, exposed endpoints, and remediation recommendations aligned with CIS benchmarks."
         ],
         deliverables: [
-          "Pentest report with context, methodology, proof, impact, and recommendations",
-          "Vulnerability register ranked by severity and business risk",
-          "Executive summary readable by leadership, IT, or product teams",
-          "Technical restitution workshop with your developers or vendors",
+          "Full audit report: context, methodology, exploitation evidence, business impact and actionable recommendations",
+          "Vulnerability register ranked by severity and real business risk",
+          "Executive summary readable by leadership, CTO, or product team (non-technical)",
+          "Technical debrief workshop with your developers, IT team or vendors",
           "Retest report after priority vulnerabilities are fixed"
         ],
         cases: [
-          "Pentest before releasing an exposed application or sensitive-data platform",
-          "API, back-office, customer portal, marketplace, or SaaS platform audit",
-          "Verification of roles, permissions, indirect access, and business-logic flaws",
-          "Post-incident analysis to understand the attack path and close the gaps"
+          "Exposure audit before releasing an application handling sensitive data (healthcare, finance, HR)",
+          "Internal penetration test to assess risks from network access (employees, VPN, Wi-Fi, physical access)",
+          "Web application, REST/GraphQL API or mobile app pentest following OWASP methodology",
+          "Cloud configuration audit (AWS/Azure/GCP) to detect exposed attack surfaces and excessive privileges"
         ],
         faq: [
           {
-            q: "What's the difference between a pentest and a code review?",
-            a: "A pentest tests the application like a real attacker, exploiting actual weaknesses. A code review analyzes source code for potential vulnerabilities. I combine both approaches for a comprehensive assessment."
+            q: "What is the difference between black box, grey box and white box testing?",
+            a: "In black box testing, no information is provided — simulating real-world attack conditions. In grey box, you provide partial access (ideal for testing authenticated portals). In white box, your teams collaborate directly with the auditor for an in-depth architecture review. I recommend grey box for most missions."
           },
           {
-            q: "How long does a pentest take?",
-            a: "A standard pentest lasts between 3 and 10 days depending on attack surface. I deliver a preliminary report at mid-point and the final report with detailed recommendations."
+            q: "Do you perform cloud audits?",
+            a: "Yes, I audit AWS, Azure and GCP environments: IAM misconfigurations, exposed services, excessive privileges, open S3 buckets, permissive firewall rules, secrets in environment variables. The report includes recommendations aligned with CIS benchmarks."
           },
           {
-            q: "Do you also test APIs?",
-            a: "Yes, I test REST/GraphQL APIs with the same rigor as web interfaces: authentication, authorization, injection, rate limiting, business logic, and data exposure."
+            q: "How does an internal penetration test work?",
+            a: "I simulate an attacker who has gained network access (malicious employee, compromised VPN, physical port access). The goal: map your infrastructure, escalate privileges, and assess the impact on sensitive data and Active Directory."
           },
           {
-            q: "What happens after the pentest?",
-            a: "I deliver a report with vulnerabilities ranked by severity and a prioritized remediation plan. I can support your developers in fixing and retest critical vulnerabilities."
+            q: "What happens after the audit?",
+            a: "I deliver a detailed report with an executive summary and a prioritized remediation plan. A debrief session with your teams covers results and fix planning. I can perform a retest of critical vulnerabilities after remediation to validate the measures taken."
           }
         ]
       },

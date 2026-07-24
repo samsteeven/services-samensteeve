@@ -13,7 +13,7 @@ export const fr = {
     serviceItems: [
       { label: "Ingénierie logicielle", slug: "ingenierie-logicielle" },
       { label: "Architecture Cloud", slug: "architecture-cloud" },
-      { label: "Pentest & Sécurité", slug: "audit-securite" },
+      { label: "Audit Sécurité & Pentest", slug: "audit-securite" },
       { label: "Automatisation IA", slug: "automatisation-ia" },
     ],
   },
@@ -144,52 +144,52 @@ export const fr = {
         ]
       },
       "audit-securite": {
-        title: "Pentest & Sécurité Applicative",
-        punchline: "Pas une simple revue de code : une approche offensive pour vérifier ce qu'un attaquant peut réellement faire.",
-        shortDesc: "Tests d'intrusion applicatifs, audit d'exposition, analyse des contrôles d'accès et accompagnement à la remédiation.",
-        longDesc: "J'évalue vos applications comme une cible réelle : reconnaissance, cartographie de surface d'attaque, tests OWASP, logique métier, authentification, autorisations, sessions, API, configuration et chemins d'exploitation. La revue de code peut faire partie de la mission, mais elle n'est qu'un outil parmi d'autres.",
-        stack: ["Pentest web/API", "OWASP Top 10", "Auth & sessions", "Contrôles d'accès", "Logique métier", "Surface d'attaque", "Hardening", "Retest"],
+        title: "Audit Sécurité & Pentest",
+        punchline: "Cartographiez vos vulnérabilités avant qu'un attaquant ne le fasse — analyse d'exposition, tests d'intrusion infra & applicatif, audit cloud.",
+        shortDesc: "Analyse d'exposition, tests d'intrusion (infra, applicatif, cloud AWS/Azure/GCP) et accompagnement à la remédiation pour renforcer durablement votre posture de sécurité.",
+        longDesc: "J'évalue vos systèmes comme un attaquant réel. De la cartographie de votre surface d'exposition externe jusqu'aux tests d'intrusion internes (Active Directory, élévation de privilèges, accès réseau compromis), applicatifs (OWASP, APIs, mobiles) et cloud (AWS/Azure/GCP : erreurs de configuration, privilèges excessifs, services exposés), je reproduis des scénarios d'attaque concrets pour identifier les failles exploitables et vous fournir un plan de remédiation actionnable. Approche en trois volets — analyse d'exposition, pentest infrastructure & applicatif, audit des environnements cloud — adaptée à votre maturité.",
+        stack: ["Analyse d'exposition", "Pentest infra", "Pentest applicatif", "OWASP Top 10", "Audit cloud AWS/Azure/GCP", "Active Directory", "Red Team", "Boîte noire/grise/blanche"],
         outcomes: [
-          "Une vision claire des failles réellement exploitables, pas une liste brute de scanners.",
-          "Des preuves d'impact compréhensibles par la direction et exploitables par les développeurs.",
-          "Un plan de remédiation priorisé selon le risque métier et la facilité de correction.",
-          "Une validation après correction pour réduire le risque résiduel."
+          "Une cartographie précise de votre surface d'exposition vue depuis Internet — avant qu'un attaquant ne la dresse à votre place.",
+          "Des preuves concrètes des failles exploitables, classées par impact réel, pas une liste brute de scanners.",
+          "Un plan de remédiation priorisé selon le risque métier, avec des actions claires et actionnables pour vos équipes.",
+          "Une restitution complète et un rapport de retest pour valider les corrections et réduire le risque résiduel."
         ],
         scope: [
-          "Reconnaissance, cartographie de surface d'attaque et analyse des points d'entrée exposés.",
-          "Tests manuels sur authentification, autorisation, sessions, API, fichiers, uploads et logique métier.",
-          "Vérification des risques OWASP : injection, XSS, SSRF, IDOR, CSRF, mauvaise configuration, secrets.",
-          "Accompagnement des correctifs et contre-test des vulnérabilités critiques."
+          "Analyse d'exposition : scan technique des IPs et domaines, cartographie des services, identification des vulnérabilités connues et exploitation manuelle des cibles sensibles (Phase 1 : état des lieux, Phase 2 : exploitation ciblée).",
+          "Test d'intrusion interne : simulation d'un attaquant ayant obtenu un accès réseau (VPN compromis, Wi-Fi, accès physique) — cartographie Active Directory, élévation de privilèges, accès aux données sensibles (RH, serveurs métiers, fichiers confidentiels).",
+          "Pentest applicatif : tests offensifs sur vos applications web, APIs REST/GraphQL et mobiles (Android/iOS) selon les référentiels OWASP — authentification, autorisation, injections, logique métier, data exposure.",
+          "Audit cloud (AWS/Azure/GCP) : revue des configurations, détection des erreurs de paramétrage, des privilèges excessifs, des services non sécurisés et recommandations de remédiation conformes aux meilleures pratiques."
         ],
         deliverables: [
-          "Rapport de pentest avec contexte, méthodologie, preuves, impact et recommandations",
-          "Registre des vulnérabilités classées par criticité et risque métier",
-          "Synthèse exécutive lisible pour direction, DSI ou équipe produit",
-          "Atelier de restitution technique avec vos développeurs ou prestataires",
+          "Rapport d'audit complet : contexte, méthodologie, preuves d'exploitation, impact et recommandations actionnables",
+          "Registre des vulnérabilités classées par criticité et risque métier réel",
+          "Synthèse exécutive lisible par direction, DSI ou équipe produit (non technique)",
+          "Atelier de restitution technique avec vos développeurs, équipes IT ou prestataires",
           "Rapport de retest après correction des failles prioritaires"
         ],
         cases: [
-          "Pentest avant mise en production d'une application exposée ou manipulant des données sensibles",
-          "Audit d'API, backoffice, portail client, marketplace ou plateforme SaaS",
-          "Vérification des rôles, permissions, accès indirects et failles de logique métier",
-          "Analyse post-incident pour comprendre le chemin d'attaque et fermer les portes"
+          "Audit d'exposition avant mise en production d'une application manipulant des données sensibles (santé, finance, RH)",
+          "Test d'intrusion interne pour évaluer les risques liés aux accès réseau (employés, VPN, Wi-Fi, accès physique)",
+          "Pentest d'application web, API REST/GraphQL ou application mobile selon l'OWASP",
+          "Audit de configuration cloud (AWS/Azure/GCP) pour détecter les surfaces d'attaque exposées et les privilèges excessifs"
         ],
         faq: [
           {
-            q: "Quelle est la différence entre un pentest et une revue de code ?",
-            a: "Un pentest teste l'application comme un attaquant réel, en exploitant les failles. Une revue de code analyse le source pour trouver des vulnérabilités potentielles. Je combine les deux approches pour une évaluation complète."
+            q: "Quelle est la différence entre boîte noire, boîte grise et boîte blanche ?",
+            a: "En boîte noire, aucune information n'est fournie — conditions d'un piratage réel. En boîte grise, vous fournissez un accès partiel (idéal pour tester les portails authentifiés). En boîte blanche, vos équipes collaborent directement avec l'auditeur pour une revue approfondie de l'architecture. Je recommande la boîte grise pour la plupart des missions."
           },
           {
-            q: "Combien de temps dure un pentest ?",
-            a: "Un pentest standard dure entre 3 et 10 jours selon la surface d'attaque. Je livre un rapport préliminaire à mi-parcours et le rapport final avec les recommandations détaillées."
+            q: "Faites-vous aussi des audits cloud ?",
+            a: "Oui, j'audite les environnements AWS, Azure et GCP : erreurs de configuration IAM, services exposés, privilèges excessifs, buckets S3 ouverts, règles de firewall permissives, secrets exposés dans les variables d'environnement. Le rapport inclut des recommandations conformes aux benchmarks CIS."
           },
           {
-            q: "Est-ce que vous testez aussi les APIs ?",
-            a: "Oui, je teste les APIs REST/GraphQL avec la même rigueur que les interfaces web : authentification, autorisation, injection, rate limiting, logique métier et data exposure."
+            q: "Comment se déroule un test d'intrusion interne ?",
+            a: "Je simule le comportement d'un attaquant ayant obtenu un accès à votre réseau (employé malveillant, VPN compromis, accès physique à un port réseau). L'objectif : cartographier l'infrastructure, élever les privilèges et évaluer l'impact sur vos données sensibles et votre Active Directory."
           },
           {
-            q: "Que se passe-t-il après le pentest ?",
-            a: "Je livre un rapport avec les vulnérabilités classées par criticité et un plan de remédiation priorisé. Je peux accompagner vos développeurs dans la correction et faire un retest des failles critiques."
+            q: "Que se passe-t-il après l'audit ?",
+            a: "Je livre un rapport détaillé avec une synthèse exécutive et un plan de remédiation priorisé. Une session de restitution avec vos équipes permet de discuter des résultats et planifier les corrections. Je peux effectuer un retest des failles critiques après correction pour valider les mesures prises."
           }
         ]
       },

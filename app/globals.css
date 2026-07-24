@@ -44,6 +44,21 @@ html {
 h1, h2, h3, h4 { text-wrap: balance; }
 p { text-wrap: pretty; }
 
+/* Inline code formatting with margin isolation to prevent word sticking */
+:not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  font-weight: 600;
+  background-color: var(--paper-raised);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.375rem;
+  margin: 0 0.15rem;
+  display: inline-block;
+  line-height: 1.25;
+}
+
 /* Custom Scrollbar for WebKit */
 ::-webkit-scrollbar {
   width: 10px;

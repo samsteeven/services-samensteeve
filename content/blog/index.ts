@@ -6,6 +6,15 @@ import { BlogPost, PostMeta } from "./types";
 export const blogMetadata: PostMeta[] = [
   // ─── FRENCH POSTS ───
   {
+    slug: "deploiement-hermes-agent-ia-production",
+    title: "Déployer un agent IA autonome en production : retour d'expérience complet sur Hermes Agent",
+    excerpt: "Migration sécurisée, gateway Telegram, interface web, backups automatisés — le journal de bord d'un déploiement self-hosted de bout en bout.",
+    date: "2026-07-24",
+    tags: ["IA", "DevOps", "Agents", "Sécurité", "Docker"],
+    readTime: 8,
+    lang: "fr"
+  },
+  {
     slug: "n8n-deploiement-vps-production",
     title: "Déployer n8n en production sur un VPS partagé : retour d'expérience",
     excerpt: "Comment j'ai auto-hébergé n8n sur un VPS déjà en production sans rien casser : isolation Docker, reverse proxy nginx, HTTPS, et les trois incidents de debugging que les tutoriels ne mentionnent pas.",
@@ -88,6 +97,15 @@ export const blogMetadata: PostMeta[] = [
   },
 
   // ─── ENGLISH POSTS ───
+  {
+    slug: "deploying-hermes-ai-agent-production",
+    title: "Deploying an Autonomous AI Agent in Production: Hermes Agent Retrospective",
+    excerpt: "Hardened security migration, Telegram gateway, web UI, automated remote backups — the complete log of a self-hosted agent deployment.",
+    date: "2026-07-24",
+    tags: ["AI", "DevOps", "Agents", "Security", "Docker"],
+    readTime: 8,
+    lang: "en"
+  },
   {
     slug: "n8n-vps-production-deployment",
     title: "Deploying n8n in Production on a Shared VPS: Field Retrospective",

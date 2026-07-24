@@ -37,8 +37,8 @@ export const services: ServiceConfig[] = [
     formIcon: Laptop2,
     relatedCaseStudy: "tribunejustice",
     mcp: {
-      title: "Ingénierie logicielle",
-      description: "Conception, développement et maintenance de systèmes logiciels robustes.",
+      title: "Ingénierie Logicielle",
+      description: "Conception, développement et industrialisation de logiciels de production robustes : architecture, APIs, backends critiques et interfaces métier.",
     },
   },
   {
@@ -49,7 +49,7 @@ export const services: ServiceConfig[] = [
     relatedCaseStudy: "shopnow",
     mcp: {
       title: "Architecture Cloud & Hybride",
-      description: "Conception d'architectures cloud scalables et résilientes.",
+      description: "Infrastructures cloud et hybrides résilientes (AWS/Azure) : interconnexion multi-sites, basculement automatique, tolérance aux coupures et maîtrise des coûts.",
     },
   },
   {
@@ -60,7 +60,7 @@ export const services: ServiceConfig[] = [
     relatedCaseStudy: "tribunejustice",
     mcp: {
       title: "Audit Sécurité & Pentest",
-      description: "Analyse d'exposition, tests d'intrusion (infra/applicatif) et audit cloud (AWS/Azure/GCP).",
+      description: "Analyse d'exposition, tests d'intrusion (infra/applicatif) et audit cloud (AWS/Azure/GCP) orientés décision et remédiation.",
     },
   },
   {
@@ -71,7 +71,7 @@ export const services: ServiceConfig[] = [
     relatedCaseStudy: "lead-qualification-agent",
     mcp: {
       title: "Automatisation IA",
-      description: "Intégration d'agents IA et d'automatisations intelligentes.",
+      description: "Automatisation de processus réels : agents IA supervisables (MCP, LangGraph) connectés à vos outils et données métier.",
     },
   },
 ];

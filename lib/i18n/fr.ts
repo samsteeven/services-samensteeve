@@ -12,7 +12,7 @@ export const fr = {
     opposite: "EN",
     serviceItems: [
       { label: "Ingénierie logicielle", slug: "ingenierie-logicielle" },
-      { label: "Architecture Cloud", slug: "architecture-cloud" },
+      { label: "Architecture Cloud & Hybride", slug: "architecture-cloud" },
       { label: "Audit Sécurité & Pentest", slug: "audit-securite" },
       { label: "Automatisation IA", slug: "automatisation-ia" },
     ],

@@ -95,6 +95,9 @@ export function SiteHeader({ lang }: { lang: Language }) {
     return cleanPath.startsWith(cleanHref);
   };
 
+  const isServicesNavActive = isActive(`/${lang}/services`);
+  const isExplorerNavActive = isActive(`/${lang}/comment-ca-marche`) || isActive(`/${lang}/realisations`) || isActive(`/${lang}/blog`) || isActive(`/${lang}/tools-i-use`);
+
   const dropdownBase =
     "absolute top-full mt-2 left-0 min-w-[200px] rounded-xl border border-line bg-paper-raised/95 backdrop-blur-md shadow-lg py-1.5 z-50 animate-fade-in";
 
@@ -127,7 +130,7 @@ export function SiteHeader({ lang }: { lang: Language }) {
             <button
               onClick={() => { setServicesOpen((v) => !v); setExploreOpen(false); }}
               className={`flex items-center uppercase gap-1 py-1 transition-all duration-200 hover:text-accent ${
-                isActive(`/${lang}/services`) ? "text-accent" : ""
+                isServicesNavActive ? "text-accent" : ""
               }`}
             >
               {t.nav.services}
@@ -156,7 +159,7 @@ export function SiteHeader({ lang }: { lang: Language }) {
             <button
               onClick={() => { setExploreOpen((v) => !v); setServicesOpen(false); }}
               className={`flex items-center gap-1 py-1 uppercase transition-all duration-200 hover:text-accent ${
-                isActive(`/${lang}/comment-ca-marche`) || isActive(`/${lang}/realisations`) ? "text-accent" : ""
+                isExplorerNavActive ? "text-accent" : ""
               }`}
             >
               {t.nav.explore}
@@ -190,6 +193,15 @@ export function SiteHeader({ lang }: { lang: Language }) {
                   }`}
                 >
                   {t.nav.blog}
+                </Link>
+                <Link
+                  href={`/${lang}/tools-i-use`}
+                  onClick={() => setExploreOpen(false)}
+                  className={`block px-4 py-2.5 text-[11px] font-mono uppercase tracking-wider transition duration-150 hover:text-accent hover:bg-accent/5 ${
+                    isActive(`/${lang}/tools-i-use`) ? "text-accent" : "text-ink-soft"
+                  }`}
+                >
+                  {t.nav.tools}
                 </Link>
               </div>
             )}
@@ -259,7 +271,6 @@ export function SiteHeader({ lang }: { lang: Language }) {
                 {item.label}
               </Link>
             ))}
-
             {/* Explorer group */}
             <p className="pt-4 pb-1 text-[9px] font-bold tracking-widest text-ink-soft/40">{t.nav.explore}</p>
             <Link
@@ -288,6 +299,15 @@ export function SiteHeader({ lang }: { lang: Language }) {
               }`}
             >
               {t.nav.blog}
+            </Link>
+            <Link
+              href={`/${lang}/tools-i-use`}
+              onClick={() => setIsOpen(false)}
+              className={`py-2 pl-2 border-b border-line/20 transition duration-200 ${
+                isActive(`/${lang}/tools-i-use`) ? "text-accent font-semibold" : ""
+              }`}
+            >
+              {t.nav.tools}
             </Link>
 
             {/* Moi */}

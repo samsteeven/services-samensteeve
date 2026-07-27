@@ -108,6 +108,9 @@ export function SiteFooter({ lang }: { lang: Language }) {
               <Link href={`/${lang}/realisations`} className="hover:text-accent transition duration-200">
                 {t.nav.realisations}
               </Link>
+              <Link href={`/${lang}/tools-i-use`} className="hover:text-accent transition duration-200">
+                {t.nav.tools}
+              </Link>
               <Link href={`/${lang}/demarrer-un-projet`} className="hover:text-accent transition duration-200 font-semibold text-accent/90">
                 {t.nav.cta}
               </Link>

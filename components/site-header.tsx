@@ -14,6 +14,7 @@ export function SiteHeader({ lang }: { lang: Language }) {
   const [hash, setHash] = useState("");
   const [servicesOpen, setServicesOpen] = useState(false);
   const [exploreOpen, setExploreOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const servicesRef = useRef<HTMLDivElement>(null);
   const exploreRef = useRef<HTMLDivElement>(null);
   const servicesCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -22,6 +23,7 @@ export function SiteHeader({ lang }: { lang: Language }) {
 
   useEffect(() => {
     document.documentElement.lang = lang;
+    setMounted(true);
   }, [lang]);
 
   useEffect(() => {
@@ -95,8 +97,8 @@ export function SiteHeader({ lang }: { lang: Language }) {
     return cleanPath.startsWith(cleanHref);
   };
 
-  const isServicesNavActive = isActive(`/${lang}/services`);
-  const isExplorerNavActive = isActive(`/${lang}/comment-ca-marche`) || isActive(`/${lang}/realisations`) || isActive(`/${lang}/blog`) || isActive(`/${lang}/tools-i-use`);
+  const isServicesNavActive = mounted && isActive(`/${lang}/services`);
+  const isExplorerNavActive = mounted && (isActive(`/${lang}/comment-ca-marche`) || isActive(`/${lang}/realisations`) || isActive(`/${lang}/blog`) || isActive(`/${lang}/tools-i-use`));
 
   const dropdownBase =
     "absolute top-full mt-2 left-0 min-w-[200px] rounded-xl border border-line bg-paper-raised/95 backdrop-blur-md shadow-lg py-1.5 z-50 animate-fade-in";

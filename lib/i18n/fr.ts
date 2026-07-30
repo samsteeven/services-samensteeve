@@ -7,6 +7,7 @@ export const fr = {
     explore: "Explorer",
     moi: "Moi",
     blog: "Blog",
+    tools: "Tools I use",
     contactShort: "Me contacter",
     cta: "Démarrer un projet",
     opposite: "EN",
@@ -763,6 +764,83 @@ export const fr = {
     outcomeLabel: "Résultat visé",
     viewDetails: "Voir le détail",
     ctaUnsure: "Vous ne savez pas encore quelle prestation correspond à votre situation ?",
+    toolsIUse: {
+      eyebrow: "Tools I use",
+      title: "Les outils que j'utilise selon le service.",
+      subtitle: "Une stack n'est pas choisie pour décorer une proposition. J'utilise ces outils quand ils servent directement la fiabilité, la sécurité, la livraison ou l'automatisation du projet.",
+      navLabel: "Aller aux outils par service",
+      note: "Cette liste n'est pas figée : elle donne une base réaliste de travail. Je m'adapte à votre stack existante quand elle est cohérente avec vos contraintes.",
+      groups: {
+        "ingenierie-logicielle": {
+          description: "Pour construire, stabiliser et livrer des produits logiciels maintenables, testés et exploitables en production.",
+          tools: [
+            "Laravel",
+            "Next.js",
+            "React",
+            "Angular",
+            "TypeScript",
+            "Node.js",
+            "PostgreSQL",
+            "Redis",
+            "Docker",
+            "GitHub Actions",
+            "Playwright",
+            "OpenAPI"
+          ]
+        },
+        "architecture-cloud": {
+          description: "Pour concevoir des infrastructures cloud ou hybrides résilientes, observables et exploitables par vos équipes.",
+          tools: [
+            "AWS",
+            "Azure",
+            "Terraform",
+            "Docker",
+            "Kubernetes",
+            "Veeam",
+            "FortiGate",
+            "pfSense",
+            "IPSec VPN",
+            "Microsoft 365",
+            "Zabbix",
+            "Grafana"
+          ]
+        },
+        "audit-securite": {
+          description: "Pour tester manuellement l'exposition réelle, valider les risques exploitables et prioriser la remédiation.",
+          tools: [
+            "Burp Suite",
+            "OWASP ZAP",
+            "Nmap",
+            "Nuclei",
+            "ffuf",
+            "Metasploit",
+            "Wireshark",
+            "Kali Linux",
+            "Semgrep",
+            "Trivy",
+            "MobSF",
+            "CIS Benchmarks"
+          ]
+        },
+        "automatisation-ia": {
+          description: "Pour automatiser des workflows métier avec des agents supervisables, connectés aux APIs et aux données existantes.",
+          tools: [
+            "n8n",
+            "LangGraph",
+            "MCP",
+            "OpenAI API",
+            "Claude",
+            "OpenRouter",
+            "Tavily API",
+            "Redis",
+            "Turso",
+            "PostgreSQL",
+            "TypeScript",
+            "Docker"
+          ]
+        }
+      }
+    },
   },
   processPage: {
     methodology: "Méthodologie",
@@ -790,6 +868,7 @@ export const fr = {
   serviceDetail: {
     bestFit: "Quand c'est pertinent",
     capabilities: "Capacités mobilisées",
+    viewTools: "Voir les outils utilisés",
     expectedOutcomes: "Résultats attendus",
     engagementScope: "Périmètre d'intervention",
   },
@@ -806,6 +885,8 @@ export const fr = {
     realisationsDescription: "Études de cas réels : plateforme legaltech, architecture cloud hybride, microservices pour l'agro-industrie et systèmes logiciels d'entreprise.",
     servicesTitle: "Services Ingénierie Logicielle",
     servicesDescription: "Services d'ingénierie logicielle freelance : développement sur mesure, architecture cloud, audits de sécurité et automatisation IA pour systèmes de production.",
+    toolsTitle: "Tools I use — Outils par service",
+    toolsDescription: "Liste des outils utilisés par Samen Steeve pour l'ingénierie logicielle, l'architecture cloud, l'audit sécurité et l'automatisation IA.",
     notFoundTitle: "Page introuvable — Samen Steeve",
   },
   footer: {

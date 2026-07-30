@@ -221,26 +221,27 @@ export function SiteHeader({ lang }: { lang: Language }) {
 
           <span className="h-3 w-px bg-line/60" />
 
-          {/* Lang switch */}
+          {/* Lang switch - Flag button */}
           <Link
             href={getOppositeUrl(pathname, lang, hash)}
             scroll={false}
-            className="flex items-center gap-1.5 font-semibold text-ink-soft hover:text-accent transition duration-200"
+            className="inline-flex items-center justify-center transition duration-200 hover:opacity-80 hover:scale-105 active:scale-95"
             aria-label={oppositeLang === "EN" ? "Switch to English" : "Passer en Français"}
+            title={oppositeLang === "EN" ? "English" : "Français"}
           >
             {oppositeLang === "EN" ? (
-              <svg viewBox="0 0 60 40" className="h-4 w-6 rounded-sm shadow-sm">
+              <svg viewBox="0 0 60 40" className="h-3.5 w-5.5 rounded-[3px] overflow-hidden shadow-xs shrink-0">
                 <rect width="60" height="40" fill="#012169" />
-                <path d="M0 0l60 40m0-40L0 40" stroke="#FFF" strokeWidth="6" />
-                <path d="M0 0l60 40m0-40L0 40" stroke="#C8102E" strokeWidth="2" />
-                <path d="M30 0v40M0 20h60" stroke="#FFF" strokeWidth="6" />
-                <path d="M30 0v40M0 20h60" stroke="#C8102E" strokeWidth="2" />
+                <path d="M0 0L60 40M60 0L0 40" stroke="#FFFFFF" strokeWidth="8" />
+                <path d="M0 0L60 40M60 0L0 40" stroke="#C8102E" strokeWidth="3" />
+                <path d="M30 0V40M0 20H60" stroke="#FFFFFF" strokeWidth="12" />
+                <path d="M30 0V40M0 20H60" stroke="#C8102E" strokeWidth="7" />
               </svg>
             ) : (
-              <svg viewBox="0 0 60 40" className="h-4 w-6 rounded-sm shadow-sm">
-                <rect width="60" height="40" fill="#ED2939" />
-                <rect x="20" width="20" height="40" fill="#FFF" />
-                <rect x="40" width="20" height="40" fill="#002395" />
+              <svg viewBox="0 0 60 40" className="h-3.5 w-5.5 rounded-[3px] overflow-hidden shadow-xs shrink-0">
+                <rect width="20" height="40" fill="#002395" />
+                <rect x="20" width="20" height="40" fill="#FFFFFF" />
+                <rect x="40" width="20" height="40" fill="#ED2939" />
               </svg>
             )}
           </Link>
@@ -339,31 +340,33 @@ export function SiteHeader({ lang }: { lang: Language }) {
             </a>
 
             <div className="flex items-center justify-between pt-4">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-ink-soft/60">Langue / Language</span>
               <Link
                 href={getOppositeUrl(pathname, lang, hash)}
                 scroll={false}
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-2 font-semibold text-ink hover:text-accent transition duration-200"
+                className="flex items-center gap-2 rounded-lg border border-line bg-paper-raised/80 px-2.5 py-1.5 hover:border-accent/50 hover:bg-paper-raised transition duration-200 shadow-xs active:scale-95"
+                title={oppositeLang === "EN" ? "Switch to English" : "Passer en Français"}
               >
                 {oppositeLang === "EN" ? (
                   <>
-                    <svg viewBox="0 0 60 40" className="h-4 w-6 rounded-sm shadow-sm">
+                    <svg viewBox="0 0 60 40" className="h-4 w-6 rounded-[3px] overflow-hidden shadow-xs border border-black/10 shrink-0">
                       <rect width="60" height="40" fill="#012169" />
-                      <path d="M0 0l60 40m0-40L0 40" stroke="#FFF" strokeWidth="6" />
-                      <path d="M0 0l60 40m0-40L0 40" stroke="#C8102E" strokeWidth="2" />
-                      <path d="M30 0v40M0 20h60" stroke="#FFF" strokeWidth="6" />
-                      <path d="M30 0v40M0 20h60" stroke="#C8102E" strokeWidth="2" />
+                      <path d="M0 0L60 40M60 0L0 40" stroke="#FFFFFF" strokeWidth="8" />
+                      <path d="M0 0L60 40M60 0L0 40" stroke="#C8102E" strokeWidth="3" />
+                      <path d="M30 0V40M0 20H60" stroke="#FFFFFF" strokeWidth="12" />
+                      <path d="M30 0V40M0 20H60" stroke="#C8102E" strokeWidth="7" />
                     </svg>
-                    Switch to English
+                    <span className="font-mono text-xs font-bold uppercase tracking-wider text-ink">English</span>
                   </>
                 ) : (
                   <>
-                    <svg viewBox="0 0 60 40" className="h-4 w-6 rounded-sm shadow-sm">
-                      <rect width="60" height="40" fill="#ED2939" />
-                      <rect x="20" width="20" height="40" fill="#FFF" />
-                      <rect x="40" width="20" height="40" fill="#002395" />
+                    <svg viewBox="0 0 60 40" className="h-4 w-6 rounded-[3px] overflow-hidden shadow-xs border border-black/10 shrink-0">
+                      <rect width="20" height="40" fill="#002395" />
+                      <rect x="20" width="20" height="40" fill="#FFFFFF" />
+                      <rect x="40" width="20" height="40" fill="#ED2939" />
                     </svg>
-                    Passer en Français
+                    <span className="font-mono text-xs font-bold uppercase tracking-wider text-ink">Français</span>
                   </>
                 )}
               </Link>

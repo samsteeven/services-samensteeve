@@ -7,6 +7,7 @@ export const en = {
     explore: "Explore",
     moi: "Me",
     blog: "Blog",
+    tools: "Tools I use",
     contactShort: "Contact me",
     cta: "Start a project",
     opposite: "FR",
@@ -762,6 +763,83 @@ export const en = {
     outcomeLabel: "Expected outcome",
     viewDetails: "View details",
     ctaUnsure: "Not sure which service matches your situation?",
+    toolsIUse: {
+      eyebrow: "Tools I use",
+      title: "The tools I use by service.",
+      subtitle: "A stack is not chosen to decorate a proposal. I use these tools when they directly support reliability, security, delivery, or automation outcomes.",
+      navLabel: "Jump to tools by service",
+      note: "This list is not fixed: it gives a realistic working baseline. I adapt to your existing stack when it matches your constraints.",
+      groups: {
+        "ingenierie-logicielle": {
+          description: "For building, stabilizing, and shipping maintainable software products that can run in production.",
+          tools: [
+            "Laravel",
+            "Next.js",
+            "React",
+            "Angular",
+            "TypeScript",
+            "Node.js",
+            "PostgreSQL",
+            "Redis",
+            "Docker",
+            "GitHub Actions",
+            "Playwright",
+            "OpenAPI"
+          ]
+        },
+        "architecture-cloud": {
+          description: "For designing cloud or hybrid infrastructures that are resilient, observable, and operable by your teams.",
+          tools: [
+            "AWS",
+            "Azure",
+            "Terraform",
+            "Docker",
+            "Kubernetes",
+            "Veeam",
+            "FortiGate",
+            "pfSense",
+            "IPSec VPN",
+            "Microsoft 365",
+            "Zabbix",
+            "Grafana"
+          ]
+        },
+        "audit-securite": {
+          description: "For manually testing real exposure, validating exploitable risks, and prioritizing remediation.",
+          tools: [
+            "Burp Suite",
+            "OWASP ZAP",
+            "Nmap",
+            "Nuclei",
+            "ffuf",
+            "Metasploit",
+            "Wireshark",
+            "Kali Linux",
+            "Semgrep",
+            "Trivy",
+            "MobSF",
+            "CIS Benchmarks"
+          ]
+        },
+        "automatisation-ia": {
+          description: "For automating business workflows with supervised agents connected to existing APIs and data.",
+          tools: [
+            "n8n",
+            "LangGraph",
+            "MCP",
+            "OpenAI API",
+            "Claude",
+            "OpenRouter",
+            "Tavily API",
+            "Redis",
+            "Turso",
+            "PostgreSQL",
+            "TypeScript",
+            "Docker"
+          ]
+        }
+      }
+    },
   },
   processPage: {
     methodology: "Methodology",
@@ -789,6 +867,7 @@ export const en = {
   serviceDetail: {
     bestFit: "When it is relevant",
     capabilities: "Capabilities",
+    viewTools: "View tools used",
     expectedOutcomes: "Expected outcomes",
     engagementScope: "Engagement scope",
   },
@@ -805,6 +884,8 @@ export const en = {
     realisationsDescription: "Real-world case studies: legaltech platform, hybrid cloud architecture, microservices for agro-industry, and enterprise software systems.",
     servicesTitle: "Software Engineering Services",
     servicesDescription: "Freelance software engineering services: custom development, cloud architecture, security audits, and AI automation for production systems.",
+    toolsTitle: "Tools I use — Tools by service",
+    toolsDescription: "A service-by-service list of the tools Samen Steeve uses for software engineering, cloud architecture, security audits, and AI automation.",
     notFoundTitle: "Page not found — Samen Steeve",
   },
   footer: {

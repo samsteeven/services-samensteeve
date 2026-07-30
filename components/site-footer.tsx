@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getT, type Language } from "@/lib/i18n";
 import { CONTACT_EMAIL, CAL_URL, WHATSAPP_URL, WHATSAPP_NUMBER, SOCIAL_LINKS, PORTFOLIO_URL } from "@/lib/constants";
 import { Mail, Calendar, Linkedin, Github } from "lucide-react";
@@ -61,9 +62,20 @@ export function SiteFooter({ lang }: { lang: Language }) {
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
           {/* Brand Col */}
           <div className="flex flex-col gap-4">
-            <span className="font-display text-base font-extrabold tracking-tight text-ink">
-              SAMEN STEEVE<span className="text-accent">.</span>
-            </span>
+            <div className="flex items-center gap-2.5">
+              <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-line bg-paper-raised/80 shadow-sm">
+                <Image
+                  src="/profil.png"
+                  alt="Samen Steeve"
+                  width={32}
+                  height={32}
+                  className="h-full w-full object-cover object-[center_15%]"
+                />
+              </div>
+              <span className="font-display text-base font-extrabold tracking-tight text-ink">
+                SAMEN STEEVE<span className="text-accent">.</span>
+              </span>
+            </div>
             <p className="text-xs leading-relaxed text-ink-soft/80">
               {t.footer.specialty}
             </p>

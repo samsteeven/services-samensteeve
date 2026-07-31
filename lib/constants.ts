@@ -1,6 +1,7 @@
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://services.samensteeve.com";
 
-export const PORTFOLIO_URL = "https://samensteeve.com";
+export const PORTFOLIO_URL =
+  process.env.NEXT_PUBLIC_PORTFOLIO_URL || "https://samensteeve.com";
 
 export const CONTACT_EMAIL = "contact@samensteeve.com";
 

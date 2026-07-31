@@ -4,7 +4,7 @@ import type { Language } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
 import { getT } from "@/lib/i18n";
 import { services, getServiceBySlug } from "@/lib/services";
-import { ArrowLeft, ArrowRight, CheckCircle2, HelpCircle, Wrench } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, HelpCircle } from "lucide-react";
 import Link from "next/link";
 import { ScrollReveal } from "@/components/scroll-reveal";
 
@@ -172,13 +172,6 @@ export default async function ServiceDetailPage({ params }: PageProps) {
                 ))}
               </div>
 
-              <Link
-                href={`/${lang}/tools-i-use#tools-${service.slug}`}
-                className="mt-6 inline-flex min-h-10 items-center gap-2 rounded-full border border-line px-4 py-2.5 font-mono text-[10px] font-bold uppercase tracking-widest text-ink-soft transition hover:border-accent/40 hover:text-accent active:scale-[0.96]"
-              >
-                <Wrench className="h-3.5 w-3.5" />
-                {t.serviceDetail.viewTools}
-              </Link>
 
               {relatedSlug && (
                 <Link

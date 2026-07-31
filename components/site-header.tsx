@@ -98,7 +98,7 @@ export function SiteHeader({ lang }: { lang: Language }) {
   };
 
   const isServicesNavActive = mounted && isActive(`/${lang}/services`);
-  const isExplorerNavActive = mounted && (isActive(`/${lang}/comment-ca-marche`) || isActive(`/${lang}/realisations`) || isActive(`/${lang}/blog`) || isActive(`/${lang}/tools-i-use`));
+  const isExplorerNavActive = mounted && (isActive(`/${lang}/comment-ca-marche`) || isActive(`/${lang}/realisations`) || isActive(`/${lang}/blog`));
 
   const dropdownBase =
     "absolute top-full mt-2 left-0 min-w-[200px] rounded-xl border border-line bg-paper-raised/95 backdrop-blur-md shadow-lg py-1.5 z-50 animate-fade-in";
@@ -195,15 +195,6 @@ export function SiteHeader({ lang }: { lang: Language }) {
                   }`}
                 >
                   {t.nav.blog}
-                </Link>
-                <Link
-                  href={`/${lang}/tools-i-use`}
-                  onClick={() => setExploreOpen(false)}
-                  className={`block px-4 py-2.5 text-[11px] font-mono uppercase tracking-wider transition duration-150 hover:text-accent hover:bg-accent/5 ${
-                    isActive(`/${lang}/tools-i-use`) ? "text-accent" : "text-ink-soft"
-                  }`}
-                >
-                  {t.nav.tools}
                 </Link>
               </div>
             )}
@@ -317,15 +308,6 @@ export function SiteHeader({ lang }: { lang: Language }) {
               }`}
             >
               {t.nav.blog}
-            </Link>
-            <Link
-              href={`/${lang}/tools-i-use`}
-              onClick={() => setIsOpen(false)}
-              className={`py-2 pl-2 border-b border-line/20 transition duration-200 ${
-                isActive(`/${lang}/tools-i-use`) ? "text-accent font-semibold" : ""
-              }`}
-            >
-              {t.nav.tools}
             </Link>
 
             {/* Moi */}

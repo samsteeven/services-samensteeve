@@ -80,9 +80,11 @@ p { text-wrap: pretty; }
   opacity: 0.8;
 }
 
-/* Animations transition de thème */
-.theme-transition * {
-  transition: background-color 0.35s ease, border-color 0.35s ease, color 0.35s ease, fill 0.35s ease, stroke 0.35s ease, box-shadow 0.35s ease, opacity 0.35s ease !important;
+/* View Transitions pour le changement de thème (theme-toggle.tsx) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 @keyframes fade-in {

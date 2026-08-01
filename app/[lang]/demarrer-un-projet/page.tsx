@@ -4,6 +4,7 @@ import { createPageMetadata } from "@/lib/metadata";
 import { getT } from "@/lib/i18n";
 import { ProjectForm } from "@/components/project-form";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { ParticlesBackground } from "@/components/particles-background";
 import { Suspense } from "react";
 
 interface PageProps {
@@ -32,7 +33,8 @@ export default async function StartProjectPage({ params }: PageProps) {
   const t = getT(langKey);
 
   return (
-    <div className="flex flex-col min-h-[70vh] justify-center py-16 md:py-24">
+    <div className="relative isolate overflow-hidden flex flex-col min-h-[70vh] justify-center py-16 md:py-24">
+      <ParticlesBackground className="absolute inset-0 -z-10" quantity={100} ease={80} />
       {/* Form Section */}
       <div className="mx-auto max-w-3xl w-full px-4 sm:px-8">
         <div className="text-center mb-12">

@@ -3,6 +3,7 @@ import { getT, type Language } from "@/lib/i18n";
 import { CAL_URL } from "@/lib/constants";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { ScrollReveal } from "./scroll-reveal";
+import { ParticlesBackground } from "./particles-background";
 
 // Grain SVG en data-URL — aucun appel réseau
 const GRAIN_URL =
@@ -60,6 +61,9 @@ export function HeroSection({ lang }: { lang: Language }) {
           }}
         />
       </div>
+
+      {/* ── Particules ── */}
+      <ParticlesBackground className="absolute inset-0 z-0" quantity={100} ease={80} />
 
       {/* ── Contenu ── */}
       <div className="relative mx-auto max-w-4xl px-4 sm:px-8 flex flex-col items-center text-center">

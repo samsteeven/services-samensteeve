@@ -36,8 +36,15 @@ export default async function RealisationsPage({ params }: PageProps) {
   return (
     <div className="flex flex-col">
       {/* Page Header */}
-      <header className="py-16 md:py-24 border-b border-line/40 bg-paper-raised/20 transition-all duration-300">
-        <div className="mx-auto max-w-5xl px-4 sm:px-8">
+      <header className="relative overflow-hidden py-16 md:py-32 border-b border-line/40 bg-paper-raised/20 transition-all duration-300">
+        {/* Giant Background Text Effect */}
+        <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap">
+          <span className="font-display text-[100px] font-extrabold leading-none tracking-tighter text-ink/[0.04] dark:text-ink/[0.03] sm:text-[160px] md:text-[220px] lg:text-[280px]">
+            {t.realisations.title}
+          </span>
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-8">
           <ScrollReveal>
             <p className="font-mono text-[10px] uppercase tracking-widest font-bold text-accent">
               {t.nav.realisations}

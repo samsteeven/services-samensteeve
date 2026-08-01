@@ -4,7 +4,7 @@ import { SITE_URL } from "@/lib/constants";
 
 const BASE_URL = SITE_URL;
 
-const PROFILE_IMAGE = "/profil.png";
+const DEFAULT_OG_IMAGE = "/layout_app.png";
 
 export interface PageMetadataOptions {
   lang: Language;
@@ -19,21 +19,21 @@ export interface PageMetadataOptions {
  * Fabrique un objet Metadata Next.js complet avec :
  * - canonical + lang alternates (hreflang)
  * - Open Graph + Twitter card (toujours summary_large_image)
- * - image par défaut (profil) ou personnalisée avec dimensions
+ * - image par défaut (layout_app) ou personnalisée avec dimensions
  */
 export function createPageMetadata({
   lang,
   title,
   description,
   path,
-  image = PROFILE_IMAGE,
+  image = DEFAULT_OG_IMAGE,
   type = "website",
 }: PageMetadataOptions): Metadata {
   const altLang: Language = lang === "fr" ? "en" : "fr";
   const canonicalUrl = `${BASE_URL}/${lang}${path}`;
   const altUrl = `${BASE_URL}/${altLang}${path}`;
-  const ogImage = image === PROFILE_IMAGE
-    ? { url: image, width: 800, height: 800, alt: title }
+  const ogImage = image === DEFAULT_OG_IMAGE
+    ? { url: image, width: 1902, height: 926, alt: title }
     : { url: image, alt: title };
 
   return {
@@ -66,4 +66,4 @@ export function createPageMetadata({
   };
 }
 
-export { BASE_URL, PROFILE_IMAGE };
+export { BASE_URL, DEFAULT_OG_IMAGE };

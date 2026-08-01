@@ -136,6 +136,22 @@ export function TestimonialsCarousel({ lang }: TestimonialsCarouselProps) {
 
   return (
     <section className="py-20 bg-paper transition-all duration-300 relative overflow-hidden border-t border-line">
+      {/* Giant Background Watermark — hachures DANS les lettres */}
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-0 select-none whitespace-nowrap">
+        <span
+          className="font-display text-[90px] font-extrabold leading-none tracking-tighter sm:text-[140px] md:text-[180px]"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(-45deg, var(--color-ink) 0px, var(--color-ink) 1px, transparent 1px, transparent 6px)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            color: 'transparent',
+            opacity: 0.07,
+          }}
+        >
+          REVIEWS
+        </span>
+      </div>
+
       {/* Decorative horizontal line — full viewport width */}
       <div className="absolute top-1/2 left-0 right-0 h-px bg-line -translate-y-1/2 pointer-events-none" />
 

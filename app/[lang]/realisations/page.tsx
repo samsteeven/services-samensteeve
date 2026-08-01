@@ -37,9 +37,18 @@ export default async function RealisationsPage({ params }: PageProps) {
     <div className="flex flex-col">
       {/* Page Header */}
       <header className="relative overflow-hidden py-16 md:py-32 border-b border-line/40 bg-paper-raised/20 transition-all duration-300">
-        {/* Giant Background Text Effect */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 z-0 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap">
-          <span className="font-display text-[100px] font-extrabold leading-none tracking-tighter text-ink/[0.04] dark:text-ink/[0.03] sm:text-[160px] md:text-[220px] lg:text-[280px]">
+        {/* Giant Background Watermark — hachures DANS les lettres, débordement à gauche */}
+        <div className="pointer-events-none absolute -left-12 sm:-left-24 md:-left-36 top-6 sm:top-10 z-0 select-none whitespace-nowrap">
+          <span
+            className="font-display text-[100px] font-extrabold leading-none tracking-tighter sm:text-[160px] md:text-[220px] lg:text-[280px]"
+            style={{
+              backgroundImage: 'repeating-linear-gradient(-45deg, var(--color-ink) 0px, var(--color-ink) 1px, transparent 1px, transparent 6px)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              color: 'transparent',
+              opacity: 0.12,
+            }}
+          >
             {t.realisations.title}
           </span>
         </div>

@@ -8,8 +8,24 @@ export function ServicesGrid({ lang }: { lang: Language }) {
   const t = getT(lang);
 
   return (
-    <section id="services" className="border-t border-line/40 bg-paper py-24 transition-colors duration-300 md:py-32">
-      <div className="mx-auto max-w-6xl px-4 sm:px-8">
+    <section id="services" className="relative overflow-hidden border-t border-line/40 bg-paper py-24 transition-colors duration-300 md:py-32">
+      {/* Giant Background Watermark — hachures DANS les lettres */}
+      <div className="pointer-events-none absolute left-1/2 top-10 -translate-x-1/2 z-0 select-none whitespace-nowrap">
+        <span
+          className="font-display text-[90px] font-extrabold leading-none tracking-tighter sm:text-[150px] md:text-[200px] lg:text-[240px]"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(-45deg, var(--color-ink) 0px, var(--color-ink) 1px, transparent 1px, transparent 6px)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            color: 'transparent',
+            opacity: 0.08,
+          }}
+        >
+          SERVICES
+        </span>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-8">
         <div className="grid gap-8 border-b border-line/30 pb-12 lg:grid-cols-[1fr_0.55fr] lg:items-end">
           <div className="max-w-3xl">
             <ScrollReveal>

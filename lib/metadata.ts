@@ -32,9 +32,10 @@ export function createPageMetadata({
   const altLang: Language = lang === "fr" ? "en" : "fr";
   const canonicalUrl = `${BASE_URL}/${lang}${path}`;
   const altUrl = `${BASE_URL}/${altLang}${path}`;
+  const absoluteImage = image.startsWith("http") ? image : `${BASE_URL}${image}`;
   const ogImage = image === DEFAULT_OG_IMAGE
-    ? { url: image, width: 1902, height: 926, alt: title }
-    : { url: image, alt: title };
+    ? { url: absoluteImage, width: 1902, height: 926, alt: title }
+    : { url: absoluteImage, alt: title };
 
   return {
     title: `${title} — Samen Steeve`,

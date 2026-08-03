@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: locale.title,
     description: locale.tagline,
     path: `/realisations/${slug}`,
+    image: cs.coverImage,
     type: "article",
   });
   

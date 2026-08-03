@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import type { Language } from "@/lib/i18n";
-import { createPageMetadata } from "@/lib/metadata";
+import { createPageMetadata, BASE_URL } from "@/lib/metadata";
 import { getT } from "@/lib/i18n";
 import { caseStudies, getCaseStudyBySlug } from "@/lib/case-studies";
 import Link from "next/link";
@@ -49,7 +49,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
   if (!cs) notFound();
 
   const locale = lang === "fr" ? cs.fr : cs.en;
-  const portfolioCanonical = `https://samensteeve.com/${lang}/work/${slug}`;
+  const canonicalUrl = `${BASE_URL}/${lang}/realisations/${slug}`;
 
   // ── Prev / Next navigation ──
   const currentIndex = caseStudies.findIndex((s) => s.slug === slug);
@@ -174,7 +174,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
               )}
             </div>
             <CopyButtons
-              url={portfolioCanonical}
+              url={canonicalUrl}
               shareText={[
                 locale.title,
                 "",
@@ -182,7 +182,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
                 "",
                 locale.services.map((s) => `#${s.replace(/\s+/g, "")}`).join(" "),
                 "",
-                portfolioCanonical,
+                canonicalUrl,
               ].join("\n").trim()}
               lang={langKey}
             />

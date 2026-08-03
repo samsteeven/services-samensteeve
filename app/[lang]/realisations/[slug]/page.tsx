@@ -37,15 +37,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     type: "article",
   });
   
-  const portfolioCanonical = `https://samensteeve.com/${lang}/work/${slug}`;
-  
-  return {
-    ...metadata,
-    alternates: {
-      ...metadata.alternates,
-      canonical: portfolioCanonical,
-    },
-  };
+  return metadata;
 }
 
 export default async function CaseStudyPage({ params }: PageProps) {

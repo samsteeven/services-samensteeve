@@ -43,6 +43,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function CaseStudyPage({ params }: PageProps) {
   const { lang, slug } = await params;
   const langKey = lang as Language;
+  const prefix = langKey === "en" ? "" : "/fr";
   const t = getT(langKey);
 
   const cs = getCaseStudyBySlug(slug);
@@ -68,7 +69,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
         <div className="mx-auto max-w-5xl px-4 sm:px-8">
           <ScrollReveal>
             <Link
-              href={`/${lang}/realisations`}
+              href={`${prefix}/realisations`}
               className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider text-ink-soft hover:text-accent transition duration-200"
             >
               <ArrowLeft className="h-3 w-3" />
@@ -102,11 +103,11 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
           <ScrollReveal delay={60} className="mt-8">
             {/* Service tags */}
-            <div className="flex flex-wrap gap-2 mb-5">
+            <div className="flex flex-wrap gap-2 mb-5 max-w-full">
               {locale.services.map((s) => (
                 <span
                   key={s}
-                  className="font-mono text-[9px] uppercase tracking-wider font-bold text-accent bg-accent/10 border border-accent/20 px-2.5 py-1 rounded-full"
+                  className="font-mono text-[9px] uppercase tracking-wider font-bold text-accent bg-accent/10 border border-accent/20 px-2.5 py-1 rounded-full break-words"
                 >
                   {s}
                 </span>
@@ -136,11 +137,11 @@ export default async function CaseStudyPage({ params }: PageProps) {
           </ScrollReveal>
 
           {/* Stack */}
-          <ScrollReveal delay={160} className="mt-6 flex flex-wrap gap-2">
+          <ScrollReveal delay={160} className="mt-6 flex flex-wrap gap-2 max-w-full">
             {locale.stack.map((tech) => (
               <span
                 key={tech}
-                className="font-mono text-[10px] uppercase tracking-wider font-medium text-ink-soft bg-paper px-3 py-1 rounded-full border border-line hover:border-accent/40 hover:text-accent transition duration-200"
+                className="font-mono text-[10px] uppercase tracking-wider font-medium text-ink-soft bg-paper px-3 py-1 rounded-full border border-line hover:border-accent/40 hover:text-accent transition duration-200 break-words"
               >
                 {tech}
               </span>
@@ -362,7 +363,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
             </p>
           </div>
           <Link
-            href={`/${lang}/demarrer-un-projet`}
+            href={`${prefix}/demarrer-un-projet`}
             className="shrink-0 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-mono text-xs uppercase font-bold tracking-widest text-paper hover:bg-accent hover:text-white transition duration-200 hover:scale-105 active:scale-[0.96]"
           >
             {t.nav.cta}
@@ -380,7 +381,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
               {/* Prev */}
               {prevCs && prevLocale ? (
                 <Link
-                  href={`/${lang}/realisations/${prevCs.slug}`}
+                  href={`${prefix}/realisations/${prevCs.slug}`}
                   className="group flex flex-col justify-between rounded-xl border border-line bg-paper-raised/30 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-paper-raised/60 hover:shadow-md"
                 >
                   <div>
@@ -401,7 +402,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
               {/* Next */}
               {nextCs && nextLocale ? (
                 <Link
-                  href={`/${lang}/realisations/${nextCs.slug}`}
+                  href={`${prefix}/realisations/${nextCs.slug}`}
                   className="group flex flex-col justify-between rounded-xl border border-line bg-paper-raised/30 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-paper-raised/60 hover:shadow-md sm:text-right"
                 >
                   <div>

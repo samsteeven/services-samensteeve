@@ -50,6 +50,7 @@ export async function generateStaticParams() {
 export default async function BlogPostPage({ params }: PageProps) {
   const { lang, slug } = await params;
   const langKey = lang as Language;
+  const prefix = langKey === "en" ? "" : "/fr";
   const t = getT(langKey);
 
   const post = await getPostBySlug(slug, langKey);
@@ -153,19 +154,19 @@ export default async function BlogPostPage({ params }: PageProps) {
       />
       {/* Top Banner details */}
       <div className="border-b border-line bg-paper-raised/10 py-6 transition-all duration-300">
-        <div className="mx-auto max-w-3xl px-4 sm:px-8 flex items-center justify-between">
+        <div className="mx-auto max-w-3xl px-4 sm:px-8 flex flex-wrap items-center justify-between gap-3">
           <Link
-            href={`/${langKey}/blog`}
+            href={`${prefix}/blog`}
             className="inline-flex items-center gap-2 font-mono text-[10px] uppercase font-bold tracking-widest text-ink-soft hover:text-accent transition duration-200"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             {langKey === "fr" ? "Retour au blog" : "Back to blog"}
           </Link>
-          <div className="flex gap-1.5">
+          <div className="flex flex-wrap gap-1.5 min-w-0">
             {meta.tags.map((tag) => (
               <span
                 key={tag}
-                className="font-mono text-[9px] uppercase tracking-wider font-bold text-accent bg-accent/5 border border-accent/10 px-2 py-0.5 rounded-full"
+                className="font-mono text-[9px] uppercase tracking-wider font-bold text-accent bg-accent/5 border border-accent/10 px-2 py-0.5 rounded-full break-words"
               >
                 {tag}
               </span>
@@ -254,7 +255,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 {/* Prev */}
                 {prevPost ? (
                   <Link
-                    href={`/${langKey}/blog/${prevPost.slug}`}
+                    href={`${prefix}/blog/${prevPost.slug}`}
                     className="group flex flex-col justify-between rounded-xl border border-line bg-paper-raised/30 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-paper-raised/60 hover:shadow-md"
                   >
                     <div>
@@ -275,7 +276,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 {/* Next */}
                 {nextPost ? (
                   <Link
-                    href={`/${langKey}/blog/${nextPost.slug}`}
+                    href={`${prefix}/blog/${nextPost.slug}`}
                     className="group flex flex-col justify-between rounded-xl border border-line bg-paper-raised/30 p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-paper-raised/60 hover:shadow-md sm:text-right"
                   >
                     <div>

@@ -108,8 +108,8 @@ export function TableOfContents({ lang, selector = "main article" }: TableOfCont
 
   return (
     <>
-      {/* Desktop version: sticky sidebar floating on the right side on xl screens */}
-      <aside className="absolute top-0 -right-72 hidden h-full w-60 xl:block">
+      {/* Desktop version: sticky sidebar floating on the right side on 2xl screens */}
+      <aside className="absolute top-0 -right-64 hidden h-full w-56 2xl:block">
         <div className="sticky top-24 flex max-h-[calc(100vh-8rem)] flex-col gap-2 overflow-hidden">
           <div className="min-h-0 flex-1 overflow-y-auto rounded-xl border border-line bg-paper/80 p-4 shadow-sm backdrop-blur-sm">
             <nav>
@@ -124,7 +124,7 @@ export function TableOfContents({ lang, selector = "main article" }: TableOfCont
       </aside>
 
       {/* Mobile / Tablet version: collapsible card right above article content */}
-      <details className="group mb-8 rounded-xl border border-line bg-paper/80 p-4 shadow-sm backdrop-blur-sm xl:hidden">
+      <details className="group mb-8 rounded-xl border border-line bg-paper/80 p-4 shadow-sm backdrop-blur-sm 2xl:hidden">
         <summary className="flex cursor-pointer list-none items-center justify-between font-mono text-[11px] font-bold uppercase tracking-widest text-ink select-none">
           <span className="flex items-center gap-2">
             <ListTree className="h-3.5 w-3.5 text-accent" />

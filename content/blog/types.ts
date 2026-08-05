@@ -6,6 +6,7 @@ export interface PostMeta {
   tags: string[];
   readTime: number; // minutes
   lang: "fr" | "en";
+  coverImage?: string
 }
 
 export interface BlogPost {

@@ -21,7 +21,9 @@ export const blogMetadata: PostMeta[] = [
     date: "2026-07-21",
     tags: ["DevOps", "Docker", "Automatisation", "n8n", "Infrastructure"],
     readTime: 7,
-    lang: "fr"
+    lang: "fr",
+      coverImage: "/blog/n8n-cover.jpg"
+
   },
   {
     slug: "securiser-agent-mcp-bdd",
@@ -113,7 +115,8 @@ export const blogMetadata: PostMeta[] = [
     date: "2026-07-21",
     tags: ["DevOps", "Docker", "Automation", "n8n", "Infrastructure"],
     readTime: 7,
-    lang: "en"
+    lang: "en",
+      coverImage: "/blog/n8n-cover.jpg"
   },
   {
     slug: "securing-mcp-agent-database",

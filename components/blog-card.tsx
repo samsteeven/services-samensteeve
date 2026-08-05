@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { PostMeta } from "@/content/blog/types";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
@@ -24,6 +25,19 @@ export function BlogCard({ post, lang }: BlogCardProps) {
       <div className="absolute top-0 right-0 w-32 h-32 bg-accent/3 rounded-full blur-3xl group-hover:bg-accent/8 transition-colors duration-300 pointer-events-none" />
 
       <div>
+        {/* Cover Image Thumbnail */}
+        {post.coverImage && (
+          <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-5 border border-line/60 bg-paper">
+            <Image
+              src={post.coverImage}
+              alt={post.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover group-hover:scale-103 transition-transform duration-500"
+            />
+          </div>
+        )}
+
         {/* Date and Read time */}
         <div className="flex items-center gap-4 text-xs text-ink-soft font-mono mb-4">
           <span className="flex items-center gap-1">

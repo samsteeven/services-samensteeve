@@ -1,12 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
 import { PostMeta } from "@/content/blog/types";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { Calendar, Clock, ArrowRight, ShieldCheck, Cpu, Database, Cloud, Terminal, Code2 } from "lucide-react";
 import { getT, type Language } from "@/lib/i18n";
 
 interface BlogCardProps {
   post: PostMeta;
   lang: Language;
+}
+
+function getTagIcon(tags: string[]) {
+  if (tags.some((t) => ["IA", "AI", "Agents"].includes(t))) return Cpu;
+  if (tags.some((t) => ["Sécurité", "Security", "Audit"].includes(t))) return ShieldCheck;
+  if (tags.some((t) => ["SQL", "PostgreSQL", "BDD", "Fintech"].includes(t))) return Database;
+  if (tags.some((t) => ["Cloud", "Réseau", "Network", "Infrastructure"].includes(t))) return Cloud;
+  if (tags.some((t) => ["DevOps", "Docker", "n8n", "Automatisation"].includes(t))) return Terminal;
+  return Code2;
 }
 
 export function BlogCard({ post, lang }: BlogCardProps) {
@@ -17,6 +26,8 @@ export function BlogCard({ post, lang }: BlogCardProps) {
     { year: "numeric", month: "short", day: "numeric" }
   );
 
+  const CategoryIcon = getTagIcon(post.tags);
+
   return (
     <Link
       href={`${prefix}/blog/${post.slug}`}
@@ -26,8 +37,8 @@ export function BlogCard({ post, lang }: BlogCardProps) {
       <div className="absolute top-0 right-0 w-32 h-32 bg-accent/3 rounded-full blur-3xl group-hover:bg-accent/8 transition-colors duration-300 pointer-events-none" />
 
       <div>
-        {/* Cover Image Thumbnail */}
-        {post.coverImage && (
+        {/* Cover Image Thumbnail or Tech Fallback Header */}
+        {post.coverImage ? (
           <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-5 border border-line/60 bg-paper">
             <Image
               src={post.coverImage}
@@ -36,6 +47,19 @@ export function BlogCard({ post, lang }: BlogCardProps) {
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover group-hover:scale-103 transition-transform duration-500"
             />
+          </div>
+        ) : (
+          <div className="relative w-full aspect-[16/9] rounded-xl overflow-hidden mb-5 border border-line/60 bg-paper-raised/80 flex flex-col justify-between p-4 group-hover:border-accent/30 transition-colors duration-300">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-accent/15 via-transparent to-transparent opacity-70 pointer-events-none" />
+            <div className="relative z-10 flex items-center justify-between">
+              <span className="font-mono text-[9px] uppercase tracking-widest font-bold text-accent bg-accent/10 border border-accent/20 px-2 py-0.5 rounded">
+                {post.tags[0] || "ARTICLE"}
+              </span>
+              <CategoryIcon className="h-5 w-5 text-accent/70" />
+            </div>
+            <div className="relative z-10 font-mono text-[10px] text-ink-soft/40 truncate font-semibold">
+              SAMEN STEEVE // {post.slug}
+            </div>
           </div>
         )}
 

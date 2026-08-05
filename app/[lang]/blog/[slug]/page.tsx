@@ -6,6 +6,7 @@ import { PORTFOLIO_URL } from "@/lib/constants";
 import { blogMetadata, getPostBySlug } from "@/content/blog/index";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, Calendar, Clock, ArrowRight, ShieldCheck, Cpu, Code2, Cloud } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { TableOfContents } from "@/components/table-of-contents";
@@ -172,6 +173,24 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </div>
       </div>
+
+      {/* Cover Image */}
+      {meta.coverImage && (
+        <div className="border-b border-line/40">
+          <div className="relative mx-auto max-w-3xl px-4 sm:px-8 py-8">
+            <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-line">
+              <Image
+                src={meta.coverImage}
+                alt={meta.title}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 768px"
+                className="object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Article Header */}
       <header className="py-16 border-b border-line/40 bg-paper-raised/20">

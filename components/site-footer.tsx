@@ -21,6 +21,7 @@ export const WhatsappIcon = (props: SVGProps<SVGSVGElement>) => (
 
 export function SiteFooter({ lang }: { lang: Language }) {
   const t = getT(lang);
+  const prefix = lang === "en" ? "" : "/fr";
 
   const contactLinks = [
     {
@@ -111,16 +112,16 @@ export function SiteFooter({ lang }: { lang: Language }) {
               Navigation
             </h3>
             <div className="grid grid-cols-2 gap-x-4 gap-y-2 font-mono text-[11px] text-ink-soft">
-              <Link href={`/${lang}/services`} className="hover:text-accent transition duration-200">
+              <Link href={`${prefix}/services`} className="hover:text-accent transition duration-200">
                 {t.nav.services}
               </Link>
-              <Link href={`/${lang}/comment-ca-marche`} className="hover:text-accent transition duration-200">
+              <Link href={`${prefix}/comment-ca-marche`} className="hover:text-accent transition duration-200">
                 {t.nav.process}
               </Link>
-              <Link href={`/${lang}/realisations`} className="hover:text-accent transition duration-200">
+              <Link href={`${prefix}/realisations`} className="hover:text-accent transition duration-200">
                 {t.nav.realisations}
               </Link>
-              <Link href={`/${lang}/demarrer-un-projet`} className="hover:text-accent transition duration-200 font-semibold text-accent/90">
+              <Link href={`${prefix}/demarrer-un-projet`} className="hover:text-accent transition duration-200 font-semibold text-accent/90">
                 {t.nav.cta}
               </Link>
             </div>

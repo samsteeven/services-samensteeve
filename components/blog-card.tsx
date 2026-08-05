@@ -11,6 +11,7 @@ interface BlogCardProps {
 
 export function BlogCard({ post, lang }: BlogCardProps) {
   const t = getT(lang);
+  const prefix = lang === "en" ? "" : "/fr";
   const formattedDate = new Date(post.date).toLocaleDateString(
     lang === "fr" ? "fr-FR" : "en-US",
     { year: "numeric", month: "short", day: "numeric" }
@@ -18,7 +19,7 @@ export function BlogCard({ post, lang }: BlogCardProps) {
 
   return (
     <Link
-      href={`/${lang}/blog/${post.slug}`}
+      href={`${prefix}/blog/${post.slug}`}
       className="group relative flex flex-col justify-between h-full rounded-2xl border border-line bg-paper-raised/40 p-6 sm:p-8 transition-all duration-300 hover:border-accent/40 hover:bg-paper-raised hover:shadow-xl hover:shadow-accent/5 overflow-hidden"
     >
       {/* Subtle card highlight glow */}

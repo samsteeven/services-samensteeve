@@ -5,6 +5,7 @@ import { CheckCircle2, ArrowRight } from "lucide-react";
 
 export function ProcessTimeline({ lang, hideHeader = false }: { lang: Language; hideHeader?: boolean }) {
   const t = getT(lang);
+  const prefix = lang === "en" ? "" : "/fr";
 
   return (
     <section id="process" className={`py-16 md:py-24 transition-all duration-300 ${hideHeader ? "" : "border-t border-line/40"}`}>
@@ -94,7 +95,7 @@ export function ProcessTimeline({ lang, hideHeader = false }: { lang: Language; 
         <div className="mt-20 text-center">
           <ScrollReveal delay={300}>
             <Link
-              href={`/${lang}/demarrer-un-projet`}
+              href={`${prefix}/demarrer-un-projet`}
               className="inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 font-mono text-xs uppercase font-bold tracking-widest text-paper hover:bg-accent hover:text-white transition duration-200 hover:scale-105 active:scale-[0.96]"
             >
               {t.process.cta}

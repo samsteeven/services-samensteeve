@@ -11,6 +11,7 @@ const GRAIN_URL =
 
 export function HeroSection({ lang }: { lang: Language }) {
   const t = getT(lang);
+  const prefix = lang === "en" ? "" : "/fr";
 
   return (
     <section className="relative overflow-hidden pt-12 pb-16 md:pt-16 md:pb-24 border-b border-line/40 bg-paper">
@@ -104,7 +105,7 @@ export function HeroSection({ lang }: { lang: Language }) {
         <ScrollReveal delay={250} className="mt-9 flex flex-col sm:flex-row gap-3.5 justify-center">
           {/* Primaire — noir */}
           <Link
-            href={`/${lang}/demarrer-un-projet`}
+            href={`${prefix}/demarrer-un-projet`}
             className="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-3.5 font-mono text-[10px] uppercase font-bold tracking-widest text-paper transition-all duration-300 hover:scale-105 hover:bg-accent hover:text-white hover:shadow-lg hover:shadow-accent/20 active:scale-[0.96]"
           >
             {t.hero.startProject}
@@ -125,7 +126,7 @@ export function HeroSection({ lang }: { lang: Language }) {
         {/* Lien tertiaire — explorer les offres */}
         <ScrollReveal delay={330} className="mt-5">
           <Link
-            href={`/${lang}/services`}
+            href={`${prefix}/services`}
             className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-widest text-ink-soft/55 hover:text-accent transition-colors duration-200 group"
           >
             {t.hero.ctaExplore}

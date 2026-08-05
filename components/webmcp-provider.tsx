@@ -79,7 +79,7 @@ const tools: WebMcpTool[] = [
         slug,
         lang,
         title: service?.mcp.title ?? slug,
-        url: `${BASE}/${lang}/services/${slug}`,
+        url: lang === "en" ? `${BASE}/services/${slug}` : `${BASE}/fr/services/${slug}`,
         note: "Fetch the page for full details, or use Accept: text/markdown header for markdown content.",
       };
     },
@@ -102,7 +102,7 @@ const tools: WebMcpTool[] = [
       const lang = (input.lang as string) || "fr";
       return {
         lang,
-        url: `${BASE}/${lang}/realisations`,
+        url: lang === "en" ? `${BASE}/realisations` : `${BASE}/fr/realisations`,
         note: "Fetch the page for the full list of case studies with links.",
       };
     },
@@ -125,7 +125,7 @@ const tools: WebMcpTool[] = [
       const lang = (input.lang as string) || "fr";
       return {
         lang,
-        url: `${BASE}/${lang}/blog`,
+        url: lang === "en" ? `${BASE}/blog` : `${BASE}/fr/blog`,
         note: "Fetch the blog index for full post listings.",
       };
     },
@@ -149,7 +149,7 @@ const tools: WebMcpTool[] = [
       const lang = (input.lang as string) || "fr";
       return {
         lang,
-        formUrl: `${BASE}/${lang}/demarrer-un-projet`,
+        formUrl: lang === "en" ? `${BASE}/demarrer-un-projet` : `${BASE}/fr/demarrer-un-projet`,
         process: "6-step project intake: context, goals, budget, timeline, technical details, recap.",
         responseTime: "24h with technical analysis and concrete proposal.",
         note: "Agents must not submit the form unless explicitly instructed by a human user.",

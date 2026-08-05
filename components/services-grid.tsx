@@ -6,6 +6,7 @@ import { ScrollReveal } from "./scroll-reveal";
 
 export function ServicesGrid({ lang }: { lang: Language }) {
   const t = getT(lang);
+  const prefix = lang === "en" ? "" : "/fr";
 
   return (
     <section id="services" className="relative overflow-hidden border-t border-line/40 bg-paper py-24 transition-colors duration-300 md:py-32">
@@ -55,7 +56,7 @@ export function ServicesGrid({ lang }: { lang: Language }) {
             return (
               <ScrollReveal key={service.slug} delay={i * 80}>
                 <Link
-                  href={`/${lang}/services/${service.slug}`}
+                  href={`${prefix}/services/${service.slug}`}
                   className="group flex h-full min-h-[420px] flex-col bg-paper-raised p-6 transition-[background-color,box-shadow] duration-300 hover:bg-paper sm:p-8"
                 >
                   <div className="flex items-start justify-between gap-5">

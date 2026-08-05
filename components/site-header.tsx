@@ -20,6 +20,8 @@ export function SiteHeader({ lang }: { lang: Language }) {
   const servicesCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const exploreCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const t = getT(lang);
+  // L'anglais est à la racine (pas de préfixe visible), le français sous /fr
+  const prefix = lang === "en" ? "" : "/fr";
 
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -97,8 +99,8 @@ export function SiteHeader({ lang }: { lang: Language }) {
     return cleanPath.startsWith(cleanHref);
   };
 
-  const isServicesNavActive = mounted && isActive(`/${lang}/services`);
-  const isExplorerNavActive = mounted && (isActive(`/${lang}/comment-ca-marche`) || isActive(`/${lang}/realisations`) || isActive(`/${lang}/blog`));
+  const isServicesNavActive = mounted && isActive(`${prefix}/services`);
+  const isExplorerNavActive = mounted && (isActive(`${prefix}/comment-ca-marche`) || isActive(`${prefix}/realisations`) || isActive(`${prefix}/blog`));
 
   const dropdownBase =
     "absolute top-full mt-2 left-0 min-w-[200px] rounded-xl border border-line bg-paper-raised/95 backdrop-blur-md shadow-lg py-1.5 z-50 animate-fade-in";
@@ -108,7 +110,7 @@ export function SiteHeader({ lang }: { lang: Language }) {
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4 sm:px-8">
         {/* Logo */}
         <Link
-          href={`/${lang}`}
+          href={prefix || "/"}
           className="flex items-center gap-2.5 transition-all duration-200 hover:opacity-85 group shrink-0"
         >
           <div className="relative h-9 w-9 overflow-hidden rounded-full border border-line bg-paper-raised/80 shadow-sm transition-all duration-300 group-hover:border-accent/40 group-hover:scale-105">
@@ -143,10 +145,10 @@ export function SiteHeader({ lang }: { lang: Language }) {
                 {t.nav.serviceItems.map((item) => (
                   <Link
                     key={item.slug}
-                    href={`/${lang}/services/${item.slug}`}
+                    href={`${prefix}/services/${item.slug}`}
                     onClick={() => setServicesOpen(false)}
                     className={`block px-4 py-2.5 text-[11px] font-mono uppercase tracking-wider transition duration-150 hover:text-accent hover:bg-accent/5 ${
-                      isActive(`/${lang}/services/${item.slug}`) ? "text-accent" : "text-ink-soft"
+                      isActive(`${prefix}/services/${item.slug}`) ? "text-accent" : "text-ink-soft"
                     }`}
                   >
                     {item.label}
@@ -170,28 +172,28 @@ export function SiteHeader({ lang }: { lang: Language }) {
             {exploreOpen && (
               <div className={dropdownBase} onMouseEnter={openExplore} onMouseLeave={closeExplore}>
                 <Link
-                  href={`/${lang}/comment-ca-marche`}
+                  href={`${prefix}/comment-ca-marche`}
                   onClick={() => setExploreOpen(false)}
                   className={`block px-4 py-2.5 text-[11px] font-mono uppercase tracking-wider transition duration-150 hover:text-accent hover:bg-accent/5 ${
-                    isActive(`/${lang}/comment-ca-marche`) ? "text-accent" : "text-ink-soft"
+                    isActive(`${prefix}/comment-ca-marche`) ? "text-accent" : "text-ink-soft"
                   }`}
                 >
                   {t.nav.process}
                 </Link>
                 <Link
-                  href={`/${lang}/realisations`}
+                  href={`${prefix}/realisations`}
                   onClick={() => setExploreOpen(false)}
                   className={`block px-4 py-2.5 text-[11px] font-mono uppercase tracking-wider transition duration-150 hover:text-accent hover:bg-accent/5 ${
-                    isActive(`/${lang}/realisations`) ? "text-accent" : "text-ink-soft"
+                    isActive(`${prefix}/realisations`) ? "text-accent" : "text-ink-soft"
                   }`}
                 >
                   {t.nav.realisations}
                 </Link>
                 <Link
-                  href={`/${lang}/blog`}
+                  href={`${prefix}/blog`}
                   onClick={() => setExploreOpen(false)}
                   className={`block px-4 py-2.5 text-[11px] font-mono uppercase tracking-wider transition duration-150 hover:text-accent hover:bg-accent/5 ${
-                    isActive(`/${lang}/blog`) ? "text-accent" : "text-ink-soft"
+                    isActive(`${prefix}/blog`) ? "text-accent" : "text-ink-soft"
                   }`}
                 >
                   {t.nav.blog}
@@ -241,7 +243,7 @@ export function SiteHeader({ lang }: { lang: Language }) {
 
           {/* CTA */}
           <Link
-            href={`/${lang}/demarrer-un-projet`}
+            href={`${prefix}/demarrer-un-projet`}
             className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-[10px] uppercase font-bold tracking-widest text-paper hover:bg-accent hover:text-white transition duration-200 hover:scale-105 active:scale-[0.96]"
           >
             {t.nav.cta}
@@ -271,10 +273,10 @@ export function SiteHeader({ lang }: { lang: Language }) {
             {t.nav.serviceItems.map((item) => (
               <Link
                 key={item.slug}
-                href={`/${lang}/services/${item.slug}`}
+                href={`${prefix}/services/${item.slug}`}
                 onClick={() => setIsOpen(false)}
                 className={`py-2 pl-2 border-b border-line/20 transition duration-200 ${
-                  isActive(`/${lang}/services/${item.slug}`) ? "text-accent font-semibold" : ""
+                  isActive(`${prefix}/services/${item.slug}`) ? "text-accent font-semibold" : ""
                 }`}
               >
                 {item.label}
@@ -283,28 +285,28 @@ export function SiteHeader({ lang }: { lang: Language }) {
             {/* Explorer group */}
             <p className="pt-4 pb-1 text-[9px] font-bold tracking-widest text-ink-soft/40">{t.nav.explore}</p>
             <Link
-              href={`/${lang}/comment-ca-marche`}
+              href={`${prefix}/comment-ca-marche`}
               onClick={() => setIsOpen(false)}
               className={`py-2 pl-2 border-b border-line/20 transition duration-200 ${
-                isActive(`/${lang}/comment-ca-marche`) ? "text-accent font-semibold" : ""
+                isActive(`${prefix}/comment-ca-marche`) ? "text-accent font-semibold" : ""
               }`}
             >
               {t.nav.process}
             </Link>
             <Link
-              href={`/${lang}/realisations`}
+              href={`${prefix}/realisations`}
               onClick={() => setIsOpen(false)}
               className={`py-2 pl-2 border-b border-line/20 transition duration-200 ${
-                isActive(`/${lang}/realisations`) ? "text-accent font-semibold" : ""
+                isActive(`${prefix}/realisations`) ? "text-accent font-semibold" : ""
               }`}
             >
               {t.nav.realisations}
             </Link>
             <Link
-              href={`/${lang}/blog`}
+              href={`${prefix}/blog`}
               onClick={() => setIsOpen(false)}
               className={`py-2 pl-2 border-b border-line/20 transition duration-200 ${
-                isActive(`/${lang}/blog`) ? "text-accent font-semibold" : ""
+                isActive(`${prefix}/blog`) ? "text-accent font-semibold" : ""
               }`}
             >
               {t.nav.blog}
@@ -354,7 +356,7 @@ export function SiteHeader({ lang }: { lang: Language }) {
               </Link>
             </div>
             <Link
-              href={`/${lang}/demarrer-un-projet`}
+              href={`${prefix}/demarrer-un-projet`}
               onClick={() => setIsOpen(false)}
               className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-ink py-3 font-semibold text-paper hover:bg-accent hover:text-white transition duration-200"
             >

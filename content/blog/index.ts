@@ -12,7 +12,8 @@ export const blogMetadata: PostMeta[] = [
     date: "2026-07-24",
     tags: ["IA", "DevOps", "Agents", "Sécurité", "Docker"],
     readTime: 8,
-    lang: "fr"
+    lang: "fr",
+    coverImage: "/blog/hermes-cover.jpg"
   },
   {
     slug: "n8n-deploiement-vps-production",

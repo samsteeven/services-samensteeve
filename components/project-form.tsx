@@ -12,6 +12,7 @@ import {
 import { getContactTypeIcon } from "@/lib/services";
 import { useProjectForm } from "./use-project-form";
 import { TurnstileWidget } from "./turnstile-widget";
+import { ConfirmModal } from "./confirm-modal";
 import {
   StepService,
   StepGoals,
@@ -32,6 +33,7 @@ export function ProjectForm({ lang }: Props) {
   const { buttons, steps, success, questions } = t.contact;
   const form = useProjectForm(lang);
   const [hydrated, setHydrated] = useState(false);
+  const [showResetModal, setShowResetModal] = useState(false);
   const mountedRef = useRef(false);
 
   useEffect(() => {
@@ -168,9 +170,7 @@ export function ProjectForm({ lang }: Props) {
             {hydrated && form.hasDraftData && (
               <button
                 type="button"
-                onClick={() => {
-                  if (window.confirm(buttons.resetConfirm)) form.resetForm();
-                }}
+                onClick={() => setShowResetModal(true)}
                 className="font-mono text-[10px] uppercase tracking-widest text-ink-soft/45 transition hover:text-red-400"
               >
                 {buttons.resetAll}
@@ -281,6 +281,18 @@ export function ProjectForm({ lang }: Props) {
       </div>
       )}
 
+      <ConfirmModal
+        open={showResetModal}
+        title={buttons.resetTitle}
+        description={buttons.resetConfirm}
+        confirmLabel={buttons.resetAll}
+        cancelLabel={buttons.resetCancel}
+        onConfirm={() => {
+          form.resetForm();
+          setShowResetModal(false);
+        }}
+        onCancel={() => setShowResetModal(false)}
+      />
     </div>
   );
 }

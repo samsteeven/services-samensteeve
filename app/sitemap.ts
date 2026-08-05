@@ -18,9 +18,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/demarrer-un-projet", priority: 0.9 as const, freq: "monthly" as const },
   ];
 
+  // Pages statiques — EN à la racine, FR sous /fr
   const staticEntries = langs.flatMap((lang) =>
     staticRoutes.map((route) => ({
-      url: `${baseUrl}/${lang}${route.path}`,
+      url: lang === "en" ? `${baseUrl}${route.path}` : `${baseUrl}/fr${route.path}`,
       lastModified: new Date(),
       priority: route.priority,
       changeFrequency: route.freq,
@@ -28,9 +29,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   // Service pages
+  // Pages de services — EN à la racine, FR sous /fr
   const serviceEntries = langs.flatMap((lang) =>
     services.map((s) => ({
-      url: `${baseUrl}/${lang}/services/${s.slug}`,
+      url: lang === "en" ? `${baseUrl}/services/${s.slug}` : `${baseUrl}/fr/services/${s.slug}`,
       lastModified: new Date(),
       priority: 0.8 as const,
       changeFrequency: "monthly" as const,
@@ -38,17 +40,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   // Case study pages
+  // Études de cas — EN à la racine, FR sous /fr
   const caseStudyEntries = langs.flatMap((lang) =>
     caseStudies.map((cs) => ({
-      url: `${baseUrl}/${lang}/realisations/${cs.slug}`,
+      url: lang === "en" ? `${baseUrl}/realisations/${cs.slug}` : `${baseUrl}/fr/realisations/${cs.slug}`,
       lastModified: new Date(),
       priority: 0.8 as const,
       changeFrequency: "monthly" as const,
     }))
   );
 
+  // Blog — EN à la racine, FR sous /fr
   const blogEntries = blogMetadata.map((post) => ({
-    url: `${baseUrl}/${post.lang}/blog/${post.slug}`,
+    url: post.lang === "en"
+      ? `${baseUrl}/blog/${post.slug}`
+      : `${baseUrl}/fr/blog/${post.slug}`,
     lastModified: new Date(post.date),
     priority: 0.7 as const,
     changeFrequency: "monthly" as const,

@@ -30,8 +30,9 @@ export function createPageMetadata({
   type = "website",
 }: PageMetadataOptions): Metadata {
   const altLang: Language = lang === "fr" ? "en" : "fr";
-  const canonicalUrl = `${BASE_URL}/${lang}${path}`;
-  const altUrl = `${BASE_URL}/${altLang}${path}`;
+  // L'anglais est à la racine (pas de /en visible), le français sous /fr
+  const canonicalUrl = lang === "en" ? `${BASE_URL}${path}` : `${BASE_URL}/fr${path}`;
+  const altUrl = lang === "en" ? `${BASE_URL}/fr${path}` : `${BASE_URL}${path}`;
   const absoluteImage = image.startsWith("http") ? image : `${BASE_URL}${image}`;
   const ogImage = image === DEFAULT_OG_IMAGE
     ? { url: absoluteImage, width: 1902, height: 926, alt: title }
@@ -45,7 +46,8 @@ export function createPageMetadata({
       languages: {
         [lang]: canonicalUrl,
         [altLang]: altUrl,
-        "x-default": `${BASE_URL}/fr${path}`,
+        // x-default = URL anglaise propre (sans /en)
+        "x-default": `${BASE_URL}${path}`,
       },
     },
     openGraph: {

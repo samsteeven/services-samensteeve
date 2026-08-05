@@ -12,15 +12,24 @@ export function getT(lang: Language): Translation {
   return translations[lang] ?? translations.en;
 }
 
+/**
+ * Retourne l'URL pour la langue opposée.
+ * L'anglais est la langue par défaut (sans préfixe visible dans l'URL).
+ * Ex: /fr/services/dev → /services/dev   (switch FR → EN)
+ * Ex: /blog/mon-article → /fr/blog/mon-article (switch EN → FR)
+ */
 export function getOppositeUrl(pathname: string, lang: "en" | "fr", hash?: string): string {
   if (!pathname) return "/";
-  const segments = pathname.split("/");
   const targetLang = lang === "en" ? "fr" : "en";
-  if (segments[1] === "en" || segments[1] === "fr") {
-    segments[1] = targetLang;
-  } else {
-    return `/${targetLang}${pathname}${hash || ""}`;
+
+  if (targetLang === "fr") {
+    // EN → FR : enlever l'éventuel /en puis préfixer par /fr
+    const cleanPath = pathname.startsWith("/en") ? pathname.slice(3) || "/" : pathname;
+    const base = cleanPath === "/" ? "/fr" : `/fr${cleanPath}`;
+    return hash ? `${base}${hash}` : base;
   }
-  const base = segments.join("/");
-  return hash ? `${base}${hash}` : base;
+
+  // FR → EN : enlever /fr (la racine = anglais, pas de préfixe)
+  const cleanPath = pathname.startsWith("/fr") ? pathname.slice(3) || "/" : pathname;
+  return hash ? `${cleanPath}${hash}` : cleanPath;
 }

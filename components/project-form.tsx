@@ -13,6 +13,7 @@ import { getContactTypeIcon } from "@/lib/services";
 import { useProjectForm } from "./use-project-form";
 import { TurnstileWidget } from "./turnstile-widget";
 import { ConfirmModal } from "./confirm-modal";
+import { FormSkeleton } from "./form-skeleton";
 import {
   StepService,
   StepGoals,
@@ -43,7 +44,11 @@ export function ProjectForm({ lang }: Props) {
     }
   }, []);
 
-  const displayStep = hydrated ? form.step : 1;
+  if (!hydrated) {
+    return <FormSkeleton lang={lang} />;
+  }
+
+  const displayStep = form.step;
 
   const stepLabels = [
     steps.step1,

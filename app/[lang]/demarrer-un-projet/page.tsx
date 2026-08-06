@@ -3,6 +3,7 @@ import type { Language } from "@/lib/i18n";
 import { createPageMetadata } from "@/lib/metadata";
 import { getT } from "@/lib/i18n";
 import { ProjectForm } from "@/components/project-form";
+import { FormSkeleton } from "@/components/form-skeleton";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { ParticlesBackground } from "@/components/particles-background";
 import { Suspense } from "react";
@@ -45,14 +46,8 @@ export default async function StartProjectPage({ params }: PageProps) {
           </ScrollReveal>
         </div>
 
-        <div className="flex justify-center mt-8">
-          <Suspense fallback={
-            <div className="w-full max-w-2xl flex items-center justify-center py-20">
-              <span className="font-mono text-xs text-ink-soft/40 animate-pulse">
-                {t.contact.recapLabels.loading}
-              </span>
-            </div>
-          }>
+        <div className="w-full mt-4">
+          <Suspense fallback={<FormSkeleton lang={langKey} />}>
             <ProjectForm lang={langKey} />
           </Suspense>
         </div>

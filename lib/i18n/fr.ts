@@ -21,9 +21,9 @@ export const fr = {
   hero: {
     status: "Disponible pour de nouveaux projets",
     title: "Je conçois, sécurise et automatise des systèmes logiciels pour des entreprises qui ont besoin que ça fonctionne en production — pas juste en démo.",
-    subtitle: "Ingénieur logiciel Tech Lead & Spécialiste automatisation IA basé à Douala, Cameroun. J'interviens en freelance pour structurer votre backend, sécuriser vos architectures cloud et intégrer des agents IA autonomes dans vos workflows métiers.",
-    heroSub: "Ingénieur logiciel indépendant et Tech Lead basé à Douala. Je conçois des systèmes logiciels robustes, déploie des infrastructures cloud hybrides et automatise vos workflows métier avec des agents IA supervisables.",
-    availability: "Disponible · Douala, Cameroun",
+    subtitle: "Ingénieur logiciel Tech Lead & Spécialiste automatisation IA basé à Paris, France. J'interviens en freelance pour structurer votre backend, sécuriser vos architectures cloud et intégrer des agents IA autonomes dans vos workflows métiers.",
+    heroSub: "Ingénieur logiciel indépendant et Tech Lead basé à Paris. Je conçois des systèmes logiciels robustes, déploie des infrastructures cloud hybrides et automatise vos workflows métier avec des agents IA supervisables.",
+    availability: "Disponible · Paris, France",
     headline: "Vos systèmes tiennent en **production**. C'est mon seul critère.",
     ctaCall: "Réserver un appel de 30 min",
     ctaExplore: "ou explorez les offres",
@@ -99,7 +99,7 @@ export const fr = {
         title: "Architecture Cloud & Hybride",
         punchline: "La plupart des architectures cloud supposent une fibre garantie et un courant continu. Je conçois des infrastructures résilientes (AWS/Azure/Hybride) taillées pour les contraintes réelles du terrain.",
         shortDesc: "Infrastructures cloud et hybrides résilientes (AWS/Azure) : interconnexion multi-sites, basculement automatique, tolérance aux coupures et maîtrise des coûts.",
-        longDesc: "La plupart des architectures cloud sont conçues pour des environnements idéaux : connectivité stable, courant continu, équipes IT pléthoriques. Ce n'est pas la réalité du terrain en Afrique centrale. Je conçois des infrastructures hybrides et cloud résilientes qui continuent de fonctionner quand le lien MPLS tombe, quand le courant coupe et quand vos données doivent respecter des exigences de souveraineté locale. Le modèle hybride n'est pas un compromis — c'est l'architecture responsable pour maintenir la continuité d'activité.",
+        longDesc: "La plupart des architectures cloud sont conçues pour des environnements idéaux : connectivité stable, courant continu, équipes IT pléthoriques. La réalité du terrain est rarement celle-là. Je conçois des infrastructures hybrides et cloud résilientes qui continuent de fonctionner quand le lien MPLS tombe, quand le courant coupe et quand vos données doivent respecter des exigences de souveraineté locale. Le modèle hybride n'est pas un compromis — c'est l'architecture responsable pour maintenir la continuité d'activité.",
         stack: ["Cloud AWS/Azure", "Infrastructure hybride", "Réseau & VPN", "IaC Terraform", "Sauvegarde & PRA", "Monitoring", "Identité Microsoft 365", "Runbooks"],
         outcomes: [
           "Une infrastructure résiliente aux pannes : basculement automatique des liens réseau, sauvegardes redondantes et PCA/PRA testé.",
@@ -875,8 +875,8 @@ export const fr = {
     engagementScope: "Périmètre d'intervention",
   },
   metadata: {
-    homeTitle: "Ingénieur Logiciel Freelance & Architecte Cloud — Cameroun",
-    homeDescription: "Expert ingénieur logiciel freelance spécialisé en Laravel, React, architecture cloud (AWS/Azure), sécurité applicative et automatisation IA. Disponible en télétravail international et sur site au Cameroun.",
+    homeTitle: "Ingénieur Logiciel Freelance & Architecte Cloud — France",
+    homeDescription: "Expert ingénieur logiciel freelance spécialisé en Laravel, React, architecture cloud (AWS/Azure), sécurité applicative et automatisation IA. Disponible en télétravail international et sur site à Paris.",
     blogTitle: "Blog Ingénierie Logicielle — IA, Cloud & Sécurité",
     blogDescription: "Articles techniques sur l'ingénierie logicielle, l'architecture cloud, l'automatisation IA et les bonnes pratiques de sécurité. Retours d'expérience concrets de production.",
     processTitle: "Méthodologie Développement Logiciel",
@@ -893,7 +893,7 @@ export const fr = {
   },
   footer: {
     rights: "Tous droits réservés.",
-    location: "Disponible en télétravail international et sur site à Douala.",
+    location: "Disponible en télétravail international et sur site à Paris.",
     specialty: "Samen Steeve · Ingénieur Logiciel & Architecte Solutions",
     bookCall: "Réserver un appel (30 min)"
   },

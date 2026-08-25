@@ -21,9 +21,9 @@ export const en = {
   hero: {
     status: "Available for new projects",
     title: "I design, secure, and automate software systems for companies that need things to work in production — not just in demos.",
-    subtitle: "Software Engineer, Tech Lead & AI Automation Specialist based in Douala, Cameroon. I work on a freelance basis to structure your backend, secure your cloud architectures, and integrate autonomous AI agents into your business operations.",
-    heroSub: "Independent software engineer and Tech Lead based in Douala. I design robust software systems, deploy hybrid cloud infrastructures, and automate your business workflows with supervised AI agents.",
-    availability: "Available · Douala, Cameroon",
+    subtitle: "Software Engineer, Tech Lead & AI Automation Specialist based in Paris, France. I work on a freelance basis to structure your backend, secure your cloud architectures, and integrate autonomous AI agents into your business operations.",
+    heroSub: "Independent software engineer and Tech Lead based in Paris. I design robust software systems, deploy hybrid cloud infrastructures, and automate your business workflows with supervised AI agents.",
+    availability: "Available · Paris, France",
     headline: "Your systems work in **production**. That is my only criterion.",
     ctaCall: "Book a 30 min call",
     ctaExplore: "or explore services",
@@ -98,7 +98,7 @@ export const en = {
         title: "Cloud & Hybrid Architecture",
         punchline: "Most cloud architectures assume guaranteed fiber and uninterrupted power. I design resilient infrastructures (AWS/Azure/Hybrid) built for real field constraints.",
         shortDesc: "Resilient cloud and hybrid infrastructures (AWS/Azure): multi-site interconnect, automatic failover, outage tolerance, and cost control.",
-        longDesc: "Most cloud architectures are designed for ideal environments: stable connectivity, continuous power, abundant IT teams. That's not the reality on the ground in Central Africa. I design resilient hybrid and cloud infrastructures that keep running when MPLS links drop, when power cuts out, and when your data must respect local sovereignty regulations. The hybrid model is not a compromise — it is the responsible architecture for business continuity.",
+        longDesc: "Most cloud architectures are designed for ideal environments: stable connectivity, continuous power, abundant IT teams. The reality on the ground is rarely like that. I design resilient hybrid and cloud infrastructures that keep running when MPLS links drop, when power cuts out, and when your data must respect local sovereignty regulations. The hybrid model is not a compromise — it is the responsible architecture for business continuity.",
         stack: ["AWS/Azure cloud", "Hybrid infrastructure", "Network & VPN", "Terraform IaC", "Backup & DRP", "Monitoring", "Microsoft 365 identity", "Runbooks"],
         outcomes: [
           "Outage-resilient infrastructure: automated network link failover, redundant backups, and fully tested BCP/DRP.",
@@ -874,8 +874,8 @@ export const en = {
     engagementScope: "Engagement scope",
   },
   metadata: {
-    homeTitle: "Freelance Software Engineer & Cloud Architect — Cameroon",
-    homeDescription: "Expert freelance software engineer specializing in Laravel, React, cloud architecture (AWS/Azure), application security, and AI automation. Available for remote work worldwide and on-site in Cameroon.",
+    homeTitle: "Freelance Software Engineer & Cloud Architect — France",
+    homeDescription: "Expert freelance software engineer specializing in Laravel, React, cloud architecture (AWS/Azure), application security, and AI automation. Available for remote work worldwide and on-site in Paris.",
     blogTitle: "Software Engineering Blog — AI, Cloud & Security",
     blogDescription: "Technical articles on software engineering, cloud architecture, AI automation, and security best practices. Practical insights from production experience.",
     processTitle: "Software Development Methodology",
@@ -892,7 +892,7 @@ export const en = {
   },
   footer: {
     rights: "All rights reserved.",
-    location: "Available for international remote work and on-site in Douala.",
+    location: "Available for international remote work and on-site in Paris.",
     specialty: "Samen Steeve · Software Engineer & Solution Architect",
     bookCall: "Book a call (30 min)"
   },

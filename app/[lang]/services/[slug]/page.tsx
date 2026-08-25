@@ -49,10 +49,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         "https://github.com/samsteeven"
       ]
     },
-    "areaServed": {
-      "@type": "Country",
-      "name": "Cameroon"
-    },
+    "areaServed": "Worldwide",
     "availableChannel": {
       "@type": "ServiceChannel",
       "serviceUrl": `https://services.samensteeve.com/${lang}/services/${service.slug}`,
@@ -60,7 +57,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
         "@type": "Place",
         "address": {
           "@type": "PostalAddress",
-          "addressCountry": "CM"
+          "addressCountry": "FR"
         }
       }
     },

@@ -69,7 +69,7 @@ interface OutboxMutation {
   "client_id": "uuid-1234",
   "version": 4, // The version read locally by the client before editing
   "changes": {
-    "phone": "+237654557446"
+    "phone": "+33614093987"
   }
 }
 

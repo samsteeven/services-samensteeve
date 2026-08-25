@@ -697,7 +697,7 @@ export const en = {
       roleLabel: "Your role (optional)",
       rolePlaceholder: "Product Owner, CTO, Founder...",
       whatsappLabel: "WhatsApp / Phone number",
-      whatsappPlaceholder: "+237 6xx xxx xxx",
+      whatsappPlaceholder: "+33 6 xx xx xx xx",
       sourceLabel: "How did you hear about me?",
       sourcePlaceholder: "LinkedIn, Google search, recommendation..."
     },

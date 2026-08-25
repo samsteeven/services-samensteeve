@@ -6,9 +6,9 @@ export const PORTFOLIO_URL =
 export const CONTACT_EMAIL = "contact@samensteeve.com";
 
 export const CAL_URL = "https://cal.com/samen-steeve/30min";
+export const WHATSAPP_URL = "https://wa.me/33614093987";
 
-export const WHATSAPP_URL = "https://wa.me/237654557446";
-export const WHATSAPP_NUMBER = "+237 654 557 446";
+export const WHATSAPP_NUMBER = "+33 6 14 09 39 87";
 
 export const SOCIAL_LINKS = {
   linkedin: "https://linkedin.com/in/samensteeve",

@@ -70,7 +70,7 @@ export const en = {
           "Technical operational documentation and handover session for your development team"
         ],
         cases: [
-          "Technical refactoring of a legaltech platform (TribuneJustice): breaking down a monolith into 4 specialized services, Redis cache on 10 endpoints, and N+1 query elimination",
+          "Full design and development of a legaltech platform for a legal expert (TribuneJustice): 3 applications (Laravel, Angular, Next.js), escrow payments, frontend monolith breakdown, Redis caching, and N+1 elimination",
           "Business platform or SaaS with complex logic and multiple user profiles",
           "Custom internal tool replacing spreadsheets, manual processing, or scattered software",
           "Stabilization and performance optimization of a critical API or backend before scaling"

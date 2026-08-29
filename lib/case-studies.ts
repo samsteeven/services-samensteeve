@@ -55,48 +55,48 @@ export const caseStudies: CaseStudy[] = [
     coverImage: "/projects/logoTBJ.png",
     fr: {
       title: "TribuneJustice",
-      tagline: "Refonte technique et audit sécurité d'une plateforme legaltech en production — 41 vulnérabilités fermées, 0 interruption de service.",
-      role: "Tech Lead & Project Manager",
+      tagline: "Plateforme legaltech conçue et développée pour un expert juridique : escrow, consultations vidéo, messagerie temps réel, bilingue FR/EN — 41 vulnérabilités fermées, LCP de 5 s à 1,5 s.",
+      role: "Tech Lead",
       period: "Novembre 2025 — en cours",
-      stack: ["Laravel", "Angular", "Next.js", "Redis", "Docker", "Laravel Reverb", "Typesense"],
+      stack: ["Laravel", "Angular 20", "Next.js", "Typesense", "MeSomb", "Redis", "Laravel Reverb", "Docker"],
       services: ["Ingénierie logicielle", "Pentest & Sécurité applicative"],
       summary:
-        "TribuneJustice connecte des clients à des avocats certifiés, avec paiements en escrow et suivi de dossiers en temps réel. Prise en charge de la direction technique d'une plateforme en production souffrant d'une dette technique critique et de failles de sécurité majeures. Mission : sécuriser l'architecture, refactorer le monolithe frontend et optimiser les recherches sans interrompre les utilisateurs actifs.",
+        "TribuneJustice connecte des clients à des avocats certifiés, avec paiements en escrow, consultations vidéo et suivi de dossiers en temps réel. C'est le produit digital de M. Badjeu Kuitchouha Ghislain, expert juridique, qui en a eu l'idée et rédigé les spécifications ; j'ai été consulté pour le construire. J'ai dirigé et réalisé toute la technique — backend Laravel, frontend Angular SSR, blog Next.js — pendant 8 mois. Deux campagnes d'audit (pentest externe + revue interne) ont ensuite identifié 41 failles : toutes fermées sans interrompre les utilisateurs actifs.",
       metrics: [
-        { value: "41", label: "Failles colmatées", description: "Audit OWASP Top 10 complet (SSRF, CSRF, sessions sans TTL)" },
-        { value: "0", label: "Incident post-déploiement", description: "Zéro interruption lors du patch en production" },
-        { value: "< 300ms", label: "Temps de recherche avocat", description: "Remplacement du SQL lent par Typesense facetté" },
-        { value: "594 ➔ 4", label: "Refonte frontend", description: "Composant Angular monolithique découpé en 4 services découplés" }
+        { value: "41", label: "Failles colmatées", description: "Deux campagnes d'audit (pentest externe + revue interne), fermées avant toute exploitation" },
+        { value: "0", label: "Incident post-déploiement", description: "Déploiements zero-downtime avec auto-récupération des caches périmés" },
+        { value: "< 300ms", label: "Temps de recherche avocat", description: "Indexation Typesense facettée : spécialité, ville, disponibilité" },
+        { value: "594 ➔ 4", label: "Refonte frontend", description: "Service d'authentification monolithique découpé en 4 services Angular Signals" }
       ],
       sections: [
         {
           id: "contexte",
-          title: "01. Le Contexte & La Dette Technique",
+          title: "01. Le Contexte — Le produit digital d'un expert juridique",
           content:
-            "TribuneJustice opère dans un domaine exigeant la confidentialité absolue et une intégrité financière irréprochable. Lors de ma prise de poste en tant que Tech Lead, la plateforme fonctionnait avec des vulnérabilités critiques en production : un composant Angular monolithique de 594 lignes concentrait la logique d'authentification, les sessions Redis n'avaient aucun TTL expirable, et plusieurs endpoints exposaient des failles SSRF exploitables. Chaque mise à jour menaçait d'interrompre les parcours d'escrow en cours.",
-          quote: "En legaltech, la faille de sécurité d'aujourd'hui est le procès de demain. Sécuriser sans interrompre la production était la priorité absolue."
+            "TribuneJustice est le produit digital de M. Badjeu Kuitchouha Ghislain, expert juridique : il en a eu l'idée et rédigé les spécifications. Il m'a consulté pour construire la plateforme — j'ai conçu le modèle de données (MCD), l'architecture, le backend Laravel, le frontend Angular et le blog Next.js, livrés en 8 mois (~1 650 interventions), en échangeant avec lui sur chaque décision produit. Dans un domaine qui exige une confidentialité absolue et une intégrité financière irréprochable, la sécurité ne peut pas être un après-coup : après le lancement, nous avons fait auditer la plateforme par un pentest externe puis une revue interne. Verdict : 41 failles — SSRF sur le proxy d'images du blog, sessions Redis sans TTL, service d'authentification monolithique de 594 lignes. Chaque mise à jour menaçait d'interrompre les parcours d'escrow en cours.",
+          quote: "En legaltech, la faille de sécurité d'aujourd'hui est le procès de demain. Construire pour un client, c'est livrer un produit qui survit à ses propres audits."
         },
         {
           id: "architecture-securite",
-          title: "02. Stratégie de Refonte & Sécurisation",
+          title: "02. Construction, Refonte & Durcissement",
           content:
-            "Pour traiter les failles sans casser l'existant, j'ai mis en place une stratégie en deux temps. Côté backend, nous avons encapsulé les transactions financières dans des verrous pessimistes (lockForUpdate) associés à une machine à états Laravel déterministe. Côté frontend, le composant Angular tentaculaire a été refactoré en 4 services TypeScript spécialisés basés sur les Angular Signals, garantissant un typage strict et une réactivité optimale.",
+            "J'ai traité les 41 failles sans interrompre l'activité. Côté backend, les transactions financières ont été encapsulées dans des verrous pessimistes (lockForUpdate) reliés à la machine à états Laravel déterministe de la Service Request — l'entité centrale qui porte le cycle de vie complet du dossier : création, assignment, suivi, paiement, résolution. Côté frontend, le service d'authentification monolithique (594 lignes, 87 consommateurs) a été découpé en 4 services TypeScript spécialisés basés sur les Angular Signals. En parallèle, la recherche SQL lente a été remplacée par un index Typesense.",
           highlights: [
             {
-              title: "Machine à États & Verrouillage Pessimiste",
-              description: "Empêche les race conditions sur les paiements en escrow lors des demandes simultanées."
+              title: "Machine à états & verrous pessimistes",
+              description: "Élimine les race conditions sur les paiements en escrow lors des demandes simultanées."
             },
             {
-              title: "Isolation Frontend Angular",
-              description: "Découpage en 4 services découplés avec injection de dépendances stricte et gestion fine des états."
+              title: "Frontend découplé (Angular Signals)",
+              description: "4 services spécialisés — état, API, token, permissions — avec typage strict et gestion fine des états."
             },
             {
               title: "Hardening OWASP Top 10",
-              description: "Correction des vulnérabilités SSRF par listes blanches, ajouts de headers CSP/HSTS et sessions à TTL borné."
+              description: "SSRF par listes blanches, headers CSP/HSTS, sessions à TTL borné, cookies JWT HTTP-only, mode sudo."
             },
             {
-              title: "Moteur de Recherche Typesense",
-              description: "Indexation facettée permettant de filtrer les avocats par spécialité, ville et disponibilité en moins de 300ms."
+              title: "Moteur de recherche Typesense",
+              description: "Filtrage des avocats par spécialité, ville et disponibilité en moins de 300 ms."
             }
           ]
         },
@@ -104,7 +104,7 @@ export const caseStudies: CaseStudy[] = [
           id: "impact",
           title: "03. Impact & Résultats Métier",
           content:
-            "Le déploiement global s'est effectué sans la moindre minute d'arrêt. La charge serveur a été considérablement allégée grâce à la suppression des requêtes N+1 et à la mise en cache Redis stratégique sur 10 endpoints clés. La plateforme est désormais hautement évolutive et a permis l'intégration fluide de 3 nouveaux modules métier sans régression."
+            "Le déploiement global s'est effectué sans la moindre minute d'arrêt. La charge serveur a été considérablement allégée (suppression des requêtes N+1, cache Redis sur 10 endpoints clés). Le chargement est passé de 5 secondes à moins de 1,5 seconde (LCP), les images de 68 Mo à 3,9 Mo (−94 % en WebP). La plateforme est désormais hautement évolutive : 3 nouveaux modules métier ont été intégrés sans régression."
         }
       ],
       repoUrl: undefined,
@@ -112,48 +112,48 @@ export const caseStudies: CaseStudy[] = [
     },
     en: {
       title: "TribuneJustice",
-      tagline: "Security audit and technical refactor of a live legaltech platform — 41 vulnerabilities closed, zero service interruption.",
-      role: "Tech Lead & Project Manager",
+      tagline: "Legaltech platform designed and built for a legal expert: escrow payments, video consultations, real-time messaging, FR/EN bilingual — 41 vulnerabilities closed, LCP from 5s to 1.5s.",
+      role: "Tech Lead",
       period: "November 2025 — ongoing",
-      stack: ["Laravel", "Angular", "Next.js", "Redis", "Docker", "Laravel Reverb", "Typesense"],
+      stack: ["Laravel", "Angular 20", "Next.js", "Typesense", "MeSomb", "Redis", "Laravel Reverb", "Docker"],
       services: ["Software Engineering", "Application Pentest & Security"],
       summary:
-        "TribuneJustice connects clients with certified lawyers, handling escrow payments and real-time case tracking. Took technical leadership of a live platform suffering from critical technical debt and major security flaws. Mission: harden the architecture, refactor the frontend monolith, and accelerate search without interrupting active users.",
+        "TribuneJustice connects clients with certified lawyers, handling escrow payments, video consultations, and real-time case tracking. It is the digital product of Mr Badjeu Kuitchouha Ghislain, a legal expert who came up with the idea and wrote the specifications; I was consulted to build it. I led and built the entire technical side — Laravel backend, Angular SSR frontend, Next.js blog — over 8 months. Two audit campaigns (external pentest + internal review) then found 41 flaws: all closed without disrupting active users.",
       metrics: [
-        { value: "41", label: "Vulnerabilities patched", description: "Full OWASP Top 10 audit (SSRF, CSRF, TTL-less sessions)" },
-        { value: "0", label: "Post-deploy incidents", description: "Zero downtime during live patch rollout" },
-        { value: "< 300ms", label: "Lawyer search speed", description: "Replaced slow SQL queries with Typesense faceted index" },
-        { value: "594 ➔ 4", label: "Frontend refactor", description: "Monolithic Angular component split into 4 decoupled services" }
+        { value: "41", label: "Vulnerabilities patched", description: "Two audit campaigns (external pentest + internal review), closed before any exploit" },
+        { value: "0", label: "Post-deploy incidents", description: "Zero-downtime deployments with automatic stale-cache recovery" },
+        { value: "< 300ms", label: "Lawyer search speed", description: "Typesense faceted index: specialty, city, availability" },
+        { value: "594 ➔ 4", label: "Frontend refactor", description: "Monolithic auth service split into 4 Angular Signals services" }
       ],
       sections: [
         {
           id: "context",
-          title: "01. Context & Technical Debt",
+          title: "01. Context — The Digital Product of a Legal Expert",
           content:
-            "TribuneJustice operates in a space demanding strict confidentiality and financial integrity. When taking over as Tech Lead, the platform suffered from severe production liabilities: a 594-line monolithic Angular component handled all auth logic, Redis sessions had no expiration TTL, and several endpoints exposed exploitable SSRF vectors. Every deployment risked breaking active escrow flows.",
-          quote: "In legaltech, today's security flaw is tomorrow's lawsuit. Securing the stack without breaking active users was the top priority."
+            "TribuneJustice is the digital product of Mr Badjeu Kuitchouha Ghislain, a legal expert: he came up with the idea and wrote the specifications. He consulted me to build the platform — I designed the data model (MCD), the architecture, the Laravel backend, the Angular frontend, and the Next.js blog, shipped over 8 months (~1,650 tracked changes), exchanging with him on every product decision. In a domain demanding absolute confidentiality and financial integrity, security cannot be an afterthought: after launch, we had the platform audited by an external pentest followed by an internal review. Verdict: 41 flaws — SSRF on the blog image proxy, Redis sessions without TTL, a 594-line monolithic auth service. Every deployment risked breaking active escrow flows.",
+          quote: "In legaltech, today's security flaw is tomorrow's lawsuit. Building for a client means shipping a product that survives its own audits."
         },
         {
           id: "strategy",
-          title: "02. Refactoring & Security Strategy",
+          title: "02. Building, Refactoring & Hardening",
           content:
-            "To patch flaws without disrupting business, I executed a two-pronged strategy. On the backend, financial transactions were wrapped in pessimistic locking (lockForUpdate) bound to a deterministic Laravel state machine. On the frontend, the sprawling Angular component was refactored into 4 specialized TypeScript services powered by Angular Signals for strict type safety and reactive state flow.",
+            "I closed all 41 flaws without disrupting business. On the backend, financial transactions were wrapped in pessimistic locking (lockForUpdate) bound to the deterministic Laravel state machine of the Service Request — the central entity carrying the full case lifecycle: creation, assignment, tracking, payment, resolution. On the frontend, the monolithic auth service (594 lines, 87 consumers) was split into 4 specialized TypeScript services powered by Angular Signals. In parallel, slow SQL search was replaced by a Typesense index.",
           highlights: [
             {
               title: "State Machine & Pessimistic Locks",
               description: "Eliminates race conditions on escrow payments during concurrent client requests."
             },
             {
-              title: "Angular Frontend Decoupling",
-              description: "Split into 4 modular services with strict dependency injection and Signal-based state management."
+              title: "Decoupled Frontend (Angular Signals)",
+              description: "4 specialized services — state, API, token, permissions — with strict typing and fine-grained state management."
             },
             {
               title: "OWASP Top 10 Hardening",
-              description: "Patched SSRF vulnerabilities via explicit allowlists, CSP/HSTS headers, and bounded TTL sessions."
+              description: "SSRF allowlists, CSP/HSTS headers, bounded TTL sessions, HTTP-only JWT cookies, sudo mode."
             },
             {
               title: "Typesense Search Engine",
-              description: "Faceted indexing filter for lawyers by specialty, city, and availability in under 300ms."
+              description: "Filter lawyers by specialty, city, and availability in under 300ms."
             }
           ]
         },
@@ -161,7 +161,7 @@ export const caseStudies: CaseStudy[] = [
           id: "impact",
           title: "03. Business Impact & Results",
           content:
-            "The full patch deployed with zero downtime. Server load decreased significantly thanks to N+1 query cleanup and strategic Redis caching across 10 core endpoints. The architecture is now scalable, enabling 3 new modules to be shipped smoothly without regression."
+            "The full rollout deployed with zero downtime. Server load dropped significantly thanks to N+1 query cleanup and strategic Redis caching across 10 core endpoints. Page load went from 5 seconds to under 1.5 seconds (LCP), and media assets from 68 MB to 3.9 MB (−94% as WebP). The architecture is now scalable: 3 new business modules shipped without regression."
         }
       ],
       repoUrl: undefined,
@@ -417,8 +417,8 @@ export const caseStudies: CaseStudy[] = [
       title: "Pipeline IA de Gestion des Leads",
       tagline: "Deux agents IA partagent une même CRM — le premier qualifie chaque prospect en < 30 secondes, le second permet de consulter et agir sur les données directement depuis WhatsApp.",
       role: "Architecte IA & Ingénieur logiciel",
-      period: "Juillet 2026",
-      stack: ["n8n", "Claude Haiku 4.5", "Tavily API", "OpenRouter", "Redis", "TypeScript", "Next.js", "Turso", "Data Tables", "MCP"],
+      period: "Juillet — Août 2026",
+      stack: ["n8n", "DeepSeek v4 Flash", "Tavily API", "OpenRouter", "Redis", "Next.js", "Data Tables", "MCP"],
       services: ["Automatisation IA", "Ingénierie logicielle"],
       summary:
         "Conception et déploiement d'un pipeline d'agents IA autonomes pour l'acquisition et la gestion de prospects. Le premier agent intercepte les formulaires web, enrichit les données entreprise en temps réel et attribue un score de maturité. Le second agent permet au décideur d'interroger et de piloter la base de prospects directement via WhatsApp.",
@@ -440,7 +440,7 @@ export const caseStudies: CaseStudy[] = [
           id: "architecture",
           title: "02. Architecture à Double Workflow n8n & Redis",
           content:
-            "Le système repose sur deux workflows n8n interconnectés par une Data Table CRM commune et une mémoire Redis. Lorsqu'un prospect soumet un formulaire, le Lead Agent s'exécute : il effectue une recherche web Tavily sur l'entreprise, compare ses besoins au catalogue de services, formule un score de 1 à 10 et génère un email personnalisé via Claude Haiku 4.5. Le second workflow — le WhatsApp CRM Assistant — permet au décideur d'interroger cette même CRM en langage naturel directement depuis WhatsApp, sans ouvrir aucun dashboard.",
+            "Le système repose sur deux workflows n8n interconnectés par une Data Table CRM commune et une mémoire Redis. Lorsqu'un prospect soumet un formulaire, le Lead Agent s'exécute : il effectue une recherche web Tavily sur l'entreprise, compare ses besoins au catalogue de services, formule un score de 1 à 10 et génère un email personnalisé via DeepSeek v4 Flash (OpenRouter). Le second workflow — le WhatsApp CRM Assistant — permet au décideur d'interroger cette même CRM en langage naturel directement depuis WhatsApp, sans ouvrir aucun dashboard.",
           image: "/projects/whatsapp_workflow.jpg",
           imageAlt: "Workflow n8n du WhatsApp CRM Assistant — réception du message, extraction, agent IA avec mémoire Redis, outils CRM et envoi de réponse",
           highlights: [
@@ -466,7 +466,7 @@ export const caseStudies: CaseStudy[] = [
           id: "impact",
           title: "03. Rigueur, Sécurité & Production",
           content:
-            "Le pipeline tourne en production avec gestion d'erreur robuste (onError → continueErrorOutput). Aucun lead ne peut être égaré. La réactivité perçue par les prospects est immédiate, et la gestion CRM se fait sans ouvrir d'interface complexe."
+            "Le Lead Qualification Agent tourne en production : webhook sécurisé par header + filtrage IP, gestion d'erreur robuste (onError → continueErrorOutput) et journalisation des échecs dans la CRM — aucun lead ne peut être égaré. Le WhatsApp CRM Assistant est construit et testé ; sa publication n'attend que ses credentials WhatsApp Business."
         }
       ],
       repoUrl: undefined,
@@ -476,8 +476,8 @@ export const caseStudies: CaseStudy[] = [
       title: "AI-Powered Lead Management Pipeline",
       tagline: "Two AI agents share one CRM — the first qualifies every lead in < 30 seconds, the second allows querying and acting on data directly from WhatsApp.",
       role: "AI Architect & Software Engineer",
-      period: "July 2026",
-      stack: ["n8n", "Claude Haiku 4.5", "Tavily API", "OpenRouter", "Redis", "TypeScript", "Next.js", "Turso", "Data Tables", "MCP"],
+      period: "July — August 2026",
+      stack: ["n8n", "DeepSeek v4 Flash", "Tavily API", "OpenRouter", "Redis", "Next.js", "Data Tables", "MCP"],
       services: ["AI Automation", "Software Engineering"],
       summary:
         "Architected and deployed a multi-agent AI pipeline for lead acquisition and CRM management. The first agent intercepts contact forms, enriches company data in real time, and scores prospects. The second agent allows management to query and control the lead database directly through WhatsApp.",
@@ -499,7 +499,7 @@ export const caseStudies: CaseStudy[] = [
           id: "architecture",
           title: "02. Dual n8n Workflow & Redis Architecture",
           content:
-            "The architecture links two n8n workflows through a shared CRM Data Table and persistent Redis memory. Upon form submission, the Lead Agent triggers Tavily web search, matches prospect requirements with the service catalog, scores lead intent (1-10), and drafts a tailored email via Claude Haiku 4.5. The second workflow — the WhatsApp CRM Assistant — lets the decision-maker query that same CRM in natural language directly from WhatsApp, without opening any dashboard.",
+            "The architecture links two n8n workflows through a shared CRM Data Table and persistent Redis memory. Upon form submission, the Lead Agent triggers Tavily web search, matches prospect requirements with the service catalog, scores lead intent (1-10), and drafts a tailored email via DeepSeek v4 Flash (OpenRouter). The second workflow — the WhatsApp CRM Assistant — lets the decision-maker query that same CRM in natural language directly from WhatsApp, without opening any dashboard.",
           image: "/projects/whatsapp_workflow.jpg",
           imageAlt: "n8n WhatsApp CRM Assistant workflow — message trigger, extraction, AI agent with Redis memory, CRM tools and reply delivery",
           highlights: [
@@ -525,7 +525,7 @@ export const caseStudies: CaseStudy[] = [
           id: "impact",
           title: "03. Reliability & Production Results",
           content:
-            "The pipeline runs in production with robust error routing (onError → continueErrorOutput). No lead is ever lost. Prospects experience instantaneous response times, and CRM management requires zero complex dashboarding."
+            "The Lead Qualification Agent is now running in production: header-secured webhook + IP filtering, robust error routing (onError → continueErrorOutput) and failure logging into the CRM — no lead can ever be lost. The WhatsApp CRM Assistant is built and tested; its publication only awaits the WhatsApp Business credentials."
         }
       ],
       repoUrl: undefined,

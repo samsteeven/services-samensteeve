@@ -5,7 +5,7 @@ export default function N8nVpsProductionDeployment() {
   return (
     <article className="prose dark:prose-invert max-w-none text-ink-soft leading-relaxed font-sans text-sm md:text-base space-y-6">
       <p className="text-lg text-ink font-medium leading-relaxed">
-        An autopilot automation tool can go wrong: poor isolation on a shared VPS can compromise your production database. Here is how I deployed n8n in production for the <a href="/en/realisations/tribunejustice" className="text-accent underline underline-offset-2">TribuneJustice</a> project — a legaltech platform I lead as Tech Lead — without disrupting existing infrastructure.
+        An autopilot automation tool can go wrong: poor isolation on a shared VPS can compromise your production database. Here is how I deployed n8n in production for the <a href="/en/realisations/tribunejustice" className="text-accent underline underline-offset-2">TribuneJustice</a> project — a legaltech platform I built from scratch and lead — without disrupting existing infrastructure.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -151,21 +151,21 @@ networks:
         What&apos;s Running in Production Today
       </h2>
       <p>
-        The n8n instance is no longer just a task orchestrator. Two critical workflows run in production, connected by a <strong>shared CRM Data Table</strong> — the core of the system.
+        The n8n instance is deployed and secured on n8n.samensteeve.com (2FA, automated PostgreSQL backups). The <strong>Lead Qualification Agent</strong> runs there in production, connected to the WhatsApp CRM Assistant (built and tested) by a <strong>shared CRM Data Table</strong> — the core of the system.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        Lead Qualification Agent (write)
+        Lead Qualification Agent (write) — in production
       </h3>
       <p>
-        Autonomous AI agent that intercepts form submissions, enriches data via Tavily, scores the lead 1-10, and <strong>writes</strong> to the CRM Data Table (upsert by email). Personalized response email sent to the prospect in &lt; 30s. Redis memory, strict Output Parser (constrained JSON schema), retry on Gmail and Tavily.
+        Autonomous AI agent that intercepts form submissions, enriches data via Tavily, scores the lead 1-10, and <strong>writes</strong> to the CRM Data Table (upsert by email). Personalized response email sent to the prospect in &lt; 30s. Redis memory, strict Output Parser (constrained JSON schema), retry on Gmail and Tavily. Header-secured webhook + IP filtering — the workflow is published and receives form submissions.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        WhatsApp CRM Assistant (read &amp; operational)
+        WhatsApp CRM Assistant (read &amp; operational) — awaiting credentials
       </h3>
       <p>
-        WhatsApp agent that allows <strong>reading</strong> and querying the same CRM in natural language — check recent leads, look up by email, update status, send professional emails. Redis memory for conversation context.
+        WhatsApp agent that allows <strong>reading</strong> and querying the same CRM in natural language — check recent leads, look up by email, update status, send professional emails. Redis memory for conversation context. Built and tested in manual mode; publication only awaits the WhatsApp Business credentials.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
@@ -176,7 +176,7 @@ networks:
       </p>
 
       <div className="border border-line rounded-xl bg-paper/60 p-4 font-mono text-xs text-ink/80 space-y-1">
-        <div>— Each workflow has its own security model: Header Auth (<code>X-Webhook-Secret</code>) for the Lead Agent, WhatsApp Business authentication for the CRM Assistant.</div>
+        <div>— Each workflow has its own security model: Header Auth (<code>n8n-webhook-secret</code>) for the Lead Agent, WhatsApp Business authentication for the CRM Assistant (once its credentials are set).</div>
         <div>— <code>retryOnFail</code> configured on critical nodes (Gmail, Tavily, HTTP) with 3 attempts.</div>
         <div>— Shared Redis memory for conversation persistence.</div>
       </div>

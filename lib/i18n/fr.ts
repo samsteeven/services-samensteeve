@@ -70,7 +70,7 @@ export const fr = {
           "Documentation technique d'exploitation et session de transfert pour vos développeurs"
         ],
         cases: [
-          "Refonte technique d'une plateforme legaltech (TribuneJustice) : découpage du monolithe, cache Redis sur 10 endpoints et élimination des requêtes N+1",
+          "Conception et développement complet d'une plateforme legaltech pour un expert juridique (TribuneJustice) : 3 applications (Laravel, Angular, Next.js), paiements séquestrés, découpage du monolithe frontend, cache Redis et élimination des N+1",
           "Plateforme métier ou SaaS avec logique complexe et plusieurs profils d'utilisateurs",
           "Outil interne sur-mesure pour remplacer des fichiers Excel, des traitements manuels ou des outils dispersés",
           "Stabilisation et optimisation d'une API ou d'un backend critique avant montée en charge"

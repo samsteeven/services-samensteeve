@@ -5,7 +5,7 @@ export default function N8nDeploiementVpsProduction() {
   return (
     <article className="prose dark:prose-invert max-w-none text-ink-soft leading-relaxed font-sans text-sm md:text-base space-y-6">
       <p className="text-lg text-ink font-medium leading-relaxed">
-        L&apos;outil d&apos;automatisation autopilote peut lui-même mal tourner : une mauvaise isolation sur un VPS partagé, et c&apos;est votre base de production qui paie les frais. Voici comment j&apos;ai déployé n8n en production pour le projet <a href="/fr/realisations/tribunejustice" className="text-accent underline underline-offset-2">TribuneJustice</a> — une plateforme legaltech que je pilote en tant que Tech Lead — sans rien casser de l&apos;infrastructure existante.
+        L&apos;outil d&apos;automatisation autopilote peut lui-même mal tourner : une mauvaise isolation sur un VPS partagé, et c&apos;est votre base de production qui paie les frais. Voici comment j&apos;ai déployé n8n en production pour le projet <a href="/fr/realisations/tribunejustice" className="text-accent underline underline-offset-2">TribuneJustice</a> — une plateforme legaltech que j&apos;ai construite de A à Z et que je pilote — sans rien casser de l&apos;infrastructure existante.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -219,21 +219,21 @@ networks:
         Ce qui tourne en production aujourd&apos;hui
       </h2>
       <p>
-        L&apos;instance n8n n&apos;est plus un simple orchestrateur de tâches récurrentes. Deux workflows critiques y tournent en production, connectés par une <strong>même Data Table CRM</strong> — le cœur du système.
+        L&apos;instance n8n est déployée et sécurisée sur n8n.samensteeve.com (2FA, sauvegardes PostgreSQL automatisées). Le <strong>Lead Qualification Agent</strong> y tourne en production, connecté au WhatsApp CRM Assistant (construit et testé) par une <strong>même Data Table CRM</strong> — le cœur du système.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        Lead Qualification Agent (écriture)
+        Lead Qualification Agent (écriture) — en production
       </h3>
       <p>
-        Agent IA autonome qui intercepte les soumissions de formulaire, enrichit les données via Tavily, score le lead de 1 à 10, et <strong>écrit</strong> dans la CRM Data Table (upsert par email). Email de notification personnalisé envoyé au prospect en &lt; 30 secondes. Mémoire Redis, Output Parser strict (schéma JSON contraint), retry sur Gmail et Tavily.
+        Agent IA autonome qui intercepte les soumissions de formulaire, enrichit les données via Tavily, score le lead de 1 à 10, et <strong>écrit</strong> dans la CRM Data Table (upsert par email). Email de notification personnalisé envoyé au prospect en &lt; 30 secondes. Mémoire Redis, Output Parser strict (schéma JSON contraint), retry sur Gmail et Tavily. Webhook sécurisé par header + filtrage IP — le workflow est publié et reçoit les soumissions de formulaire.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        WhatsApp CRM Assistant (lecture &amp; opérationnel)
+        WhatsApp CRM Assistant (lecture &amp; opérationnel) — en attente de credentials
       </h3>
       <p>
-        Agent WhatsApp qui permet de <strong>lire</strong> et interroger la même CRM en langage naturel — consulter les leads récents, chercher par email, mettre à jour un statut, envoyer un email professionnel. Mémoire Redis pour le contexte conversationnel.
+        Agent WhatsApp qui permet de <strong>lire</strong> et interroger la même CRM en langage naturel — consulter les leads récents, chercher par email, mettre à jour un statut, envoyer un email professionnel. Mémoire Redis pour le contexte conversationnel. Construit et testé en manuel ; la publication n&apos;attend que les credentials WhatsApp Business.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
@@ -244,7 +244,7 @@ networks:
       </p>
 
       <div className="rounded-xl border border-accent/20 bg-accent/5 p-4 font-mono text-xs text-ink/80 space-y-1">
-        <div>— Chaque workflow a sa propre logique de sécurité : Header Auth (<code>X-Webhook-Secret</code>) pour le Lead Agent, authentification WhatsApp Business pour le CRM Assistant.</div>
+        <div>— Chaque workflow a sa propre logique de sécurité : Header Auth (<code>n8n-webhook-secret</code>) pour le Lead Agent, authentification WhatsApp Business pour le CRM Assistant (une fois ses credentials renseignées).</div>
         <div>— <code>retryOnFail</code> configuré sur les nœuds critiques (Gmail, Tavily, HTTP).</div>
         <div>— Mémoire Redis partagée pour la persistance conversationnelle.</div>
       </div>

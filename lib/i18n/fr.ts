@@ -902,22 +902,10 @@ export const fr = {
     subtitle: "Ce que les clients et collègues disent de notre collaboration.",
     items: [
       {
-        quote: "Steeve a conçu notre infrastructure microservices hybride depuis zéro. La synchronisation offline-first a résolu des années d'échecs de sync pour nos agents terrain. Une approche technique rigoureuse qui a tenu toutes ses promesses.",
-        author: "Jean-Pierre Ndongo",
-        role: "Directeur des Systèmes d'Information",
-        company: "AGROCAM S.A."
-      },
-      {
-        quote: "L'audit de sécurité qu'il a mené sur notre plateforme a révélé des vulnérabilités critiques que nous n'aurions jamais détectées seuls. Son rapport était clair, exploitable, et il nous a accompagnés jusqu'à la remédiation complète.",
-        author: "Hervé Nkili",
-        role: "CEO",
-        company: "OpenCode Labs"
-      },
-      {
-        quote: "Steeve a repris notre backend Laravel existant et l'a complètement transformé. Tests automatisés, CI/CD, documentation API — tout ce qui manquait est maintenant en place. Le projet a été livré dans les délais.",
-        author: "Carole Mvele",
-        role: "Lead Developer",
-        company: "Digital Services Group"
+        quote: "Steeve a construit la plateforme TribuneJustice avec moi, de la conception à la mise en production : je venais avec l'idée et les spécifications métier, il apportait l'architecture et l'exigence technique. Les audits de sécurité qu'il a menés ont fait de la plateforme un outil fiable et digne de confiance pour notre profession.",
+        author: "Badjeu Kuitchouha Ghislain",
+        role: "Fondateur & Expert juridique",
+        company: "TribuneJustice"
       }
     ]
   }

@@ -175,26 +175,26 @@ export const caseStudies: CaseStudy[] = [
     coverImage: "",
     fr: {
       title: "DIGITRANS-CM (AGROCAM S.A.)",
-      tagline: "5 microservices pour une agro-industrie camerounaise — conçus pour des agents terrain sans internet et une traçabilité inviolable de la parcelle au marché.",
-      role: "Architecte Solutions & Ingénieur logiciel",
-      period: "Mai 2026 — Juin 2026",
+      tagline: "Épreuve certifiante RNCP (bloc BC04) : 5 microservices pour une agro-industrie camerounaise simulée — agents terrain offline-first, souveraineté des données et traçabilité blockchain Hyperledger.",
+      role: "Architecte Cloud & Développeur Full-Stack",
+      period: "Mai 2026 (épreuve de 3 jours)",
       stack: ["Node.js", "FastAPI", "PostgreSQL", "Redis", "Docker", "Kubernetes", "Terraform", "AWS", "Azure", "Hyperledger Fabric", "GitHub Actions"],
       services: ["Architecture Cloud & Hybride", "Ingénierie logicielle"],
       summary:
-        "AGROCAM S.A. gérait son opération sur un monolithe obsolète. Le défi n'était pas la charge serveur, mais l'incapacité des agents terrain en zone rurale à enregistrer leurs opérations sans connexion. De plus, la législation locale et les exigences de la chaîne alimentaire imposaient une souveraineté des données et une traçabilité immuable.",
+        "Épreuve certifiante RNCP39765 (bloc BC04, EADL 4) : en équipe de 3 étudiants sur 3 jours, conception et déploiement de l'architecture du scénario DIGITRANS-CM — moderniser le SI d'AGROCAM S.A. (groupe agroalimentaire camerounais simulé) en microservices cloud hybrides AWS/Azure, avec Supply Chain offline-first et traçabilité Hyperledger Fabric. Livrables : application déployée, documentation technique, rapport de sécurisation, soutenance devant jury.",
       metrics: [
-        { value: "5", label: "Microservices indépendants", description: "API Gateway, ERP, CRM, Supply Chain, BI" },
-        { value: "0%", label: "Perte de données terrain", description: "Module Supply Chain offline-first avec sync par batch" },
-        { value: "45min", label: "Provisioning environnement", description: "Réduit de 3 jours à 45 minutes via Terraform IaC" },
-        { value: "100%", label: "Conformité loi n°2010/012", description: "Souveraineté des données RH et financières sur site" }
+        { value: "3", label: "Jours d'épreuve", description: "Équipe de 3 étudiants, mise en situation reconstituée, jury" },
+        { value: "5", label: "Microservices", description: "API Gateway, ERP, CRM, Supply Chain, BI" },
+        { value: "C21–C26", label: "Compétences évaluées", description: "Intégration cloud, IaC, administration, performance, sécurité, blockchain" },
+        { value: "100%", label: "Exigences couvertes", description: "Souveraineté des données (loi n°2010/012), offline-first, HA ≥ 99,9 %" }
       ],
       sections: [
         {
           id: "contexte",
-          title: "01. L'Enjeu Métier & Les Contraintes Africaines",
+          title: "01. L'Épreuve & Les Contraintes Africaines",
           content:
-            "Les architectures cloud traditionnelles échouent souvent en zone rurale africaine où la connectivité 2G/3G est intermittente. Les agents d'AGROCAM perdaient des heures de données lors des coupures réseau. Par ailleurs, la réglementation camerounaise (loi n°2010/012) interdit le stockage d'informations financières et RH hors du territoire national, interdisant le 100% cloud public.",
-          quote: "Une architecture cloud en Afrique doit être conçue pour la réalité du terrain : coupures réseau, contraintes légales de souveraineté et résilience offline."
+            "Dans le cadre de l'épreuve certifiante RNCP39765 (bloc BC04 « Optimiser le SI par l'apport du Cloud Computing »), le scénario place l'équipe chez CAMTECH SOLUTIONS S.A., ESN camerounaise, en mission DIGITRANS-CM pour AGROCAM S.A. : remplacer un monolithe de 2009 par un SI distribué et partiellement cloud. Les architectures cloud traditionnelles échouent souvent en zone rurale africaine où la connectivité 2G/3G est intermittente — les agents terrain perdent des heures de données lors des coupures réseau. Par ailleurs, la réglementation camerounaise (loi n°2010/012) interdit le stockage d'informations financières et RH hors du territoire national, interdisant le 100% cloud public. Trois jours, en équipe de trois, pour livrer une application déployée et un rapport de sécurisation devant jury.",
+          quote: "Une architecture cloud en Afrique doit être conçue pour la réalité du terrain : coupures réseau, contraintes légales de souveraineté et résilience offline — et en épreuve de 3 jours, chaque choix doit être défendable."
         },
         {
           id: "architecture",
@@ -222,9 +222,9 @@ export const caseStudies: CaseStudy[] = [
         },
         {
           id: "impact",
-          title: "03. Enseignements & Impact Opérationnel",
+          title: "03. Enseignements & Résultats de l'Épreuve",
           content:
-            "Sur les 3 premiers mois de pilote, aucune donnée terrain n'a été perdue. Le temps nécessaire pour provisionner un environnement complet est passé de 3 jours à 45 minutes grâce à l'Infrastructure as Code (Terraform), et le client bénéficie d'une conformité légale totale."
+            "L'épreuve a été livrée dans le temps imparti : application déployée (AWS/Azure hybride, Terraform, CI/CD en 5 étapes), documentation technique, rapport de sécurisation (C25–C26) incluant la solution Hyperledger Fabric, et soutenance devant jury. Au-delà de la certification, c'est la capacité à trancher des choix d'architecture complexes sous contrainte de délai — et à les défendre — qui fait la valeur de l'exercice."
         }
       ],
       repoUrl: "https://github.com/samsteeven/digitram-cm-microservices",
@@ -232,26 +232,26 @@ export const caseStudies: CaseStudy[] = [
     },
     en: {
       title: "DIGITRANS-CM (AGROCAM S.A.)",
-      tagline: "5 microservices for a Cameroonian agro-industrial group — built for offline field agents and tamper-proof traceability from farm to market.",
-      role: "Solution Architect & Software Engineer",
-      period: "May 2026 — June 2026",
+      tagline: "RNCP certification exam (BC04): 5 microservices for a simulated Cameroonian agro-industrial group — offline-first field agents, data sovereignty, and Hyperledger blockchain traceability.",
+      role: "Cloud Architect & Full-Stack Developer",
+      period: "May 2026 (3-day exam)",
       stack: ["Node.js", "FastAPI", "PostgreSQL", "Redis", "Docker", "Kubernetes", "Terraform", "AWS", "Azure", "Hyperledger Fabric", "GitHub Actions"],
       services: ["Cloud & Hybrid Architecture", "Software Engineering"],
       summary:
-        "AGROCAM S.A. managed its operations on an obsolete monolith. The main bottleneck wasn't server load, but the inability of rural field agents to log data without network connectivity. Local compliance laws and food-grade supply chains also demanded data sovereignty and immutable auditability.",
+        "RNCP39765 certification exam (BC04 block, EADL 4): as a team of 3 students over 3 days, design and deployment of the DIGITRANS-CM scenario architecture — modernizing AGROCAM S.A.'s SI (simulated Cameroonian agro-industrial group) into hybrid AWS/Azure cloud microservices, with an offline-first Supply Chain and Hyperledger Fabric traceability. Deliverables: deployed application, technical documentation, security report, jury defense.",
       metrics: [
-        { value: "5", label: "Independent microservices", description: "API Gateway, ERP, CRM, Supply Chain, BI" },
-        { value: "0%", label: "Field data loss rate", description: "Offline-first Supply Chain module with batch sync" },
-        { value: "45min", label: "Environment provisioning", description: "Reduced from 3 days to 45 minutes using Terraform IaC" },
-        { value: "100%", label: "Local Law 2010/012 compliance", description: "On-premise sovereignty for financial and HR data" }
+        { value: "3", label: "Exam days", description: "Team of 3 students, reconstructed scenario, jury" },
+        { value: "5", label: "Microservices", description: "API Gateway, ERP, CRM, Supply Chain, BI" },
+        { value: "C21–C26", label: "Assessed competencies", description: "Cloud integration, IaC, administration, performance, security, blockchain" },
+        { value: "100%", label: "Requirements covered", description: "Data sovereignty (Law 2010/012), offline-first, HA ≥ 99.9%" }
       ],
       sections: [
         {
           id: "context",
-          title: "01. Business Challenge & Regional Constraints",
+          title: "01. The Exam & African Constraints",
           content:
-            "Traditional cloud architectures often fail in rural African environments where 2G/3G connectivity is spotty. AGROCAM field agents were losing operational logs during outages. Furthermore, Cameroonian Law n°2010/012 restricts storing financial and HR data outside national borders, ruling out pure public cloud.",
-          quote: "Cloud architecture in Africa must be built for operational reality: intermittent connectivity, local data sovereignty, and offline resilience."
+            "Within the RNCP39765 certification exam (BC04 block 'Optimizing the SI with Cloud Computing'), the scenario places the team at CAMTECH SOLUTIONS S.A., a Cameroonian IT services company, on the DIGITRANS-CM mission for AGROCAM S.A.: replacing a 2009 monolith with a distributed, partially cloud SI. Traditional cloud architectures often fail in rural African environments where 2G/3G connectivity is spotty — field agents lose hours of operational logs during outages. Furthermore, Cameroonian Law n°2010/012 restricts storing financial and HR data outside national borders, ruling out pure public cloud. Three days, in a team of three, to deliver a deployed application and a security report in front of a jury.",
+          quote: "Cloud architecture in Africa must be built for operational reality: intermittent connectivity, local data sovereignty, and offline resilience — and in a 3-day exam, every choice must be defensible."
         },
         {
           id: "architecture",
@@ -279,9 +279,9 @@ export const caseStudies: CaseStudy[] = [
         },
         {
           id: "impact",
-          title: "03. Impact & Takeaways",
+          title: "03. Exam Results & Takeaways",
           content:
-            "Zero field data was lost during the 3-month pilot. Environment provisioning dropped from 3 days to 45 minutes thanks to Infrastructure as Code, guaranteeing full legal and operational compliance."
+            "The exam was delivered within the allotted time: deployed application (hybrid AWS/Azure, Terraform, 5-stage CI/CD), technical documentation, security report (C25–C26) including the Hyperledger Fabric solution, and jury defense. Beyond the certification, it's the ability to make complex architectural decisions under deadline pressure — and defend them — that makes the exercise valuable."
         }
       ],
       repoUrl: "https://github.com/samsteeven/digitram-cm-microservices",

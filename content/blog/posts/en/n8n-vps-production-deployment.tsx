@@ -5,14 +5,14 @@ export default function N8nVpsProductionDeployment() {
   return (
     <article className="prose dark:prose-invert max-w-none text-ink-soft leading-relaxed font-sans text-sm md:text-base space-y-6">
       <p className="text-lg text-ink font-medium leading-relaxed">
-        An autopilot automation tool can go wrong: poor isolation on a shared VPS can compromise your production database. Here is how I deployed n8n in production for the <a href="/en/realisations/tribunejustice" className="text-accent underline underline-offset-2">TribuneJustice</a> project — a legaltech platform I built from scratch and lead — without disrupting existing infrastructure.
+        An autopilot automation tool can go wrong: poor isolation on a shared VPS can compromise your production database. Here is how I self-hosted n8n in production on a VPS I already ran, without disrupting existing infrastructure.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         The Context: Making the Most of an Existing VPS
       </h2>
       <p>
-        On TribuneJustice, I needed a workflow orchestrator for recurring tasks: notifications, service syncs, and scheduled jobs. Rather than paying for execution-based cloud subscriptions, I chose to self-host <a href="https://n8n.io" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2">n8n</a> on a VPS already running for the project — maximizing existing resources rather than multiplying infrastructure costs.
+        For my own automation — a lead-qualification pipeline that intercepts contact form submissions, enriches them via web search, scores them, and feeds a shared CRM, plus a WhatsApp CRM assistant — I needed a workflow orchestrator. Rather than paying for execution-based cloud subscriptions, I chose to self-host <a href="https://n8n.io" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2">n8n</a> on a VPS already running for my work — maximizing existing resources rather than multiplying infrastructure costs.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">

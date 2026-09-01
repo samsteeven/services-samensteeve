@@ -5,14 +5,14 @@ export default function N8nDeploiementVpsProduction() {
   return (
     <article className="prose dark:prose-invert max-w-none text-ink-soft leading-relaxed font-sans text-sm md:text-base space-y-6">
       <p className="text-lg text-ink font-medium leading-relaxed">
-        L&apos;outil d&apos;automatisation autopilote peut lui-même mal tourner : une mauvaise isolation sur un VPS partagé, et c&apos;est votre base de production qui paie les frais. Voici comment j&apos;ai déployé n8n en production pour le projet <a href="/fr/realisations/tribunejustice" className="text-accent underline underline-offset-2">TribuneJustice</a> — une plateforme legaltech que j&apos;ai construite de A à Z et que je pilote — sans rien casser de l&apos;infrastructure existante.
+        L&apos;outil d&apos;automatisation autopilote peut lui-même mal tourner : une mauvaise isolation sur un VPS partagé, et c&apos;est votre base de production qui paie les frais. Voici comment j&apos;ai auto-hébergé n8n en production sur un VPS que je gérais déjà, sans rien casser de l&apos;infrastructure existante.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         Le contexte : rentabiliser un VPS déjà en place
       </h2>
       <p>
-        Sur TribuneJustice, j&apos;avais besoin d&apos;un orchestrateur de tâches récurrentes : notifications, synchronisations entre services, jobs planifiés. Plutôt que de payer un abonnement cloud facturé à l&apos;exécution, j&apos;ai choisi d&apos;auto-héberger <a href="https://n8n.io" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2">n8n</a> sur un VPS déjà utilisé pour le projet — histoire de rentabiliser des ressources disponibles plutôt que de multiplier les infrastructures.
+        Pour mes propres automatisations — un pipeline de qualification de leads qui intercepte les soumissions de formulaire de contact, les enrichit via une recherche web, les score, et alimente une CRM partagée, plus un assistant CRM WhatsApp — j&apos;avais besoin d&apos;un orchestrateur de workflows. Plutôt que de payer un abonnement cloud facturé à l&apos;exécution, j&apos;ai choisi d&apos;auto-héberger <a href="https://n8n.io" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2">n8n</a> sur un VPS déjà utilisé pour mon activité — histoire de rentabiliser des ressources disponibles plutôt que de multiplier les infrastructures.
       </p>
       <p>
         Le VPS tournait déjà sous Ubuntu, avec Docker, nginx, Redis et une base MySQL locale. L&apos;objectif : ajouter n8n proprement, via un sous-domaine dédié, sans affecter la disponibilité du reste.

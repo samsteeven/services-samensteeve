@@ -6,6 +6,15 @@ import { BlogPost, PostMeta } from "./types";
 export const blogMetadata: PostMeta[] = [
   // ─── FRENCH POSTS ───
   {
+    slug: "integration-escrow-mobile-money-mesomb",
+    title: "Intégrer le mobile money (MeSomb) dans une plateforme legaltech : un escrow qui tient vraiment",
+    excerpt: "Ce qu'intégrer MTN Mobile Money / Orange Money au Cameroun implique réellement : signature HMAC des requêtes, webhooks idempotents, courses conditions sur l'escrow, et la discipline d'ingénierie qui rend les flux d'argent sûrs.",
+    date: "2026-09-02",
+    tags: ["Laravel", "Paiement", "MeSomb", "Mobile Money", "Escrow", "Sécurité"],
+    readTime: 9,
+    lang: "fr"
+  },
+  {
     slug: "deploiement-hermes-agent-ia-production",
     title: "Déployer un agent IA autonome en production : retour d'expérience complet sur Hermes Agent",
     excerpt: "Migration sécurisée, gateway Telegram, interface web, backups automatisés — le journal de bord d'un déploiement self-hosted de bout en bout.",
@@ -100,6 +109,15 @@ export const blogMetadata: PostMeta[] = [
   },
 
   // ─── ENGLISH POSTS ───
+  {
+    slug: "integrating-mesomb-mobile-money",
+    title: "Integrating mobile money (MeSomb) into a legaltech platform: an escrow that actually holds",
+    excerpt: "What integrating MTN Mobile Money / Orange Money in Cameroon really involves: HMAC request signing, idempotent webhooks, race conditions on escrow, and the engineering discipline that makes money flows safe.",
+    date: "2026-09-02",
+    tags: ["Laravel", "Payments", "MeSomb", "Mobile Money", "Escrow", "Security"],
+    readTime: 9,
+    lang: "en"
+  },
   {
     slug: "deploying-hermes-ai-agent-production",
     title: "Deploying an Autonomous AI Agent in Production: Hermes Agent Retrospective",

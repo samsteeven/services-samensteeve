@@ -1,4 +1,4 @@
-export type CaseStudySlug = "tribunejustice" | "digitrans-cm" | "shopnow" | "lead-qualification-agent";
+export type CaseStudySlug = "tribunejustice" | "digitrans-cm" | "shopnow" | "lead-qualification-agent" | "easypharma";
 
 export interface CaseStudyMetric {
   value: string;
@@ -285,6 +285,126 @@ export const caseStudies: CaseStudy[] = [
         }
       ],
       repoUrl: "https://github.com/samsteeven/digitram-cm-microservices",
+      siteUrl: undefined
+    }
+  },
+  {
+    slug: "easypharma",
+    service: ["ingenierie-logicielle"],
+    coverPlaceholder: "#14532d",
+    coverImage: "",
+    fr: {
+      title: "EasyPharma — Recherche & Commande de Médicaments",
+      tagline: "3 plateformes livrées (Spring Boot, Angular, Flutter) pour la recherche et commande de médicaments au Cameroun — équipe de 4 coordonnée via GitHub Actions, 12+ PRs fusionnées, SonarQube et OWASP ZAP.",
+      role: "Tech Lead & Développeur Full-Stack",
+      period: "Novembre 2025 — Janvier 2026",
+      stack: ["Spring Boot", "Java 21", "Angular", "Flutter", "PostgreSQL", "Docker", "SonarQube", "GitHub Actions"],
+      services: ["Ingénierie logicielle"],
+      summary:
+        "Application de gestion de pharmacie et de commande de médicaments en ligne, livrée sur 3 plateformes (backend Spring Boot, web Angular, mobile Flutter) par une équipe de 4 développeurs que j'ai coordonnée : organisation par branches feature, revue et fusion de 12+ pull requests, pipeline GitHub Actions validant chaque contribution, analyse SonarQube et tests OWASP ZAP.",
+      metrics: [
+        { value: "3", label: "Plateformes livrées", description: "Backend Spring Boot, web Angular, mobile Flutter — une API partagée" },
+        { value: "12+", label: "Pull requests fusionnées", description: "Équipe de 4 coordonnée via branches feature + CI GitHub Actions" },
+        { value: "75", label: "Tests backend", description: "Unitaires et d'intégration (JUnit 5, Mockito, AssertJ)" },
+        { value: "DevSecOps", label: "Qualité & sécurité", description: "SonarQube dans la CI, OWASP ZAP, Docker Compose multi-services" }
+      ],
+      sections: [
+        {
+          id: "contexte",
+          title: "01. Le Contexte — Trouver un médicament au Cameroun",
+          content:
+            "Trouver un médicament au Cameroun, c'est souvent appeler pharmacie par pharmacie, sans savoir qui a le produit en stock, à quel prix, ni où il se trouve. EasyPharma répond à ce problème : une application de recherche et commande de médicaments connectant patients, pharmacies et livreurs. Projet de groupe du Semestre 1 (EADL), mené en équipe de 4 développeurs avec une exigence de livraison sur trois plateformes : backend, web et mobile.",
+          quote: "Livrer le même produit sur trois plateformes impose une seule discipline : une API unique, stable, que le web et le mobile consomment identiquement."
+        },
+        {
+          id: "architecture",
+          title: "02. Architecture, Livrables & Coordination d'Équipe",
+          content:
+            "J'ai assumé le rôle de Tech Lead : organisation des tâches par branches feature, revue de code et fusion des contributions de chaque membre via le pipeline GitHub Actions (build backend, build frontend, analyse SonarQube) — aucune PR ne passait sans build vert. Côté backend, une architecture propre en 4 couches (Spring Boot 3, Java 21) avec JWT, PostgreSQL/PostGIS pour la recherche géographique, migrations Flyway, Swagger et 75 tests. Le web est en Angular 21 (Cypress, Vitest) et le mobile en Flutter pour les rôles patient et livreur : panier avec vérification de stock groupé par pharmacie, commandes avec gestion des succès partiels, historique avec statuts colorés.",
+          highlights: [
+            {
+              title: "Clean Architecture Spring Boot",
+              description: "4 couches (présentation, application, domaine, infrastructure), JWT, PostgreSQL/PostGIS, Flyway, Swagger."
+            },
+            {
+              title: "Coordination d'équipe via GitHub",
+              description: "Branches feature, 12+ PRs revues et fusionnées, CI GitHub Actions exigeante (build + tests + SonarQube)."
+            },
+            {
+              title: "Recherche intelligente",
+              description: "Médicaments trouvés par nom, symptôme ou proximité géographique (PostGIS)."
+            },
+            {
+              title: "Qualité DevSecOps",
+              description: "SonarQube (backend + frontend), tests de pénétration OWASP ZAP, Docker Compose multi-services."
+            }
+          ]
+        },
+        {
+          id: "impact",
+          title: "03. Résultats & Enseignements",
+          content:
+            "Le produit est livré sur trois plateformes avec une qualité mesurée : 75 tests backend, SonarQube intégré à la CI, ZAP en sécurité. Coordonner une équipe sur un workflow git exigeant m'a confirmé que le rôle de Tech Lead dépasse le code — découper le travail en branches cohérentes, rendre la CI non négociable, et intégrer des contributions de niveaux variés sans casser la cohérence d'ensemble."
+        }
+      ],
+      repoUrl: "https://github.com/samsteeven/EasyPharma-App-Flutter",
+      siteUrl: undefined
+    },
+    en: {
+      title: "EasyPharma — Medicine Search & Ordering",
+      tagline: "3 platforms delivered (Spring Boot, Angular, Flutter) for medicine search and ordering in Cameroon — team of 4 coordinated via GitHub Actions, 12+ merged PRs, SonarQube and OWASP ZAP.",
+      role: "Tech Lead & Full-Stack Developer",
+      period: "November 2025 — January 2026",
+      stack: ["Spring Boot", "Java 21", "Angular", "Flutter", "PostgreSQL", "Docker", "SonarQube", "GitHub Actions"],
+      services: ["Software Engineering"],
+      summary:
+        "Online pharmacy management and medicine ordering application delivered on 3 platforms (Spring Boot backend, Angular web, Flutter mobile) by a team of 4 developers I coordinated: feature-branch organization, review and merge of 12+ pull requests, GitHub Actions pipeline validating every contribution, SonarQube analysis and OWASP ZAP testing.",
+      metrics: [
+        { value: "3", label: "Platforms delivered", description: "Spring Boot backend, Angular web, Flutter mobile — one shared API" },
+        { value: "12+", label: "Merged pull requests", description: "Team of 4 coordinated via feature branches + GitHub Actions CI" },
+        { value: "75", label: "Backend tests", description: "Unit and integration tests (JUnit 5, Mockito, AssertJ)" },
+        { value: "DevSecOps", label: "Quality & security", description: "SonarQube in CI, OWASP ZAP, multi-service Docker Compose" }
+      ],
+      sections: [
+        {
+          id: "context",
+          title: "01. The Context — Finding a Medicine in Cameroon",
+          content:
+            "Finding a medicine in Cameroon usually means calling pharmacies one by one — without knowing who has it in stock, at what price, or where. EasyPharma solves this: a medicine search and ordering application connecting patients, pharmacies and couriers. A Semester 1 group project (EADL), run by a team of 4 developers with a three-platform delivery requirement: backend, web and mobile.",
+          quote: "Delivering the same product on three platforms imposes one discipline: a single, stable API that web and mobile consume identically."
+        },
+        {
+          id: "architecture",
+          title: "02. Architecture, Deliverables & Team Coordination",
+          content:
+            "I took on the Tech Lead role: organizing tasks into feature branches, reviewing code and merging each member's contributions through the GitHub Actions pipeline (backend build, frontend build, SonarQube analysis) — no PR passed without a green build. On the backend, a clean 4-layer architecture (Spring Boot 3, Java 21) with JWT, PostgreSQL/PostGIS for geographic search, Flyway migrations, Swagger and 75 tests. The web is Angular 21 (Cypress, Vitest) and the mobile app is Flutter for patient and courier roles: cart with stock verification grouped by pharmacy, orders with partial-success handling, color-coded history.",
+          highlights: [
+            {
+              title: "Spring Boot Clean Architecture",
+              description: "4 layers (presentation, application, domain, infrastructure), JWT, PostgreSQL/PostGIS, Flyway, Swagger."
+            },
+            {
+              title: "Team coordination via GitHub",
+              description: "Feature branches, 12+ reviewed and merged PRs, demanding GitHub Actions CI (build + tests + SonarQube)."
+            },
+            {
+              title: "Intelligent search",
+              description: "Medicines found by name, symptom or geographic proximity (PostGIS)."
+            },
+            {
+              title: "DevSecOps quality",
+              description: "SonarQube (backend + frontend), OWASP ZAP penetration tests, multi-service Docker Compose."
+            }
+          ]
+        },
+        {
+          id: "impact",
+          title: "03. Results & Takeaways",
+          content:
+            "The product shipped on three platforms with measured quality: 75 backend tests, SonarQube in CI, ZAP for security. Coordinating a team on a demanding git workflow confirmed that the Tech Lead role goes beyond code — splitting work into coherent branches, making the CI non-negotiable, and integrating contributions of varying quality without breaking overall coherence."
+        }
+      ],
+      repoUrl: "https://github.com/samsteeven/EasyPharma-App-Flutter",
       siteUrl: undefined
     }
   },

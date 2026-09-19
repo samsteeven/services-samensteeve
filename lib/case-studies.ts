@@ -1,4 +1,4 @@
-export type CaseStudySlug = "tribunejustice" | "digitrans-cm" | "shopnow" | "lead-qualification-agent" | "easypharma";
+export type CaseStudySlug = "tribunejustice" | "digitrans-cm" | "shopnow" | "lead-qualification-agent" | "easypharma" | "second-brain";
 
 export interface CaseStudyMetric {
   value: string;
@@ -649,6 +649,126 @@ export const caseStudies: CaseStudy[] = [
         }
       ],
       repoUrl: undefined,
+      siteUrl: undefined
+    }
+  },
+  {
+    slug: "second-brain",
+    service: ["automatisation-ia", "architecture-cloud"],
+    coverPlaceholder: "#0f172a",
+    coverImage: "",
+    fr: {
+      title: "Second Brain - Base de connaissances accessible via MCP",
+      tagline: "Un second cerveau auto-hébergé : un vault Obsidian rendu lisible ET enrichissable par n'importe quelle IA via MCP - RAG local (Ollama + Qdrant), génération DeepSeek, écritures IA validées humainement.",
+      role: "Architecte IA & Ingénieur logiciel",
+      period: "Septembre 2026 - en cours",
+      stack: ["n8n", "MCP", "RAG", "Qdrant", "Ollama", "DeepSeek", "Docker", "GitHub"],
+      services: ["Automatisation IA", "Architecture cloud"],
+      summary:
+        "Projet personnel d'ingénierie IA : un second cerveau - une base de connaissances Obsidian versionnée sur un repo GitHub privé, indexée par n8n dans Qdrant (embeddings 100 % locaux Ollama bge-m3) et générée par DeepSeek V4 Flash Vision. Le tout est exposé à n'importe quelle IA via un serveur MCP dédié : lecture (RAG avec sources) et écriture (notes auto-classées, dédupliquées, en quarantaine jusqu'à validation humaine).",
+      metrics: [
+        { value: "5", label: "Workflows n8n en production", description: "Ingestion, KB Query, Add Note, Housekeeping, MCP Server" },
+        { value: "0", label: "Coût API supplémentaire", description: "Embeddings 100 % locaux (Ollama) + clé opencode existante" },
+        { value: "2", label: "Outils MCP", description: "second_brain_ask (lire) + second_brain_add (écrire) via une seule URL" },
+        { value: "75 %", label: "Seuil anti-doublon", description: "Écritures redondantes refusées, avertissement dès 55 % de similarité" }
+      ],
+      sections: [
+        {
+          id: "contexte",
+          title: "01. Le Contexte - Un contexte réexpliqué à chaque conversation",
+          content:
+            "Chaque conversation avec une IA repartait de zéro : je devais réexpliquer qui je suis, mes projets, mes compétences, mon CV. Un contexte dispersé, jamais à jour, et aucune IA n'a de mémoire durable que je contrôle. Je voulais une base de connaissances interrogeable ET enrichissable par n'importe quelle IA, sans dépendre d'un seul outil.",
+          quote: "L'IA n'a pas besoin de tout mémoriser : elle doit pouvoir lire ma base quand elle en a besoin - et n'y écrire qu'avec mon accord."
+        },
+        {
+          id: "architecture",
+          title: "02. Serveur MCP dédié, RAG local & validation humaine",
+          content:
+            "L'architecture repose sur un serveur MCP dédié (MCP Server Trigger + Custom Workflow Tool) qui n'expose que deux outils, sans jamais donner accès à l'administration n8n. La lecture passe par un RAG complet : embeddings locaux Ollama bge-m3, index sémantique Qdrant, génération DeepSeek V4 Flash Vision via la passerelle OpenCode Go. L'écriture est contrôlée : chaque note proposée par une IA est classée automatiquement (type, tags, dossier), vérifiée contre les doublons, et mise en quarantaine (status: pending) jusqu'à validation.",
+          highlights: [
+            {
+              title: "MCP scoped (2 outils seulement)",
+              description: "second_brain_ask + second_brain_add - jamais les outils d'administration n8n."
+            },
+            {
+              title: "Confidentialité par conception",
+              description: "Embeddings 100 % locaux (Ollama) sur mon VPS - aucun tiers n'indexe mes notes."
+            },
+            {
+              title: "Quarantaine & validation humaine",
+              description: "Aucune écriture IA n'entre dans la base sans validation (anti injection de prompt)."
+            },
+            {
+              title: "Dédoublonnage + classification",
+              description: "Similarité sémantique (refus ≥ 75 %), classement LLM (type, tags, dossier), rapport hebdomadaire."
+            }
+          ]
+        },
+        {
+          id: "impact",
+          title: "03. Impact & Résultats",
+          content:
+            "Une seule URL MCP suffit : ChatGPT, Claude, Cursor ou opencode peuvent lire ma base (réponses sourcées) et l'enrichir (notes classées, en quarantaine). Le tout tourne en production avec zéro coût d'API supplémentaire, et un pipeline de qualité (dédoublonnage à l'écriture, housekeeping hebdomadaire) maintient la base propre et bien classée."
+        }
+      ],
+      repoUrl: "https://github.com/samsteeven/sam-second-brain",
+      siteUrl: undefined
+    },
+    en: {
+      title: "Second Brain - AI-Accessible Personal Knowledge Base over MCP",
+      tagline: "A self-hosted second brain: an Obsidian vault made readable AND writable by any AI via MCP - local RAG (Ollama + Qdrant), DeepSeek generation, human-validated AI writes.",
+      role: "AI Architect & Software Engineer",
+      period: "September 2026 - ongoing",
+      stack: ["n8n", "MCP", "RAG", "Qdrant", "Ollama", "DeepSeek", "Docker", "GitHub"],
+      services: ["AI Automation", "Cloud Architecture"],
+      summary:
+        "Personal AI engineering project: a second brain - an Obsidian knowledge base versioned on a private GitHub repo, indexed by n8n into Qdrant (100% local Ollama bge-m3 embeddings) and generated with DeepSeek V4 Flash Vision. Exposed to any AI through a dedicated MCP server: reading (RAG with sources) and writing (auto-classified notes, deduplicated, held in quarantine until human validation).",
+      metrics: [
+        { value: "5", label: "Production n8n Workflows", description: "Ingestion, KB Query, Add Note, Housekeeping, MCP Server" },
+        { value: "0", label: "Extra API Cost", description: "100% local embeddings (Ollama) + existing opencode key" },
+        { value: "2", label: "MCP Tools", description: "second_brain_ask (read) + second_brain_add (write) behind a single URL" },
+        { value: "75%", label: "Duplicate Gate", description: "Redundant writes refused, warning from 55% similarity" }
+      ],
+      sections: [
+        {
+          id: "context",
+          title: "01. Re-Explaining Context in Every Conversation",
+          content:
+            "Every AI conversation started from zero: I had to re-explain who I am, my projects, my skills, my CV - scattered, outdated context, and no AI has a durable memory I control. I wanted a knowledge base any AI could query AND enrich, without depending on a single tool.",
+          quote: "An AI doesn't need to memorize everything: it should be able to read my base when needed - and only write to it with my approval."
+        },
+        {
+          id: "architecture",
+          title: "02. Dedicated MCP Server, Local RAG & Human Validation",
+          content:
+            "The architecture relies on a dedicated MCP server (MCP Server Trigger + Custom Workflow Tool) exposing only two tools, never n8n's admin surface. Reading runs through a full RAG: local Ollama bge-m3 embeddings, Qdrant semantic index, DeepSeek V4 Flash Vision generation via the OpenCode Go gateway. Writing is gated: every note proposed by an AI is auto-classified (type, tags, folder), checked against duplicates, and quarantined (status: pending) until validation.",
+          highlights: [
+            {
+              title: "Scoped MCP (2 tools only)",
+              description: "second_brain_ask + second_brain_add - never n8n's admin tools."
+            },
+            {
+              title: "Privacy by design",
+              description: "100% local embeddings (Ollama) on my VPS - no third party indexes my notes."
+            },
+            {
+              title: "Quarantine & human validation",
+              description: "No AI write enters the base without approval (anti prompt-injection)."
+            },
+            {
+              title: "Deduplication + classification",
+              description: "Semantic similarity (refuse ≥ 75%), LLM classification (type, tags, folder), weekly report."
+            }
+          ]
+        },
+        {
+          id: "impact",
+          title: "03. Impact & Results",
+          content:
+            "A single MCP URL is enough: ChatGPT, Claude, Cursor or opencode can read my base (sourced answers) and enrich it (classified, quarantined notes). Everything runs in production with zero extra API cost, and a quality pipeline (dedup on write, weekly housekeeping) keeps the base clean and well-organized."
+        }
+      ],
+      repoUrl: "https://github.com/samsteeven/sam-second-brain",
       siteUrl: undefined
     }
   }

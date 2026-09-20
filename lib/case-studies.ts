@@ -677,7 +677,7 @@ export const caseStudies: CaseStudy[] = [
           id: "contexte",
           title: "01. Le Contexte - Un contexte réexpliqué à chaque conversation",
           content:
-            "Chaque conversation avec une IA repartait de zéro : je devais réexpliquer qui je suis, mes projets, mes compétences, mon CV. Un contexte dispersé, jamais à jour, et aucune IA n'a de mémoire durable que je contrôle. Je voulais une base de connaissances interrogeable ET enrichissable par n'importe quelle IA, sans dépendre d'un seul outil.",
+            "Chaque conversation avec une IA repartait de zéro. La preuve la plus concrète, ce sont mes candidatures de stage : à chaque offre, je réadaptais mon CV, et l'IA qui m'aidait ne me connaissait pas, ou pas à jour. Je lui redonnais mon contexte, mes expériences, mes projets, ce qui collait à l'offre. Quand j'oubliais un détail, je repartais le chercher dans une autre IA. Mon profil était dispersé entre plusieurs IA, chacune avec sa version de moi. Je voulais une base de connaissances interrogeable ET enrichissable par n'importe quelle IA, sans dépendre d'un seul outil.",
           quote: "L'IA n'a pas besoin de tout mémoriser : elle doit pouvoir lire ma base quand elle en a besoin - et n'y écrire qu'avec mon accord."
         },
         {
@@ -740,7 +740,7 @@ export const caseStudies: CaseStudy[] = [
           id: "context",
           title: "01. Re-Explaining Context in Every Conversation",
           content:
-            "Every AI conversation started from zero: I had to re-explain who I am, my projects, my skills, my CV - scattered, outdated context, and no AI has a durable memory I control. I wanted a knowledge base any AI could query AND enrich, without depending on a single tool.",
+            "Every AI conversation started from zero. The most concrete proof was my internship applications: for every opening, I adapted my CV, and the AI helping me didn't know me, or was out of date. I re-explained my context, my experience, my projects, whatever matched the role. When I forgot a detail, I went back to another AI to find it. My profile was scattered across several AIs, each with its own version of me. I wanted a knowledge base any AI could query AND enrich, without depending on a single tool.",
           quote: "An AI doesn't need to memorize everything: it should be able to read my base when needed - and only write to it with my approval."
         },
         {

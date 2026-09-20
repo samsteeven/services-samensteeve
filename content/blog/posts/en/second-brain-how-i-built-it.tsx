@@ -13,6 +13,17 @@ export default function SecondBrainHowIBuiltIt() {
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
+        The architecture principles
+      </h2>
+      <p>Behind the tools, there&apos;s a chain of principles. It&apos;s what structures everything else.</p>
+      <CodeWindow
+        filename="Principles"
+        badge="Architecture"
+        code={`Source of truth\n      ↓\nProjection\n      ↓\nRetrieval\n      ↓\nControlled access\n      ↓\nControlled write\n      ↓\nVerification`}
+      />
+      <p>The vault is the source of truth. Everything else is just a projection of it. The AI never touches the source directly: it goes through controlled access, a controlled write, then human verification. That thread ties together everything that follows.</p>
+
+      <h2 className="font-display text-xl font-bold text-ink mt-8">
         The starting point: re-explaining my life to a machine
       </h2>
       <p>
@@ -95,6 +106,9 @@ export default function SecondBrainHowIBuiltIt() {
       />
       <p>
         In practice, in a Claude conversation, I can write &quot;query my second brain: what are my Laravel projects?&quot; and it searches my notes, with sources.
+      </p>
+      <p>
+        The key point isn&apos;t the RAG itself: a classic &quot;Obsidian + chatbot&quot; already does that. What changes everything is <strong>interoperability</strong>: the same base serves ChatGPT, Claude, Cursor and opencode, with no duplication. And the server exposes only my tools, never n8n&apos;s admin surface.
       </p>
 
       <ZoomableImage src="/blog/second-brain-mcp-server.png" alt="The dedicated MCP server and its tools" />

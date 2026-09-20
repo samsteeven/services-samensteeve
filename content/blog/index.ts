@@ -7,7 +7,7 @@ export const blogMetadata: PostMeta[] = [
   // ─── FRENCH POSTS ───
   {
     slug: "second-brain-comment-jai-construit",
-    title: "Construire un « second cerveau » pour mes IA, le récit complet étape par étape",
+    title: "Un « second cerveau » interopérable pour mes IA : source de vérité locale, RAG et MCP",
     excerpt: "D'une frustration quotidienne à un serveur MCP en production : les décisions, les problèmes rencontrés (et les solutions), et à quoi ça sert au quotidien.",
     date: "2026-09-20",
     tags: ["IA", "RAG", "MCP", "n8n", "Auto-hébergement"],
@@ -121,7 +121,7 @@ export const blogMetadata: PostMeta[] = [
   // ─── ENGLISH POSTS ───
   {
     slug: "second-brain-how-i-built-it",
-    title: "Building a 'second brain' for my AIs, the full story step by step",
+    title: "An interoperable 'second brain' for my AIs: local source of truth, RAG and MCP",
     excerpt: "From a daily frustration to a production MCP server: the decisions, the problems I hit (and how I solved them), and what it is useful for.",
     date: "2026-09-20",
     tags: ["AI", "RAG", "MCP", "n8n", "Self-hosting"],

@@ -9,8 +9,19 @@ export default function SecondBrainCommentJaiConstruit() {
         Je vais être honnête. Ce projet n&apos;est pas né d&apos;une envie de faire de l&apos;IA. Il est né d&apos;une frustration. Chaque fois que j&apos;ouvrais ChatGPT, Claude, Cursor ou opencode, je recommençais à zéro. Je réexpliquais qui je suis, mes projets, ma stack, mes études, ce que je cherchais. À chaque conversation. Mon contexte était éparpillé dans dix fichiers, jamais à jour, et aucune IA n&apos;a une mémoire durable que je contrôle.
       </p>
       <p>
-        Cet article raconte comment j&apos;ai construit un « second cerveau » pour régler ça.         Pas à pas, avec les galères et les solutions. Le résultat final m&apos;importe moins que le chemin pour y arriver.
+        Cet article raconte comment j&apos;ai construit un « second cerveau » pour régler ça. Pas à pas, avec les galères et les solutions. Le résultat final m&apos;importe moins que le chemin pour y arriver.
       </p>
+
+      <h2 className="font-display text-xl font-bold text-ink mt-8">
+        Les principes d&apos;architecture
+      </h2>
+      <p>Derrière les outils, il y a une chaîne de principes. C&apos;est elle qui structure tout le reste.</p>
+      <CodeWindow
+        filename="Principes"
+        badge="Architecture"
+        code={`Source de vérité\n      ↓\nProjection\n      ↓\nRetrieval\n      ↓\nAccès contrôlé\n      ↓\nÉcriture contrôlée\n      ↓\nVérification`}
+      />
+      <p>Le vault est la source de vérité. Tout le reste n&apos;en est qu&apos;une projection. L&apos;IA ne touche jamais la source directement : elle passe par un accès contrôlé, une écriture contrôlée, puis une vérification humaine. C&apos;est ce fil qui relie tout ce qui suit.</p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         Le point de départ : réexpliquer ma vie à une machine
@@ -95,6 +106,9 @@ export default function SecondBrainCommentJaiConstruit() {
       />
       <p>
         Concrètement, dans une conversation Claude, je peux écrire « interroge mon second cerveau : quels sont mes projets Laravel ? » et il va chercher dans mes notes, avec les sources.
+      </p>
+      <p>
+        Le point clé n&apos;est pas le RAG en lui-même : un « Obsidian + chatbot » classique fait déjà ça. Ce qui change tout, c&apos;est l&apos;<strong>interopérabilité</strong> : la même base sert à ChatGPT, Claude, Cursor et opencode, sans duplication. Et le serveur n&apos;expose que mes outils, jamais l&apos;administration de n8n.
       </p>
 
       <ZoomableImage src="/blog/second-brain-mcp-server.png" alt="Le serveur MCP dédié et ses outils" />

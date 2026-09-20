@@ -8,7 +8,7 @@ export default function SecondBrainHowIBuiltIt() {
         Let me be honest. This project wasn&apos;t born from a desire to &quot;do AI&quot;. It was born from frustration. Every time I opened ChatGPT, Claude, Cursor or opencode, I started from zero. I re-explained who I am, my projects, my stack, my studies, what I was looking for. Every single conversation. My context was scattered across ten files, never up to date, and no AI has a durable memory that I control.
       </p>
       <p>
-        This article tells how I built a &quot;second brain&quot; to fix that. Step by step, with the real struggles and the real solutions. Because that&apos;s where it gets interesting: not in the final result, but in the road to get there.
+        This article tells how I built a &quot;second brain&quot; to fix that. Step by step, with the struggles and the solutions. The final result matters less to me than the road to get there.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -20,7 +20,7 @@ export default function SecondBrainHowIBuiltIt() {
       <p>I wanted a memory that was:</p>
       <ul className="list-disc list-inside space-y-2">
         <li>mine, not locked inside a tool that might shut down tomorrow;</li>
-        <li>portable, readable by any AI, not only the one that created it;</li>
+        <li>portable, readable by any AI, whichever it is;</li>
         <li>readable and writable, so the AI can use it but also add to it, under my control;</li>
         <li>private, so my notes don&apos;t go off to be indexed by a third party.</li>
       </ul>
@@ -44,7 +44,7 @@ export default function SecondBrainHowIBuiltIt() {
         Step 2: the ingestion pipeline
       </h3>
       <p>
-        For an AI to read those notes, they must be turned into something searchable by meaning. That&apos;s the job of a RAG (Retrieval-Augmented Generation): split notes into pieces (chunks), compute a vector for each (a number that summarizes its meaning), and store them in a vector database.
+        For an AI to read those notes, they must be turned into data searchable by meaning. That&apos;s the job of a RAG (Retrieval-Augmented Generation): split notes into pieces (chunks), compute a vector for each (a number that summarizes its meaning), and store them in a vector database.
       </p>
       <p>My pipeline, orchestrated with n8n, which I already use everywhere:</p>
       <CodeWindow
@@ -167,7 +167,7 @@ export default function SecondBrainHowIBuiltIt() {
         The solution: make ingestion differential. Each piece gets a deterministic identifier, a hash of its content. Before computing, I ask Qdrant which identifiers already exist, and I only embed the new or changed ones.
       </p>
       <p>
-        The result: from three to six minutes, down to two seconds in steady state. Only the notes I just edited cost anything.
+        The result: from three to six minutes, down to two seconds in steady state. Only the notes I just edited cost time.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
@@ -177,11 +177,11 @@ export default function SecondBrainHowIBuiltIt() {
         The problem: two concurrent ingestion runs, one scheduled and one manual, and the base contained twice the same notes.
       </p>
       <p>
-        The solution: with deterministic identifiers, an upsert overwrites instead of appending. Two simultaneous runs produce exactly the same index.
+        The solution: with deterministic identifiers, an upsert overwrites instead of appending. Two simultaneous runs produce the same index.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        5. The data loss that really annoyed me
+        5. The data loss that annoyed me
       </h3>
       <p>
         The problem: while fixing duplicates, I introduced something worse. My cleanup deleted points missing from the current batch. But if a run had a stale view of the vault, it deleted the notes another run had just written. I lost four notes while testing. That kind of bug makes you doubt everything.
@@ -207,10 +207,10 @@ export default function SecondBrainHowIBuiltIt() {
         7. The false friend that made me doubt
       </h3>
       <p>
-        The problem: a node was called &quot;OpenRouter Model&quot;, but actually pointed to another gateway. A credential named &quot;OpenAI account&quot; had nothing to do with OpenAI. Result: hours hunting an inconsistency that was in the names.
+        The problem: a node was called &quot;OpenRouter Model&quot;, but pointed to another gateway. A credential named &quot;OpenAI account&quot; had nothing to do with OpenAI. Result: hours hunting an inconsistency that was in the names.
       </p>
       <p>
-        The solution: rename things by what they actually do, not by a brand. And turn it into a written rule in the project.
+        The solution: rename things by what they do, not by a brand. And turn it into a written rule in the project.
       </p>
       <p>
         The lesson: bad names cost more than they seem. A lying name is a bug waiting to happen.
@@ -223,11 +223,11 @@ export default function SecondBrainHowIBuiltIt() {
         The problem: an AI told me my base was misnamed, based on a screenshot that matched nothing in my repository. A file that never existed. I checked the entire Git history, zero trace.
       </p>
       <p>
-        The solution: the golden rule, verify at the source and never trust a screenshot. That&apos;s exactly the point of this project. An AI that makes things up is an AI without access to the truth. Here, it only has access to what&apos;s verified.
+        The solution: the golden rule, verify at the source and never trust a screenshot. That&apos;s the point of this project. An AI that makes things up is an AI without access to the truth. Here, it only has access to what&apos;s verified.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
-        What it&apos;s actually useful for
+        What it&apos;s useful for
       </h2>
       <p>
         This is the real question, and for a long time I hadn&apos;t put enough emphasis on it. Here&apos;s the concrete utility, today.
@@ -255,11 +255,11 @@ export default function SecondBrainHowIBuiltIt() {
         </div>
         <div className="rounded-xl border border-line bg-paper-raised/40 p-4">
           <h3 className="font-display text-sm font-bold text-ink mb-1">Feeding my articles and projects</h3>
-          <p className="text-sm text-ink-soft m-0">What I write here is fueled by the vault. My notes, retrospectives and articles no longer start from zero: they start from what I actually lived.</p>
+          <p className="text-sm text-ink-soft m-0">What I write here is fueled by the vault. My notes, retrospectives and articles no longer start from zero: they start from what I lived.</p>
         </div>
       </div>
       <p>
-        And beyond work, it&apos;s a memory for life: my projects, my goals, my admin. An AI that truly knows me, and knows me with my permission, because it&apos;s my base, on my server.
+        Beyond work, it&apos;s also a memory for life: my projects, my goals, my admin. An AI that knows me, and knows me with my permission, because it&apos;s my base, on my server.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -278,7 +278,7 @@ export default function SecondBrainHowIBuiltIt() {
         The foundation is solid, but nothing is frozen. Coming up: a chat interface (Telegram or WhatsApp) to query the brain without opening an MCP client, automatic capture (watch, ideas) so the base feeds itself, and ever more life notes. Because deep down, this isn&apos;t an AI project. It&apos;s a memory I&apos;m building, piece by piece.
       </p>
       <p className="mt-4">
-        If you&apos;re building something similar, start simple, put guardrails in before you get hurt, and document every trap. The problems I listed here, you&apos;ll hit too. Might as well let them serve you.
+        If you&apos;re building a similar project, start simple, put guardrails in before you get hurt, and document every trap. The problems I listed here, you&apos;ll hit too. Might as well let them serve you.
       </p>
     </article>
   );

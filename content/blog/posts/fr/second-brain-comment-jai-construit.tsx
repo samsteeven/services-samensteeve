@@ -8,7 +8,7 @@ export default function SecondBrainCommentJaiConstruit() {
         Je vais être honnête. Ce projet n&apos;est pas né d&apos;une envie de faire de l&apos;IA. Il est né d&apos;une frustration. Chaque fois que j&apos;ouvrais ChatGPT, Claude, Cursor ou opencode, je recommençais à zéro. Je réexpliquais qui je suis, mes projets, ma stack, mes études, ce que je cherchais. À chaque conversation. Mon contexte était éparpillé dans dix fichiers, jamais à jour, et aucune IA n&apos;a une mémoire durable que je contrôle.
       </p>
       <p>
-        Cet article raconte comment j&apos;ai construit un « second cerveau » pour régler ça. Pas à pas, avec les vraies galères et les vraies solutions. Parce que c&apos;est là que ça devient intéressant : pas dans le résultat final, mais dans le chemin pour y arriver.
+        Cet article raconte comment j&apos;ai construit un « second cerveau » pour régler ça.         Pas à pas, avec les galères et les solutions. Le résultat final m&apos;importe moins que le chemin pour y arriver.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -20,7 +20,7 @@ export default function SecondBrainCommentJaiConstruit() {
       <p>Je voulais une mémoire qui soit :</p>
       <ul className="list-disc list-inside space-y-2">
         <li>à moi, pas enfermée dans un outil qui peut fermer demain ;</li>
-        <li>portable, lisible par n&apos;importe quelle IA, pas seulement celle qui l&apos;a créée ;</li>
+        <li>portable, lisible par n&apos;importe quelle IA, quelle qu&apos;elle soit ;</li>
         <li>lisible et enrichissable, pour que l&apos;IA puisse s&apos;en servir mais aussi y ajouter, sous mon contrôle ;</li>
         <li>privée, pour que mes notes ne partent pas s&apos;indexer chez un tiers.</li>
       </ul>
@@ -44,7 +44,7 @@ export default function SecondBrainCommentJaiConstruit() {
         Étape 2 : le pipeline d&apos;ingestion
       </h3>
       <p>
-        Pour qu&apos;une IA puisse lire ces notes, il faut les transformer en quelque chose d&apos;interrogeable par le sens. C&apos;est le rôle d&apos;un RAG (Retrieval-Augmented Generation) : découper les notes en morceaux (chunks), calculer pour chacun un vecteur (un nombre qui résume son sens), et les stocker dans une base vectorielle.
+        Pour qu&apos;une IA puisse lire ces notes, il faut les transformer en données interrogeables par le sens. C&apos;est le rôle d&apos;un RAG (Retrieval-Augmented Generation) : découper les notes en morceaux (chunks), calculer pour chacun un vecteur (un nombre qui résume son sens), et les stocker dans une base vectorielle.
       </p>
       <p>Mon pipeline, orchestré avec n8n que j&apos;utilise déjà partout :</p>
       <CodeWindow
@@ -167,7 +167,7 @@ export default function SecondBrainCommentJaiConstruit() {
         La solution : rendre l&apos;ingestion différentielle. Chaque morceau reçoit un identifiant déterministe, un hash de son contenu. Avant de calculer, on demande à Qdrant quels identifiants existent déjà, et on n&apos;embarque que les nouveaux ou les modifiés.
       </p>
       <p>
-        Le résultat : de trois à six minutes, on passe à deux secondes en régime stable. Seules les notes que je viens de modifier coûtent quelque chose.
+        Le résultat : de trois à six minutes, on passe à deux secondes en régime stable. Seules les notes que je viens de modifier coûtent du temps.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
@@ -177,11 +177,11 @@ export default function SecondBrainCommentJaiConstruit() {
         Le problème : deux exécutions concurrentes de l&apos;ingestion, une planifiée et une manuelle, et la base contenait deux fois les mêmes notes.
       </p>
       <p>
-        La solution : avec des identifiants déterministes, un upsert écrase au lieu d&apos;ajouter. Deux exécutions simultanées produisent exactement le même index.
+        La solution : avec des identifiants déterministes, un upsert écrase au lieu d&apos;ajouter. Deux exécutions simultanées produisent le même index.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        5. La perte de données qui m&apos;a vraiment vexé
+        5. La perte de données qui m&apos;a agacé
       </h3>
       <p>
         Le problème : en corrigeant les doublons, j&apos;ai introduit pire. Mon nettoyage supprimait les points absents du lot courant. Mais si une exécution avait une vue périmée du vault, elle supprimait les notes qu&apos;une autre venait d&apos;écrire. J&apos;ai perdu quatre notes en testant. C&apos;est le genre de bug qui te fait douter de tout.
@@ -210,7 +210,7 @@ export default function SecondBrainCommentJaiConstruit() {
         Le problème : un nœud s&apos;appelait « OpenRouter Model », mais pointait en réalité vers une autre passerelle. Une credential nommée « OpenAI account » n&apos;avait rien d&apos;OpenAI. Résultat : des heures à chercher une incohérence qui était dans les noms.
       </p>
       <p>
-        La solution : renommer selon ce que les choses font réellement, pas selon une marque. Et en faire une règle écrite dans le projet.
+        La solution : renommer selon ce que les choses font, pas selon une marque. Et en faire une règle écrite dans le projet.
       </p>
       <p>
         La leçon : les mauvais noms coûtent plus cher qu&apos;ils n&apos;en ont l&apos;air. Un nom mensonger, c&apos;est un bug en attente.
@@ -223,7 +223,7 @@ export default function SecondBrainCommentJaiConstruit() {
         Le problème : une IA m&apos;a affirmé que ma base était mal nommée, en s&apos;appuyant sur une capture d&apos;écran qui ne correspondait à rien dans mon dépôt. Un fichier qui n&apos;a jamais existé. J&apos;ai vérifié l&apos;historique Git complet, zéro trace.
       </p>
       <p>
-        La solution : la règle d&apos;or, vérifier à la source et ne jamais faire confiance à une capture. C&apos;est exactement la raison d&apos;être de ce projet. Une IA qui invente, c&apos;est une IA qui n&apos;a pas accès à la vérité. Ici, elle n&apos;a accès qu&apos;à ce qui est vérifié.
+        La solution : la règle d&apos;or, vérifier à la source et ne jamais faire confiance à une capture. C&apos;est la raison d&apos;être de ce projet. Une IA qui invente, c&apos;est une IA qui n&apos;a pas accès à la vérité. Ici, elle n&apos;a accès qu&apos;à ce qui est vérifié.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -255,11 +255,11 @@ export default function SecondBrainCommentJaiConstruit() {
         </div>
         <div className="rounded-xl border border-line bg-paper-raised/40 p-4">
           <h3 className="font-display text-sm font-bold text-ink mb-1">Alimenter mes articles et mes projets</h3>
-          <p className="text-sm text-ink-soft m-0">Ce que j&apos;écris ici est nourri par le vault. Mes notes, mes retours d&apos;expérience et mes articles ne partent plus de zéro : ils partent de ce que j&apos;ai réellement vécu.</p>
+          <p className="text-sm text-ink-soft m-0">Ce que j&apos;écris ici est nourri par le vault. Mes notes, mes retours d&apos;expérience et mes articles ne partent plus de zéro : ils partent de ce que j&apos;ai vécu.</p>
         </div>
       </div>
       <p>
-        Et au-delà du travail, c&apos;est une mémoire de vie : mes projets, mes objectifs, mes démarches. Une IA qui me connaît vraiment, et qui me connaît avec ma permission, parce que c&apos;est ma base, sur mon serveur.
+        Au-delà du travail, c&apos;est aussi une mémoire de vie : mes projets, mes objectifs, mes démarches. Une IA qui me connaît, et qui me connaît avec ma permission, parce que c&apos;est ma base, sur mon serveur.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -278,7 +278,7 @@ export default function SecondBrainCommentJaiConstruit() {
         Le socle est solide, mais rien n&apos;est figé. Ce qui vient : une interface de chat (Telegram ou WhatsApp) pour interroger le cerveau sans ouvrir un client MCP, la capture automatique (veille, idées) pour que la base se nourrisse toute seule, et toujours plus de notes de vie. Parce qu&apos;au fond, ce projet n&apos;est pas un projet d&apos;IA. C&apos;est une mémoire que je construis, morceau par morceau.
       </p>
       <p className="mt-4">
-        Si tu construis quelque chose de similaire, commence simple, mets des garde-fous avant d&apos;avoir mal, et documente chaque piège. Les problèmes que j&apos;ai listés ici, tu les rencontreras aussi. Autant qu&apos;ils te servent.
+        Si tu construis un projet similaire, commence simple, mets des garde-fous avant d&apos;avoir mal, et documente chaque piège. Les problèmes que j&apos;ai listés ici, tu les rencontreras aussi. Autant qu&apos;ils te servent.
       </p>
     </article>
   );

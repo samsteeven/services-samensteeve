@@ -110,6 +110,8 @@ export default function SecondBrainCommentJaiConstruit() {
         Une note proposée par une IA arrive avec <code>status: pending</code>. Elle est invisible pour la recherche tant que je ne l&apos;ai pas validée à la main. Le pire qu&apos;une IA compromise puisse faire, c&apos;est écrire une note que je vois, que je peux corriger ou supprimer. Et tout est versionné par Git, donc réversible.
       </p>
 
+      <ZoomableImage src="/blog/second-brain-quarantine.png" alt="Le flux de quarantaine : l'IA écrit, la note reste invisible jusqu'à validation" />
+
       <h3 className="font-display text-base font-bold text-ink mt-6">
         Étape 6 : la qualité, classement, doublons, ménage
       </h3>

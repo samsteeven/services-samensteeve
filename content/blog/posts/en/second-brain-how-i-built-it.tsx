@@ -110,6 +110,8 @@ export default function SecondBrainHowIBuiltIt() {
         A note proposed by an AI arrives with <code>status: pending</code>. It&apos;s invisible to search until I&apos;ve validated it by hand. The worst a compromised AI can do is write a note I can see, that I can fix or delete. And everything is versioned by Git, so it&apos;s reversible.
       </p>
 
+      <ZoomableImage src="/blog/second-brain-quarantine.png" alt="The quarantine flow: the AI writes, the note stays invisible until validation" />
+
       <h3 className="font-display text-base font-bold text-ink mt-6">
         Step 6: quality, classification, duplicates, housekeeping
       </h3>

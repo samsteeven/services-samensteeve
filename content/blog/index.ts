@@ -7,12 +7,13 @@ export const blogMetadata: PostMeta[] = [
   // ─── FRENCH POSTS ───
   {
     slug: "second-brain-comment-jai-construit",
-    title: "Construire un « second cerveau » pour mes IA — le récit complet, étape par étape",
+    title: "Construire un « second cerveau » pour mes IA, le récit complet étape par étape",
     excerpt: "D'une frustration quotidienne à un serveur MCP en production : les décisions, les problèmes rencontrés (et les solutions), et à quoi ça sert au quotidien.",
     date: "2026-09-20",
     tags: ["IA", "RAG", "MCP", "n8n", "Auto-hébergement"],
     readTime: 8,
-    lang: "fr"
+    lang: "fr",
+    coverImage: "/blog/second-brain-architecture.png"
   },
   {
     slug: "integration-escrow-mobile-money-mesomb",
@@ -120,12 +121,13 @@ export const blogMetadata: PostMeta[] = [
   // ─── ENGLISH POSTS ───
   {
     slug: "second-brain-how-i-built-it",
-    title: "Building a 'second brain' for my AIs — the full story, step by step",
+    title: "Building a 'second brain' for my AIs, the full story step by step",
     excerpt: "From a daily frustration to a production MCP server: the decisions, the problems I hit (and how I solved them), and what it is useful for.",
     date: "2026-09-20",
     tags: ["AI", "RAG", "MCP", "n8n", "Self-hosting"],
     readTime: 8,
-    lang: "en"
+    lang: "en",
+    coverImage: "/blog/second-brain-architecture.png"
   },
   {
     slug: "integrating-mesomb-mobile-money",

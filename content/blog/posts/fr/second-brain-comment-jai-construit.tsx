@@ -1,5 +1,6 @@
 import React from "react";
 import { CodeWindow } from "@/components/code-window";
+import { ZoomableImage } from "@/components/zoomable-image";
 
 export default function SecondBrainCommentJaiConstruit() {
   return (
@@ -30,6 +31,9 @@ export default function SecondBrainCommentJaiConstruit() {
         La construction, étape par étape
       </h2>
 
+      <ZoomableImage src="/blog/second-brain-architecture.png" alt="Architecture du second cerveau : ingestion Obsidian, Git, n8n, Qdrant et Ollama, accès via MCP" />
+      <p className="text-xs text-ink-soft text-center italic mb-6">Vue d&apos;ensemble. Le vault est la source de vérité, l&apos;ingestion le projette dans Qdrant, et le serveur MCP l&apos;ouvre à n&apos;importe quelle IA.</p>
+
       <h3 className="font-display text-base font-bold text-ink mt-6">
         Étape 1 : le vault Obsidian comme source de vérité
       </h3>
@@ -39,6 +43,9 @@ export default function SecondBrainCommentJaiConstruit() {
       <p>
         C&apos;est le socle. Le vault est la seule source de vérité. Tout le reste n&apos;est qu&apos;une projection de ce vault.
       </p>
+
+      <ZoomableImage src="/blog/second-brain-vault.png" alt="Le vault Obsidian : arborescence et vue graphique des notes" />
+      <p className="text-xs text-ink-soft text-center italic mb-6">Des fichiers Markdown, un sujet par note, reliés entre eux par des liens.</p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
         Étape 2 : le pipeline d&apos;ingestion
@@ -58,6 +65,9 @@ export default function SecondBrainCommentJaiConstruit() {
       <p>
         Point important : l&apos;ingestion tourne toutes les 30 minutes. J&apos;écris dans Obsidian, je pousse, et trente minutes plus tard c&apos;est interrogeable. Pas de bouton à cliquer.
       </p>
+
+      <ZoomableImage src="/blog/second-brain-ingestion.png" alt="Le workflow n8n d'ingestion : de GitHub à Qdrant, avec le filtre différentiel" />
+      <p className="text-xs text-ink-soft text-center italic mb-6">Le pipeline d&apos;ingestion dans n8n : lecture du vault, découpage, filtre des chunks déjà indexés, embeddings, upsert et nettoyage.</p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
         Étape 3 : le RAG, poser une question
@@ -86,6 +96,9 @@ export default function SecondBrainCommentJaiConstruit() {
       <p>
         Concrètement, dans une conversation Claude, je peux écrire « interroge mon second cerveau : quels sont mes projets Laravel ? » et il va chercher dans mes notes, avec les sources.
       </p>
+
+      <ZoomableImage src="/blog/second-brain-mcp-server.png" alt="Le serveur MCP dédié et ses outils" />
+      <p className="text-xs text-ink-soft text-center italic mb-6">Le serveur MCP expose uniquement mes outils (lecture, écriture en quarantaine, lecture de la source), jamais l&apos;administration de n8n.</p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
         Étape 5 : l&apos;écriture contrôlée, la quarantaine
@@ -125,6 +138,8 @@ export default function SecondBrainCommentJaiConstruit() {
       <p>
         C&apos;est la partie dont je suis le plus fier, parce qu&apos;elle est invisible et qu&apos;elle a demandé le plus de réflexion. Aujourd&apos;hui, quand rien n&apos;a changé, l&apos;ingestion tourne en deux secondes au lieu de trois à six minutes. Et elle ne peut jamais dupliquer ni perdre une note, même si deux exécutions tournent en même temps.
       </p>
+
+      <ZoomableImage src="/blog/second-brain-perf.png" alt="Avant / après : l'ingestion passe de plusieurs minutes à deux secondes" />
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         Les problèmes rencontrés (et comment je les ai réglés)

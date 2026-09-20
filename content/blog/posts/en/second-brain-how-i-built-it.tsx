@@ -1,5 +1,6 @@
 import React from "react";
 import { CodeWindow } from "@/components/code-window";
+import { ZoomableImage } from "@/components/zoomable-image";
 
 export default function SecondBrainHowIBuiltIt() {
   return (
@@ -30,6 +31,9 @@ export default function SecondBrainHowIBuiltIt() {
         Building it, step by step
       </h2>
 
+      <ZoomableImage src="/blog/second-brain-architecture.png" alt="Second brain architecture: ingestion Obsidian, Git, n8n, Qdrant and Ollama, access over MCP" />
+      <p className="text-xs text-ink-soft text-center italic mb-6">The big picture. The vault is the source of truth, ingestion projects it into Qdrant, and the MCP server opens it to any AI.</p>
+
       <h3 className="font-display text-base font-bold text-ink mt-6">
         Step 1: the Obsidian vault as the source of truth
       </h3>
@@ -39,6 +43,9 @@ export default function SecondBrainHowIBuiltIt() {
       <p>
         That&apos;s the foundation. The vault is the single source of truth. Everything else is just a projection of it.
       </p>
+
+      <ZoomableImage src="/blog/second-brain-vault.png" alt="The Obsidian vault: folder tree and graph view of the notes" />
+      <p className="text-xs text-ink-soft text-center italic mb-6">Markdown files, one topic per note, linked to each other.</p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
         Step 2: the ingestion pipeline
@@ -58,6 +65,9 @@ export default function SecondBrainHowIBuiltIt() {
       <p>
         Important: ingestion runs every 30 minutes. I write in Obsidian, push, and thirty minutes later it&apos;s queryable. No button to click.
       </p>
+
+      <ZoomableImage src="/blog/second-brain-ingestion.png" alt="The n8n ingestion workflow: from GitHub to Qdrant, with the differential filter" />
+      <p className="text-xs text-ink-soft text-center italic mb-6">The ingestion pipeline in n8n: reading the vault, chunking, filtering already-indexed chunks, embeddings, upsert and cleanup.</p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
         Step 3: the RAG, asking a question
@@ -86,6 +96,9 @@ export default function SecondBrainHowIBuiltIt() {
       <p>
         In practice, in a Claude conversation, I can write &quot;query my second brain: what are my Laravel projects?&quot; and it searches my notes, with sources.
       </p>
+
+      <ZoomableImage src="/blog/second-brain-mcp-server.png" alt="The dedicated MCP server and its tools" />
+      <p className="text-xs text-ink-soft text-center italic mb-6">The MCP server exposes only my tools (read, quarantined write, source reading), never n8n&apos;s admin surface.</p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
         Step 5: controlled writing, quarantine
@@ -125,6 +138,8 @@ export default function SecondBrainHowIBuiltIt() {
       <p>
         This is the part I&apos;m proudest of, because it&apos;s invisible and it took the most thought. Today, when nothing has changed, ingestion runs in two seconds instead of three to six minutes. And it can never duplicate or lose a note, even if two executions run at the same time.
       </p>
+
+      <ZoomableImage src="/blog/second-brain-perf.png" alt="Before / after: ingestion drops from several minutes to two seconds" />
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         The problems I hit (and how I solved them)

@@ -168,7 +168,7 @@ export function renderContactEmail(
   `;
 
   return {
-    subject: `[Services] Nouveau projet — ${subjectName} (${subjectTypes})`,
+    subject: `[Services] Nouveau projet, ${subjectName} (${subjectTypes})`,
     html,
   };
 }

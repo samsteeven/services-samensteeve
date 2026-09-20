@@ -39,7 +39,7 @@ export function createPageMetadata({
     : { url: absoluteImage, alt: title };
 
   return {
-    title: `${title} — Samen Steeve`,
+    title: `${title} : Samen Steeve`,
     description,
     alternates: {
       canonical: canonicalUrl,

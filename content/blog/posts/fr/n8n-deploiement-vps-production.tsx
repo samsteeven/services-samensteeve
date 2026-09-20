@@ -12,7 +12,7 @@ export default function N8nDeploiementVpsProduction() {
         Le contexte : rentabiliser un VPS déjà en place
       </h2>
       <p>
-        Pour mes propres automatisations — un pipeline de qualification de leads qui intercepte les soumissions de formulaire de contact, les enrichit via une recherche web, les score, et alimente une CRM partagée, plus un assistant CRM WhatsApp — j&apos;avais besoin d&apos;un orchestrateur de workflows. Plutôt que de payer un abonnement cloud facturé à l&apos;exécution, j&apos;ai choisi d&apos;auto-héberger <a href="https://n8n.io" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2">n8n</a> sur un VPS déjà utilisé pour mon activité — histoire de rentabiliser des ressources disponibles plutôt que de multiplier les infrastructures.
+        Pour mes propres automatisations, un pipeline de qualification de leads qui intercepte les soumissions de formulaire de contact, les enrichit via une recherche web, les score, et alimente une CRM partagée, plus un assistant CRM WhatsApp, j&apos;avais besoin d&apos;un orchestrateur de workflows. Plutôt que de payer un abonnement cloud facturé à l&apos;exécution, j&apos;ai choisi d&apos;auto-héberger <a href="https://n8n.io" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2">n8n</a> sur un VPS déjà utilisé pour mon activité, histoire de rentabiliser des ressources disponibles plutôt que de multiplier les infrastructures.
       </p>
       <p>
         Le VPS tournait déjà sous Ubuntu, avec Docker, nginx, Redis et une base MySQL locale. L&apos;objectif : ajouter n8n proprement, via un sous-domaine dédié, sans affecter la disponibilité du reste.
@@ -22,14 +22,14 @@ export default function N8nDeploiementVpsProduction() {
         L&apos;architecture retenue : isolation complète
       </h2>
       <p>
-        La tentation était de faire cohabiter n8n avec la base MySQL de production. J&apos;ai refusé — un crash ou une saturation de disque côté n8n aurait eu un impact direct sur le site principal. L&apos;architecture retenue repose sur une isolation stricte :
+        La tentation était de faire cohabiter n8n avec la base MySQL de production. J&apos;ai refusé, un crash ou une saturation de disque côté n8n aurait eu un impact direct sur le site principal. L&apos;architecture retenue repose sur une isolation stricte :
       </p>
       <div className="border border-line rounded-xl bg-paper/60 p-4 font-mono text-xs text-ink/80 space-y-1">
-        <div>— Un conteneur <code>PostgreSQL 16</code> dédié (n8n recommande officiellement Postgres, pas MySQL, en production)</div>
-        <div>— Un réseau Docker isolé reliant uniquement n8n et sa base</div>
-        <div>— n8n exposé uniquement sur <code>127.0.0.1:5678</code>, jamais directement sur internet</div>
-        <div>— Le nginx existant configuré avec un <code>server_block</code> dédié pour <code>n8n.samensteeve.com</code></div>
-        <div>— Des limites CPU/mémoire sur les conteneurs pour ne pas empiéter sur le projet principal</div>
+        <div>• Un conteneur <code>PostgreSQL 16</code> dédié (n8n recommande officiellement Postgres, pas MySQL, en production)</div>
+        <div>• Un réseau Docker isolé reliant uniquement n8n et sa base</div>
+        <div>• n8n exposé uniquement sur <code>127.0.0.1:5678</code>, jamais directement sur internet</div>
+        <div>• Le nginx existant configuré avec un <code>server_block</code> dédié pour <code>n8n.samensteeve.com</code></div>
+        <div>• Des limites CPU/mémoire sur les conteneurs pour ne pas empiéter sur le projet principal</div>
       </div>
       <p>
         Cette isolation garantit qu&apos;un problème sur n8n (crash, faille, usage disque excessif) n&apos;affecte jamais la disponibilité du site principal ni l&apos;intégrité de sa base de données.
@@ -43,7 +43,7 @@ export default function N8nDeploiementVpsProduction() {
         1. Préparer l&apos;arborescence dédiée
       </h3>
       <CodeWindow
-        filename="Terminal — Bash"
+        filename="Terminal · Bash"
         badge="Bash"
         code={`sudo mkdir -p /opt/n8n
 cd /opt/n8n
@@ -57,7 +57,7 @@ sudo mkdir -p n8n_data postgres_data`}
         Cette clé chiffre tous les credentials stockés par n8n (mots de passe d&apos;API, tokens OAuth).
       </p>
       <CodeWindow
-        filename="Terminal — OpenSSL"
+        filename="Terminal · OpenSSL"
         badge="Secret"
         code={`openssl rand -hex 32`}
       />
@@ -172,7 +172,7 @@ networks:
         2. Le sous-domaine flaggé "site dangereux" par Google
       </h3>
       <p>
-        Le plus instructif des trois. Une fois le service opérationnel et le HTTPS activé, Chrome s&apos;est mis à bloquer brutalement l&apos;accès au sous-domaine avec un avertissement rouge d&apos;hameçonnage — alors que le contenu était parfaitement légitime.
+        Le plus instructif des trois. Une fois le service opérationnel et le HTTPS activé, Chrome s&apos;est mis à bloquer brutalement l&apos;accès au sous-domaine avec un avertissement rouge d&apos;hameçonnage, alors que le contenu était parfaitement légitime.
       </p>
 
       {/* Screenshot 1 : Avertissement Google Safe Browsing */}
@@ -219,46 +219,46 @@ networks:
         Ce qui tourne en production aujourd&apos;hui
       </h2>
       <p>
-        L&apos;instance n8n est déployée et sécurisée sur n8n.samensteeve.com (2FA, sauvegardes PostgreSQL automatisées). Le <strong>Lead Qualification Agent</strong> y tourne en production, connecté au WhatsApp CRM Assistant (construit et testé) par une <strong>même Data Table CRM</strong> — le cœur du système.
+        L&apos;instance n8n est déployée et sécurisée sur n8n.samensteeve.com (2FA, sauvegardes PostgreSQL automatisées). Le <strong>Lead Qualification Agent</strong> y tourne en production, connecté au WhatsApp CRM Assistant (construit et testé) par une <strong>même Data Table CRM</strong>, le cœur du système.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        Lead Qualification Agent (écriture) — en production
+        Lead Qualification Agent (écriture), en production
       </h3>
       <p>
-        Agent IA autonome qui intercepte les soumissions de formulaire, enrichit les données via Tavily, score le lead de 1 à 10, et <strong>écrit</strong> dans la CRM Data Table (upsert par email). Email de notification personnalisé envoyé au prospect en &lt; 30 secondes. Mémoire Redis, Output Parser strict (schéma JSON contraint), retry sur Gmail et Tavily. Webhook sécurisé par header + filtrage IP — le workflow est publié et reçoit les soumissions de formulaire.
+        Agent IA autonome qui intercepte les soumissions de formulaire, enrichit les données via Tavily, score le lead de 1 à 10, et <strong>écrit</strong> dans la CRM Data Table (upsert par email). Email de notification personnalisé envoyé au prospect en &lt; 30 secondes. Mémoire Redis, Output Parser strict (schéma JSON contraint), retry sur Gmail et Tavily. Webhook sécurisé par header + filtrage IP, le workflow est publié et reçoit les soumissions de formulaire.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        WhatsApp CRM Assistant (lecture &amp; opérationnel) — en attente de credentials
+        WhatsApp CRM Assistant (lecture &amp; opérationnel), en attente de credentials
       </h3>
       <p>
-        Agent WhatsApp qui permet de <strong>lire</strong> et interroger la même CRM en langage naturel — consulter les leads récents, chercher par email, mettre à jour un statut, envoyer un email professionnel. Mémoire Redis pour le contexte conversationnel. Construit et testé en manuel ; la publication n&apos;attend que les credentials WhatsApp Business.
+        Agent WhatsApp qui permet de <strong>lire</strong> et interroger la même CRM en langage naturel, consulter les leads récents, chercher par email, mettre à jour un statut, envoyer un email professionnel. Mémoire Redis pour le contexte conversationnel. Construit et testé en manuel ; la publication n&apos;attend que les credentials WhatsApp Business.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
         Le pipeline complet
       </h3>
       <p>
-        Les deux workflows forment un système unifié : le Lead Agent <strong>peuple</strong> la CRM avec des leads qualifiés et enrichis, le WhatsApp Assistant permet de <strong>consulter</strong> et <strong>agir</strong> sur ces données directement depuis WhatsApp — sans ouvrir l&apos;interface n8n. Mémoire Redis partagée pour la continuité conversationnelle entre les deux agents.
+        Les deux workflows forment un système unifié : le Lead Agent <strong>peuple</strong> la CRM avec des leads qualifiés et enrichis, le WhatsApp Assistant permet de <strong>consulter</strong> et <strong>agir</strong> sur ces données directement depuis WhatsApp, sans ouvrir l&apos;interface n8n. Mémoire Redis partagée pour la continuité conversationnelle entre les deux agents.
       </p>
 
       <div className="rounded-xl border border-accent/20 bg-accent/5 p-4 font-mono text-xs text-ink/80 space-y-1">
-        <div>— Chaque workflow a sa propre logique de sécurité : Header Auth (<code>n8n-webhook-secret</code>) pour le Lead Agent, authentification WhatsApp Business pour le CRM Assistant (une fois ses credentials renseignées).</div>
-        <div>— <code>retryOnFail</code> configuré sur les nœuds critiques (Gmail, Tavily, HTTP).</div>
-        <div>— Mémoire Redis partagée pour la persistance conversationnelle.</div>
+        <div>• Chaque workflow a sa propre logique de sécurité : Header Auth (<code>n8n-webhook-secret</code>) pour le Lead Agent, authentification WhatsApp Business pour le CRM Assistant (une fois ses credentials renseignées).</div>
+        <div>• <code>retryOnFail</code> configuré sur les nœuds critiques (Gmail, Tavily, HTTP).</div>
+        <div>• Mémoire Redis partagée pour la persistance conversationnelle.</div>
       </div>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         La sécurisation finale &amp; Ce que je retiens
       </h2>
       <div className="border border-line rounded-xl bg-paper/60 p-4 font-mono text-xs text-ink/80 space-y-1">
-        <div>— <strong>2FA</strong> activée sur le compte administrateur</div>
-        <div>— <strong>Backups automatisés</strong> (dump PostgreSQL quotidien) via script cron, rotation sur 7 jours</div>
-        <div>— Compte owner <strong>verrouillé après création</strong> — tout nouvel utilisateur doit être invité explicitement</div>
+        <div>• <strong>2FA</strong> activée sur le compte administrateur</div>
+        <div>• <strong>Backups automatisés</strong> (dump PostgreSQL quotidien) via script cron, rotation sur 7 jours</div>
+        <div>• Compte owner <strong>verrouillé après création</strong>, tout nouvel utilisateur doit être invité explicitement</div>
       </div>
       <p className="mt-4">
-        Ce type de déploiement — modeste en apparence — mobilise tout un spectre de compétences : architecture système (isolation, réseaux Docker), sécurité (permissions, chiffrement, authentification), réseau (DNS, reverse proxy, certificats SSL), et une méthode rigoureuse pour diagnostiquer des pannes réelles.
+        Ce type de déploiement, modeste en apparence, mobilise tout un spectre de compétences : architecture système (isolation, réseaux Docker), sécurité (permissions, chiffrement, authentification), réseau (DNS, reverse proxy, certificats SSL), et une méthode rigoureuse pour diagnostiquer des pannes réelles.
       </p>
     </article>
   );

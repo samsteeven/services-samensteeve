@@ -20,7 +20,7 @@ export const fr = {
   },
   hero: {
     status: "Disponible pour de nouveaux projets",
-    title: "Je conçois, sécurise et automatise des systèmes logiciels pour des entreprises qui ont besoin que ça fonctionne en production — pas juste en démo.",
+    title: "Je conçois, sécurise et automatise des systèmes logiciels pour des entreprises qui ont besoin que ça fonctionne en production : pas juste en démo.",
     subtitle: "Ingénieur logiciel Tech Lead & Spécialiste automatisation IA basé à Paris, France. J'interviens en freelance pour structurer votre backend, sécuriser vos architectures cloud et intégrer des agents IA autonomes dans vos workflows métiers.",
     heroSub: "Ingénieur logiciel indépendant et Tech Lead basé à Paris. Je conçois des systèmes logiciels robustes, déploie des infrastructures cloud hybrides et automatise vos workflows métier avec des agents IA supervisables.",
     availability: "Disponible · Paris, France",
@@ -48,10 +48,10 @@ export const fr = {
         title: "Ingénierie Logicielle",
         punchline: "La plupart des projets logiciels livrent des écrans. Je construis des systèmes fiables, maintenables et faits pour durer sans dépendre du développeur.",
         shortDesc: "Conception, développement et industrialisation de logiciels de production robustes : architecture, APIs, backends critiques et interfaces métier.",
-        longDesc: "La plupart des projets logiciels livrent des interfaces. Ce qui manque ensuite : un système qui tient sous la charge, que votre équipe peut maintenir, et qui reflète vraiment vos processus métier. Je prends en charge la construction complète — cadrage fonctionnel, architecture applicative, backend, APIs, frontend, tests et déploiement. Ce que vous recevez à la fin : un produit robuste que vous possédez à 100% et que vous pouvez faire évoluer sereinement.",
+        longDesc: "La plupart des projets logiciels livrent des interfaces. Ce qui manque ensuite : un système qui tient sous la charge, que votre équipe peut maintenir, et qui reflète vraiment vos processus métier. Je prends en charge la construction complète, cadrage fonctionnel, architecture applicative, backend, APIs, frontend, tests et déploiement. Ce que vous recevez à la fin : un produit robuste que vous possédez à 100% et que vous pouvez faire évoluer sereinement.",
         stack: ["Architecture applicative", "Backend & APIs", "Frontend produit", "Bases de données", "Intégrations métier", "Tests & CI/CD", "Observabilité", "Documentation"],
         outcomes: [
-          "Un produit logiciel fiable, maintenable et aligné sur vos processus métier — pas une simple maquette livrée sans suivi.",
+          "Un produit logiciel fiable, maintenable et aligné sur vos processus métier, pas une simple maquette livrée sans suivi.",
           "Une architecture capable d'absorber la montée en charge sans transformer chaque nouvelle fonctionnalité en dette technique.",
           "Des workflows critiques sécurisés : paiements, gestion des rôles, validations complexes, synchronisation, recherche et reporting.",
           "Une base de code propre, entièrement documentée, testée et transmissible à vos équipes."
@@ -99,7 +99,7 @@ export const fr = {
         title: "Architecture Cloud & Hybride",
         punchline: "La plupart des architectures cloud supposent une fibre garantie et un courant continu. Je conçois des infrastructures résilientes (AWS/Azure/Hybride) taillées pour les contraintes réelles du terrain.",
         shortDesc: "Infrastructures cloud et hybrides résilientes (AWS/Azure) : interconnexion multi-sites, basculement automatique, tolérance aux coupures et maîtrise des coûts.",
-        longDesc: "La plupart des architectures cloud sont conçues pour des environnements idéaux : connectivité stable, courant continu, équipes IT pléthoriques. La réalité du terrain est rarement celle-là. Je conçois des infrastructures hybrides et cloud résilientes qui continuent de fonctionner quand le lien MPLS tombe, quand le courant coupe et quand vos données doivent respecter des exigences de souveraineté locale. Le modèle hybride n'est pas un compromis — c'est l'architecture responsable pour maintenir la continuité d'activité.",
+        longDesc: "La plupart des architectures cloud sont conçues pour des environnements idéaux : connectivité stable, courant continu, équipes IT pléthoriques. La réalité du terrain est rarement celle-là. Je conçois des infrastructures hybrides et cloud résilientes qui continuent de fonctionner quand le lien MPLS tombe, quand le courant coupe et quand vos données doivent respecter des exigences de souveraineté locale. Le modèle hybride n'est pas un compromis, c'est l'architecture responsable pour maintenir la continuité d'activité.",
         stack: ["Cloud AWS/Azure", "Infrastructure hybride", "Réseau & VPN", "IaC Terraform", "Sauvegarde & PRA", "Monitoring", "Identité Microsoft 365", "Runbooks"],
         outcomes: [
           "Une infrastructure résiliente aux pannes : basculement automatique des liens réseau, sauvegardes redondantes et PCA/PRA testé.",
@@ -147,21 +147,21 @@ export const fr = {
       },
       "audit-securite": {
         title: "Audit Sécurité & Pentest",
-        punchline: "J'évalue vos systèmes comme un attaquant réel. L'objectif n'est pas une liste de failles — c'est une lecture claire de votre risque réel, comment il peut être exploité, et par où commencer pour le réduire.",
-        shortDesc: "Analyse d'exposition, tests d'intrusion (infra, applicatif, cloud AWS/Azure/GCP) et rapport de remédiation priorisé par impact métier — pas un scan automatique, une évaluation manuelle orientée décision.",
-        longDesc: "Vous n'avez pas besoin d'un simple scan automatique. Vous avez besoin d'une lecture claire de votre exposition réelle, de vos points de fragilité et des scénarios d'attaque les plus crédibles dans votre contexte. La majorité des incidents sérieux ne commencent pas par une attaque spectaculaire — ils commencent par une erreur de configuration, un accès trop large, une permission oubliée. J'évalue vos systèmes selon trois axes : analyse d'exposition externe, tests d'intrusion (infra interne, applicatif web/API/mobile, OWASP) et audit cloud (AWS, Azure, GCP). Chaque mission est cadrée selon votre organisation, votre maturité sécurité et vos priorités métier.",
+        punchline: "J'évalue vos systèmes comme un attaquant réel. L'objectif n'est pas une liste de failles, c'est une lecture claire de votre risque réel, comment il peut être exploité, et par où commencer pour le réduire.",
+        shortDesc: "Analyse d'exposition, tests d'intrusion (infra, applicatif, cloud AWS/Azure/GCP) et rapport de remédiation priorisé par impact métier, pas un scan automatique, une évaluation manuelle orientée décision.",
+        longDesc: "Vous n'avez pas besoin d'un simple scan automatique. Vous avez besoin d'une lecture claire de votre exposition réelle, de vos points de fragilité et des scénarios d'attaque les plus crédibles dans votre contexte. La majorité des incidents sérieux ne commencent pas par une attaque spectaculaire, ils commencent par une erreur de configuration, un accès trop large, une permission oubliée. J'évalue vos systèmes selon trois axes : analyse d'exposition externe, tests d'intrusion (infra interne, applicatif web/API/mobile, OWASP) et audit cloud (AWS, Azure, GCP). Chaque mission est cadrée selon votre organisation, votre maturité sécurité et vos priorités métier.",
         stack: ["Analyse d'exposition", "Pentest infra", "Pentest applicatif", "OWASP Top 10", "Audit cloud AWS/Azure/GCP", "Active Directory", "Red Team", "Boîte noire/grise/blanche"],
         outcomes: [
-          "Une lecture claire de votre exposition réelle : failles exploitables, leur gravité et leur portée opérationnelle — pas une liste brute de scanners.",
+          "Une lecture claire de votre exposition réelle : failles exploitables, leur gravité et leur portée opérationnelle, pas une liste brute de scanners.",
           "Des preuves d'exploitation compréhensibles par la direction pour décider vite, et actionnables par vos équipes techniques pour corriger efficacement.",
           "Un plan de remédiation priorisé par ordre d'impact métier, avec des recommandations concrètes et structurées.",
           "Un rapport de retest pour confirmer que les failles corrigées ne sont plus exploitables et réduire le risque résiduel."
         ],
         scope: [
-          "Exposition externe : services, interfaces et configurations visibles depuis Internet — scan des IPs/domaines, cartographie des services, exploitation manuelle des cibles sensibles.",
-          "Systèmes internes : simulation d'un attaquant ayant accès réseau (VPN compromis, Wi-Fi, accès physique) — cartographie Active Directory, élévation de privilèges, accès aux données sensibles.",
+          "Exposition externe : services, interfaces et configurations visibles depuis Internet, scan des IPs/domaines, cartographie des services, exploitation manuelle des cibles sensibles.",
+          "Systèmes internes : simulation d'un attaquant ayant accès réseau (VPN compromis, Wi-Fi, accès physique), cartographie Active Directory, élévation de privilèges, accès aux données sensibles.",
           "Applications web, APIs REST/GraphQL et mobiles (Android/iOS) : parcours d'authentification, flux à fort impact (facturation, administration, export) et logique métier selon l'OWASP.",
-          "Environnements cloud (AWS/Azure/GCP) : configurations IAM, buckets exposés, règles de firewall permissives, secrets dans les variables d'environnement — conformes aux benchmarks CIS."
+          "Environnements cloud (AWS/Azure/GCP) : configurations IAM, buckets exposés, règles de firewall permissives, secrets dans les variables d'environnement, conformes aux benchmarks CIS."
         ],
         deliverables: [
           "Synthèse exécutive lisible par la direction : niveau de risque global, priorités et actions recommandées",
@@ -179,7 +179,7 @@ export const fr = {
         faq: [
           {
             q: "Quelle est la différence entre boîte noire, grise et blanche ?",
-            a: "En boîte noire, l'audit se fait sans information préalable — conditions d'un piratage réel. En boîte grise, quelques accès ou informations sont fournis, idéal pour tester les portails authentifiés. En boîte blanche, le périmètre et certains éléments internes sont partagés pour une analyse plus approfondie. Je recommande la boîte grise pour la majorité des missions."
+            a: "En boîte noire, l'audit se fait sans information préalable, conditions d'un piratage réel. En boîte grise, quelques accès ou informations sont fournis, idéal pour tester les portails authentifiés. En boîte blanche, le périmètre et certains éléments internes sont partagés pour une analyse plus approfondie. Je recommande la boîte grise pour la majorité des missions."
           },
           {
             q: "Le rapport est-il compréhensible par la direction ?",
@@ -197,13 +197,13 @@ export const fr = {
       },
       "automatisation-ia": {
         title: "Automatisation IA",
-        punchline: "Vos équipes perdent du temps sur des tâches prévisibles. J'intègre des agents IA supervisables dans vos outils métier pour transformer ce qui ralentit votre activité en workflows fiables — sans casser votre organisation.",
+        punchline: "Vos équipes perdent du temps sur des tâches prévisibles. J'intègre des agents IA supervisables dans vos outils métier pour transformer ce qui ralentit votre activité en workflows fiables, sans casser votre organisation.",
         shortDesc: "Automatisation de processus réels : agents IA connectés à vos outils métier (CRM, ERP, APIs), supervisables, documentés et intégrés à votre environnement de production.",
-        longDesc: "Vos équipes exécutent chaque semaine les mêmes tâches : saisie, tri, qualification, reporting, traitement de documents. Ce n'est pas un problème de compétences — c'est un problème d'automatisation. J'identifie les processus à fort potentiel dans votre organisation, je conçois les agents IA adaptés et je les intègre directement dans vos outils existants (CRM, ERP, base de données, API, application interne). Via MCP et LangGraph, les agents exécutent des workflows complexes en plusieurs étapes, avec des garde-fous clairs : permissions limitées, logs détaillés, validation humaine aux points critiques. Vous gardez la maîtrise ; l'IA prend en charge le reste.",
+        longDesc: "Vos équipes exécutent chaque semaine les mêmes tâches : saisie, tri, qualification, reporting, traitement de documents. Ce n'est pas un problème de compétences, c'est un problème d'automatisation. J'identifie les processus à fort potentiel dans votre organisation, je conçois les agents IA adaptés et je les intègre directement dans vos outils existants (CRM, ERP, base de données, API, application interne). Via MCP et LangGraph, les agents exécutent des workflows complexes en plusieurs étapes, avec des garde-fous clairs : permissions limitées, logs détaillés, validation humaine aux points critiques. Vous gardez la maîtrise ; l'IA prend en charge le reste.",
         stack: ["Agents IA", "MCP", "LangGraph", "Outils métier", "Validation humaine", "RAG", "APIs LLM", "Journalisation"],
         outcomes: [
           "Les tâches manuelles répétitives (saisie, tri, qualification, reporting) sont traitées automatiquement, sans perte de contrôle.",
-          "L'agent travaille à l'intérieur de votre écosystème existant — pas un chatbot isolé, mais un système branché sur vos vraies données.",
+          "L'agent travaille à l'intérieur de votre écosystème existant, pas un chatbot isolé, mais un système branché sur vos vraies données.",
           "Des garde-fous solides : permissions limitées, logs détaillés, validation humaine sur les décisions sensibles, reprise en cas d'erreur.",
           "Un retour mesurable : gain de temps quantifié, volume de tâches traitées, erreurs évitées."
         ],
@@ -228,7 +228,7 @@ export const fr = {
         faq: [
           {
             q: "Quelle est la différence avec un chatbot classique ?",
-            a: "Un chatbot répond à des questions. Un agent IA exécute des actions concrètes dans vos systèmes : créer un enregistrement, générer un rapport, déclencher un workflow, qualifier un lead — avec validation humaine aux points critiques."
+            a: "Un chatbot répond à des questions. Un agent IA exécute des actions concrètes dans vos systèmes : créer un enregistrement, générer un rapport, déclencher un workflow, qualifier un lead, avec validation humaine aux points critiques."
           },
           {
             q: "Comment garantir que l'IA ne fait pas d'erreurs ?",
@@ -236,7 +236,7 @@ export const fr = {
           },
           {
             q: "Est-ce que ça s'intègre à mes outils actuels ?",
-            a: "C'est précisément l'objectif. Je m'intègre à vos APIs, bases de données, CRM, ERP ou applications internes. L'agent travaille dans votre écosystème existant — vous n'avez pas à tout changer pour commencer."
+            a: "C'est précisément l'objectif. Je m'intègre à vos APIs, bases de données, CRM, ERP ou applications internes. L'agent travaille dans votre écosystème existant, vous n'avez pas à tout changer pour commencer."
           },
           {
             q: "Combien de temps avant de voir des résultats concrets ?",
@@ -248,7 +248,7 @@ export const fr = {
   },
   process: {
     title: "Comment ça marche ?",
-    subtitle: "Une méthode d'ingénierie rigoureuse, sans boîte noire — chaque phase produit des livrables concrets que vous pouvez auditer.",
+    subtitle: "Une méthode d'ingénierie rigoureuse, sans boîte noire, chaque phase produit des livrables concrets que vous pouvez auditer.",
     cta: "Démarrer une collaboration",
     phases: [
       {
@@ -267,7 +267,7 @@ export const fr = {
         num: "02",
         title: "Architecture & Proof of Concept",
         duration: "3 à 7 jours",
-        desc: "Je conçois l'architecture cible avant de construire. Les choix technologiques sont justifiés par des ADR (Architecture Decision Records). Un POC validé sur les points de risque techniques est livré avant le démarrage du build — pour éliminer les inconnues, pas pour les reporter.",
+        desc: "Je conçois l'architecture cible avant de construire. Les choix technologiques sont justifiés par des ADR (Architecture Decision Records). Un POC validé sur les points de risque techniques est livré avant le démarrage du build, pour éliminer les inconnues, pas pour les reporter.",
         deliverables: [
           "Diagrammes d'architecture (C4 : contexte, conteneurs, composants, déploiement)",
           "ADR documentant chaque choix structurant (stack, patterns, sécurité)",
@@ -279,7 +279,7 @@ export const fr = {
         num: "03",
         title: "Build Itératif & CI/CD",
         duration: "Sprints de 2 semaines",
-        desc: "Le développement se fait en sprints courts. Dès le premier sprint, un pipeline CI/CD est en place : chaque commit est testé, linté et déployé automatiquement sur staging. Vous avez accès au dépôt Git et à l'environnement de staging en temps réel — zéro effet tunnel.",
+        desc: "Le développement se fait en sprints courts. Dès le premier sprint, un pipeline CI/CD est en place : chaque commit est testé, linté et déployé automatiquement sur staging. Vous avez accès au dépôt Git et à l'environnement de staging en temps réel, zéro effet tunnel.",
         deliverables: [
           "Pipeline CI/CD opérationnel dès le sprint 1 (tests, lint, déploiement auto)",
           "Code source typé strict, reviewé et couvert par des tests unitaires et d'intégration",
@@ -751,7 +751,7 @@ export const fr = {
     }
   },
   blog: {
-    title: "Notes de terrain — Blog",
+    title: "Notes de terrain : Blog",
     description: "Analyses techniques et retours d'expérience réels sur l'IA, le cloud, la sécurité et le développement logiciel en production par Samen Steeve.",
     heading: "Notes de terrain",
     subtitle: "Analyses techniques et retours d'expérience réels sur l'IA, le cloud, la sécurité et le développement logiciel en production.",
@@ -875,9 +875,9 @@ export const fr = {
     engagementScope: "Périmètre d'intervention",
   },
   metadata: {
-    homeTitle: "Ingénieur Logiciel Freelance & Architecte Cloud — France",
+    homeTitle: "Ingénieur Logiciel Freelance & Architecte Cloud, France",
     homeDescription: "Expert ingénieur logiciel freelance spécialisé en Laravel, React, architecture cloud (AWS/Azure), sécurité applicative et automatisation IA. Disponible en télétravail international et sur site à Paris.",
-    blogTitle: "Blog Ingénierie Logicielle — IA, Cloud & Sécurité",
+    blogTitle: "Blog Ingénierie Logicielle, IA, Cloud & Sécurité",
     blogDescription: "Articles techniques sur l'ingénierie logicielle, l'architecture cloud, l'automatisation IA et les bonnes pratiques de sécurité. Retours d'expérience concrets de production.",
     processTitle: "Méthodologie Développement Logiciel",
     processDescription: "Un processus de développement logiciel en 4 phases transparentes : cadrage, architecture, build itératif et déploiement. Livrables concrets à chaque étape.",
@@ -887,9 +887,9 @@ export const fr = {
     realisationsDescription: "Études de cas réels : plateforme legaltech, architecture cloud hybride, microservices pour l'agro-industrie et systèmes logiciels d'entreprise.",
     servicesTitle: "Services Ingénierie Logicielle",
     servicesDescription: "Services d'ingénierie logicielle freelance : développement sur mesure, architecture cloud, audits de sécurité et automatisation IA pour systèmes de production.",
-    toolsTitle: "Tools I use — Outils par service",
+    toolsTitle: "Tools I use, Outils par service",
     toolsDescription: "Liste des outils utilisés par Samen Steeve pour l'ingénierie logicielle, l'architecture cloud, l'audit sécurité et l'automatisation IA.",
-    notFoundTitle: "Page introuvable — Samen Steeve",
+    notFoundTitle: "Page introuvable, Samen Steeve",
   },
   footer: {
     rights: "Tous droits réservés.",

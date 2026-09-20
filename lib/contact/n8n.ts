@@ -148,7 +148,7 @@ export function buildN8nPayload(
 export function getN8nHeaders(): Record<string, string> {
   const secret = process.env.N8N_WEBHOOK_SECRET;
   if (!secret) {
-    console.warn("N8N_WEBHOOK_SECRET not set — webhook calls will fail authentication");
+    console.warn("N8N_WEBHOOK_SECRET not set, webhook calls will fail authentication");
   }
   return {
     "Content-Type": "application/json",

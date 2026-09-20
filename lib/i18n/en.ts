@@ -20,7 +20,7 @@ export const en = {
   },
   hero: {
     status: "Available for new projects",
-    title: "I design, secure, and automate software systems for companies that need things to work in production — not just in demos.",
+    title: "I design, secure, and automate software systems for companies that need things to work in production : not just in demos.",
     subtitle: "Software Engineer, Tech Lead & AI Automation Specialist based in Paris, France. I work on a freelance basis to structure your backend, secure your cloud architectures, and integrate autonomous AI agents into your business operations.",
     heroSub: "Independent software engineer and Tech Lead based in Paris. I design robust software systems, deploy hybrid cloud infrastructures, and automate your business workflows with supervised AI agents.",
     availability: "Available · Paris, France",
@@ -48,10 +48,10 @@ export const en = {
         title: "Software Engineering",
         punchline: "Most software projects ship screens. I build reliable, maintainable systems built to last without depending on the developer.",
         shortDesc: "Design, development, and industrialization of robust production software: architecture, APIs, critical backends, and business interfaces.",
-        longDesc: "Most software projects ship interfaces. What's missing next: a system that holds under load, that your team can maintain, and that genuinely reflects your business processes. I handle full construction — product scoping, application architecture, backend, APIs, frontend, tests, and deployment. What you receive at the end: a robust product you own 100% and can evolve with confidence.",
+        longDesc: "Most software projects ship interfaces. What's missing next: a system that holds under load, that your team can maintain, and that genuinely reflects your business processes. I handle full construction, product scoping, application architecture, backend, APIs, frontend, tests, and deployment. What you receive at the end: a robust product you own 100% and can evolve with confidence.",
         stack: ["Application architecture", "Backend & APIs", "Product frontend", "Databases", "Business integrations", "Tests & CI/CD", "Observability", "Documentation"],
         outcomes: [
-          "A reliable, maintainable software product aligned with your business processes — not a raw prototype handed over without support.",
+          "A reliable, maintainable software product aligned with your business processes, not a raw prototype handed over without support.",
           "An architecture capable of absorbing growth without turning each new feature into technical debt.",
           "Critical workflows secured: payments, role permissions, complex approvals, sync, search, and reporting.",
           "A clean, fully documented, tested codebase ready to be handed over to your team."
@@ -98,7 +98,7 @@ export const en = {
         title: "Cloud & Hybrid Architecture",
         punchline: "Most cloud architectures assume guaranteed fiber and uninterrupted power. I design resilient infrastructures (AWS/Azure/Hybrid) built for real field constraints.",
         shortDesc: "Resilient cloud and hybrid infrastructures (AWS/Azure): multi-site interconnect, automatic failover, outage tolerance, and cost control.",
-        longDesc: "Most cloud architectures are designed for ideal environments: stable connectivity, continuous power, abundant IT teams. The reality on the ground is rarely like that. I design resilient hybrid and cloud infrastructures that keep running when MPLS links drop, when power cuts out, and when your data must respect local sovereignty regulations. The hybrid model is not a compromise — it is the responsible architecture for business continuity.",
+        longDesc: "Most cloud architectures are designed for ideal environments: stable connectivity, continuous power, abundant IT teams. The reality on the ground is rarely like that. I design resilient hybrid and cloud infrastructures that keep running when MPLS links drop, when power cuts out, and when your data must respect local sovereignty regulations. The hybrid model is not a compromise, it is the responsible architecture for business continuity.",
         stack: ["AWS/Azure cloud", "Hybrid infrastructure", "Network & VPN", "Terraform IaC", "Backup & DRP", "Monitoring", "Microsoft 365 identity", "Runbooks"],
         outcomes: [
           "Outage-resilient infrastructure: automated network link failover, redundant backups, and fully tested BCP/DRP.",
@@ -146,21 +146,21 @@ export const en = {
       },
       "audit-securite": {
         title: "Security Audit & Pentest",
-        punchline: "I assess your systems as a real attacker would. The goal is not a list of vulnerabilities — it's a clear picture of your actual risk, how it can be exploited, and where to start reducing it.",
-        shortDesc: "Exposure analysis, penetration testing (infra, application, cloud AWS/Azure/GCP) and a remediation report prioritized by business impact — not an automated scan, a manual assessment built for decisions.",
-        longDesc: "You don't need a simple automated scan. You need a clear picture of your actual exposure, your weaknesses, and the most credible attack scenarios in your context. Most serious incidents don't start with a spectacular attack — they start with a misconfiguration, an overly broad access, a forgotten permission. I assess your systems across three axes: external exposure analysis, penetration testing (internal infra, application web/API/mobile, OWASP) and cloud audit (AWS, Azure, GCP). Every engagement is scoped based on your organization, your security maturity and your business priorities.",
+        punchline: "I assess your systems as a real attacker would. The goal is not a list of vulnerabilities, it's a clear picture of your actual risk, how it can be exploited, and where to start reducing it.",
+        shortDesc: "Exposure analysis, penetration testing (infra, application, cloud AWS/Azure/GCP) and a remediation report prioritized by business impact, not an automated scan, a manual assessment built for decisions.",
+        longDesc: "You don't need a simple automated scan. You need a clear picture of your actual exposure, your weaknesses, and the most credible attack scenarios in your context. Most serious incidents don't start with a spectacular attack, they start with a misconfiguration, an overly broad access, a forgotten permission. I assess your systems across three axes: external exposure analysis, penetration testing (internal infra, application web/API/mobile, OWASP) and cloud audit (AWS, Azure, GCP). Every engagement is scoped based on your organization, your security maturity and your business priorities.",
         stack: ["Exposure analysis", "Infra pentest", "App pentest", "OWASP Top 10", "Cloud audit AWS/Azure/GCP", "Active Directory", "Red Team", "Black/grey/white box"],
         outcomes: [
-          "A clear picture of your actual exposure: exploitable vulnerabilities, their severity and operational scope — not a raw scanner dump.",
+          "A clear picture of your actual exposure: exploitable vulnerabilities, their severity and operational scope, not a raw scanner dump.",
           "Exploitation evidence understandable by leadership to decide fast, and actionable by your technical teams to fix effectively.",
           "A remediation plan prioritized by business impact order, with concrete and structured recommendations.",
           "A retest report to confirm fixed vulnerabilities are no longer exploitable and reduce residual risk."
         ],
         scope: [
-          "External exposure: services, interfaces and configurations visible from the Internet — IP/domain scanning, service mapping, manual exploitation of sensitive targets.",
-          "Internal systems: simulating an attacker with network access (compromised VPN, Wi-Fi, physical access) — Active Directory mapping, privilege escalation, access to sensitive data.",
+          "External exposure: services, interfaces and configurations visible from the Internet, IP/domain scanning, service mapping, manual exploitation of sensitive targets.",
+          "Internal systems: simulating an attacker with network access (compromised VPN, Wi-Fi, physical access), Active Directory mapping, privilege escalation, access to sensitive data.",
           "Web apps, REST/GraphQL APIs and mobile apps (Android/iOS): authentication flows, high-impact routes (billing, admin, export) and business logic following OWASP.",
-          "Cloud environments (AWS/Azure/GCP): IAM configurations, exposed buckets, permissive firewall rules, secrets in environment variables — aligned with CIS benchmarks."
+          "Cloud environments (AWS/Azure/GCP): IAM configurations, exposed buckets, permissive firewall rules, secrets in environment variables, aligned with CIS benchmarks."
         ],
         deliverables: [
           "Executive summary readable by leadership: overall risk level, priorities and recommended actions",
@@ -178,7 +178,7 @@ export const en = {
         faq: [
           {
             q: "What is the difference between black box, grey box and white box testing?",
-            a: "In black box testing, the audit is conducted with no information provided — real-world attack conditions. In grey box, some access or information is provided, ideal for testing authenticated portals. In white box, the scope and internal elements are shared for a deeper analysis. I recommend grey box for most engagements."
+            a: "In black box testing, the audit is conducted with no information provided, real-world attack conditions. In grey box, some access or information is provided, ideal for testing authenticated portals. In white box, the scope and internal elements are shared for a deeper analysis. I recommend grey box for most engagements."
           },
           {
             q: "Is the report understandable by leadership?",
@@ -196,13 +196,13 @@ export const en = {
       },
       "automatisation-ia": {
         title: "AI Automation",
-        punchline: "Your teams lose time on predictable, repetitive tasks. I integrate supervisable AI agents into your business tools to turn what slows you down into reliable workflows — without disrupting your existing organization.",
+        punchline: "Your teams lose time on predictable, repetitive tasks. I integrate supervisable AI agents into your business tools to turn what slows you down into reliable workflows, without disrupting your existing organization.",
         shortDesc: "Real-process automation: AI agents connected to your business tools (CRM, ERP, APIs), supervisable, documented, and integrated into your production environment.",
-        longDesc: "Your teams run the same tasks every week: data entry, triage, qualification, reporting, document processing. That's not a skills problem — it's an automation problem. I identify the high-potential processes in your organization, design the right AI agents, and integrate them directly into your existing tools (CRM, ERP, database, API, internal application). Via MCP and LangGraph, agents execute complex multi-step workflows with clear guardrails: limited permissions, detailed logs, human approval at critical decision points. You stay in control; the AI handles the rest.",
+        longDesc: "Your teams run the same tasks every week: data entry, triage, qualification, reporting, document processing. That's not a skills problem, it's an automation problem. I identify the high-potential processes in your organization, design the right AI agents, and integrate them directly into your existing tools (CRM, ERP, database, API, internal application). Via MCP and LangGraph, agents execute complex multi-step workflows with clear guardrails: limited permissions, detailed logs, human approval at critical decision points. You stay in control; the AI handles the rest.",
         stack: ["AI agents", "MCP", "LangGraph", "Business tools", "Human approval", "RAG", "LLM APIs", "Logging"],
         outcomes: [
           "Manual repetitive tasks (data entry, triage, qualification, reporting) handled automatically, without losing control.",
-          "The agent works inside your existing ecosystem — not an isolated chatbot, but a system wired to your real data.",
+          "The agent works inside your existing ecosystem, not an isolated chatbot, but a system wired to your real data.",
           "Solid guardrails: limited permissions, detailed logs, human validation on sensitive decisions, error recovery built in.",
           "Measurable return: quantified time saved, volume of tasks handled, errors avoided."
         ],
@@ -227,7 +227,7 @@ export const en = {
         faq: [
           {
             q: "What's the difference with a classic chatbot?",
-            a: "A chatbot answers questions. An AI agent executes concrete actions in your systems: creating a record, generating a report, triggering a workflow, qualifying a lead — with human approval at critical points."
+            a: "A chatbot answers questions. An AI agent executes concrete actions in your systems: creating a record, generating a report, triggering a workflow, qualifying a lead, with human approval at critical points."
           },
           {
             q: "How do you ensure the AI doesn't make errors?",
@@ -235,7 +235,7 @@ export const en = {
           },
           {
             q: "Does it integrate with my current tools?",
-            a: "That's precisely the goal. I integrate with your APIs, databases, CRM, ERP, or internal applications. The agent works inside your existing ecosystem — you don't have to change everything to get started."
+            a: "That's precisely the goal. I integrate with your APIs, databases, CRM, ERP, or internal applications. The agent works inside your existing ecosystem, you don't have to change everything to get started."
           },
           {
             q: "How long before seeing concrete results?",
@@ -247,7 +247,7 @@ export const en = {
   },
   process: {
     title: "How It Works",
-    subtitle: "A rigorous engineering methodology, zero black-box — each phase delivers concrete outputs you can audit.",
+    subtitle: "A rigorous engineering methodology, zero black-box, each phase delivers concrete outputs you can audit.",
     cta: "Start a collaboration",
     phases: [
       {
@@ -266,7 +266,7 @@ export const en = {
         num: "02",
         title: "Architecture & Proof of Concept",
         duration: "3 to 7 days",
-        desc: "I design the target architecture before building anything. Technology choices are justified through ADRs (Architecture Decision Records). A validated POC covering the highest-risk technical unknowns is delivered before the build starts — to eliminate uncertainty, not defer it.",
+        desc: "I design the target architecture before building anything. Technology choices are justified through ADRs (Architecture Decision Records). A validated POC covering the highest-risk technical unknowns is delivered before the build starts, to eliminate uncertainty, not defer it.",
         deliverables: [
           "Architecture diagrams (C4 model: context, containers, components, deployment)",
           "ADRs documenting every structural decision (stack, patterns, security model)",
@@ -278,7 +278,7 @@ export const en = {
         num: "03",
         title: "Iterative Build & CI/CD",
         duration: "2-week sprints",
-        desc: "Development runs in short sprints. From sprint 1, a CI/CD pipeline is live: every commit is automatically tested, linted, and deployed to staging. You have real-time access to the Git repository and staging environment — zero tunnel effect, zero surprises.",
+        desc: "Development runs in short sprints. From sprint 1, a CI/CD pipeline is live: every commit is automatically tested, linted, and deployed to staging. You have real-time access to the Git repository and staging environment, zero tunnel effect, zero surprises.",
         deliverables: [
           "CI/CD pipeline live from sprint 1 (automated tests, lint, auto-deployment)",
           "Strictly typed, reviewed codebase with unit and integration test coverage",
@@ -750,7 +750,7 @@ export const en = {
     }
   },
   blog: {
-    title: "Field Notes — Blog",
+    title: "Field Notes : Blog",
     description: "Technical analysis and real-world experience reports on AI, cloud, security, and software engineering in production by Samen Steeve.",
     heading: "Field Notes",
     subtitle: "Technical analysis and real-world experience reports on AI, cloud, security, and software engineering in production.",
@@ -874,9 +874,9 @@ export const en = {
     engagementScope: "Engagement scope",
   },
   metadata: {
-    homeTitle: "Freelance Software Engineer & Cloud Architect — France",
+    homeTitle: "Freelance Software Engineer & Cloud Architect, France",
     homeDescription: "Expert freelance software engineer specializing in Laravel, React, cloud architecture (AWS/Azure), application security, and AI automation. Available for remote work worldwide and on-site in Paris.",
-    blogTitle: "Software Engineering Blog — AI, Cloud & Security",
+    blogTitle: "Software Engineering Blog, AI, Cloud & Security",
     blogDescription: "Technical articles on software engineering, cloud architecture, AI automation, and security best practices. Practical insights from production experience.",
     processTitle: "Software Development Methodology",
     processDescription: "A transparent 4-phase software development process: discovery, architecture, iterative build, and deployment. Concrete deliverables at every step.",
@@ -886,9 +886,9 @@ export const en = {
     realisationsDescription: "Real-world case studies: legaltech platform, hybrid cloud architecture, microservices for agro-industry, and enterprise software systems.",
     servicesTitle: "Software Engineering Services",
     servicesDescription: "Freelance software engineering services: custom development, cloud architecture, security audits, and AI automation for production systems.",
-    toolsTitle: "Tools I use — Tools by service",
+    toolsTitle: "Tools I use, Tools by service",
     toolsDescription: "A service-by-service list of the tools Samen Steeve uses for software engineering, cloud architecture, security audits, and AI automation.",
-    notFoundTitle: "Page not found — Samen Steeve",
+    notFoundTitle: "Page not found, Samen Steeve",
   },
   footer: {
     rights: "All rights reserved.",

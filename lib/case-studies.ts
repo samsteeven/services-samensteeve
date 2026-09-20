@@ -55,13 +55,13 @@ export const caseStudies: CaseStudy[] = [
     coverImage: "/projects/logoTBJ.png",
     fr: {
       title: "TribuneJustice",
-      tagline: "Plateforme legaltech conçue et développée pour un expert juridique : escrow, consultations vidéo, messagerie temps réel, bilingue FR/EN — 41 vulnérabilités fermées, LCP de 5 s à 1,5 s.",
+      tagline: "Plateforme legaltech conçue et développée pour un expert juridique : escrow, consultations vidéo, messagerie temps réel, bilingue FR/EN, 41 vulnérabilités fermées, LCP de 5 s à 1,5 s.",
       role: "Tech Lead",
-      period: "Novembre 2025 — en cours",
+      period: "Novembre 2025 - en cours",
       stack: ["Laravel", "Angular 20", "Next.js", "Typesense", "MeSomb", "Redis", "Laravel Reverb", "Docker"],
       services: ["Ingénierie logicielle", "Pentest & Sécurité applicative"],
       summary:
-        "TribuneJustice connecte des clients à des avocats certifiés, avec paiements en escrow, consultations vidéo et suivi de dossiers en temps réel. C'est le produit digital de M. Badjeu Kuitchouha Ghislain, expert juridique, qui en a eu l'idée et rédigé les spécifications ; j'ai été consulté pour le construire. J'ai dirigé et réalisé toute la technique — backend Laravel, frontend Angular SSR, blog Next.js — pendant 8 mois. Deux campagnes d'audit (pentest externe + revue interne) ont ensuite identifié 41 failles : toutes fermées sans interrompre les utilisateurs actifs.",
+        "TribuneJustice connecte des clients à des avocats certifiés, avec paiements en escrow, consultations vidéo et suivi de dossiers en temps réel. C'est le produit digital de M. Badjeu Kuitchouha Ghislain, expert juridique, qui en a eu l'idée et rédigé les spécifications ; j'ai été consulté pour le construire. J'ai dirigé et réalisé toute la technique, backend Laravel, frontend Angular SSR, blog Next.js, pendant 8 mois. Deux campagnes d'audit (pentest externe + revue interne) ont ensuite identifié 41 failles : toutes fermées sans interrompre les utilisateurs actifs.",
       metrics: [
         { value: "41", label: "Failles colmatées", description: "Deux campagnes d'audit (pentest externe + revue interne), fermées avant toute exploitation" },
         { value: "0", label: "Incident post-déploiement", description: "Déploiements zero-downtime avec auto-récupération des caches périmés" },
@@ -71,16 +71,16 @@ export const caseStudies: CaseStudy[] = [
       sections: [
         {
           id: "contexte",
-          title: "01. Le Contexte — Le produit digital d'un expert juridique",
+          title: "01. Le Contexte : Le produit digital d'un expert juridique",
           content:
-            "TribuneJustice est le produit digital de M. Badjeu Kuitchouha Ghislain, expert juridique : il en a eu l'idée et rédigé les spécifications. Il m'a consulté pour construire la plateforme — j'ai conçu le modèle de données (MCD), l'architecture, le backend Laravel, le frontend Angular et le blog Next.js, livrés en 8 mois (~1 650 interventions), en échangeant avec lui sur chaque décision produit. Dans un domaine qui exige une confidentialité absolue et une intégrité financière irréprochable, la sécurité ne peut pas être un après-coup : après le lancement, nous avons fait auditer la plateforme par un pentest externe puis une revue interne. Verdict : 41 failles — SSRF sur le proxy d'images du blog, sessions Redis sans TTL, service d'authentification monolithique de 594 lignes. Chaque mise à jour menaçait d'interrompre les parcours d'escrow en cours.",
+            "TribuneJustice est le produit digital de M. Badjeu Kuitchouha Ghislain, expert juridique : il en a eu l'idée et rédigé les spécifications. Il m'a consulté pour construire la plateforme, j'ai conçu le modèle de données (MCD), l'architecture, le backend Laravel, le frontend Angular et le blog Next.js, livrés en 8 mois (~1 650 interventions), en échangeant avec lui sur chaque décision produit. Dans un domaine qui exige une confidentialité absolue et une intégrité financière irréprochable, la sécurité ne peut pas être un après-coup : après le lancement, nous avons fait auditer la plateforme par un pentest externe puis une revue interne. Verdict : 41 failles, SSRF sur le proxy d'images du blog, sessions Redis sans TTL, service d'authentification monolithique de 594 lignes. Chaque mise à jour menaçait d'interrompre les parcours d'escrow en cours.",
           quote: "En legaltech, la faille de sécurité d'aujourd'hui est le procès de demain. Construire pour un client, c'est livrer un produit qui survit à ses propres audits."
         },
         {
           id: "architecture-securite",
           title: "02. Construction, Refonte & Durcissement",
           content:
-            "J'ai traité les 41 failles sans interrompre l'activité. Côté backend, les transactions financières ont été encapsulées dans des verrous pessimistes (lockForUpdate) reliés à la machine à états Laravel déterministe de la Service Request — l'entité centrale qui porte le cycle de vie complet du dossier : création, assignment, suivi, paiement, résolution. Côté frontend, le service d'authentification monolithique (594 lignes, 87 consommateurs) a été découpé en 4 services TypeScript spécialisés basés sur les Angular Signals. En parallèle, la recherche SQL lente a été remplacée par un index Typesense.",
+            "J'ai traité les 41 failles sans interrompre l'activité. Côté backend, les transactions financières ont été encapsulées dans des verrous pessimistes (lockForUpdate) reliés à la machine à états Laravel déterministe de la Service Request, l'entité centrale qui porte le cycle de vie complet du dossier : création, assignment, suivi, paiement, résolution. Côté frontend, le service d'authentification monolithique (594 lignes, 87 consommateurs) a été découpé en 4 services TypeScript spécialisés basés sur les Angular Signals. En parallèle, la recherche SQL lente a été remplacée par un index Typesense.",
           highlights: [
             {
               title: "Machine à états & verrous pessimistes",
@@ -88,7 +88,7 @@ export const caseStudies: CaseStudy[] = [
             },
             {
               title: "Frontend découplé (Angular Signals)",
-              description: "4 services spécialisés — état, API, token, permissions — avec typage strict et gestion fine des états."
+              description: "4 services spécialisés, état, API, token, permissions, avec typage strict et gestion fine des états."
             },
             {
               title: "Hardening OWASP Top 10",
@@ -112,13 +112,13 @@ export const caseStudies: CaseStudy[] = [
     },
     en: {
       title: "TribuneJustice",
-      tagline: "Legaltech platform designed and built for a legal expert: escrow payments, video consultations, real-time messaging, FR/EN bilingual — 41 vulnerabilities closed, LCP from 5s to 1.5s.",
+      tagline: "Legaltech platform designed and built for a legal expert: escrow payments, video consultations, real-time messaging, FR/EN bilingual, 41 vulnerabilities closed, LCP from 5s to 1.5s.",
       role: "Tech Lead",
-      period: "November 2025 — ongoing",
+      period: "November 2025 - ongoing",
       stack: ["Laravel", "Angular 20", "Next.js", "Typesense", "MeSomb", "Redis", "Laravel Reverb", "Docker"],
       services: ["Software Engineering", "Application Pentest & Security"],
       summary:
-        "TribuneJustice connects clients with certified lawyers, handling escrow payments, video consultations, and real-time case tracking. It is the digital product of Mr Badjeu Kuitchouha Ghislain, a legal expert who came up with the idea and wrote the specifications; I was consulted to build it. I led and built the entire technical side — Laravel backend, Angular SSR frontend, Next.js blog — over 8 months. Two audit campaigns (external pentest + internal review) then found 41 flaws: all closed without disrupting active users.",
+        "TribuneJustice connects clients with certified lawyers, handling escrow payments, video consultations, and real-time case tracking. It is the digital product of Mr Badjeu Kuitchouha Ghislain, a legal expert who came up with the idea and wrote the specifications; I was consulted to build it. I led and built the entire technical side, Laravel backend, Angular SSR frontend, Next.js blog, over 8 months. Two audit campaigns (external pentest + internal review) then found 41 flaws: all closed without disrupting active users.",
       metrics: [
         { value: "41", label: "Vulnerabilities patched", description: "Two audit campaigns (external pentest + internal review), closed before any exploit" },
         { value: "0", label: "Post-deploy incidents", description: "Zero-downtime deployments with automatic stale-cache recovery" },
@@ -128,16 +128,16 @@ export const caseStudies: CaseStudy[] = [
       sections: [
         {
           id: "context",
-          title: "01. Context — The Digital Product of a Legal Expert",
+          title: "01. Context : The Digital Product of a Legal Expert",
           content:
-            "TribuneJustice is the digital product of Mr Badjeu Kuitchouha Ghislain, a legal expert: he came up with the idea and wrote the specifications. He consulted me to build the platform — I designed the data model (MCD), the architecture, the Laravel backend, the Angular frontend, and the Next.js blog, shipped over 8 months (~1,650 tracked changes), exchanging with him on every product decision. In a domain demanding absolute confidentiality and financial integrity, security cannot be an afterthought: after launch, we had the platform audited by an external pentest followed by an internal review. Verdict: 41 flaws — SSRF on the blog image proxy, Redis sessions without TTL, a 594-line monolithic auth service. Every deployment risked breaking active escrow flows.",
+            "TribuneJustice is the digital product of Mr Badjeu Kuitchouha Ghislain, a legal expert: he came up with the idea and wrote the specifications. He consulted me to build the platform, I designed the data model (MCD), the architecture, the Laravel backend, the Angular frontend, and the Next.js blog, shipped over 8 months (~1,650 tracked changes), exchanging with him on every product decision. In a domain demanding absolute confidentiality and financial integrity, security cannot be an afterthought: after launch, we had the platform audited by an external pentest followed by an internal review. Verdict: 41 flaws, SSRF on the blog image proxy, Redis sessions without TTL, a 594-line monolithic auth service. Every deployment risked breaking active escrow flows.",
           quote: "In legaltech, today's security flaw is tomorrow's lawsuit. Building for a client means shipping a product that survives its own audits."
         },
         {
           id: "strategy",
           title: "02. Building, Refactoring & Hardening",
           content:
-            "I closed all 41 flaws without disrupting business. On the backend, financial transactions were wrapped in pessimistic locking (lockForUpdate) bound to the deterministic Laravel state machine of the Service Request — the central entity carrying the full case lifecycle: creation, assignment, tracking, payment, resolution. On the frontend, the monolithic auth service (594 lines, 87 consumers) was split into 4 specialized TypeScript services powered by Angular Signals. In parallel, slow SQL search was replaced by a Typesense index.",
+            "I closed all 41 flaws without disrupting business. On the backend, financial transactions were wrapped in pessimistic locking (lockForUpdate) bound to the deterministic Laravel state machine of the Service Request, the central entity carrying the full case lifecycle: creation, assignment, tracking, payment, resolution. On the frontend, the monolithic auth service (594 lines, 87 consumers) was split into 4 specialized TypeScript services powered by Angular Signals. In parallel, slow SQL search was replaced by a Typesense index.",
           highlights: [
             {
               title: "State Machine & Pessimistic Locks",
@@ -145,7 +145,7 @@ export const caseStudies: CaseStudy[] = [
             },
             {
               title: "Decoupled Frontend (Angular Signals)",
-              description: "4 specialized services — state, API, token, permissions — with strict typing and fine-grained state management."
+              description: "4 specialized services, state, API, token, permissions, with strict typing and fine-grained state management."
             },
             {
               title: "OWASP Top 10 Hardening",
@@ -175,13 +175,13 @@ export const caseStudies: CaseStudy[] = [
     coverImage: "",
     fr: {
       title: "DIGITRANS-CM (AGROCAM S.A.)",
-      tagline: "Épreuve certifiante RNCP (bloc BC04) : 5 microservices pour une agro-industrie camerounaise simulée — agents terrain offline-first, souveraineté des données et traçabilité blockchain Hyperledger.",
+      tagline: "Épreuve certifiante RNCP (bloc BC04) : 5 microservices pour une agro-industrie camerounaise simulée, agents terrain offline-first, souveraineté des données et traçabilité blockchain Hyperledger.",
       role: "Architecte Cloud & Développeur Full-Stack",
       period: "Mai 2026 (épreuve de 3 jours)",
       stack: ["Node.js", "FastAPI", "PostgreSQL", "Redis", "Docker", "Kubernetes", "Terraform", "AWS", "Azure", "Hyperledger Fabric", "GitHub Actions"],
       services: ["Architecture Cloud & Hybride", "Ingénierie logicielle"],
       summary:
-        "Épreuve certifiante RNCP39765 (bloc BC04, EADL 4) : en équipe de 3 étudiants sur 3 jours, conception et déploiement de l'architecture du scénario DIGITRANS-CM — moderniser le SI d'AGROCAM S.A. (groupe agroalimentaire camerounais simulé) en microservices cloud hybrides AWS/Azure, avec Supply Chain offline-first et traçabilité Hyperledger Fabric. Livrables : application déployée, documentation technique, rapport de sécurisation, soutenance devant jury.",
+        "Épreuve certifiante RNCP39765 (bloc BC04, EADL 4) : en équipe de 3 étudiants sur 3 jours, conception et déploiement de l'architecture du scénario DIGITRANS-CM, moderniser le SI d'AGROCAM S.A. (groupe agroalimentaire camerounais simulé) en microservices cloud hybrides AWS/Azure, avec Supply Chain offline-first et traçabilité Hyperledger Fabric. Livrables : application déployée, documentation technique, rapport de sécurisation, soutenance devant jury.",
       metrics: [
         { value: "3", label: "Jours d'épreuve", description: "Équipe de 3 étudiants, mise en situation reconstituée, jury" },
         { value: "5", label: "Microservices", description: "API Gateway, ERP, CRM, Supply Chain, BI" },
@@ -193,8 +193,8 @@ export const caseStudies: CaseStudy[] = [
           id: "contexte",
           title: "01. L'Épreuve & Les Contraintes Africaines",
           content:
-            "Dans le cadre de l'épreuve certifiante RNCP39765 (bloc BC04 « Optimiser le SI par l'apport du Cloud Computing »), le scénario place l'équipe chez CAMTECH SOLUTIONS S.A., ESN camerounaise, en mission DIGITRANS-CM pour AGROCAM S.A. : remplacer un monolithe de 2009 par un SI distribué et partiellement cloud. Les architectures cloud traditionnelles échouent souvent en zone rurale africaine où la connectivité 2G/3G est intermittente — les agents terrain perdent des heures de données lors des coupures réseau. Par ailleurs, la réglementation camerounaise (loi n°2010/012) interdit le stockage d'informations financières et RH hors du territoire national, interdisant le 100% cloud public. Trois jours, en équipe de trois, pour livrer une application déployée et un rapport de sécurisation devant jury.",
-          quote: "Une architecture cloud en Afrique doit être conçue pour la réalité du terrain : coupures réseau, contraintes légales de souveraineté et résilience offline — et en épreuve de 3 jours, chaque choix doit être défendable."
+            "Dans le cadre de l'épreuve certifiante RNCP39765 (bloc BC04 « Optimiser le SI par l'apport du Cloud Computing »), le scénario place l'équipe chez CAMTECH SOLUTIONS S.A., ESN camerounaise, en mission DIGITRANS-CM pour AGROCAM S.A. : remplacer un monolithe de 2009 par un SI distribué et partiellement cloud. Les architectures cloud traditionnelles échouent souvent en zone rurale africaine où la connectivité 2G/3G est intermittente, les agents terrain perdent des heures de données lors des coupures réseau. Par ailleurs, la réglementation camerounaise (loi n°2010/012) interdit le stockage d'informations financières et RH hors du territoire national, interdisant le 100% cloud public. Trois jours, en équipe de trois, pour livrer une application déployée et un rapport de sécurisation devant jury.",
+          quote: "Une architecture cloud en Afrique doit être conçue pour la réalité du terrain : coupures réseau, contraintes légales de souveraineté et résilience offline, et en épreuve de 3 jours, chaque choix doit être défendable."
         },
         {
           id: "architecture",
@@ -224,7 +224,7 @@ export const caseStudies: CaseStudy[] = [
           id: "impact",
           title: "03. Enseignements & Résultats de l'Épreuve",
           content:
-            "L'épreuve a été livrée dans le temps imparti : application déployée (AWS/Azure hybride, Terraform, CI/CD en 5 étapes), documentation technique, rapport de sécurisation (C25–C26) incluant la solution Hyperledger Fabric, et soutenance devant jury. Au-delà de la certification, c'est la capacité à trancher des choix d'architecture complexes sous contrainte de délai — et à les défendre — qui fait la valeur de l'exercice."
+            "L'épreuve a été livrée dans le temps imparti : application déployée (AWS/Azure hybride, Terraform, CI/CD en 5 étapes), documentation technique, rapport de sécurisation (C25–C26) incluant la solution Hyperledger Fabric, et soutenance devant jury. Au-delà de la certification, c'est la capacité à trancher des choix d'architecture complexes sous contrainte de délai, et à les défendre, qui fait la valeur de l'exercice."
         }
       ],
       repoUrl: "https://github.com/samsteeven/digitram-cm-microservices",
@@ -232,13 +232,13 @@ export const caseStudies: CaseStudy[] = [
     },
     en: {
       title: "DIGITRANS-CM (AGROCAM S.A.)",
-      tagline: "RNCP certification exam (BC04): 5 microservices for a simulated Cameroonian agro-industrial group — offline-first field agents, data sovereignty, and Hyperledger blockchain traceability.",
+      tagline: "RNCP certification exam (BC04): 5 microservices for a simulated Cameroonian agro-industrial group, offline-first field agents, data sovereignty, and Hyperledger blockchain traceability.",
       role: "Cloud Architect & Full-Stack Developer",
       period: "May 2026 (3-day exam)",
       stack: ["Node.js", "FastAPI", "PostgreSQL", "Redis", "Docker", "Kubernetes", "Terraform", "AWS", "Azure", "Hyperledger Fabric", "GitHub Actions"],
       services: ["Cloud & Hybrid Architecture", "Software Engineering"],
       summary:
-        "RNCP39765 certification exam (BC04 block, EADL 4): as a team of 3 students over 3 days, design and deployment of the DIGITRANS-CM scenario architecture — modernizing AGROCAM S.A.'s SI (simulated Cameroonian agro-industrial group) into hybrid AWS/Azure cloud microservices, with an offline-first Supply Chain and Hyperledger Fabric traceability. Deliverables: deployed application, technical documentation, security report, jury defense.",
+        "RNCP39765 certification exam (BC04 block, EADL 4): as a team of 3 students over 3 days, design and deployment of the DIGITRANS-CM scenario architecture, modernizing AGROCAM S.A.'s SI (simulated Cameroonian agro-industrial group) into hybrid AWS/Azure cloud microservices, with an offline-first Supply Chain and Hyperledger Fabric traceability. Deliverables: deployed application, technical documentation, security report, jury defense.",
       metrics: [
         { value: "3", label: "Exam days", description: "Team of 3 students, reconstructed scenario, jury" },
         { value: "5", label: "Microservices", description: "API Gateway, ERP, CRM, Supply Chain, BI" },
@@ -250,8 +250,8 @@ export const caseStudies: CaseStudy[] = [
           id: "context",
           title: "01. The Exam & African Constraints",
           content:
-            "Within the RNCP39765 certification exam (BC04 block 'Optimizing the SI with Cloud Computing'), the scenario places the team at CAMTECH SOLUTIONS S.A., a Cameroonian IT services company, on the DIGITRANS-CM mission for AGROCAM S.A.: replacing a 2009 monolith with a distributed, partially cloud SI. Traditional cloud architectures often fail in rural African environments where 2G/3G connectivity is spotty — field agents lose hours of operational logs during outages. Furthermore, Cameroonian Law n°2010/012 restricts storing financial and HR data outside national borders, ruling out pure public cloud. Three days, in a team of three, to deliver a deployed application and a security report in front of a jury.",
-          quote: "Cloud architecture in Africa must be built for operational reality: intermittent connectivity, local data sovereignty, and offline resilience — and in a 3-day exam, every choice must be defensible."
+            "Within the RNCP39765 certification exam (BC04 block 'Optimizing the SI with Cloud Computing'), the scenario places the team at CAMTECH SOLUTIONS S.A., a Cameroonian IT services company, on the DIGITRANS-CM mission for AGROCAM S.A.: replacing a 2009 monolith with a distributed, partially cloud SI. Traditional cloud architectures often fail in rural African environments where 2G/3G connectivity is spotty, field agents lose hours of operational logs during outages. Furthermore, Cameroonian Law n°2010/012 restricts storing financial and HR data outside national borders, ruling out pure public cloud. Three days, in a team of three, to deliver a deployed application and a security report in front of a jury.",
+          quote: "Cloud architecture in Africa must be built for operational reality: intermittent connectivity, local data sovereignty, and offline resilience, and in a 3-day exam, every choice must be defensible."
         },
         {
           id: "architecture",
@@ -281,7 +281,7 @@ export const caseStudies: CaseStudy[] = [
           id: "impact",
           title: "03. Exam Results & Takeaways",
           content:
-            "The exam was delivered within the allotted time: deployed application (hybrid AWS/Azure, Terraform, 5-stage CI/CD), technical documentation, security report (C25–C26) including the Hyperledger Fabric solution, and jury defense. Beyond the certification, it's the ability to make complex architectural decisions under deadline pressure — and defend them — that makes the exercise valuable."
+            "The exam was delivered within the allotted time: deployed application (hybrid AWS/Azure, Terraform, 5-stage CI/CD), technical documentation, security report (C25–C26) including the Hyperledger Fabric solution, and jury defense. Beyond the certification, it's the ability to make complex architectural decisions under deadline pressure, and defend them, that makes the exercise valuable."
         }
       ],
       repoUrl: "https://github.com/samsteeven/digitram-cm-microservices",
@@ -294,16 +294,16 @@ export const caseStudies: CaseStudy[] = [
     coverPlaceholder: "#14532d",
     coverImage: "",
     fr: {
-      title: "EasyPharma — Recherche & Commande de Médicaments",
-      tagline: "3 plateformes livrées (Spring Boot, Angular, Flutter) pour la recherche et commande de médicaments au Cameroun — équipe de 4 coordonnée via GitHub Actions, 12+ PRs fusionnées, SonarQube et OWASP ZAP.",
+      title: "EasyPharma : Recherche & Commande de Médicaments",
+      tagline: "3 plateformes livrées (Spring Boot, Angular, Flutter) pour la recherche et commande de médicaments au Cameroun, équipe de 4 coordonnée via GitHub Actions, 12+ PRs fusionnées, SonarQube et OWASP ZAP.",
       role: "Tech Lead & Développeur Full-Stack",
-      period: "Novembre 2025 — Janvier 2026",
+      period: "Novembre 2025 - Janvier 2026",
       stack: ["Spring Boot", "Java 21", "Angular", "Flutter", "PostgreSQL", "Docker", "SonarQube", "GitHub Actions"],
       services: ["Ingénierie logicielle"],
       summary:
         "Application de gestion de pharmacie et de commande de médicaments en ligne, livrée sur 3 plateformes (backend Spring Boot, web Angular, mobile Flutter) par une équipe de 4 développeurs que j'ai coordonnée : organisation par branches feature, revue et fusion de 12+ pull requests, pipeline GitHub Actions validant chaque contribution, analyse SonarQube et tests OWASP ZAP.",
       metrics: [
-        { value: "3", label: "Plateformes livrées", description: "Backend Spring Boot, web Angular, mobile Flutter — une API partagée" },
+        { value: "3", label: "Plateformes livrées", description: "Backend Spring Boot, web Angular, mobile Flutter, une API partagée" },
         { value: "12+", label: "Pull requests fusionnées", description: "Équipe de 4 coordonnée via branches feature + CI GitHub Actions" },
         { value: "75", label: "Tests backend", description: "Unitaires et d'intégration (JUnit 5, Mockito, AssertJ)" },
         { value: "DevSecOps", label: "Qualité & sécurité", description: "SonarQube dans la CI, OWASP ZAP, Docker Compose multi-services" }
@@ -311,7 +311,7 @@ export const caseStudies: CaseStudy[] = [
       sections: [
         {
           id: "contexte",
-          title: "01. Le Contexte — Trouver un médicament au Cameroun",
+          title: "01. Le Contexte : Trouver un médicament au Cameroun",
           content:
             "Trouver un médicament au Cameroun, c'est souvent appeler pharmacie par pharmacie, sans savoir qui a le produit en stock, à quel prix, ni où il se trouve. EasyPharma répond à ce problème : une application de recherche et commande de médicaments connectant patients, pharmacies et livreurs. Projet de groupe du Semestre 1 (EADL), mené en équipe de 4 développeurs avec une exigence de livraison sur trois plateformes : backend, web et mobile.",
           quote: "Livrer le même produit sur trois plateformes impose une seule discipline : une API unique, stable, que le web et le mobile consomment identiquement."
@@ -320,7 +320,7 @@ export const caseStudies: CaseStudy[] = [
           id: "architecture",
           title: "02. Architecture, Livrables & Coordination d'Équipe",
           content:
-            "J'ai assumé le rôle de Tech Lead : organisation des tâches par branches feature, revue de code et fusion des contributions de chaque membre via le pipeline GitHub Actions (build backend, build frontend, analyse SonarQube) — aucune PR ne passait sans build vert. Côté backend, une architecture propre en 4 couches (Spring Boot 3, Java 21) avec JWT, PostgreSQL/PostGIS pour la recherche géographique, migrations Flyway, Swagger et 75 tests. Le web est en Angular 21 (Cypress, Vitest) et le mobile en Flutter pour les rôles patient et livreur : panier avec vérification de stock groupé par pharmacie, commandes avec gestion des succès partiels, historique avec statuts colorés.",
+            "J'ai assumé le rôle de Tech Lead : organisation des tâches par branches feature, revue de code et fusion des contributions de chaque membre via le pipeline GitHub Actions (build backend, build frontend, analyse SonarQube), aucune PR ne passait sans build vert. Côté backend, une architecture propre en 4 couches (Spring Boot 3, Java 21) avec JWT, PostgreSQL/PostGIS pour la recherche géographique, migrations Flyway, Swagger et 75 tests. Le web est en Angular 21 (Cypress, Vitest) et le mobile en Flutter pour les rôles patient et livreur : panier avec vérification de stock groupé par pharmacie, commandes avec gestion des succès partiels, historique avec statuts colorés.",
           highlights: [
             {
               title: "Clean Architecture Spring Boot",
@@ -344,23 +344,23 @@ export const caseStudies: CaseStudy[] = [
           id: "impact",
           title: "03. Résultats & Enseignements",
           content:
-            "Le produit est livré sur trois plateformes avec une qualité mesurée : 75 tests backend, SonarQube intégré à la CI, ZAP en sécurité. Coordonner une équipe sur un workflow git exigeant m'a confirmé que le rôle de Tech Lead dépasse le code — découper le travail en branches cohérentes, rendre la CI non négociable, et intégrer des contributions de niveaux variés sans casser la cohérence d'ensemble."
+            "Le produit est livré sur trois plateformes avec une qualité mesurée : 75 tests backend, SonarQube intégré à la CI, ZAP en sécurité. Coordonner une équipe sur un workflow git exigeant m'a confirmé que le rôle de Tech Lead dépasse le code, découper le travail en branches cohérentes, rendre la CI non négociable, et intégrer des contributions de niveaux variés sans casser la cohérence d'ensemble."
         }
       ],
       repoUrl: "https://github.com/samsteeven/EasyPharma-App-Flutter",
       siteUrl: undefined
     },
     en: {
-      title: "EasyPharma — Medicine Search & Ordering",
-      tagline: "3 platforms delivered (Spring Boot, Angular, Flutter) for medicine search and ordering in Cameroon — team of 4 coordinated via GitHub Actions, 12+ merged PRs, SonarQube and OWASP ZAP.",
+      title: "EasyPharma : Medicine Search & Ordering",
+      tagline: "3 platforms delivered (Spring Boot, Angular, Flutter) for medicine search and ordering in Cameroon, team of 4 coordinated via GitHub Actions, 12+ merged PRs, SonarQube and OWASP ZAP.",
       role: "Tech Lead & Full-Stack Developer",
-      period: "November 2025 — January 2026",
+      period: "November 2025 - January 2026",
       stack: ["Spring Boot", "Java 21", "Angular", "Flutter", "PostgreSQL", "Docker", "SonarQube", "GitHub Actions"],
       services: ["Software Engineering"],
       summary:
         "Online pharmacy management and medicine ordering application delivered on 3 platforms (Spring Boot backend, Angular web, Flutter mobile) by a team of 4 developers I coordinated: feature-branch organization, review and merge of 12+ pull requests, GitHub Actions pipeline validating every contribution, SonarQube analysis and OWASP ZAP testing.",
       metrics: [
-        { value: "3", label: "Platforms delivered", description: "Spring Boot backend, Angular web, Flutter mobile — one shared API" },
+        { value: "3", label: "Platforms delivered", description: "Spring Boot backend, Angular web, Flutter mobile, one shared API" },
         { value: "12+", label: "Merged pull requests", description: "Team of 4 coordinated via feature branches + GitHub Actions CI" },
         { value: "75", label: "Backend tests", description: "Unit and integration tests (JUnit 5, Mockito, AssertJ)" },
         { value: "DevSecOps", label: "Quality & security", description: "SonarQube in CI, OWASP ZAP, multi-service Docker Compose" }
@@ -368,16 +368,16 @@ export const caseStudies: CaseStudy[] = [
       sections: [
         {
           id: "context",
-          title: "01. The Context — Finding a Medicine in Cameroon",
+          title: "01. The Context : Finding a Medicine in Cameroon",
           content:
-            "Finding a medicine in Cameroon usually means calling pharmacies one by one — without knowing who has it in stock, at what price, or where. EasyPharma solves this: a medicine search and ordering application connecting patients, pharmacies and couriers. A Semester 1 group project (EADL), run by a team of 4 developers with a three-platform delivery requirement: backend, web and mobile.",
+            "Finding a medicine in Cameroon usually means calling pharmacies one by one, without knowing who has it in stock, at what price, or where. EasyPharma solves this: a medicine search and ordering application connecting patients, pharmacies and couriers. A Semester 1 group project (EADL), run by a team of 4 developers with a three-platform delivery requirement: backend, web and mobile.",
           quote: "Delivering the same product on three platforms imposes one discipline: a single, stable API that web and mobile consume identically."
         },
         {
           id: "architecture",
           title: "02. Architecture, Deliverables & Team Coordination",
           content:
-            "I took on the Tech Lead role: organizing tasks into feature branches, reviewing code and merging each member's contributions through the GitHub Actions pipeline (backend build, frontend build, SonarQube analysis) — no PR passed without a green build. On the backend, a clean 4-layer architecture (Spring Boot 3, Java 21) with JWT, PostgreSQL/PostGIS for geographic search, Flyway migrations, Swagger and 75 tests. The web is Angular 21 (Cypress, Vitest) and the mobile app is Flutter for patient and courier roles: cart with stock verification grouped by pharmacy, orders with partial-success handling, color-coded history.",
+            "I took on the Tech Lead role: organizing tasks into feature branches, reviewing code and merging each member's contributions through the GitHub Actions pipeline (backend build, frontend build, SonarQube analysis), no PR passed without a green build. On the backend, a clean 4-layer architecture (Spring Boot 3, Java 21) with JWT, PostgreSQL/PostGIS for geographic search, Flyway migrations, Swagger and 75 tests. The web is Angular 21 (Cypress, Vitest) and the mobile app is Flutter for patient and courier roles: cart with stock verification grouped by pharmacy, orders with partial-success handling, color-coded history.",
           highlights: [
             {
               title: "Spring Boot Clean Architecture",
@@ -401,7 +401,7 @@ export const caseStudies: CaseStudy[] = [
           id: "impact",
           title: "03. Results & Takeaways",
           content:
-            "The product shipped on three platforms with measured quality: 75 backend tests, SonarQube in CI, ZAP for security. Coordinating a team on a demanding git workflow confirmed that the Tech Lead role goes beyond code — splitting work into coherent branches, making the CI non-negotiable, and integrating contributions of varying quality without breaking overall coherence."
+            "The product shipped on three platforms with measured quality: 75 backend tests, SonarQube in CI, ZAP for security. Coordinating a team on a demanding git workflow confirmed that the Tech Lead role goes beyond code, splitting work into coherent branches, making the CI non-negotiable, and integrating contributions of varying quality without breaking overall coherence."
         }
       ],
       repoUrl: "https://github.com/samsteeven/EasyPharma-App-Flutter",
@@ -414,10 +414,10 @@ export const caseStudies: CaseStudy[] = [
     coverPlaceholder: "#172554",
     coverImage: "/projects/archi_cloud.png",
     fr: {
-      title: "ShopNow — Infrastructure Cloud Hybride",
-      tagline: "Migration zéro-interruption vers une infrastructure cloud hybride pour un e-commerce 3 sites — RTO validé à 1h45 au lieu des 3 jours estimés avec l'ancienne architecture.",
+      title: "ShopNow : Infrastructure Cloud Hybride",
+      tagline: "Migration zéro-interruption vers une infrastructure cloud hybride pour un e-commerce 3 sites, RTO validé à 1h45 au lieu des 3 jours estimés avec l'ancienne architecture.",
       role: "Architecte Cloud",
-      period: "Avril 2026 — Juin 2026",
+      period: "Avril 2026 - Juin 2026",
       stack: ["Azure", "Active Directory", "Microsoft 365", "Veeam", "FortiGate", "pfSense", "MPLS", "IPSec VPN", "Terraform", "Zabbix", "Grafana"],
       services: ["Architecture Cloud & Hybride"],
       summary:
@@ -471,10 +471,10 @@ export const caseStudies: CaseStudy[] = [
       siteUrl: undefined
     },
     en: {
-      title: "ShopNow — Hybrid Cloud Infrastructure",
-      tagline: "Zero-downtime migration to a hybrid cloud infrastructure for a 3-site e-commerce company — validated RTO of 1h45 vs. 3 days estimated with the old setup.",
+      title: "ShopNow : Hybrid Cloud Infrastructure",
+      tagline: "Zero-downtime migration to a hybrid cloud infrastructure for a 3-site e-commerce company, validated RTO of 1h45 vs. 3 days estimated with the old setup.",
       role: "Cloud Architect",
-      period: "April 2026 — June 2026",
+      period: "April 2026 - June 2026",
       stack: ["Azure", "Active Directory", "Microsoft 365", "Veeam", "FortiGate", "pfSense", "MPLS", "IPSec VPN", "Terraform", "Zabbix", "Grafana"],
       services: ["Cloud & Hybrid Architecture"],
       summary:
@@ -535,9 +535,9 @@ export const caseStudies: CaseStudy[] = [
     coverImage: "/projects/ia_agent.png",
     fr: {
       title: "Pipeline IA de Gestion des Leads",
-      tagline: "Deux agents IA partagent une même CRM — le premier qualifie chaque prospect en < 30 secondes, le second permet de consulter et agir sur les données directement depuis WhatsApp.",
+      tagline: "Deux agents IA partagent une même CRM, le premier qualifie chaque prospect en < 30 secondes, le second permet de consulter et agir sur les données directement depuis WhatsApp.",
       role: "Architecte IA & Ingénieur logiciel",
-      period: "Juillet — Août 2026",
+      period: "Juillet - Août 2026",
       stack: ["n8n", "DeepSeek v4 Flash", "Tavily API", "OpenCode Go", "Redis", "Next.js", "Data Tables", "MCP"],
       services: ["Automatisation IA", "Ingénierie logicielle"],
       summary:
@@ -560,9 +560,9 @@ export const caseStudies: CaseStudy[] = [
           id: "architecture",
           title: "02. Architecture à Double Workflow n8n & Redis",
           content:
-            "Le système repose sur deux workflows n8n interconnectés par une Data Table CRM commune et une mémoire Redis. Lorsqu'un prospect soumet un formulaire, le Lead Agent s'exécute : il effectue une recherche web Tavily sur l'entreprise, compare ses besoins au catalogue de services, formule un score de 1 à 10 et génère un email personnalisé via DeepSeek v4 Flash (OpenCode Go). Le second workflow — le WhatsApp CRM Assistant — permet au décideur d'interroger cette même CRM en langage naturel directement depuis WhatsApp, sans ouvrir aucun dashboard.",
+            "Le système repose sur deux workflows n8n interconnectés par une Data Table CRM commune et une mémoire Redis. Lorsqu'un prospect soumet un formulaire, le Lead Agent s'exécute : il effectue une recherche web Tavily sur l'entreprise, compare ses besoins au catalogue de services, formule un score de 1 à 10 et génère un email personnalisé via DeepSeek v4 Flash (OpenCode Go). Le second workflow, le WhatsApp CRM Assistant, permet au décideur d'interroger cette même CRM en langage naturel directement depuis WhatsApp, sans ouvrir aucun dashboard.",
           image: "/projects/whatsapp_workflow.jpg",
-          imageAlt: "Workflow n8n du WhatsApp CRM Assistant — réception du message, extraction, agent IA avec mémoire Redis, outils CRM et envoi de réponse",
+          imageAlt: "Workflow n8n du WhatsApp CRM Assistant, réception du message, extraction, agent IA avec mémoire Redis, outils CRM et envoi de réponse",
           highlights: [
             {
               title: "Structured Output Parser JSON",
@@ -586,7 +586,7 @@ export const caseStudies: CaseStudy[] = [
           id: "impact",
           title: "03. Rigueur, Sécurité & Production",
           content:
-            "Le Lead Qualification Agent tourne en production : webhook sécurisé par header + filtrage IP, gestion d'erreur robuste (onError → continueErrorOutput) et journalisation des échecs dans la CRM — aucun lead ne peut être égaré. Le WhatsApp CRM Assistant est construit et testé ; sa publication n'attend que ses credentials WhatsApp Business."
+            "Le Lead Qualification Agent tourne en production : webhook sécurisé par header + filtrage IP, gestion d'erreur robuste (onError → continueErrorOutput) et journalisation des échecs dans la CRM, aucun lead ne peut être égaré. Le WhatsApp CRM Assistant est construit et testé ; sa publication n'attend que ses credentials WhatsApp Business."
         }
       ],
       repoUrl: undefined,
@@ -594,9 +594,9 @@ export const caseStudies: CaseStudy[] = [
     },
     en: {
       title: "AI-Powered Lead Management Pipeline",
-      tagline: "Two AI agents share one CRM — the first qualifies every lead in < 30 seconds, the second allows querying and acting on data directly from WhatsApp.",
+      tagline: "Two AI agents share one CRM, the first qualifies every lead in < 30 seconds, the second allows querying and acting on data directly from WhatsApp.",
       role: "AI Architect & Software Engineer",
-      period: "July — August 2026",
+      period: "July - August 2026",
       stack: ["n8n", "DeepSeek v4 Flash", "Tavily API", "OpenCode Go", "Redis", "Next.js", "Data Tables", "MCP"],
       services: ["AI Automation", "Software Engineering"],
       summary:
@@ -619,9 +619,9 @@ export const caseStudies: CaseStudy[] = [
           id: "architecture",
           title: "02. Dual n8n Workflow & Redis Architecture",
           content:
-            "The architecture links two n8n workflows through a shared CRM Data Table and persistent Redis memory. Upon form submission, the Lead Agent triggers Tavily web search, matches prospect requirements with the service catalog, scores lead intent (1-10), and drafts a tailored email via DeepSeek v4 Flash (OpenCode Go). The second workflow — the WhatsApp CRM Assistant — lets the decision-maker query that same CRM in natural language directly from WhatsApp, without opening any dashboard.",
+            "The architecture links two n8n workflows through a shared CRM Data Table and persistent Redis memory. Upon form submission, the Lead Agent triggers Tavily web search, matches prospect requirements with the service catalog, scores lead intent (1-10), and drafts a tailored email via DeepSeek v4 Flash (OpenCode Go). The second workflow, the WhatsApp CRM Assistant, lets the decision-maker query that same CRM in natural language directly from WhatsApp, without opening any dashboard.",
           image: "/projects/whatsapp_workflow.jpg",
-          imageAlt: "n8n WhatsApp CRM Assistant workflow — message trigger, extraction, AI agent with Redis memory, CRM tools and reply delivery",
+          imageAlt: "n8n WhatsApp CRM Assistant workflow, message trigger, extraction, AI agent with Redis memory, CRM tools and reply delivery",
           highlights: [
             {
               title: "Strict JSON Output Parsing",
@@ -645,7 +645,7 @@ export const caseStudies: CaseStudy[] = [
           id: "impact",
           title: "03. Reliability & Production Results",
           content:
-            "The Lead Qualification Agent is now running in production: header-secured webhook + IP filtering, robust error routing (onError → continueErrorOutput) and failure logging into the CRM — no lead can ever be lost. The WhatsApp CRM Assistant is built and tested; its publication only awaits the WhatsApp Business credentials."
+            "The Lead Qualification Agent is now running in production: header-secured webhook + IP filtering, robust error routing (onError → continueErrorOutput) and failure logging into the CRM, no lead can ever be lost. The WhatsApp CRM Assistant is built and tested; its publication only awaits the WhatsApp Business credentials."
         }
       ],
       repoUrl: undefined,

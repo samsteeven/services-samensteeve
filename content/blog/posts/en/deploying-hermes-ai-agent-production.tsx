@@ -39,10 +39,10 @@ export default function DeployingHermesAiAgentProduction() {
         Why This Project
       </h2>
       <p>
-        The goal wasn&apos;t just running a five-minute <code>curl | bash</code> script — anyone can do that. The goal was deploying it <strong>production-style</strong>: proper user isolation, reduced attack surface, credential encryption, and a backup strategy resilient to server failures.
+        The goal wasn&apos;t just running a five-minute <code>curl | bash</code> script, anyone can do that. The goal was deploying it <strong>production-style</strong>: proper user isolation, reduced attack surface, credential encryption, and a backup strategy resilient to server failures.
       </p>
       <p>
-        This guide documents every step, including real-world troubleshooting encounters — because real deployments never go strictly according to initial docs.
+        This guide documents every step, including real-world troubleshooting encounters, because real deployments never go strictly according to initial docs.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -90,14 +90,14 @@ export default function DeployingHermesAiAgentProduction() {
         Hermes provides a one-liner installer managing runtime dependencies (Python 3.11, Node.js, ripgrep, ffmpeg) automatically:
       </p>
       <CodeWindow
-        filename="Terminal — Setup"
+        filename="Terminal · Setup"
         badge="Bash"
         code={`curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
 source ~/.bashrc
 hermes setup`}
       />
       <p>
-        The interactive wizard configures LLM providers (Anthropic Claude, OpenRouter, Nous Portal, or any OpenAI-compatible endpoint). At this stage everything runs — but under root, without firewall policies, and with unrestricted tools.
+        The interactive wizard configures LLM providers (Anthropic Claude, OpenRouter, Nous Portal, or any OpenAI-compatible endpoint). At this stage everything runs, but under root, without firewall policies, and with unrestricted tools.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -107,7 +107,7 @@ hermes setup`}
         Running an agent with terminal access, code execution, and network access <strong>as root</strong> is a shortcut that feels fine right up until it isn&apos;t. Step one: creating a dedicated unprivileged user.
       </p>
       <CodeWindow
-        filename="Terminal — User Creation"
+        filename="Terminal · User Creation"
         badge="Bash"
         code={`adduser hermes`}
       />
@@ -137,7 +137,7 @@ WantedBy=multi-user.target`}
         <strong className="text-amber-500 font-mono text-xs uppercase tracking-wider block mb-1">
           ⚠️ Gotcha Encountered
         </strong>
-        After migration, running <code>hermes config show</code> as root printed empty configuration — expected, as the CLI inspects the active user&apos;s <code>$HOME</code>. Always verify with <code>sudo -u hermes -i</code>.
+        After migration, running <code>hermes config show</code> as root printed empty configuration, expected, as the CLI inspects the active user&apos;s <code>$HOME</code>. Always verify with <code>sudo -u hermes -i</code>.
       </div>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -148,7 +148,7 @@ WantedBy=multi-user.target`}
       </p>
       <p className="text-sm font-semibold text-ink"><code>config.yaml</code> snippet before hardening:</p>
       <CodeWindow
-        filename="config.yaml — Before restriction"
+        filename="config.yaml · Before restriction"
         badge="YAML"
         code={`platform_toolsets:
   telegram:
@@ -164,7 +164,7 @@ WantedBy=multi-user.target`}
       />
       <p className="text-sm font-semibold text-ink">After hardening (retaining only essential messaging tools):</p>
       <CodeWindow
-        filename="config.yaml — After restriction"
+        filename="config.yaml · After restriction"
         badge="YAML"
         code={`platform_toolsets:
   telegram:
@@ -187,7 +187,7 @@ WantedBy=multi-user.target`}
         In addition, security guardrails were explicitly enabled:
       </p>
       <CodeWindow
-        filename="config.yaml — Security Policies"
+        filename="config.yaml · Security Policies"
         badge="YAML"
         code={`security:
   redact_secrets: true      # Redacts API keys / tokens from logs & responses
@@ -219,7 +219,7 @@ WantedBy=multi-user.target`}
         </p>
       </div>
       <CodeWindow
-        filename="Terminal — WebUI Setup"
+        filename="Terminal · WebUI Setup"
         badge="Bash"
         code={`git clone https://github.com/nesquena/hermes-webui.git
 cd hermes-webui
@@ -267,7 +267,7 @@ HERMES_WEBUI_ALLOWED_ORIGINS=https://hermes.yourdomain.com`}
 }`}
       />
       <CodeWindow
-        filename="Terminal — Certbot TLS"
+        filename="Terminal · Certbot TLS"
         badge="Bash"
         code={`sudo certbot --nginx -d hermes.yourdomain.com`}
       />

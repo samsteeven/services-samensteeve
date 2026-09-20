@@ -27,7 +27,7 @@ export const blogMetadata: PostMeta[] = [
   {
     slug: "deploiement-hermes-agent-ia-production",
     title: "Déployer un agent IA autonome en production : retour d'expérience complet sur Hermes Agent",
-    excerpt: "Migration sécurisée, gateway Telegram, interface web, backups automatisés — le journal de bord d'un déploiement self-hosted de bout en bout.",
+    excerpt: "Migration sécurisée, gateway Telegram, interface web, backups automatisés, le journal de bord d'un déploiement self-hosted de bout en bout.",
     date: "2026-07-24",
     tags: ["IA", "DevOps", "Agents", "Sécurité", "Docker"],
     readTime: 8,
@@ -74,7 +74,7 @@ export const blogMetadata: PostMeta[] = [
   },
   {
     slug: "refus-microservices-laravel",
-    title: "Pourquoi j'ai refusé de découper ce monolithe Laravel — L'ADR",
+    title: "Pourquoi j'ai refusé de découper ce monolithe Laravel : L'ADR",
     excerpt: "Étude d'une décision d'architecture : pourquoi le passage aux microservices aurait ralenti les livraisons et comment nous avons opté pour un monolithe modulaire hautement performant.",
     date: "2026-04-10",
     tags: ["Logiciel", "Architecture"],
@@ -141,7 +141,7 @@ export const blogMetadata: PostMeta[] = [
   {
     slug: "deploying-hermes-ai-agent-production",
     title: "Deploying an Autonomous AI Agent in Production: Hermes Agent Retrospective",
-    excerpt: "Hardened security migration, Telegram gateway, web UI, automated remote backups — the complete log of a self-hosted agent deployment.",
+    excerpt: "Hardened security migration, Telegram gateway, web UI, automated remote backups, the complete log of a self-hosted agent deployment.",
     date: "2026-07-24",
     tags: ["AI", "DevOps", "Agents", "Security", "Docker"],
     readTime: 8,
@@ -187,7 +187,7 @@ export const blogMetadata: PostMeta[] = [
   },
   {
     slug: "refusing-laravel-microservices",
-    title: "Why I Refused to Split This Laravel Monolith — The ADR",
+    title: "Why I Refused to Split This Laravel Monolith : The ADR",
     excerpt: "An architectural case study: why moving to microservices would have slowed down shipping, and how we structured a high-performing modular monolith instead.",
     date: "2026-04-10",
     tags: ["Software", "Architecture"],

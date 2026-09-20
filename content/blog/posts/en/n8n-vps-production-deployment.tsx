@@ -12,18 +12,18 @@ export default function N8nVpsProductionDeployment() {
         The Context: Making the Most of an Existing VPS
       </h2>
       <p>
-        For my own automation — a lead-qualification pipeline that intercepts contact form submissions, enriches them via web search, scores them, and feeds a shared CRM, plus a WhatsApp CRM assistant — I needed a workflow orchestrator. Rather than paying for execution-based cloud subscriptions, I chose to self-host <a href="https://n8n.io" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2">n8n</a> on a VPS already running for my work — maximizing existing resources rather than multiplying infrastructure costs.
+        For my own automation, a lead-qualification pipeline that intercepts contact form submissions, enriches them via web search, scores them, and feeds a shared CRM, plus a WhatsApp CRM assistant, I needed a workflow orchestrator. Rather than paying for execution-based cloud subscriptions, I chose to self-host <a href="https://n8n.io" target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-2">n8n</a> on a VPS already running for my work, maximizing existing resources rather than multiplying infrastructure costs.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         Architecture Choice: Complete Isolation
       </h2>
       <div className="border border-line rounded-xl bg-paper/60 p-4 font-mono text-xs text-ink/80 space-y-1">
-        <div>— Dedicated <code>PostgreSQL 16</code> container (officially recommended by n8n over MySQL)</div>
-        <div>— Isolated Docker network connecting only n8n and its PostgreSQL instance</div>
-        <div>— n8n exposed exclusively on <code>127.0.0.1:5678</code>, never directly to the public web</div>
-        <div>— Existing Nginx configured with a dedicated <code>server_block</code> for <code>n8n.samensteeve.com</code></div>
-        <div>— CPU and memory limits on containers to protect main project resources</div>
+        <div>• Dedicated <code>PostgreSQL 16</code> container (officially recommended by n8n over MySQL)</div>
+        <div>• Isolated Docker network connecting only n8n and its PostgreSQL instance</div>
+        <div>• n8n exposed exclusively on <code>127.0.0.1:5678</code>, never directly to the public web</div>
+        <div>• Existing Nginx configured with a dedicated <code>server_block</code> for <code>n8n.samensteeve.com</code></div>
+        <div>• CPU and memory limits on containers to protect main project resources</div>
       </div>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -34,7 +34,7 @@ export default function N8nVpsProductionDeployment() {
         1. Prepare Dedicated Directory
       </h3>
       <CodeWindow
-        filename="Terminal — Bash"
+        filename="Terminal · Bash"
         badge="Bash"
         code={`sudo mkdir -p /opt/n8n
 cd /opt/n8n
@@ -151,34 +151,34 @@ networks:
         What&apos;s Running in Production Today
       </h2>
       <p>
-        The n8n instance is deployed and secured on n8n.samensteeve.com (2FA, automated PostgreSQL backups). The <strong>Lead Qualification Agent</strong> runs there in production, connected to the WhatsApp CRM Assistant (built and tested) by a <strong>shared CRM Data Table</strong> — the core of the system.
+        The n8n instance is deployed and secured on n8n.samensteeve.com (2FA, automated PostgreSQL backups). The <strong>Lead Qualification Agent</strong> runs there in production, connected to the WhatsApp CRM Assistant (built and tested) by a <strong>shared CRM Data Table</strong>, the core of the system.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        Lead Qualification Agent (write) — in production
+        Lead Qualification Agent (write), in production
       </h3>
       <p>
-        Autonomous AI agent that intercepts form submissions, enriches data via Tavily, scores the lead 1-10, and <strong>writes</strong> to the CRM Data Table (upsert by email). Personalized response email sent to the prospect in &lt; 30s. Redis memory, strict Output Parser (constrained JSON schema), retry on Gmail and Tavily. Header-secured webhook + IP filtering — the workflow is published and receives form submissions.
+        Autonomous AI agent that intercepts form submissions, enriches data via Tavily, scores the lead 1-10, and <strong>writes</strong> to the CRM Data Table (upsert by email). Personalized response email sent to the prospect in &lt; 30s. Redis memory, strict Output Parser (constrained JSON schema), retry on Gmail and Tavily. Header-secured webhook + IP filtering, the workflow is published and receives form submissions.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
-        WhatsApp CRM Assistant (read &amp; operational) — awaiting credentials
+        WhatsApp CRM Assistant (read &amp; operational), awaiting credentials
       </h3>
       <p>
-        WhatsApp agent that allows <strong>reading</strong> and querying the same CRM in natural language — check recent leads, look up by email, update status, send professional emails. Redis memory for conversation context. Built and tested in manual mode; publication only awaits the WhatsApp Business credentials.
+        WhatsApp agent that allows <strong>reading</strong> and querying the same CRM in natural language, check recent leads, look up by email, update status, send professional emails. Redis memory for conversation context. Built and tested in manual mode; publication only awaits the WhatsApp Business credentials.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
         The Complete Pipeline
       </h3>
       <p>
-        Both workflows form a unified system: the Lead Agent <strong>populates</strong> the CRM with qualified, enriched leads, while the WhatsApp Assistant allows <strong>querying</strong> and <strong>acting</strong> on that data directly from WhatsApp — without opening the n8n interface. Shared Redis memory for conversation continuity between both agents.
+        Both workflows form a unified system: the Lead Agent <strong>populates</strong> the CRM with qualified, enriched leads, while the WhatsApp Assistant allows <strong>querying</strong> and <strong>acting</strong> on that data directly from WhatsApp, without opening the n8n interface. Shared Redis memory for conversation continuity between both agents.
       </p>
 
       <div className="border border-line rounded-xl bg-paper/60 p-4 font-mono text-xs text-ink/80 space-y-1">
-        <div>— Each workflow has its own security model: Header Auth (<code>n8n-webhook-secret</code>) for the Lead Agent, WhatsApp Business authentication for the CRM Assistant (once its credentials are set).</div>
-        <div>— <code>retryOnFail</code> configured on critical nodes (Gmail, Tavily, HTTP) with 3 attempts.</div>
-        <div>— Shared Redis memory for conversation persistence.</div>
+        <div>• Each workflow has its own security model: Header Auth (<code>n8n-webhook-secret</code>) for the Lead Agent, WhatsApp Business authentication for the CRM Assistant (once its credentials are set).</div>
+        <div>• <code>retryOnFail</code> configured on critical nodes (Gmail, Tavily, HTTP) with 3 attempts.</div>
+        <div>• Shared Redis memory for conversation persistence.</div>
       </div>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">

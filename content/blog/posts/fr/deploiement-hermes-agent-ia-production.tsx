@@ -39,10 +39,10 @@ export default function DeploiementHermesAgentIaProduction() {
         Pourquoi ce projet
       </h2>
       <p>
-        L&apos;objectif n&apos;était pas juste de &quot;faire tourner un <code>curl | bash</code>&quot; — n&apos;importe qui peut le faire en cinq minutes. L&apos;objectif était de le déployer <strong>comme en production</strong> : avec une isolation utilisateur correcte, une surface d&apos;attaque réduite, un chiffrement des credentials, et une stratégie de sauvegarde qui survit à un incident serveur.
+        L&apos;objectif n&apos;était pas juste de &quot;faire tourner un <code>curl | bash</code>&quot;, n&apos;importe qui peut le faire en cinq minutes. L&apos;objectif était de le déployer <strong>comme en production</strong> : avec une isolation utilisateur correcte, une surface d&apos;attaque réduite, un chiffrement des credentials, et une stratégie de sauvegarde qui survit à un incident serveur.
       </p>
       <p>
-        Ce guide documente chaque étape, y compris les erreurs rencontrées en cours de route — parce qu&apos;un déploiement réel ne se passe jamais exactement comme la documentation le promet.
+        Ce guide documente chaque étape, y compris les erreurs rencontrées en cours de route, parce qu&apos;un déploiement réel ne se passe jamais exactement comme la documentation le promet.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -90,14 +90,14 @@ export default function DeploiementHermesAgentIaProduction() {
         Hermes fournit un installeur one-liner qui gère les dépendances (Python 3.11, Node.js, ripgrep, ffmpeg) automatiquement :
       </p>
       <CodeWindow
-        filename="Terminal — Installation"
+        filename="Terminal · Installation"
         badge="Bash"
         code={`curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
 source ~/.bashrc
 hermes setup`}
       />
       <p>
-        Le wizard configure le provider LLM (Anthropic Claude, OpenRouter, Nous Portal, ou tout endpoint compatible OpenAI) et prépare une première config fonctionnelle. À ce stade, tout tourne — mais en root, sans firewall, sans restriction d&apos;outils. C&apos;est là que le vrai travail commence.
+        Le wizard configure le provider LLM (Anthropic Claude, OpenRouter, Nous Portal, ou tout endpoint compatible OpenAI) et prépare une première config fonctionnelle. À ce stade, tout tourne, mais en root, sans firewall, sans restriction d&apos;outils. C&apos;est là que le vrai travail commence.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -107,7 +107,7 @@ hermes setup`}
         Faire tourner un agent qui a accès à un terminal, à l&apos;exécution de code et à Internet <strong>en tant que root</strong> est le genre de raccourci qui semble anodin jusqu&apos;au jour où il ne l&apos;est plus. Première étape : créer un utilisateur système dédié, sans droits sudo.
       </p>
       <CodeWindow
-        filename="Terminal — Création d'utilisateur"
+        filename="Terminal · Création d'utilisateur"
         badge="Bash"
         code={`adduser hermes`}
       />
@@ -137,7 +137,7 @@ WantedBy=multi-user.target`}
         <strong className="text-amber-500 font-mono text-xs uppercase tracking-wider block mb-1">
           ⚠️ Piège rencontré
         </strong>
-        Après la migration, <code>hermes config show</code> lancé en root affichait une config vide — logique, puisque la CLI regarde le <code>$HOME</code> de l&apos;utilisateur qui l&apos;exécute, et non celui déclaré dans le service. Toujours vérifier avec <code>sudo -u hermes -i</code> avant de conclure à un bug.
+        Après la migration, <code>hermes config show</code> lancé en root affichait une config vide, logique, puisque la CLI regarde le <code>$HOME</code> de l&apos;utilisateur qui l&apos;exécute, et non celui déclaré dans le service. Toujours vérifier avec <code>sudo -u hermes -i</code> avant de conclure à un bug.
       </div>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -148,7 +148,7 @@ WantedBy=multi-user.target`}
       </p>
       <p className="text-sm font-semibold text-ink">Extrait de <code>config.yaml</code> avant restriction :</p>
       <CodeWindow
-        filename="config.yaml — Avant restriction"
+        filename="config.yaml · Avant restriction"
         badge="YAML"
         code={`platform_toolsets:
   telegram:
@@ -164,7 +164,7 @@ WantedBy=multi-user.target`}
       />
       <p className="text-sm font-semibold text-ink">Après restriction, en ne gardant que ce qui est réellement nécessaire pour un usage messagerie :</p>
       <CodeWindow
-        filename="config.yaml — Après restriction"
+        filename="config.yaml · Après restriction"
         badge="YAML"
         code={`platform_toolsets:
   telegram:
@@ -181,13 +181,13 @@ WantedBy=multi-user.target`}
     - web`}
       />
       <p>
-        <code>terminal</code>, <code>code_execution</code>, <code>computer_use</code>, <code>browser</code> et <code>delegation</code> sont retirés — ce dernier parce qu&apos;un sous-agent délégué peut lui-même invoquer les outils exclus, contournant la restriction si on l&apos;oublie.
+        <code>terminal</code>, <code>code_execution</code>, <code>computer_use</code>, <code>browser</code> et <code>delegation</code> sont retirés, ce dernier parce qu&apos;un sous-agent délégué peut lui-même invoquer les outils exclus, contournant la restriction si on l&apos;oublie.
       </p>
       <p>
         En complément, deux protections activées explicitement dans la config :
       </p>
       <CodeWindow
-        filename="config.yaml — Protections de sécurité"
+        filename="config.yaml · Protections de sécurité"
         badge="YAML"
         code={`security:
   redact_secrets: true      # masque les clés API / tokens dans les logs et réponses
@@ -198,7 +198,7 @@ WantedBy=multi-user.target`}
         Le <code>fail_open: false</code> est un choix délibéré : par défaut, si le scanner de sécurité plante ou timeout, la commande s&apos;exécute quand même (comportement permissif). Sur un serveur de production exposé à une messagerie publique, on préfère l&apos;inverse.
       </p>
       <p>
-        Le système d&apos;appariement (<code>hermes pairing approve telegram &lt;code&gt;</code>) garantit par ailleurs que seuls les utilisateurs explicitement approuvés peuvent interagir avec le bot — les autres sont automatiquement refusés.
+        Le système d&apos;appariement (<code>hermes pairing approve telegram &lt;code&gt;</code>) garantit par ailleurs que seuls les utilisateurs explicitement approuvés peuvent interagir avec le bot, les autres sont automatiquement refusés.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -208,7 +208,7 @@ WantedBy=multi-user.target`}
         Hermes propose un dashboard intégré (<code>hermes dashboard</code>, port 9119, bind loopback par défaut), mais j&apos;ai opté pour <strong>Hermes WebUI</strong>, un projet communautaire MIT (non affilié à Nous Research) qui offre une parité quasi complète avec le CLI dans une interface de chat plus riche (gestion de sessions, navigateur de fichiers, streaming).
       </p>
       <p>
-        Utiliser un outil tiers plutôt que l&apos;officiel implique un compromis de confiance assumé — code non audité par l&apos;éditeur principal — compensé ici par : accès en loopback uniquement, authentification par mot de passe obligatoire, et exposition exclusivement via reverse proxy HTTPS.
+        Utiliser un outil tiers plutôt que l&apos;officiel implique un compromis de confiance assumé, code non audité par l&apos;éditeur principal, compensé ici par : accès en loopback uniquement, authentification par mot de passe obligatoire, et exposition exclusivement via reverse proxy HTTPS.
       </p>
 
       {/* Capture d'écran du déploiement en production */}
@@ -222,7 +222,7 @@ WantedBy=multi-user.target`}
         </p>
       </div>
       <CodeWindow
-        filename="Terminal — WebUI Installation"
+        filename="Terminal · WebUI Installation"
         badge="Bash"
         code={`git clone https://github.com/nesquena/hermes-webui.git
 cd hermes-webui
@@ -249,7 +249,7 @@ HERMES_WEBUI_ALLOWED_ORIGINS=https://hermes.mondomaine.com`}
           <strong>Process zombie bloquant le port</strong> : un ancien process resté actif après un restart raté empêchait le nouveau service de démarrer (<code>FATAL: Another server is already responding on 127.0.0.1:8787</code>). Résolu en identifiant le PID via <code>ss -tlnp</code> et en le tuant explicitement.
         </li>
         <li>
-          <strong>YAML mal formé</strong> : une édition manuelle du fichier de config a laissé une ligne de titre commentée (<code># security:</code>) avec des clés enfants décommentées en dessous — orphelines aux yeux du parseur YAML. Toujours valider avec <code>python3 -c &quot;import yaml; yaml.safe_load(...)&quot;</code> avant de relancer un service en production.
+          <strong>YAML mal formé</strong> : une édition manuelle du fichier de config a laissé une ligne de titre commentée (<code># security:</code>) avec des clés enfants décommentées en dessous, orphelines aux yeux du parseur YAML. Toujours valider avec <code>python3 -c &quot;import yaml; yaml.safe_load(...)&quot;</code> avant de relancer un service en production.
         </li>
       </ol>
 
@@ -271,7 +271,7 @@ HERMES_WEBUI_ALLOWED_ORIGINS=https://hermes.mondomaine.com`}
 }`}
       />
       <CodeWindow
-        filename="Terminal — Certbot TLS"
+        filename="Terminal · Certbot TLS"
         badge="Bash"
         code={`sudo certbot --nginx -d hermes.mondomaine.com`}
       />
@@ -280,7 +280,7 @@ HERMES_WEBUI_ALLOWED_ORIGINS=https://hermes.mondomaine.com`}
         5. Sauvegardes automatisées, chiffrées, redondantes
       </h2>
       <p>
-        Un agent avec mémoire persistante et des skills auto-générées accumule de la valeur avec le temps — le perdre suite à un incident serveur serait dommage. Stratégie retenue : sauvegarde locale quotidienne + réplication vers Google Drive, avec rotation sur 14 jours des deux côtés.
+        Un agent avec mémoire persistante et des skills auto-générées accumule de la valeur avec le temps, le perdre suite à un incident serveur serait dommage. Stratégie retenue : sauvegarde locale quotidienne + réplication vers Google Drive, avec rotation sur 14 jours des deux côtés.
       </p>
       <CodeWindow
         filename="/home/hermes/scripts/backup-hermes.sh"
@@ -331,7 +331,7 @@ rclone delete "$GDRIVE_REMOTE" --min-age \${KEEP_DAYS}d --quiet`}
       </ul>
 
       <p className="mt-4">
-        Le code n&apos;est que la moitié du travail sur ce genre de projet — l&apos;autre moitié, souvent négligée, c&apos;est la question &quot;qui peut faire quoi, et qu&apos;est-ce qui se passe si ça tourne mal&quot;. C&apos;est cette moitié-là qui distingue un <code>curl | bash</code> de cinq minutes d&apos;un déploiement qu&apos;on peut raisonnablement laisser tourner sans surveillance.
+        Le code n&apos;est que la moitié du travail sur ce genre de projet, l&apos;autre moitié, souvent négligée, c&apos;est la question &quot;qui peut faire quoi, et qu&apos;est-ce qui se passe si ça tourne mal&quot;. C&apos;est cette moitié-là qui distingue un <code>curl | bash</code> de cinq minutes d&apos;un déploiement qu&apos;on peut raisonnablement laisser tourner sans surveillance.
       </p>
     </article>
   );

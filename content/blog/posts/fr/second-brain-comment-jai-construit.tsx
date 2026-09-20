@@ -6,7 +6,10 @@ export default function SecondBrainCommentJaiConstruit() {
   return (
     <article className="prose dark:prose-invert max-w-none text-ink-soft leading-relaxed font-sans text-sm md:text-base space-y-6">
       <p className="text-lg text-ink font-medium leading-relaxed">
-        Je vais être honnête. Ce projet n&apos;est pas né d&apos;une envie de faire de l&apos;IA. Il est né d&apos;une frustration. Chaque fois que j&apos;ouvrais ChatGPT, Claude, Cursor ou opencode, je recommençais à zéro. Je réexpliquais qui je suis, mes projets, ma stack, mes études, ce que je cherchais. À chaque conversation. Mon contexte était éparpillé dans dix fichiers, jamais à jour, et aucune IA n&apos;a une mémoire durable que je contrôle.
+        Je vais être honnête. Ce projet n&apos;est pas né d&apos;une envie de faire de l&apos;IA. Il est né d&apos;une frustration, et elle est très concrète : mes candidatures de stage.
+      </p>
+      <p>
+        À chaque offre, je réadaptais mon CV. Sauf que l&apos;IA qui m&apos;aidait ne me connaissait pas, ou pas à jour. Je devais lui redonner mon contexte, mes expériences, mes projets, ce qui collait à l&apos;offre. Et moi-même j&apos;oubliais des détails. Alors j&apos;allais chercher ce contexte dans une autre IA, qui l&apos;avait gardé, pour revenir le fournir à la première. Mon profil était dispersé entre plusieurs IA, chacune avec sa version de moi.
       </p>
       <p>
         Cet article raconte comment j&apos;ai construit un « second cerveau » pour régler ça. Pas à pas, avec les galères et les solutions. Le résultat final m&apos;importe moins que le chemin pour y arriver.

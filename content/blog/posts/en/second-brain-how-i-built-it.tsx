@@ -6,7 +6,10 @@ export default function SecondBrainHowIBuiltIt() {
   return (
     <article className="prose dark:prose-invert max-w-none text-ink-soft leading-relaxed font-sans text-sm md:text-base space-y-6">
       <p className="text-lg text-ink font-medium leading-relaxed">
-        Let me be honest. This project wasn&apos;t born from a desire to &quot;do AI&quot;. It was born from frustration. Every time I opened ChatGPT, Claude, Cursor or opencode, I started from zero. I re-explained who I am, my projects, my stack, my studies, what I was looking for. Every single conversation. My context was scattered across ten files, never up to date, and no AI has a durable memory that I control.
+        Let me be honest. This project wasn&apos;t born from a desire to &quot;do AI&quot;. It was born from frustration, and a very concrete one: my internship applications.
+      </p>
+      <p>
+        For every opening, I adapted my CV. But the AI helping me didn&apos;t know me, or was out of date. I had to re-explain my context, my experience, my projects, whatever matched the role. And I kept forgetting details. So I&apos;d go fetch that context from another AI that had kept it, then bring it back to the first. My own profile was scattered across several AIs, each with its own version of me.
       </p>
       <p>
         This article tells how I built a &quot;second brain&quot; to fix that. Step by step, with the struggles and the solutions. The final result matters less to me than the road to get there.

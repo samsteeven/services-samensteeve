@@ -86,6 +86,10 @@ export default function SecondBrainHowIBuiltIt() {
       <p>
         A question comes in. It&apos;s turned into a vector. Qdrant finds the closest pieces. An LLM answers only from those pieces, citing the source files.
       </p>
+
+      <ZoomableImage src="/blog/second-brain-qdrant.png" alt="The vault's 190 chunks projected in 2D inside Qdrant: each point is a note fragment, placed by meaning" />
+      <p className="text-xs text-ink-soft text-center italic mb-6">The vector map. Each point is a chunk, and the tooltip shows the direct link between a vector and its content.</p>
+
       <p>
         Choosing the LLM was eventful (more on that in the problems section). Today, generation goes through the OpenCode Go gateway, with the model deepseek-v4-flash-vision-exp.
       </p>

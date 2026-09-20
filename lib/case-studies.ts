@@ -659,17 +659,17 @@ export const caseStudies: CaseStudy[] = [
     coverImage: "",
     fr: {
       title: "Second Brain - Base de connaissances accessible via MCP",
-      tagline: "Un second cerveau auto-hébergé : un vault Obsidian rendu lisible ET enrichissable par n'importe quelle IA via MCP - RAG local (Ollama + Qdrant), génération DeepSeek, écritures IA validées humainement.",
+      tagline: "Un second cerveau auto-hébergé : un vault Obsidian rendu lisible ET enrichissable par n'importe quelle IA via MCP (auth OAuth) - RAG local (Ollama + Qdrant), génération DeepSeek, ingestion différentielle idempotente, écritures IA validées humainement.",
       role: "Architecte IA & Ingénieur logiciel",
       period: "Septembre 2026 - en cours",
       stack: ["n8n", "MCP", "RAG", "Qdrant", "Ollama", "DeepSeek", "Docker", "GitHub"],
       services: ["Automatisation IA", "Architecture cloud"],
       summary:
-        "Projet personnel d'ingénierie IA : un second cerveau - une base de connaissances Obsidian versionnée sur un repo GitHub privé, indexée par n8n dans Qdrant (embeddings 100 % locaux Ollama bge-m3) et générée par DeepSeek V4 Flash Vision. Le tout est exposé à n'importe quelle IA via un serveur MCP dédié : lecture (RAG avec sources) et écriture (notes auto-classées, dédupliquées, en quarantaine jusqu'à validation humaine).",
+        "Projet personnel d'ingénierie IA : un second cerveau - une base de connaissances Obsidian versionnée sur un repo GitHub privé, indexée par n8n dans Qdrant (embeddings 100 % locaux Ollama bge-m3) et générée par DeepSeek V4 Flash Vision. Le tout est exposé à n'importe quelle IA via un serveur MCP dédié (auth OAuth) : lecture (RAG avec sources), écriture (notes auto-classées, dédupliquées, en quarantaine jusqu'à validation humaine) et lecture de la source d'un projet (README ou fichier GitHub précis, à la demande). Ingestion différentielle à IDs déterministes : idempotente, sans doublon, ~2 s en régime stable.",
       metrics: [
-        { value: "5", label: "Workflows n8n en production", description: "Ingestion, KB Query, Add Note, Housekeeping, MCP Server" },
+        { value: "7", label: "Workflows n8n en production", description: "Ingestion, Ask, KB Query, Add Note, MCP Server, Housekeeping, Project Details" },
         { value: "0", label: "Coût API supplémentaire", description: "Embeddings 100 % locaux (Ollama) + clé opencode existante" },
-        { value: "2", label: "Outils MCP", description: "second_brain_ask (lire) + second_brain_add (écrire) via une seule URL" },
+        { value: "3", label: "Outils MCP", description: "second_brain_ask (lire) + second_brain_add (écrire) + second_brain_project_details (lire la source) via une seule URL" },
         { value: "75 %", label: "Seuil anti-doublon", description: "Écritures redondantes refusées, avertissement dès 55 % de similarité" }
       ],
       sections: [
@@ -684,11 +684,11 @@ export const caseStudies: CaseStudy[] = [
           id: "architecture",
           title: "02. Serveur MCP dédié, RAG local & validation humaine",
           content:
-            "L'architecture repose sur un serveur MCP dédié (MCP Server Trigger + Custom Workflow Tool) qui n'expose que deux outils, sans jamais donner accès à l'administration n8n. La lecture passe par un RAG complet : embeddings locaux Ollama bge-m3, index sémantique Qdrant, génération DeepSeek V4 Flash Vision via la passerelle OpenCode Go. L'écriture est contrôlée : chaque note proposée par une IA est classée automatiquement (type, tags, dossier), vérifiée contre les doublons, et mise en quarantaine (status: pending) jusqu'à validation.",
+            "L'architecture repose sur un serveur MCP dédié (MCP Server Trigger + Custom Workflow Tool) qui n'expose que trois outils, sans jamais donner accès à l'administration n8n. La lecture passe par un RAG complet : embeddings locaux Ollama bge-m3, index sémantique Qdrant, génération DeepSeek V4 Flash Vision via la passerelle OpenCode Go. L'écriture est contrôlée : chaque note proposée par une IA est classée automatiquement (type, tags, dossier), vérifiée contre les doublons, et mise en quarantaine (status: pending) jusqu'à validation. Un troisième outil permet à l'IA de plonger dans la source d'un projet (README ou fichier GitHub précis) à la demande.",
           highlights: [
             {
-              title: "MCP scoped (2 outils seulement)",
-              description: "second_brain_ask + second_brain_add - jamais les outils d'administration n8n."
+              title: "MCP scoped (3 outils)",
+              description: "second_brain_ask + second_brain_add + second_brain_project_details - jamais les outils d'administration n8n."
             },
             {
               title: "Confidentialité par conception",
@@ -701,6 +701,10 @@ export const caseStudies: CaseStudy[] = [
             {
               title: "Dédoublonnage + classification",
               description: "Similarité sémantique (refus ≥ 75 %), classement LLM (type, tags, dossier), rapport hebdomadaire."
+            },
+            {
+              title: "Ingestion différentielle & idempotente",
+              description: "IDs déterministes (hash du contenu) : seuls les chunks nouveaux ou modifiés sont recalculés (~2 s en régime stable), sans doublon ni perte."
             }
           ]
         },
@@ -716,17 +720,17 @@ export const caseStudies: CaseStudy[] = [
     },
     en: {
       title: "Second Brain - AI-Accessible Personal Knowledge Base over MCP",
-      tagline: "A self-hosted second brain: an Obsidian vault made readable AND writable by any AI via MCP - local RAG (Ollama + Qdrant), DeepSeek generation, human-validated AI writes.",
+      tagline: "A self-hosted second brain: an Obsidian vault made readable AND writable by any AI via MCP (OAuth) - local RAG (Ollama + Qdrant), DeepSeek generation, idempotent differential indexing, human-validated AI writes.",
       role: "AI Architect & Software Engineer",
       period: "September 2026 - ongoing",
       stack: ["n8n", "MCP", "RAG", "Qdrant", "Ollama", "DeepSeek", "Docker", "GitHub"],
       services: ["AI Automation", "Cloud Architecture"],
       summary:
-        "Personal AI engineering project: a second brain - an Obsidian knowledge base versioned on a private GitHub repo, indexed by n8n into Qdrant (100% local Ollama bge-m3 embeddings) and generated with DeepSeek V4 Flash Vision. Exposed to any AI through a dedicated MCP server: reading (RAG with sources) and writing (auto-classified notes, deduplicated, held in quarantine until human validation).",
+        "Personal AI engineering project: a second brain - an Obsidian knowledge base versioned on a private GitHub repo, indexed by n8n into Qdrant (100% local Ollama bge-m3 embeddings) and generated with DeepSeek V4 Flash Vision. Exposed to any AI through a dedicated MCP server (OAuth): reading (RAG with sources), writing (auto-classified, deduplicated notes held in quarantine until human validation) and reading a project's source (README or a specific GitHub file, on demand). Differential indexing with deterministic IDs: idempotent, duplicate-free, ~2 s in steady state.",
       metrics: [
-        { value: "5", label: "Production n8n Workflows", description: "Ingestion, KB Query, Add Note, Housekeeping, MCP Server" },
+        { value: "7", label: "Production n8n Workflows", description: "Ingestion, Ask, KB Query, Add Note, MCP Server, Housekeeping, Project Details" },
         { value: "0", label: "Extra API Cost", description: "100% local embeddings (Ollama) + existing opencode key" },
-        { value: "2", label: "MCP Tools", description: "second_brain_ask (read) + second_brain_add (write) behind a single URL" },
+        { value: "3", label: "MCP Tools", description: "second_brain_ask (read) + second_brain_add (write) + second_brain_project_details (read the source) behind a single URL" },
         { value: "75%", label: "Duplicate Gate", description: "Redundant writes refused, warning from 55% similarity" }
       ],
       sections: [
@@ -741,11 +745,11 @@ export const caseStudies: CaseStudy[] = [
           id: "architecture",
           title: "02. Dedicated MCP Server, Local RAG & Human Validation",
           content:
-            "The architecture relies on a dedicated MCP server (MCP Server Trigger + Custom Workflow Tool) exposing only two tools, never n8n's admin surface. Reading runs through a full RAG: local Ollama bge-m3 embeddings, Qdrant semantic index, DeepSeek V4 Flash Vision generation via the OpenCode Go gateway. Writing is gated: every note proposed by an AI is auto-classified (type, tags, folder), checked against duplicates, and quarantined (status: pending) until validation.",
+            "The architecture relies on a dedicated MCP server (MCP Server Trigger + Custom Workflow Tool) exposing only three tools, never n8n's admin surface. Reading runs through a full RAG: local Ollama bge-m3 embeddings, Qdrant semantic index, DeepSeek V4 Flash Vision generation via the OpenCode Go gateway. Writing is gated: every note proposed by an AI is auto-classified (type, tags, folder), checked against duplicates, and quarantined (status: pending) until validation. A third tool lets the AI dive into a project's source (README or a specific GitHub file) on demand.",
           highlights: [
             {
-              title: "Scoped MCP (2 tools only)",
-              description: "second_brain_ask + second_brain_add - never n8n's admin tools."
+              title: "Scoped MCP (3 tools)",
+              description: "second_brain_ask + second_brain_add + second_brain_project_details - never n8n's admin tools."
             },
             {
               title: "Privacy by design",
@@ -758,6 +762,10 @@ export const caseStudies: CaseStudy[] = [
             {
               title: "Deduplication + classification",
               description: "Semantic similarity (refuse ≥ 75%), LLM classification (type, tags, folder), weekly report."
+            },
+            {
+              title: "Differential & idempotent indexing",
+              description: "Deterministic IDs (content hash): only new or changed chunks are recomputed (~2 s in steady state), no duplicates, no data loss."
             }
           ]
         },

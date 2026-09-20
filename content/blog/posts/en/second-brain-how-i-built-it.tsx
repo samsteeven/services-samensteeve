@@ -162,6 +162,49 @@ export default function SecondBrainHowIBuiltIt() {
       <ZoomableImage src="/blog/second-brain-perf.png" alt="Before / after: ingestion drops from several minutes to two seconds" />
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
+        A concrete example, from question to answer
+      </h2>
+      <p>To make this concrete, here&apos;s a real question asked from an MCP client, and everything that happens next.</p>
+      <p><strong>The question:</strong> &quot;What are my Laravel and Angular projects?&quot;</p>
+      <ol className="list-decimal list-inside space-y-2">
+        <li><strong>The AI calls the MCP tool</strong> <code>second_brain_ask</code> with that question.</li>
+        <li><strong>The question becomes a vector</strong>: Ollama (bge-m3) turns it into 1024 numbers.</li>
+        <li>
+          <strong>Qdrant finds the closest chunks</strong> by meaning. Here are the top 8:
+          <ul className="list-disc list-inside mt-2 space-y-1">
+            <li><code>01-Identity/About-Me.md</code> (0.593)</li>
+            <li><code>05-Skills/Laravel.md</code> (0.590)</li>
+            <li><code>06-Knowledge/Security/AntiBot-Securite-Applicative.md</code> (0.590)</li>
+            <li><code>05-Skills/Angular.md</code> (0.562)</li>
+            <li><code>03-Projects/SIGGE.md</code> (0.561)</li>
+            <li><code>00-Dashboard/Home.md</code> (0.553)</li>
+            <li><code>02-Career/CV.md</code> (0.550)</li>
+            <li><code>03-Projects/TribuneJustice.md</code> (0.549)</li>
+          </ul>
+        </li>
+        <li><strong>The context is assembled</strong>: those 8 pieces, each prefixed with its source file.</li>
+        <li><strong>The LLM answers only from that context</strong>, citing the files.</li>
+        <li><strong>The answer comes back to the AI</strong>, with sources.</li>
+      </ol>
+      <p><strong>The generated answer:</strong></p>
+      <blockquote className="my-6 border-l-4 border-accent/40 bg-paper-raised/20 py-3 pl-5 pr-4 rounded-r-lg text-ink-soft">
+        <p>From the context:</p>
+        <p><strong>Laravel projects</strong></p>
+        <ul className="list-disc list-inside">
+          <li><strong>TribuneJustice</strong>, Laravel 12, in production <code>[05-Skills/Laravel.md]</code> <code>[03-Projects/TribuneJustice.md]</code></li>
+          <li><strong>SIGGE</strong>, ESTLC lab management, Laravel + React <code>[05-Skills/Laravel.md]</code> <code>[03-Projects/SIGGE.md]</code></li>
+        </ul>
+        <p><strong>Angular projects</strong></p>
+        <ul className="list-disc list-inside">
+          <li><strong>TribuneJustice</strong>, Angular 18 SSR, auth rewrite with Signals <code>[05-Skills/Angular.md]</code> <code>[03-Projects/TribuneJustice.md]</code></li>
+          <li><strong>EasyPharma</strong>, Angular 21, Tailwind <code>[05-Skills/Angular.md]</code></li>
+          <li><strong>eapp</strong>, Angular frontend for a Spring Boot e-commerce app <code>[05-Skills/Angular.md]</code></li>
+        </ul>
+        <p>So <strong>TribuneJustice</strong> is the project that appears in both Laravel and Angular. Note: <strong>SIGGE</strong> is Laravel + <strong>React</strong>, not Angular <code>[05-Skills/Laravel.md]</code> <code>[03-Projects/SIGGE.md]</code>.</p>
+      </blockquote>
+      <p>What matters: the answer doesn&apos;t come from a vague memory of the model. It comes from <strong>my notes</strong>, it <strong>cites its sources</strong>, and it even <strong>flags a nuance</strong> (SIGGE is React, not Angular). That&apos;s exactly what a working RAG should do.</p>
+
+      <h2 className="font-display text-xl font-bold text-ink mt-8">
         The problems I hit (and how I solved them)
       </h2>
       <p>This is the part I wish I&apos;d read when I started. Nothing went as planned.</p>

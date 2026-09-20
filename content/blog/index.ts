@@ -6,6 +6,15 @@ import { BlogPost, PostMeta } from "./types";
 export const blogMetadata: PostMeta[] = [
   // ─── FRENCH POSTS ───
   {
+    slug: "second-brain-comment-jai-construit",
+    title: "Construire un « second cerveau » pour mes IA — le récit complet, étape par étape",
+    excerpt: "D'une frustration quotidienne à un serveur MCP en production : les décisions, les problèmes rencontrés (et les solutions), et à quoi ça sert vraiment au quotidien.",
+    date: "2026-09-20",
+    tags: ["IA", "RAG", "MCP", "n8n", "Auto-hébergement"],
+    readTime: 8,
+    lang: "fr"
+  },
+  {
     slug: "integration-escrow-mobile-money-mesomb",
     title: "Intégrer le mobile money (MeSomb) dans une plateforme legaltech : un escrow qui tient vraiment",
     excerpt: "Ce qu'intégrer MTN Mobile Money / Orange Money au Cameroun implique réellement : signature HMAC des requêtes, webhooks idempotents, courses conditions sur l'escrow, et la discipline d'ingénierie qui rend les flux d'argent sûrs.",
@@ -109,6 +118,15 @@ export const blogMetadata: PostMeta[] = [
   },
 
   // ─── ENGLISH POSTS ───
+  {
+    slug: "second-brain-how-i-built-it",
+    title: "Building a 'second brain' for my AIs — the full story, step by step",
+    excerpt: "From a daily frustration to a production MCP server: the decisions, the problems I hit (and how I solved them), and what it is actually useful for.",
+    date: "2026-09-20",
+    tags: ["AI", "RAG", "MCP", "n8n", "Self-hosting"],
+    readTime: 8,
+    lang: "en"
+  },
   {
     slug: "integrating-mesomb-mobile-money",
     title: "Integrating mobile money (MeSomb) into a legaltech platform: an escrow that actually holds",

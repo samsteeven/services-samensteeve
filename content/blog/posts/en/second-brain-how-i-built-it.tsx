@@ -317,7 +317,7 @@ export default function SecondBrainHowIBuiltIt() {
         What it&apos;s useful for
       </h2>
       <p>
-        This is the real question, and for a long time I hadn&apos;t put enough emphasis on it. Here&apos;s the concrete utility, today.
+        The CV was the trigger, but it&apos;s only one use among others. Here&apos;s what it brings me today, and what it will bring over time.
       </p>
       <div className="grid sm:grid-cols-2 gap-3 my-6">
         <div className="rounded-xl border border-line bg-paper-raised/40 p-4">

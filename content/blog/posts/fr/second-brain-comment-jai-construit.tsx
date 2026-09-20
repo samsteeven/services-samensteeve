@@ -317,7 +317,7 @@ export default function SecondBrainCommentJaiConstruit() {
         À quoi ça me sert, concrètement
       </h2>
       <p>
-        C&apos;est la vraie question, et pendant longtemps je ne l&apos;avais pas assez mise en avant. Voici l&apos;utilité réelle, aujourd&apos;hui.
+        Le CV a été le déclencheur, mais ce n&apos;est qu&apos;un usage parmi d&apos;autres. Voici ce que ça m&apos;apporte aujourd&apos;hui, et ce que ça m&apos;apportera au fil du temps.
       </p>
       <div className="grid sm:grid-cols-2 gap-3 my-6">
         <div className="rounded-xl border border-line bg-paper-raised/40 p-4">

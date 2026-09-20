@@ -714,7 +714,7 @@ export const caseStudies: CaseStudy[] = [
           id: "impact",
           title: "03. Impact & Résultats",
           content:
-            "Une seule URL MCP suffit : ChatGPT, Claude, Cursor ou opencode peuvent lire ma base (réponses sourcées) et l'enrichir (notes classées, en quarantaine). Le tout tourne en production avec zéro coût d'API supplémentaire, et un pipeline de qualité (dédoublonnage à l'écriture, housekeeping hebdomadaire) maintient la base propre et bien classée."
+            "Une seule URL MCP suffit : ChatGPT, Claude, Cursor ou opencode peuvent lire ma base (réponses sourcées) et l'enrichir (notes classées, en quarantaine). Le tout tourne en production avec zéro coût d'API supplémentaire, et un pipeline de qualité (dédoublonnage à l'écriture, housekeeping hebdomadaire) maintient la base propre et bien classée. Et ça ne s'arrête pas aux candidatures : la même base sert à préparer un entretien, retrouver une décision technique, ou alimenter mes articles. Du temps gagné à chaque fois."
         }
       ],
       repoUrl: "https://github.com/samsteeven/sam-second-brain",
@@ -777,7 +777,7 @@ export const caseStudies: CaseStudy[] = [
           id: "impact",
           title: "03. Impact & Results",
           content:
-            "A single MCP URL is enough: ChatGPT, Claude, Cursor or opencode can read my base (sourced answers) and enrich it (classified, quarantined notes). Everything runs in production with zero extra API cost, and a quality pipeline (dedup on write, weekly housekeeping) keeps the base clean and well-organized."
+            "A single MCP URL is enough: ChatGPT, Claude, Cursor or opencode can read my base (sourced answers) and enrich it (classified, quarantined notes). Everything runs in production with zero extra API cost, and a quality pipeline (dedup on write, weekly housekeeping) keeps the base clean and well-organized. And it doesn't stop at applications: the same base helps prepare an interview, find a technical decision, or feed my articles. Time saved every time."
         }
       ],
       repoUrl: "https://github.com/samsteeven/sam-second-brain",

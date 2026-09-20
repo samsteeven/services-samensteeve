@@ -656,7 +656,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "second-brain",
     service: ["automatisation-ia", "architecture-cloud"],
     coverPlaceholder: "#0f172a",
-    coverImage: "",
+    coverImage: "/blog/second-brain-cover.png",
     fr: {
       title: "Second Brain - Base de connaissances accessible via MCP",
       tagline: "Un second cerveau auto-hébergé : un vault Obsidian rendu lisible ET enrichissable par n'importe quelle IA via MCP (auth OAuth) - RAG local (Ollama + Qdrant), génération DeepSeek, ingestion différentielle idempotente, écritures IA validées humainement.",
@@ -685,6 +685,8 @@ export const caseStudies: CaseStudy[] = [
           title: "02. Serveur MCP dédié, RAG local & validation humaine",
           content:
             "L'architecture repose sur un serveur MCP dédié (MCP Server Trigger + Custom Workflow Tool) qui n'expose que trois outils, sans jamais donner accès à l'administration n8n. La lecture passe par un RAG complet : embeddings locaux Ollama bge-m3, index sémantique Qdrant, génération DeepSeek V4 Flash Vision via la passerelle OpenCode Go. L'écriture est contrôlée : chaque note proposée par une IA est classée automatiquement (type, tags, dossier), vérifiée contre les doublons, et mise en quarantaine (status: pending) jusqu'à validation. Un troisième outil permet à l'IA de plonger dans la source d'un projet (README ou fichier GitHub précis) à la demande.",
+          image: "/blog/second-brain-architecture.png",
+          imageAlt: "Architecture du second cerveau : ingestion Obsidian, Git, n8n, Qdrant et Ollama, accès via MCP",
           highlights: [
             {
               title: "MCP scoped (3 outils)",
@@ -746,6 +748,8 @@ export const caseStudies: CaseStudy[] = [
           title: "02. Dedicated MCP Server, Local RAG & Human Validation",
           content:
             "The architecture relies on a dedicated MCP server (MCP Server Trigger + Custom Workflow Tool) exposing only three tools, never n8n's admin surface. Reading runs through a full RAG: local Ollama bge-m3 embeddings, Qdrant semantic index, DeepSeek V4 Flash Vision generation via the OpenCode Go gateway. Writing is gated: every note proposed by an AI is auto-classified (type, tags, folder), checked against duplicates, and quarantined (status: pending) until validation. A third tool lets the AI dive into a project's source (README or a specific GitHub file) on demand.",
+          image: "/blog/second-brain-architecture.png",
+          imageAlt: "Second brain architecture: ingestion Obsidian, Git, n8n, Qdrant and Ollama, access over MCP",
           highlights: [
             {
               title: "Scoped MCP (3 tools)",

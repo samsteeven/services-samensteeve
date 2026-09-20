@@ -832,7 +832,7 @@ export const fr = {
             "MCP",
             "OpenAI API",
             "Claude",
-            "OpenRouter",
+            "OpenCode Go",
             "Tavily API",
             "Redis",
             "Turso",

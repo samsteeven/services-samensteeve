@@ -538,7 +538,7 @@ export const caseStudies: CaseStudy[] = [
       tagline: "Deux agents IA partagent une même CRM — le premier qualifie chaque prospect en < 30 secondes, le second permet de consulter et agir sur les données directement depuis WhatsApp.",
       role: "Architecte IA & Ingénieur logiciel",
       period: "Juillet — Août 2026",
-      stack: ["n8n", "DeepSeek v4 Flash", "Tavily API", "OpenRouter", "Redis", "Next.js", "Data Tables", "MCP"],
+      stack: ["n8n", "DeepSeek v4 Flash", "Tavily API", "OpenCode Go", "Redis", "Next.js", "Data Tables", "MCP"],
       services: ["Automatisation IA", "Ingénierie logicielle"],
       summary:
         "Conception et déploiement d'un pipeline d'agents IA autonomes pour l'acquisition et la gestion de prospects. Le premier agent intercepte les formulaires web, enrichit les données entreprise en temps réel et attribue un score de maturité. Le second agent permet au décideur d'interroger et de piloter la base de prospects directement via WhatsApp.",
@@ -560,7 +560,7 @@ export const caseStudies: CaseStudy[] = [
           id: "architecture",
           title: "02. Architecture à Double Workflow n8n & Redis",
           content:
-            "Le système repose sur deux workflows n8n interconnectés par une Data Table CRM commune et une mémoire Redis. Lorsqu'un prospect soumet un formulaire, le Lead Agent s'exécute : il effectue une recherche web Tavily sur l'entreprise, compare ses besoins au catalogue de services, formule un score de 1 à 10 et génère un email personnalisé via DeepSeek v4 Flash (OpenRouter). Le second workflow — le WhatsApp CRM Assistant — permet au décideur d'interroger cette même CRM en langage naturel directement depuis WhatsApp, sans ouvrir aucun dashboard.",
+            "Le système repose sur deux workflows n8n interconnectés par une Data Table CRM commune et une mémoire Redis. Lorsqu'un prospect soumet un formulaire, le Lead Agent s'exécute : il effectue une recherche web Tavily sur l'entreprise, compare ses besoins au catalogue de services, formule un score de 1 à 10 et génère un email personnalisé via DeepSeek v4 Flash (OpenCode Go). Le second workflow — le WhatsApp CRM Assistant — permet au décideur d'interroger cette même CRM en langage naturel directement depuis WhatsApp, sans ouvrir aucun dashboard.",
           image: "/projects/whatsapp_workflow.jpg",
           imageAlt: "Workflow n8n du WhatsApp CRM Assistant — réception du message, extraction, agent IA avec mémoire Redis, outils CRM et envoi de réponse",
           highlights: [
@@ -597,7 +597,7 @@ export const caseStudies: CaseStudy[] = [
       tagline: "Two AI agents share one CRM — the first qualifies every lead in < 30 seconds, the second allows querying and acting on data directly from WhatsApp.",
       role: "AI Architect & Software Engineer",
       period: "July — August 2026",
-      stack: ["n8n", "DeepSeek v4 Flash", "Tavily API", "OpenRouter", "Redis", "Next.js", "Data Tables", "MCP"],
+      stack: ["n8n", "DeepSeek v4 Flash", "Tavily API", "OpenCode Go", "Redis", "Next.js", "Data Tables", "MCP"],
       services: ["AI Automation", "Software Engineering"],
       summary:
         "Architected and deployed a multi-agent AI pipeline for lead acquisition and CRM management. The first agent intercepts contact forms, enriches company data in real time, and scores prospects. The second agent allows management to query and control the lead database directly through WhatsApp.",
@@ -619,7 +619,7 @@ export const caseStudies: CaseStudy[] = [
           id: "architecture",
           title: "02. Dual n8n Workflow & Redis Architecture",
           content:
-            "The architecture links two n8n workflows through a shared CRM Data Table and persistent Redis memory. Upon form submission, the Lead Agent triggers Tavily web search, matches prospect requirements with the service catalog, scores lead intent (1-10), and drafts a tailored email via DeepSeek v4 Flash (OpenRouter). The second workflow — the WhatsApp CRM Assistant — lets the decision-maker query that same CRM in natural language directly from WhatsApp, without opening any dashboard.",
+            "The architecture links two n8n workflows through a shared CRM Data Table and persistent Redis memory. Upon form submission, the Lead Agent triggers Tavily web search, matches prospect requirements with the service catalog, scores lead intent (1-10), and drafts a tailored email via DeepSeek v4 Flash (OpenCode Go). The second workflow — the WhatsApp CRM Assistant — lets the decision-maker query that same CRM in natural language directly from WhatsApp, without opening any dashboard.",
           image: "/projects/whatsapp_workflow.jpg",
           imageAlt: "n8n WhatsApp CRM Assistant workflow — message trigger, extraction, AI agent with Redis memory, CRM tools and reply delivery",
           highlights: [

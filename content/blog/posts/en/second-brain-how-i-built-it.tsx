@@ -167,7 +167,7 @@ export default function SecondBrainHowIBuiltIt() {
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         What it knows about me (and what it could know)
       </h2>
-      <p>Today, it knows my <strong>identity</strong>, my <strong>career</strong>, my <strong>projects</strong>, my <strong>skills</strong> and my <strong>technical knowledge</strong>. That&apos;s everything I no longer have to re-explain.</p>
+      <p>Today, it knows my <strong>identity</strong>, my <strong>career</strong>, my <strong>projects</strong>, my <strong>skills</strong>, my <strong>technical knowledge</strong> and <strong>how I develop</strong>. That&apos;s everything I no longer have to re-explain.</p>
       <p>And it&apos;s meant to grow: tomorrow, my <strong>daily life</strong>, my <strong>watch</strong>, my <strong>decisions</strong>, my <strong>ideas</strong>. A memory that grows with every note.</p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -343,6 +343,10 @@ export default function SecondBrainHowIBuiltIt() {
         <div className="rounded-xl border border-line bg-paper-raised/40 p-4">
           <h3 className="font-display text-sm font-bold text-ink mb-1">Feeding my articles and projects</h3>
           <p className="text-sm text-ink-soft m-0">What I write here is fueled by the vault. My notes, retrospectives and articles no longer start from zero: they start from what I lived.</p>
+        </div>
+        <div className="rounded-xl border border-line bg-paper-raised/40 p-4">
+          <h3 className="font-display text-sm font-bold text-ink mb-1">Applying my conventions to a new project</h3>
+          <p className="text-sm text-ink-soft m-0">The AI knows how I develop: structure, naming, patterns, best practices. On a new project, it applies what I&apos;ve already done well elsewhere, instead of producing generic code.</p>
         </div>
       </div>
       <p>

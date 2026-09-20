@@ -167,7 +167,7 @@ export default function SecondBrainCommentJaiConstruit() {
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         Ce qu&apos;il connaît de moi (et ce qu&apos;il pourrait connaître)
       </h2>
-      <p>Aujourd&apos;hui, il connaît mon <strong>identité</strong>, ma <strong>carrière</strong>, mes <strong>projets</strong>, mes <strong>compétences</strong> et mes <strong>connaissances techniques</strong>. C&apos;est tout ce que je n&apos;ai plus à réexpliquer.</p>
+      <p>Aujourd&apos;hui, il connaît mon <strong>identité</strong>, ma <strong>carrière</strong>, mes <strong>projets</strong>, mes <strong>compétences</strong>, mes <strong>connaissances techniques</strong> et ma <strong>manière de développer</strong>. C&apos;est tout ce que je n&apos;ai plus à réexpliquer.</p>
       <p>Et c&apos;est fait pour grandir : demain, ma <strong>vie quotidienne</strong>, ma <strong>veille</strong>, mes <strong>décisions</strong>, mes <strong>idées</strong>. Une mémoire qui s&apos;enrichit à chaque note.</p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -343,6 +343,10 @@ export default function SecondBrainCommentJaiConstruit() {
         <div className="rounded-xl border border-line bg-paper-raised/40 p-4">
           <h3 className="font-display text-sm font-bold text-ink mb-1">Alimenter mes articles et mes projets</h3>
           <p className="text-sm text-ink-soft m-0">Ce que j&apos;écris ici est nourri par le vault. Mes notes, mes retours d&apos;expérience et mes articles ne partent plus de zéro : ils partent de ce que j&apos;ai vécu.</p>
+        </div>
+        <div className="rounded-xl border border-line bg-paper-raised/40 p-4">
+          <h3 className="font-display text-sm font-bold text-ink mb-1">Appliquer mes conventions à un nouveau projet</h3>
+          <p className="text-sm text-ink-soft m-0">L&apos;IA connaît ma manière de développer : structure, nommage, patterns, bonnes pratiques. Sur un nouveau projet, elle applique ce que j&apos;ai déjà bien fait ailleurs, au lieu de produire du code générique.</p>
         </div>
       </div>
       <p>

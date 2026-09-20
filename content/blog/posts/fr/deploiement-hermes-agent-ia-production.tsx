@@ -162,7 +162,7 @@ WantedBy=multi-user.target`}
     - web
     # ...`}
       />
-      <p className="text-sm font-semibold text-ink">Après restriction, en ne gardant que ce qui est réellement nécessaire pour un usage messagerie :</p>
+      <p className="text-sm font-semibold text-ink">Après restriction, en ne gardant que ce qui est nécessaire pour un usage messagerie :</p>
       <CodeWindow
         filename="config.yaml · Après restriction"
         badge="YAML"

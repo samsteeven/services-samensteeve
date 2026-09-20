@@ -45,7 +45,7 @@ export default function ConcurrentDoubleBillingBug() {
         The Bad Fix: Application-Level Optimism
       </h2>
       <p>
-        Trying to resolve this in memory (such as checking session states or using an unlocked Redis cache key) is highly prone to failures. Similarly, standard database transactions running under default isolation levels (like <code>READ COMMITTED</code> in PostgreSQL) do not block this race condition, because both processes read the validated database state before the other commits its write.
+        Trying to resolve this in memory (such as checking session states or using a Redis cache key without a lock) is highly prone to failures. Similarly, standard database transactions running under default isolation levels (like <code>READ COMMITTED</code> in PostgreSQL) do not block this race condition, because both processes read the validated database state before the other commits its write.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">

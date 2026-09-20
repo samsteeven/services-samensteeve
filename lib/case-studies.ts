@@ -250,7 +250,7 @@ export const caseStudies: CaseStudy[] = [
           id: "context",
           title: "01. The Exam & African Constraints",
           content:
-            "Within the RNCP39765 certification exam (BC04 block 'Optimizing the SI with Cloud Computing'), the scenario places the team at CAMTECH SOLUTIONS S.A., a Cameroonian IT services company, on the DIGITRANS-CM mission for AGROCAM S.A.: replacing a 2009 monolith with a distributed, partially cloud SI. Traditional cloud architectures often fail in rural African environments where 2G/3G connectivity is spotty, field agents lose hours of operational logs during outages. Furthermore, Cameroonian Law n°2010/012 restricts storing financial and HR data outside national borders, ruling out pure public cloud. Three days, in a team of three, to deliver a deployed application and a security report in front of a jury.",
+            "Within the RNCP39765 certification exam (BC04 block 'Optimizing the SI with Cloud Computing'), the scenario places the team at CAMTECH SOLUTIONS S.A., a Cameroonian IT services company, on the DIGITRANS-CM mission for AGROCAM S.A.: replacing a 2009 monolith with a distributed, partially cloud SI. Traditional cloud architectures often fail in rural African environments where 2G/3G connectivity is spotty, field agents lose hours of operational logs during outages. And Cameroonian Law n°2010/012 restricts storing financial and HR data outside national borders, ruling out pure public cloud. Three days, in a team of three, to deliver a deployed application and a security report in front of a jury.",
           quote: "Cloud architecture in Africa must be built for operational reality: intermittent connectivity, local data sovereignty, and offline resilience, and in a 3-day exam, every choice must be defensible."
         },
         {
@@ -501,7 +501,7 @@ export const caseStudies: CaseStudy[] = [
           highlights: [
             {
               title: "Automated Network Failover",
-              description: "Seamless failover from MPLS to IPSec VPN in under 30 seconds upon link outage."
+              description: "Failover from MPLS to IPSec VPN in under 30 seconds upon link outage."
             },
             {
               title: "6-Phase M365 Migration",
@@ -612,7 +612,7 @@ export const caseStudies: CaseStudy[] = [
           id: "context",
           title: "01. Response Latency & CRM Friction",
           content:
-            "In B2B engineering services, failing to respond to a prospect within minutes drastically lowers conversion rates. Manually reviewing and drafting replies took hours. Moreover, updating traditional CRMs on mobile while traveling is tedious.",
+            "In B2B engineering services, failing to respond to a prospect within minutes drastically lowers conversion rates. Manually reviewing and drafting replies took hours. And updating traditional CRMs on mobile while traveling is tedious.",
           quote: "AI automation shouldn't replace human connection: it eliminates response latency and prepares decision-making before the first call."
         },
         {

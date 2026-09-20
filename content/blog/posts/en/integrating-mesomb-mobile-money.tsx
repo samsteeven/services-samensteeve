@@ -7,7 +7,7 @@ export default function IntegrateMesombMobileMoneyEscrow() {
         Integrating a payment gateway is the rarest feature where a bug isn&apos;t an annoyance, it&apos;s money leaving the system. On TribuneJustice, a legaltech where clients pay lawyers before the service is delivered, the stakes were higher: we needed an <strong>escrow</strong> flow, not just a &ldquo;charge the card&rdquo; button.
       </p>
       <p>
-        This is what integrating mobile money in Cameroon (MeSomb, via MTN Mobile Money and Orange Money) actually looked like, and the engineering that stops a payment stack from leaking money.
+        This is what integrating mobile money in Cameroon (MeSomb, via MTN Mobile Money and Orange Money) looked like, and the engineering that stops a payment stack from leaking money.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
@@ -143,7 +143,7 @@ ProfessionalPayout::updateOrCreate([...], [
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         Webhooks: the part that breaks in production
       </h2>
-      <p>Webhooks are where the money actually gets confirmed, and they&apos;re full of traps.</p>
+      <p>Webhooks are where the money gets confirmed, and they&apos;re full of traps.</p>
       <p>
         <strong>Signature verification with replay protection.</strong> MeSomb sends an <code>X-MeSomb-Webhook-Signature</code> header in the format <code>t=&lt;timestamp&gt;,v1=&lt;signature&gt;</code>. I verify it with HMAC-SHA256, reject anything outside a <strong>10-minute timestamp window</strong> (anti-replay), and compare with <code>hash_equals</code> (constant-time, against timing attacks).
       </p>

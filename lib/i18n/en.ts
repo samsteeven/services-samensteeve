@@ -103,7 +103,7 @@ export const en = {
         outcomes: [
           "Outage-resilient infrastructure: automated network link failover, redundant backups, and fully tested BCP/DRP.",
           "Controlled, predictable costs: instance optimization and elimination of over-provisioning (e.g. recurring costs cut in half by year 2).",
-          "Seamless and secure interconnection of remote sites (headquarters & branches) without a single point of failure.",
+          "Secure interconnection of remote sites (headquarters & branches) without a single point of failure.",
           "Complete skill transfer: documentation, runbooks, and local IT teams fully autonomous in daily operations."
         ],
         scope: [

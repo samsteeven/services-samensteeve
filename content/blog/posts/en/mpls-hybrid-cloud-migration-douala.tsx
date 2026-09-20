@@ -72,7 +72,7 @@ resource "azurerm_virtual_network_gateway" "vpn_gw" {
         Forcing local workstations in Douala to depend on Azure AD servers in Dublin with 140ms latency and high internet drop risks would have paralyzed operations during outages.
       </p>
       <p>
-        <strong>Our decision:</strong> Maintain physical Domain Controllers (Active Directory) locally at the Douala HQ (replicated to a secondary local node) and use Azure AD Connect to sync identities to the cloud. If the internet connection drops, local domain authorization continues to work seamlessly.
+        <strong>Our decision:</strong> Maintain physical Domain Controllers (Active Directory) locally at the Douala HQ (replicated to a secondary local node) and use Azure AD Connect to sync identities to the cloud. If the internet connection drops, local domain authorization keeps working.
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">

@@ -48,7 +48,7 @@ export const fr = {
         title: "Ingénierie Logicielle",
         punchline: "La plupart des projets logiciels livrent des écrans. Je construis des systèmes fiables, maintenables et faits pour durer sans dépendre du développeur.",
         shortDesc: "Conception, développement et industrialisation de logiciels de production robustes : architecture, APIs, backends critiques et interfaces métier.",
-        longDesc: "La plupart des projets logiciels livrent des interfaces. Ce qui manque ensuite : un système qui tient sous la charge, que votre équipe peut maintenir, et qui reflète vraiment vos processus métier. Je prends en charge la construction complète, cadrage fonctionnel, architecture applicative, backend, APIs, frontend, tests et déploiement. Ce que vous recevez à la fin : un produit robuste que vous possédez à 100% et que vous pouvez faire évoluer sereinement.",
+        longDesc: "La plupart des projets logiciels livrent des interfaces. Ce qui manque ensuite : un système qui tient sous la charge, que votre équipe peut maintenir, et qui reflète vos processus métier. Je prends en charge la construction complète, cadrage fonctionnel, architecture applicative, backend, APIs, frontend, tests et déploiement. Ce que vous recevez à la fin : un produit robuste que vous possédez à 100% et que vous pouvez faire évoluer sereinement.",
         stack: ["Architecture applicative", "Backend & APIs", "Frontend produit", "Bases de données", "Intégrations métier", "Tests & CI/CD", "Observabilité", "Documentation"],
         outcomes: [
           "Un produit logiciel fiable, maintenable et aligné sur vos processus métier, pas une simple maquette livrée sans suivi.",
@@ -236,7 +236,7 @@ export const fr = {
           },
           {
             q: "Est-ce que ça s'intègre à mes outils actuels ?",
-            a: "C'est précisément l'objectif. Je m'intègre à vos APIs, bases de données, CRM, ERP ou applications internes. L'agent travaille dans votre écosystème existant, vous n'avez pas à tout changer pour commencer."
+            a: "C'est l'objectif. Je m'intègre à vos APIs, bases de données, CRM, ERP ou applications internes. L'agent travaille dans votre écosystème existant, vous n'avez pas à tout changer pour commencer."
           },
           {
             q: "Combien de temps avant de voir des résultats concrets ?",

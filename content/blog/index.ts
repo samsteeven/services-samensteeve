@@ -17,8 +17,8 @@ export const blogMetadata: PostMeta[] = [
   },
   {
     slug: "integration-escrow-mobile-money-mesomb",
-    title: "Intégrer le mobile money (MeSomb) dans une plateforme legaltech : un escrow qui tient vraiment",
-    excerpt: "Ce qu'intégrer MTN Mobile Money / Orange Money au Cameroun implique réellement : signature HMAC des requêtes, webhooks idempotents, courses conditions sur l'escrow, et la discipline d'ingénierie qui rend les flux d'argent sûrs.",
+    title: "Intégrer le mobile money (MeSomb) dans une plateforme legaltech : un escrow qui tient",
+    excerpt: "Ce qu'intégrer MTN Mobile Money / Orange Money au Cameroun implique : signature HMAC des requêtes, webhooks idempotents, courses conditions sur l'escrow, et la discipline d'ingénierie qui rend les flux d'argent sûrs.",
     date: "2026-09-02",
     tags: ["Laravel", "Paiement", "MeSomb", "Mobile Money", "Escrow", "Sécurité"],
     readTime: 9,
@@ -131,8 +131,8 @@ export const blogMetadata: PostMeta[] = [
   },
   {
     slug: "integrating-mesomb-mobile-money",
-    title: "Integrating mobile money (MeSomb) into a legaltech platform: an escrow that actually holds",
-    excerpt: "What integrating MTN Mobile Money / Orange Money in Cameroon really involves: HMAC request signing, idempotent webhooks, race conditions on escrow, and the engineering discipline that makes money flows safe.",
+    title: "Integrating mobile money (MeSomb) into a legaltech platform: an escrow that holds",
+    excerpt: "What integrating MTN Mobile Money / Orange Money in Cameroon involves: HMAC request signing, idempotent webhooks, race conditions on escrow, and the engineering discipline that makes money flows safe.",
     date: "2026-09-02",
     tags: ["Laravel", "Payments", "MeSomb", "Mobile Money", "Escrow", "Security"],
     readTime: 9,

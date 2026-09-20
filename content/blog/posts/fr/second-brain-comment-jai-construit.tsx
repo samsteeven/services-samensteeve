@@ -162,6 +162,12 @@ export default function SecondBrainCommentJaiConstruit() {
       <ZoomableImage src="/blog/second-brain-perf.png" alt="Avant / après : l'ingestion passe de plusieurs minutes à deux secondes" />
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
+        Ce qu&apos;il connaît de moi (et ce qu&apos;il pourrait connaître)
+      </h2>
+      <p>Aujourd&apos;hui, il connaît mon <strong>identité</strong>, ma <strong>carrière</strong>, mes <strong>projets</strong>, mes <strong>compétences</strong> et mes <strong>connaissances techniques</strong>. C&apos;est tout ce que je n&apos;ai plus à réexpliquer.</p>
+      <p>Et c&apos;est fait pour grandir : demain, ma <strong>vie quotidienne</strong>, ma <strong>veille</strong>, mes <strong>décisions</strong>, mes <strong>idées</strong>. Une mémoire qui s&apos;enrichit à chaque note.</p>
+
+      <h2 className="font-display text-xl font-bold text-ink mt-8">
         Un exemple concret, de la question à la réponse
       </h2>
       <p>Pour rendre ça concret, voici une vraie question posée depuis un client MCP, et tout ce qui se passe ensuite.</p>

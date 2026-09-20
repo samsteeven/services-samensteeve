@@ -162,6 +162,12 @@ export default function SecondBrainHowIBuiltIt() {
       <ZoomableImage src="/blog/second-brain-perf.png" alt="Before / after: ingestion drops from several minutes to two seconds" />
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
+        What it knows about me (and what it could know)
+      </h2>
+      <p>Today, it knows my <strong>identity</strong>, my <strong>career</strong>, my <strong>projects</strong>, my <strong>skills</strong> and my <strong>technical knowledge</strong>. That&apos;s everything I no longer have to re-explain.</p>
+      <p>And it&apos;s meant to grow: tomorrow, my <strong>daily life</strong>, my <strong>watch</strong>, my <strong>decisions</strong>, my <strong>ideas</strong>. A memory that grows with every note.</p>
+
+      <h2 className="font-display text-xl font-bold text-ink mt-8">
         A concrete example, from question to answer
       </h2>
       <p>To make this concrete, here&apos;s a real question asked from an MCP client, and everything that happens next.</p>

@@ -121,7 +121,7 @@ export default function SecondBrainCommentJaiConstruit() {
         Donner à une IA la capacité d&apos;écrire dans ma base, c&apos;est puissant et dangereux. Une note lue par une IA, ou un contenu piégé, pourrait l&apos;inciter à écrire n&apos;importe quoi. Ma règle est simple : toute écriture IA passe par une quarantaine.
       </p>
       <p>
-        Une note proposée par une IA arrive avec <code>status: pending</code>. Elle est invisible pour la recherche tant que je ne l&apos;ai pas validée à la main. Le pire qu&apos;une IA compromise puisse faire, c&apos;est écrire une note que je vois, que je peux corriger ou supprimer. Et tout est versionné par Git, donc réversible.
+        Une note proposée par une IA arrive avec <code>status: pending</code>. Elle est invisible pour la recherche tant que je ne l&apos;ai pas validée à la main. Dans ce cadre, le pire qu&apos;une IA compromise puisse faire est d&apos;écrire une note que je vois, que je peux corriger ou supprimer. Et tout est versionné par Git, donc réversible.
       </p>
 
       <ZoomableImage src="/blog/second-brain-quarantine.png" alt="Le flux de quarantaine : l'IA écrit, la note reste invisible jusqu'à validation" />
@@ -152,7 +152,7 @@ export default function SecondBrainCommentJaiConstruit() {
         Étape 9 : rendre ça rapide et robuste
       </h3>
       <p>
-        C&apos;est la partie dont je suis le plus fier, parce qu&apos;elle est invisible et qu&apos;elle a demandé le plus de réflexion. Aujourd&apos;hui, quand rien n&apos;a changé, l&apos;ingestion tourne en deux secondes au lieu de trois à six minutes. Et elle ne peut jamais dupliquer ni perdre une note, même si deux exécutions tournent en même temps.
+        C&apos;est la partie dont je suis le plus fier, parce qu&apos;elle est invisible et qu&apos;elle a demandé le plus de réflexion. Aujourd&apos;hui, quand rien n&apos;a changé, l&apos;ingestion tourne en deux secondes au lieu de trois à six minutes. Et elle est conçue pour éviter les duplications et les pertes liées aux exécutions concurrentes.
       </p>
 
       <ZoomableImage src="/blog/second-brain-perf.png" alt="Avant / après : l'ingestion passe de plusieurs minutes à deux secondes" />
@@ -208,7 +208,7 @@ export default function SecondBrainCommentJaiConstruit() {
         Le problème : deux exécutions concurrentes de l&apos;ingestion, une planifiée et une manuelle, et la base contenait deux fois les mêmes notes.
       </p>
       <p>
-        La solution : avec des identifiants déterministes, un upsert écrase au lieu d&apos;ajouter. Deux exécutions simultanées produisent le même index.
+        La solution : avec des identifiants déterministes, un upsert écrase au lieu d&apos;ajouter. Deux exécutions simultanées convergent vers le même index.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
@@ -218,7 +218,7 @@ export default function SecondBrainCommentJaiConstruit() {
         Le problème : en corrigeant les doublons, j&apos;ai introduit pire. Mon nettoyage supprimait les points absents du lot courant. Mais si une exécution avait une vue périmée du vault, elle supprimait les notes qu&apos;une autre venait d&apos;écrire. J&apos;ai perdu quatre notes en testant. C&apos;est le genre de bug qui te fait douter de tout.
       </p>
       <p>
-        La solution : horodater chaque point avec <code>indexed_at</code>, et ne supprimer un orphelin que s&apos;il est antérieur au début de l&apos;exécution. Un run concurrent, même avec une vue périmée, ne peut plus toucher aux notes écrites après son démarrage.
+        La solution : horodater chaque point avec <code>indexed_at</code>, et ne supprimer un orphelin que s&apos;il est antérieur au début de l&apos;exécution. Un run concurrent, même avec une vue périmée, ne touche pas aux notes écrites après son démarrage.
       </p>
       <p>
         La leçon : supprimer ce qui n&apos;est plus là est une opération destructive. Sur un système concurrent, elle a besoin d&apos;une garde temporelle. J&apos;ai écrit ce piège noir sur blanc dans la doc du projet pour ne jamais y retomber.
@@ -231,7 +231,7 @@ export default function SecondBrainCommentJaiConstruit() {
         Le problème : en fouillant, j&apos;ai découvert qu&apos;une note écrite par une IA était en <code>status: active</code>, donc indexée, alors qu&apos;elle aurait dû être en quarantaine. Elle venait d&apos;une ancienne version du workflow.
       </p>
       <p>
-        La solution : en plus de la quarantaine, j&apos;ai exclu tout un dossier, celui des captures et des rapports, de l&apos;indexation. Une écriture IA ne peut plus fuiter, même par accident.
+        La solution : en plus de la quarantaine, j&apos;ai exclu tout un dossier, celui des captures et des rapports, de l&apos;indexation. Cette double protection empêche désormais une note IA de rejoindre l&apos;index par ce chemin.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">

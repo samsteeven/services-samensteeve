@@ -121,7 +121,7 @@ export default function SecondBrainHowIBuiltIt() {
         Giving an AI the ability to write into my base is powerful and dangerous. A note read by an AI, or a booby-trapped piece of content, could push it to write anything. My rule is simple: every AI write goes through quarantine.
       </p>
       <p>
-        A note proposed by an AI arrives with <code>status: pending</code>. It&apos;s invisible to search until I&apos;ve validated it by hand. The worst a compromised AI can do is write a note I can see, that I can fix or delete. And everything is versioned by Git, so it&apos;s reversible.
+        A note proposed by an AI arrives with <code>status: pending</code>. It&apos;s invisible to search until I&apos;ve validated it by hand. Within that frame, the worst a compromised AI can do is write a note I can see, that I can fix or delete. And everything is versioned by Git, so it&apos;s reversible.
       </p>
 
       <ZoomableImage src="/blog/second-brain-quarantine.png" alt="The quarantine flow: the AI writes, the note stays invisible until validation" />
@@ -152,7 +152,7 @@ export default function SecondBrainHowIBuiltIt() {
         Step 9: making it fast and robust
       </h3>
       <p>
-        This is the part I&apos;m proudest of, because it&apos;s invisible and it took the most thought. Today, when nothing has changed, ingestion runs in two seconds instead of three to six minutes. And it can never duplicate or lose a note, even if two executions run at the same time.
+        This is the part I&apos;m proudest of, because it&apos;s invisible and it took the most thought. Today, when nothing has changed, ingestion runs in two seconds instead of three to six minutes. And it&apos;s designed to avoid duplicates and losses caused by concurrent runs.
       </p>
 
       <ZoomableImage src="/blog/second-brain-perf.png" alt="Before / after: ingestion drops from several minutes to two seconds" />
@@ -208,7 +208,7 @@ export default function SecondBrainHowIBuiltIt() {
         The problem: two concurrent ingestion runs, one scheduled and one manual, and the base contained twice the same notes.
       </p>
       <p>
-        The solution: with deterministic identifiers, an upsert overwrites instead of appending. Two simultaneous runs produce the same index.
+        The solution: with deterministic identifiers, an upsert overwrites instead of appending. Two simultaneous runs converge on the same index.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">
@@ -218,7 +218,7 @@ export default function SecondBrainHowIBuiltIt() {
         The problem: while fixing duplicates, I introduced something worse. My cleanup deleted points missing from the current batch. But if a run had a stale view of the vault, it deleted the notes another run had just written. I lost four notes while testing. That kind of bug makes you doubt everything.
       </p>
       <p>
-        The solution: timestamp each point with <code>indexed_at</code>, and only delete an orphan if it predates the start of the run. A concurrent run, even with a stale view, can no longer touch notes written after it started.
+        The solution: timestamp each point with <code>indexed_at</code>, and only delete an orphan if it predates the start of the run. A concurrent run, even with a stale view, does not touch notes written after it started.
       </p>
       <p>
         The lesson: deleting what&apos;s no longer there is a destructive operation. On a concurrent system, it needs a time guard. I wrote that trap down in the project docs so I never fall into it again.
@@ -231,7 +231,7 @@ export default function SecondBrainHowIBuiltIt() {
         The problem: while digging, I discovered a note written by an AI was <code>status: active</code>, so indexed, when it should have been quarantined. It came from an old version of the workflow.
       </p>
       <p>
-        The solution: on top of quarantine, I excluded a whole folder, the one for captures and reports, from indexing. An AI write can no longer leak, even by accident.
+        The solution: on top of quarantine, I excluded a whole folder, the one for captures and reports, from indexing. This double protection now keeps AI notes out of the index through that path.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">

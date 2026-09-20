@@ -693,6 +693,10 @@ export const caseStudies: CaseStudy[] = [
               description: "second_brain_ask + second_brain_add + second_brain_project_details - jamais les outils d'administration n8n."
             },
             {
+              title: "Lecture de la source à la demande",
+              description: "L'IA va chercher la vraie implémentation d'une fonctionnalité dans le code (GitHub), sans gonfler le vault. Extensible à d'autres outils (GitLab, tickets, doc interne)."
+            },
+            {
               title: "Confidentialité par conception",
               description: "Embeddings 100 % locaux (Ollama) sur mon VPS - aucun tiers n'indexe mes notes."
             },
@@ -754,6 +758,10 @@ export const caseStudies: CaseStudy[] = [
             {
               title: "Scoped MCP (3 tools)",
               description: "second_brain_ask + second_brain_add + second_brain_project_details - never n8n's admin tools."
+            },
+            {
+              title: "Source reading on demand",
+              description: "The AI goes to find the real implementation of a feature in the code (GitHub), without bloating the vault. Extensible to other tools (GitLab, issues, internal docs)."
             },
             {
               title: "Privacy by design",

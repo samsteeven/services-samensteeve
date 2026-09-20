@@ -145,7 +145,16 @@ export default function SecondBrainCommentJaiConstruit() {
         Étape 7 : plonger dans la source
       </h3>
       <p>
-        Une base de connaissances, c&apos;est bien. Mais parfois, l&apos;IA a besoin du détail exact, un fichier précis d&apos;un projet. Plutôt que de tout recopier dans le vault, j&apos;ai ajouté un troisième outil : <code>second_brain_project_details</code>. L&apos;IA demande <code>repo</code> ou <code>repo#chemin</code>, et elle va lire la source directement sur GitHub. Le vault reste léger, la source reste la vérité.
+        Une base de connaissances, c&apos;est bien. Mais parfois, l&apos;IA a besoin du détail exact : un fichier précis d&apos;un projet, l&apos;implémentation réelle d&apos;une fonctionnalité.
+      </p>
+      <p>
+        Plutôt que de tout recopier dans le vault, j&apos;ai ajouté un troisième outil : <code>second_brain_project_details</code>. L&apos;IA demande un repo (ou <code>repo#chemin</code>), et elle va lire la source directement sur GitHub.
+      </p>
+      <p>
+        Concrètement : « comment avais-je implémenté l&apos;escrow ? », « je veux refaire cette fonctionnalité ailleurs, montre-moi comment je l&apos;avais faite ». L&apos;IA part chercher la vraie implémentation, dans le vrai code. Le vault reste léger, la source reste la vérité.
+      </p>
+      <p>
+        Aujourd&apos;hui, cet outil est branché sur GitHub. Mais rien ne l&apos;empêche de l&apos;être demain sur d&apos;autres outils : GitLab, un gestionnaire de tickets, une doc interne. C&apos;est ça qui est puissant : la même base peut ouvrir l&apos;IA à tout mon environnement de travail.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">

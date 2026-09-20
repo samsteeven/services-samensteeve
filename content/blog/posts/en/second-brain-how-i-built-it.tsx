@@ -145,7 +145,16 @@ export default function SecondBrainHowIBuiltIt() {
         Step 7: diving into the source
       </h3>
       <p>
-        A knowledge base is good. But sometimes the AI needs the exact detail, a specific file from a project. Rather than copying everything into the vault, I added a third tool: <code>second_brain_project_details</code>. The AI asks for <code>repo</code> or <code>repo#path</code>, and it reads the source directly on GitHub. The vault stays light, the source stays the truth.
+        A knowledge base is good. But sometimes the AI needs the exact detail: a specific file from a project, the real implementation of a feature.
+      </p>
+      <p>
+        Rather than copying everything into the vault, I added a third tool: <code>second_brain_project_details</code>. The AI asks for a repo (or <code>repo#path</code>), and it reads the source directly on GitHub.
+      </p>
+      <p>
+        In practice: &quot;how did I implement escrow?&quot;, &quot;I want to rebuild this feature elsewhere, show me how I did it&quot;. The AI goes to find the real implementation, in the real code. The vault stays light, the source stays the truth.
+      </p>
+      <p>
+        Today, that tool is wired to GitHub. But nothing stops it from being wired to other tools tomorrow: GitLab, an issue tracker, internal docs. That&apos;s the powerful part: the same base can open the AI to my whole work environment.
       </p>
 
       <h3 className="font-display text-base font-bold text-ink mt-6">

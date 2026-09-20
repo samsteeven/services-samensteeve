@@ -101,7 +101,7 @@ hermes setup`}
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
-        2. Isoler l&apos;agent : migration root → utilisateur dédié
+        2. Isoler l&apos;agent : migration root : utilisateur dédié
       </h2>
       <p>
         Faire tourner un agent qui a accès à un terminal, à l&apos;exécution de code et à Internet <strong>en tant que root</strong> est le genre de raccourci qui semble anodin jusqu&apos;au jour où il ne l&apos;est plus. Première étape : créer un utilisateur système dédié, sans droits sudo.

@@ -101,7 +101,7 @@ hermes setup`}
       </p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
-        2. Agent Isolation: Root → Dedicated User Migration
+        2. Agent Isolation: Root: Dedicated User Migration
       </h2>
       <p>
         Running an agent with terminal access, code execution, and network access <strong>as root</strong> is a shortcut that feels fine right up until it isn&apos;t. Step one: creating a dedicated unprivileged user.

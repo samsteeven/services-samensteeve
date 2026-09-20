@@ -586,7 +586,7 @@ export const caseStudies: CaseStudy[] = [
           id: "impact",
           title: "03. Rigueur, Sécurité & Production",
           content:
-            "Le Lead Qualification Agent tourne en production : webhook sécurisé par header + filtrage IP, gestion d'erreur robuste (onError → continueErrorOutput) et journalisation des échecs dans la CRM, aucun lead ne peut être égaré. Le WhatsApp CRM Assistant est construit et testé ; sa publication n'attend que ses credentials WhatsApp Business."
+            "Le Lead Qualification Agent tourne en production : webhook sécurisé par header + filtrage IP, gestion d'erreur robuste (onError : continueErrorOutput) et journalisation des échecs dans la CRM, aucun lead ne peut être égaré. Le WhatsApp CRM Assistant est construit et testé ; sa publication n'attend que ses credentials WhatsApp Business."
         }
       ],
       repoUrl: undefined,
@@ -645,7 +645,7 @@ export const caseStudies: CaseStudy[] = [
           id: "impact",
           title: "03. Reliability & Production Results",
           content:
-            "The Lead Qualification Agent is now running in production: header-secured webhook + IP filtering, robust error routing (onError → continueErrorOutput) and failure logging into the CRM, no lead can ever be lost. The WhatsApp CRM Assistant is built and tested; its publication only awaits the WhatsApp Business credentials."
+            "The Lead Qualification Agent is now running in production: header-secured webhook + IP filtering, robust error routing (onError: continueErrorOutput) and failure logging into the CRM, no lead can ever be lost. The WhatsApp CRM Assistant is built and tested; its publication only awaits the WhatsApp Business credentials."
         }
       ],
       repoUrl: undefined,

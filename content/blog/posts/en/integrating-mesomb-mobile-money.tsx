@@ -14,10 +14,10 @@ export default function IntegrateMesombMobileMoneyEscrow() {
         Why payments are a legaltech&apos;s riskiest code
       </h2>
       <p>
-        On a legal platform, a payment is not &ldquo;buy a product&rdquo;. It&apos;s: <em>a client puts money in trust → a lawyer performs a service → the funds are released</em>. That means the payment engine carries:
+        On a legal platform, a payment is not &ldquo;buy a product&rdquo;. It&apos;s: <em>a client puts money in trust, a lawyer performs a service, the funds are released</em>. That means the payment engine carries:
       </p>
       <ul className="list-disc pl-5 space-y-2">
-        <li>An <strong>escrow lifecycle</strong> (<code>held</code> → <code>released</code> → <code>refunded</code>) that must never skip a state.</li>
+        <li>An <strong>escrow lifecycle</strong> (<code>held</code>, <code>released</code>, <code>refunded</code>) that must never skip a state.</li>
         <li><strong>Two parties</strong> (client and expert) plus a platform commission in a single transaction.</li>
         <li>The requirement to handle <strong>failures, retries, and double-notifications</strong> without ever crediting twice.</li>
       </ul>
@@ -72,7 +72,7 @@ $signature = hash_hmac('sha1', $stringToSign, $this->secretKey);`}</pre>
       <p>Two more real-world traps with Cameroonian phone numbers:</p>
       <ul className="list-disc pl-5 space-y-2">
         <li>Users type their number in a dozen formats (<code>+237677123456</code>, <code>00237 677...</code>, <code>67712 34 56</code>). I strip everything non-digit, drop the <code>237</code> prefix, and keep the <strong>9 local digits</strong>.</li>
-        <li>The <strong>operator is inferred from the prefix</strong> (<code>69</code>, <code>655</code>, <code>656</code> → Orange; otherwise MTN), because the API needs to know which wallet to debit.</li>
+        <li>The <strong>operator is inferred from the prefix</strong> (<code>69</code>, <code>655</code>, <code>656</code>: Orange; otherwise MTN), because the API needs to know which wallet to debit.</li>
       </ul>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">

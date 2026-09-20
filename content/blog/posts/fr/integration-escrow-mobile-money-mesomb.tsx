@@ -14,10 +14,10 @@ export default function IntegrationEscrowMobileMoneyMesomb() {
         Pourquoi le paiement est le code le plus risqué d&apos;une legaltech
       </h2>
       <p>
-        Sur une plateforme juridique, un paiement n&apos;est pas « acheter un produit ». C&apos;est : <em>un client place de l&apos;argent en dépôt → un avocat réalise la prestation → les fonds sont libérés</em>. Autrement dit, le moteur de paiement porte :
+        Sur une plateforme juridique, un paiement n&apos;est pas « acheter un produit ». C&apos;est : <em>un client place de l&apos;argent en dépôt, un avocat réalise la prestation, les fonds sont libérés</em>. Autrement dit, le moteur de paiement porte :
       </p>
       <ul className="list-disc pl-5 space-y-2">
-        <li>Un <strong>cycle de vie d&apos;escrow</strong> (<code>held</code> → <code>released</code> → <code>refunded</code>) qui ne doit jamais sauter d&apos;état.</li>
+        <li>Un <strong>cycle de vie d&apos;escrow</strong> (<code>held</code>, <code>released</code>, <code>refunded</code>) qui ne doit jamais sauter d&apos;état.</li>
         <li><strong>Deux parties</strong> (client et expert) plus une commission plateforme sur une seule transaction.</li>
         <li>L&apos;obligation de gérer <strong>échecs, reprises et double-notifications</strong> sans jamais créditer deux fois.</li>
       </ul>
@@ -72,7 +72,7 @@ $signature = hash_hmac('sha1', $stringToSign, $this->secretKey);`}</pre>
       <p>Deux autres pièges bien réels avec les numéros de téléphone camerounais :</p>
       <ul className="list-disc pl-5 space-y-2">
         <li>Les utilisateurs saisissent leur numéro sous une dizaine de formats (<code>+237677123456</code>, <code>00237 677...</code>, <code>67712 34 56</code>). Je retire tout ce qui n&apos;est pas un chiffre, j&apos;enlève le préfixe <code>237</code>, et je garde les <strong>9 chiffres locaux</strong>.</li>
-        <li>L&apos;<strong>opérateur est déduit du préfixe</strong> (<code>69</code>, <code>655</code>, <code>656</code> → Orange ; sinon MTN), car l&apos;API a besoin de savoir quel portefeuille débiter.</li>
+        <li>L&apos;<strong>opérateur est déduit du préfixe</strong> (<code>69</code>, <code>655</code>, <code>656</code> : Orange ; sinon MTN), car l&apos;API a besoin de savoir quel portefeuille débiter.</li>
       </ul>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">

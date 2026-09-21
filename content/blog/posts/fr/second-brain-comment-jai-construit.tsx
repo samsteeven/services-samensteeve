@@ -183,47 +183,22 @@ export default function SecondBrainCommentJaiConstruit() {
       <p>Et c&apos;est fait pour grandir : demain, ma <strong>vie quotidienne</strong>, ma <strong>veille</strong>, mes <strong>décisions</strong>, mes <strong>idées</strong>. Une mémoire qui s&apos;enrichit à chaque note.</p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
-        Un exemple concret, de la question à la réponse
+        Un exemple concret : un CV taillé pour une offre
       </h2>
-      <p>Pour rendre ça concret, voici une vraie question posée depuis un client MCP, et tout ce qui se passe ensuite.</p>
-      <p><strong>La question :</strong> « Quels sont mes projets en Laravel et Angular ? »</p>
+      <p>Voici l&apos;usage le plus parlant, celui qui a déclenché tout le projet.</p>
+      <p><strong>Le contexte.</strong> Je tombe sur une offre de stage (Takima, « AI Software &amp; DevOps Engineer », projet PopApp autour du Green IT et de Kubernetes). Elle demande Java/Spring, React, Docker, Kubernetes et de l&apos;IA.</p>
+      <p><strong>La demande.</strong> Je branche une IA sur mon serveur MCP et je lui écris : « Génère-moi un CV adapté à cette offre, à partir de ma base. N&apos;invente rien. »</p>
+      <p><strong>Ce qui se passe ensuite :</strong></p>
       <ol className="list-decimal list-inside space-y-2">
-        <li><strong>L&apos;IA appelle l&apos;outil MCP</strong> <code>second_brain_ask</code> avec cette question.</li>
-        <li><strong>La question devient un vecteur</strong> : Ollama (bge-m3) la transforme en 1024 nombres.</li>
-        <li>
-          <strong>Qdrant cherche les chunks les plus proches</strong> par le sens. Ici, les 8 premiers :
-          <ul className="list-disc list-inside mt-2 space-y-1">
-            <li><code>01-Identity/About-Me.md</code> (0,593)</li>
-            <li><code>05-Skills/Laravel.md</code> (0,590)</li>
-            <li><code>06-Knowledge/Security/AntiBot-Securite-Applicative.md</code> (0,590)</li>
-            <li><code>05-Skills/Angular.md</code> (0,562)</li>
-            <li><code>03-Projects/SIGGE.md</code> (0,561)</li>
-            <li><code>00-Dashboard/Home.md</code> (0,553)</li>
-            <li><code>02-Career/CV.md</code> (0,550)</li>
-            <li><code>03-Projects/TribuneJustice.md</code> (0,549)</li>
-          </ul>
-        </li>
-        <li><strong>Le contexte est assemblé</strong> : ces 8 morceaux, chacun précédé de son fichier source.</li>
-        <li><strong>Le LLM répond uniquement à partir de ce contexte</strong>, en citant les fichiers.</li>
-        <li><strong>La réponse revient à l&apos;IA</strong>, sourcée.</li>
+        <li>L&apos;IA interroge ma base (<code>second_brain_ask</code>) : identité, parcours, projets, compétences, CV.</li>
+        <li>Pour les projets clés, elle plonge dans la <strong>source</strong> (<code>second_brain_project_details</code>) pour vérifier les détails réels.</li>
+        <li>Elle sélectionne et <strong>réordonne</strong> mes projets par pertinence pour l&apos;offre.</li>
+        <li>Elle signale honnêtement les <strong>écarts</strong> : Kotlin, etcd, Operator Framework ne sont pas dans ma base, elle ne les invente pas.</li>
       </ol>
-      <p><strong>La réponse générée :</strong></p>
-      <blockquote className="my-6 border-l-4 border-accent/40 bg-paper-raised/20 py-3 pl-5 pr-4 rounded-r-lg text-ink-soft">
-        <p>D&apos;après le contexte :</p>
-        <p><strong>Projets Laravel</strong></p>
-        <ul className="list-disc list-inside">
-          <li><strong>TribuneJustice</strong>, Laravel 12, en production <code>[05-Skills/Laravel.md]</code> <code>[03-Projects/TribuneJustice.md]</code></li>
-          <li><strong>SIGGE</strong>, gestion labo ESTLC, Laravel + React <code>[05-Skills/Laravel.md]</code> <code>[03-Projects/SIGGE.md]</code></li>
-        </ul>
-        <p><strong>Projets Angular</strong></p>
-        <ul className="list-disc list-inside">
-          <li><strong>TribuneJustice</strong>, Angular 18 SSR, refonte auth en Signals <code>[05-Skills/Angular.md]</code> <code>[03-Projects/TribuneJustice.md]</code></li>
-          <li><strong>EasyPharma</strong>, Angular 21, Tailwind <code>[05-Skills/Angular.md]</code></li>
-          <li><strong>eapp</strong>, frontend Angular d&apos;un e-commerce Spring Boot <code>[05-Skills/Angular.md]</code></li>
-        </ul>
-        <p>Donc <strong>TribuneJustice</strong> est le projet qui apparaît à la fois en Laravel et en Angular. À noter : <strong>SIGGE</strong> est en Laravel + <strong>React</strong>, pas Angular <code>[05-Skills/Laravel.md]</code> <code>[03-Projects/SIGGE.md]</code>.</p>
-      </blockquote>
-      <p>Ce qui compte : la réponse ne vient pas d&apos;une mémoire vague du modèle. Elle vient de <strong>mes notes</strong>, elle <strong>cite ses sources</strong>, et elle <strong>signale même une nuance</strong> (SIGGE est en React, pas Angular). C&apos;est exactement ce qu&apos;on attend d&apos;un RAG qui fonctionne.</p>
+      <p><strong>Le résultat.</strong> Un CV ciblé : Kubernetes et Terraform pour le DevOps, Spring Boot pour le Java, React pour le front, Second Brain pour l&apos;IA, et une section qui relie honnêtement mon expérience au <strong>Green IT</strong> (maîtrise des coûts et des ressources cloud).</p>
+      <ZoomableImage src="/blog/second-brain-cv-takima.png" alt="CV généré pour l'offre Takima à partir du second brain" />
+      <p className="text-xs text-ink-soft text-center italic mb-6">Le CV produit par l&apos;IA, uniquement à partir de mes notes, sans que je réexplique quoi que ce soit.</p>
+      <p>Et le détail qui compte : pendant la génération, l&apos;IA a aussi <strong>révélé les trous</strong> de ma base (email, téléphone, années de formation, référentiels RNCP manquants). Un CV ne sort pas seulement juste : il montre ce qu&apos;il fallait compléter.</p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         Les problèmes rencontrés (et comment je les ai réglés)

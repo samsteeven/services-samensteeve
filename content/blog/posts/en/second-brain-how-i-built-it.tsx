@@ -183,47 +183,22 @@ export default function SecondBrainHowIBuiltIt() {
       <p>And it&apos;s meant to grow: tomorrow, my <strong>daily life</strong>, my <strong>watch</strong>, my <strong>decisions</strong>, my <strong>ideas</strong>. A memory that grows with every note.</p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
-        A concrete example, from question to answer
+        A concrete example: a CV tailored to a job posting
       </h2>
-      <p>To make this concrete, here&apos;s a real question asked from an MCP client, and everything that happens next.</p>
-      <p><strong>The question:</strong> &quot;What are my Laravel and Angular projects?&quot;</p>
+      <p>Here&apos;s the most telling use case, the one that started the whole project.</p>
+      <p><strong>The context.</strong> I come across an internship posting (Takima, &quot;AI Software &amp; DevOps Engineer&quot;, the PopApp project around Green IT and Kubernetes). It asks for Java/Spring, React, Docker, Kubernetes and AI.</p>
+      <p><strong>The request.</strong> I plug an AI into my MCP server and write: &quot;Generate a CV tailored to this posting, from my base. Don&apos;t invent anything.&quot;</p>
+      <p><strong>What happens next:</strong></p>
       <ol className="list-decimal list-inside space-y-2">
-        <li><strong>The AI calls the MCP tool</strong> <code>second_brain_ask</code> with that question.</li>
-        <li><strong>The question becomes a vector</strong>: Ollama (bge-m3) turns it into 1024 numbers.</li>
-        <li>
-          <strong>Qdrant finds the closest chunks</strong> by meaning. Here are the top 8:
-          <ul className="list-disc list-inside mt-2 space-y-1">
-            <li><code>01-Identity/About-Me.md</code> (0.593)</li>
-            <li><code>05-Skills/Laravel.md</code> (0.590)</li>
-            <li><code>06-Knowledge/Security/AntiBot-Securite-Applicative.md</code> (0.590)</li>
-            <li><code>05-Skills/Angular.md</code> (0.562)</li>
-            <li><code>03-Projects/SIGGE.md</code> (0.561)</li>
-            <li><code>00-Dashboard/Home.md</code> (0.553)</li>
-            <li><code>02-Career/CV.md</code> (0.550)</li>
-            <li><code>03-Projects/TribuneJustice.md</code> (0.549)</li>
-          </ul>
-        </li>
-        <li><strong>The context is assembled</strong>: those 8 pieces, each prefixed with its source file.</li>
-        <li><strong>The LLM answers only from that context</strong>, citing the files.</li>
-        <li><strong>The answer comes back to the AI</strong>, with sources.</li>
+        <li>The AI queries my base (<code>second_brain_ask</code>): identity, background, projects, skills, CV.</li>
+        <li>For key projects, it dives into the <strong>source</strong> (<code>second_brain_project_details</code>) to check the real details.</li>
+        <li>It selects and <strong>reorders</strong> my projects by relevance to the posting.</li>
+        <li>It honestly flags the <strong>gaps</strong>: Kotlin, etcd, Operator Framework aren&apos;t in my base, so it doesn&apos;t invent them.</li>
       </ol>
-      <p><strong>The generated answer:</strong></p>
-      <blockquote className="my-6 border-l-4 border-accent/40 bg-paper-raised/20 py-3 pl-5 pr-4 rounded-r-lg text-ink-soft">
-        <p>From the context:</p>
-        <p><strong>Laravel projects</strong></p>
-        <ul className="list-disc list-inside">
-          <li><strong>TribuneJustice</strong>, Laravel 12, in production <code>[05-Skills/Laravel.md]</code> <code>[03-Projects/TribuneJustice.md]</code></li>
-          <li><strong>SIGGE</strong>, ESTLC lab management, Laravel + React <code>[05-Skills/Laravel.md]</code> <code>[03-Projects/SIGGE.md]</code></li>
-        </ul>
-        <p><strong>Angular projects</strong></p>
-        <ul className="list-disc list-inside">
-          <li><strong>TribuneJustice</strong>, Angular 18 SSR, auth rewrite with Signals <code>[05-Skills/Angular.md]</code> <code>[03-Projects/TribuneJustice.md]</code></li>
-          <li><strong>EasyPharma</strong>, Angular 21, Tailwind <code>[05-Skills/Angular.md]</code></li>
-          <li><strong>eapp</strong>, Angular frontend for a Spring Boot e-commerce app <code>[05-Skills/Angular.md]</code></li>
-        </ul>
-        <p>So <strong>TribuneJustice</strong> is the project that appears in both Laravel and Angular. Note: <strong>SIGGE</strong> is Laravel + <strong>React</strong>, not Angular <code>[05-Skills/Laravel.md]</code> <code>[03-Projects/SIGGE.md]</code>.</p>
-      </blockquote>
-      <p>What matters: the answer doesn&apos;t come from a vague memory of the model. It comes from <strong>my notes</strong>, it <strong>cites its sources</strong>, and it even <strong>flags a nuance</strong> (SIGGE is React, not Angular). That&apos;s exactly what a working RAG should do.</p>
+      <p><strong>The result.</strong> A targeted CV: Kubernetes and Terraform for DevOps, Spring Boot for Java, React for the frontend, Second Brain for AI, and a section that honestly ties my experience to <strong>Green IT</strong> (cloud cost and resource control).</p>
+      <ZoomableImage src="/blog/second-brain-cv-takima.png" alt="CV generated for the Takima posting from the second brain" />
+      <p className="text-xs text-ink-soft text-center italic mb-6">The CV produced by the AI, purely from my notes, without me re-explaining anything.</p>
+      <p>And the telling detail: during generation, the AI also <strong>exposed the holes</strong> in my base (missing email, phone, study years, RNCP frameworks). A CV doesn&apos;t just come out right: it shows what needed filling.</p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         The problems I hit (and how I solved them)

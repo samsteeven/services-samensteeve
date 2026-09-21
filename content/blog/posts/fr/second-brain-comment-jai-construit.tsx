@@ -93,6 +93,9 @@ export default function SecondBrainCommentJaiConstruit() {
       <ZoomableImage src="/blog/second-brain-qdrant.png" alt="Les 190 chunks du vault projetés en 2D dans Qdrant : chaque point est un morceau de note, positionné selon son sens" />
       <p className="text-xs text-ink-soft text-center italic mb-6">La carte des vecteurs. Chaque point est un chunk, et l&apos;infobulle montre le lien direct entre un vecteur et son contenu.</p>
 
+      <ZoomableImage src="/blog/second-brain-ask.png" alt="Le workflow de requête : question, vectorisation, recherche Qdrant, contexte, LLM, réponse sourcée" />
+      <p className="text-xs text-ink-soft text-center italic mb-6">Le pipeline de la requête dans n8n : c&apos;est ce workflow que l&apos;outil MCP <code>second_brain_ask</code> appelle.</p>
+
       <p>
         Le choix du LLM a été mouvementé (j&apos;y reviens dans les problèmes). Aujourd&apos;hui, la génération passe par la passerelle OpenCode Go, avec le modèle deepseek-v4-flash-vision-exp.
       </p>

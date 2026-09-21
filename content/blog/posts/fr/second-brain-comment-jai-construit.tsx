@@ -188,7 +188,33 @@ export default function SecondBrainCommentJaiConstruit() {
       </h2>
       <p>Voici l&apos;usage le plus parlant, celui qui a déclenché tout le projet.</p>
       <p><strong>Le contexte.</strong> Je tombe sur une offre de stage (<a href="https://www.jobteaser.com/fr/job-offers/2298006f-f332-4fa6-bdb2-41c1dc629c43-takima-stage-de-fin-d-etudes-ai-software-devops-engineer-projet-popapp-devops-greenit" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:opacity-80">Takima, « AI Software &amp; DevOps Engineer », projet PopApp</a>) autour du Green IT et de Kubernetes. Elle demande Java/Spring, React, Docker, Kubernetes et de l&apos;IA.</p>
-      <p><strong>La demande.</strong> Je branche une IA sur mon serveur MCP et je lui écris : « Génère-moi un CV adapté à cette offre, à partir de ma base. N&apos;invente rien. »</p>
+      <p><strong>La demande.</strong> Je branche une IA sur mon serveur MCP et je lui colle ce prompt :</p>
+      <CodeWindow
+        filename="prompt-cv-takima.txt"
+        badge="Prompt"
+        code={`Tu es connecté à mon second cerveau via MCP (outils : second_brain_ask, second_brain_project_details, second_brain_add).
+Objectif : génère-moi un CV adapté à l'offre de stage ci-dessous, en te basant UNIQUEMENT sur ma base de connaissances. N'invente rien.
+
+Méthode :
+
+1. Interroge ma base avec second_brain_ask pour récupérer : mon identité, mon parcours, mes études, mes projets, mes compétences, mon CV.
+2. Pour les projets les plus pertinents pour l'offre, plonge dans la source si tu as besoin du détail : second_brain_project_details, format "repo" ou "repo#chemin".
+3. Sélectionne et réordonne mes projets par pertinence pour l'offre. Reformule chaque élément en puces orientées résultat.
+4. Si l'offre demande une compétence que ma base ne contient pas, ne l'invente pas : signale-la comme un écart, honnêtement.
+
+Section Green IT :
+L'offre mentionne le Green IT. Relie explicitement ce thème à mon optimisation des coûts et des ressources cloud (Terraform, budgets.tf) plutôt que d'inventer une expérience Green IT que je n'ai pas. Appuie-toi uniquement sur ce qui existe dans ma base.
+
+Contraintes :
+
+- Faits vérifiables uniquement : pas de chiffre, date, techno ou résultat qui ne vienne pas de ma base.
+- Pas de tirets cadratins, pas de flèches.
+- Français, une page.
+- Titre, accroche (objectif), compétences, projets, formation, langues.
+
+Avant de rédiger, liste-moi les infos que tu as trouvées dans ma base et les écarts éventuels avec l'offre. Puis propose le CV.`}
+      />
+      <p>Trois choses comptent dans ce prompt : <strong>l&apos;ordre des outils</strong> (la base d&apos;abord, la source seulement si besoin de détail), <strong>l&apos;interdiction d&apos;inventer</strong> (avec obligation de signaler les écarts), et <strong>la demande de lister d&apos;abord ce qui a été trouvé</strong>. C&apos;est cette dernière ligne qui produit les captures ci-dessous.</p>
       <p><strong>Ce qui se passe ensuite :</strong></p>
       <ol className="list-decimal list-inside space-y-2">
         <li>L&apos;IA interroge ma base (<code>second_brain_ask</code>) : identité, parcours, projets, compétences, CV.</li>

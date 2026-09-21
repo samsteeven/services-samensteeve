@@ -188,7 +188,34 @@ export default function SecondBrainHowIBuiltIt() {
       </h2>
       <p>Here&apos;s the most telling use case, the one that started the whole project.</p>
       <p><strong>The context.</strong> I come across an internship posting (<a href="https://www.jobteaser.com/fr/job-offers/2298006f-f332-4fa6-bdb2-41c1dc629c43-takima-stage-de-fin-d-etudes-ai-software-devops-engineer-projet-popapp-devops-greenit" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:opacity-80">Takima, &quot;AI Software &amp; DevOps Engineer&quot;, the PopApp project</a>) around Green IT and Kubernetes. It asks for Java/Spring, React, Docker, Kubernetes and AI.</p>
-      <p><strong>The request.</strong> I plug an AI into my MCP server and write: &quot;Generate a CV tailored to this posting, from my base. Don&apos;t invent anything.&quot;</p>
+      <p><strong>The request.</strong> I plug an AI into my MCP server and paste this prompt:</p>
+      <CodeWindow
+        filename="prompt-cv-takima.txt"
+        badge="Prompt"
+        code={`You are connected to my second brain via MCP (tools: second_brain_ask, second_brain_project_details, second_brain_add).
+Goal: generate a CV tailored to the internship posting below, relying ONLY on my knowledge base. Don't invent anything.
+
+Method:
+
+1. Query my base with second_brain_ask to retrieve: my identity, background, studies, projects, skills, CV.
+2. For the projects most relevant to the posting, dive into the source if you need details: second_brain_project_details, format "repo" or "repo#path".
+3. Select and reorder my projects by relevance to the posting. Rewrite each item as result-oriented bullets.
+4. If the posting asks for a skill my base doesn't contain, don't invent it: flag it as a gap, honestly.
+
+Green IT section:
+The posting mentions Green IT. Explicitly tie that theme to my cloud cost and resource optimisation (Terraform, budgets.tf) rather than inventing Green IT experience I don't have. Rely only on what exists in my base.
+
+Constraints:
+
+- Verifiable facts only: no number, date, technology or result that doesn't come from my base.
+- No em dashes, no arrows.
+- French, one page.
+- Title, hook (objective), skills, projects, education, languages.
+
+Before writing, list the information you found in my base and any gaps with the posting. Then propose the CV.`}
+      />
+      <p className="text-xs text-ink-soft italic">Translated from French, the language I actually wrote it in.</p>
+      <p>Three things matter in this prompt: <strong>the order of the tools</strong> (the base first, the source only when detail is needed), <strong>the ban on inventing</strong> (with a duty to flag gaps), and <strong>the instruction to list what was found first</strong>. That last line is what produces the screenshots below.</p>
       <p><strong>What happens next:</strong></p>
       <ol className="list-decimal list-inside space-y-2">
         <li>The AI queries my base (<code>second_brain_ask</code>): identity, background, projects, skills, CV.</li>

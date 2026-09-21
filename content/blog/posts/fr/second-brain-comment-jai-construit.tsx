@@ -228,6 +228,7 @@ Avant de rédiger, liste-moi les infos que tu as trouvées dans ma base et les �
           { src: "/blog/second-brain-cv-takima-prompt.png", alt: "Demande de CV adressée à l'IA connectée au second cerveau via MCP", caption: "La demande : générer un CV ciblé uniquement à partir de la base, en interrogeant second_brain_ask puis la source." },
           { src: "/blog/second-brain-cv-takima-found.png", alt: "Synthèse de ce que l'IA a trouvé dans la base", caption: "Ce que l'IA a trouvé : 8 requêtes sur la base et 4 fichiers sources lus, dont l'identité, les études, les projets utiles et ce qui relie mon parcours au Green IT." },
           { src: "/blog/second-brain-cv-takima-gaps.png", alt: "Écarts entre l'offre et la base de connaissances", caption: "Les écarts, listés sans complaisance : ce que l'offre demande et que la base ne contient pas, mais aussi ce que la base décrit mal." },
+          { src: "/blog/second-brain-cv-takima-final.png", alt: "Le CV final généré, sur une page", caption: "Le CV final : une page, réordonnée pour l'offre, avec une section Cloud sobre qui relie honnêtement mon expérience au Green IT et dit ce qu'il me reste à apprendre." },
         ]}
       />
       <p><strong>Le résultat.</strong> Un CV ciblé : Kubernetes et Terraform pour le DevOps, Spring Boot pour le Java, React pour le front, Second Brain pour l&apos;IA, et une section qui relie honnêtement mon expérience au <strong>Green IT</strong> (maîtrise des coûts et des ressources cloud).</p>

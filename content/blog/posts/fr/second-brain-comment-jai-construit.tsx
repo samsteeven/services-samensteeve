@@ -1,6 +1,7 @@
 import React from "react";
 import { CodeWindow } from "@/components/code-window";
 import { ZoomableImage } from "@/components/zoomable-image";
+import { ScreenshotCarousel } from "@/components/screenshot-carousel";
 
 export default function SecondBrainCommentJaiConstruit() {
   return (
@@ -186,7 +187,7 @@ export default function SecondBrainCommentJaiConstruit() {
         Un exemple concret : un CV taillé pour une offre
       </h2>
       <p>Voici l&apos;usage le plus parlant, celui qui a déclenché tout le projet.</p>
-      <p><strong>Le contexte.</strong> Je tombe sur une offre de stage (Takima, « AI Software &amp; DevOps Engineer », projet PopApp autour du Green IT et de Kubernetes). Elle demande Java/Spring, React, Docker, Kubernetes et de l&apos;IA.</p>
+      <p><strong>Le contexte.</strong> Je tombe sur une offre de stage (<a href="https://www.jobteaser.com/fr/job-offers/2298006f-f332-4fa6-bdb2-41c1dc629c43-takima-stage-de-fin-d-etudes-ai-software-devops-engineer-projet-popapp-devops-greenit" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:opacity-80">Takima, « AI Software &amp; DevOps Engineer », projet PopApp</a>) autour du Green IT et de Kubernetes. Elle demande Java/Spring, React, Docker, Kubernetes et de l&apos;IA.</p>
       <p><strong>La demande.</strong> Je branche une IA sur mon serveur MCP et je lui écris : « Génère-moi un CV adapté à cette offre, à partir de ma base. N&apos;invente rien. »</p>
       <p><strong>Ce qui se passe ensuite :</strong></p>
       <ol className="list-decimal list-inside space-y-2">
@@ -196,9 +197,15 @@ export default function SecondBrainCommentJaiConstruit() {
         <li>Elle signale honnêtement les <strong>écarts</strong> : Kotlin, etcd, Operator Framework ne sont pas dans ma base, elle ne les invente pas.</li>
       </ol>
       <p><strong>Le résultat.</strong> Un CV ciblé : Kubernetes et Terraform pour le DevOps, Spring Boot pour le Java, React pour le front, Second Brain pour l&apos;IA, et une section qui relie honnêtement mon expérience au <strong>Green IT</strong> (maîtrise des coûts et des ressources cloud).</p>
-      <ZoomableImage src="/blog/second-brain-cv-takima.png" alt="CV généré pour l'offre Takima à partir du second brain" />
-      <p className="text-xs text-ink-soft text-center italic mb-6">Le CV produit par l&apos;IA, uniquement à partir de mes notes, sans que je réexplique quoi que ce soit.</p>
-      <p>Et le détail qui compte : pendant la génération, l&apos;IA a aussi <strong>révélé les trous</strong> de ma base (email, téléphone, années de formation, référentiels RNCP manquants). Un CV ne sort pas seulement juste : il montre ce qu&apos;il fallait compléter.</p>
+      <ScreenshotCarousel
+        images={[
+          { src: "/blog/second-brain-cv-takima-prompt.png", alt: "Demande de CV adressée à l'IA connectée au second cerveau via MCP", caption: "La demande : générer un CV ciblé uniquement à partir de la base, en interrogeant second_brain_ask puis la source." },
+          { src: "/blog/second-brain-cv-takima-found.png", alt: "Synthèse de ce que l'IA a trouvé dans la base", caption: "Ce que l'IA a trouvé : 8 requêtes sur la base et 4 fichiers sources lus, dont l'identité, les études, les projets utiles et ce qui relie mon parcours au Green IT." },
+          { src: "/blog/second-brain-cv-takima-gaps.png", alt: "Écarts entre l'offre et la base de connaissances", caption: "Les écarts, listés sans complaisance : ce que l'offre demande et que la base ne contient pas, mais aussi ce que la base décrit mal." },
+        ]}
+      />
+      <p><strong>Le résultat.</strong> Un CV ciblé : Kubernetes et Terraform pour le DevOps, Spring Boot pour le Java, React pour le front, Second Brain pour l&apos;IA, et une section qui relie honnêtement mon expérience au <strong>Green IT</strong> (maîtrise des coûts et des ressources cloud).</p>
+      <p>Ce que j&apos;ai trouvé le plus utile n&apos;est pourtant pas le CV. C&apos;est la liste des écarts. L&apos;IA y pointe les <strong>manques de ma base</strong> : des projets décrits trop vite (React seulement via SIGGE, sans détail de ce que j&apos;y ai fait), le rôle que je tenais sur TribuneJustice jamais précisé, un projet présenté comme un cas d&apos;étude plutôt qu&apos;une mission réelle. Et sa remarque la plus juste : « certains fichiers remontés semblent tronqués, donc absent veut dire non trouvé, pas forcément inexistant ». Le cerveau ne vaut que par ce qu&apos;on y met. C&apos;est un début, et il rend ces trous visibles.</p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         Les problèmes rencontrés (et comment je les ai réglés)

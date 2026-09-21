@@ -1,6 +1,7 @@
 import React from "react";
 import { CodeWindow } from "@/components/code-window";
 import { ZoomableImage } from "@/components/zoomable-image";
+import { ScreenshotCarousel } from "@/components/screenshot-carousel";
 
 export default function SecondBrainHowIBuiltIt() {
   return (
@@ -186,7 +187,7 @@ export default function SecondBrainHowIBuiltIt() {
         A concrete example: a CV tailored to a job posting
       </h2>
       <p>Here&apos;s the most telling use case, the one that started the whole project.</p>
-      <p><strong>The context.</strong> I come across an internship posting (Takima, &quot;AI Software &amp; DevOps Engineer&quot;, the PopApp project around Green IT and Kubernetes). It asks for Java/Spring, React, Docker, Kubernetes and AI.</p>
+      <p><strong>The context.</strong> I come across an internship posting (<a href="https://www.jobteaser.com/fr/job-offers/2298006f-f332-4fa6-bdb2-41c1dc629c43-takima-stage-de-fin-d-etudes-ai-software-devops-engineer-projet-popapp-devops-greenit" target="_blank" rel="noopener noreferrer" className="text-accent underline hover:opacity-80">Takima, &quot;AI Software &amp; DevOps Engineer&quot;, the PopApp project</a>) around Green IT and Kubernetes. It asks for Java/Spring, React, Docker, Kubernetes and AI.</p>
       <p><strong>The request.</strong> I plug an AI into my MCP server and write: &quot;Generate a CV tailored to this posting, from my base. Don&apos;t invent anything.&quot;</p>
       <p><strong>What happens next:</strong></p>
       <ol className="list-decimal list-inside space-y-2">
@@ -196,9 +197,15 @@ export default function SecondBrainHowIBuiltIt() {
         <li>It honestly flags the <strong>gaps</strong>: Kotlin, etcd, Operator Framework aren&apos;t in my base, so it doesn&apos;t invent them.</li>
       </ol>
       <p><strong>The result.</strong> A targeted CV: Kubernetes and Terraform for DevOps, Spring Boot for Java, React for the frontend, Second Brain for AI, and a section that honestly ties my experience to <strong>Green IT</strong> (cloud cost and resource control).</p>
-      <ZoomableImage src="/blog/second-brain-cv-takima.png" alt="CV generated for the Takima posting from the second brain" />
-      <p className="text-xs text-ink-soft text-center italic mb-6">The CV produced by the AI, purely from my notes, without me re-explaining anything.</p>
-      <p>And the telling detail: during generation, the AI also <strong>exposed the holes</strong> in my base (missing email, phone, study years, RNCP frameworks). A CV doesn&apos;t just come out right: it shows what needed filling.</p>
+      <ScreenshotCarousel
+        images={[
+          { src: "/blog/second-brain-cv-takima-prompt.png", alt: "CV request sent to the AI connected to the second brain via MCP", caption: "The request: generate a targeted CV purely from the base, querying second_brain_ask and then the source." },
+          { src: "/blog/second-brain-cv-takima-found.png", alt: "Summary of what the AI found in the base", caption: "What the AI found: 8 queries against the base and 4 source files read, covering identity, studies, relevant projects and what ties my background to Green IT." },
+          { src: "/blog/second-brain-cv-takima-gaps.png", alt: "Gaps between the posting and the knowledge base", caption: "The gaps, listed without flattery: what the posting asks for that the base lacks, but also what the base describes poorly." },
+        ]}
+      />
+      <p><strong>The result.</strong> A targeted CV: Kubernetes and Terraform for DevOps, Spring Boot for Java, React for the frontend, Second Brain for AI, and a section that honestly ties my experience to <strong>Green IT</strong> (cloud cost and resource control).</p>
+      <p>What I found most useful wasn&apos;t the CV, though. It was the list of gaps. The AI points out the <strong>holes in my base</strong>: projects described too quickly (React only via SIGGE, with no detail of what I did there), the role I held on TribuneJustice never specified, a project presented as a case study rather than a real mission. And its sharpest remark: &quot;some of the files returned look truncated, so absent means not found, not necessarily non-existent&quot;. The brain is only worth what you put into it. It&apos;s a start, and it makes those holes visible.</p>
 
       <h2 className="font-display text-xl font-bold text-ink mt-8">
         The problems I hit (and how I solved them)
